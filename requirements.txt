@@ -1,0 +1,11 @@
+seleniumbase
+pandas
+lxml
+openai
+python-dotenv
+praw
+vaderSentiment
+requests
+streamlit
+python-docx
+soccerdata
