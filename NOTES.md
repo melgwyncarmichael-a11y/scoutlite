@@ -1,5 +1,37 @@
 # ScoutLite — Build Notes
 
+## 12-case test batch (2026-09-08)
+
+Ran the full test plan for real (11 succeeded, 1 -- a garbage name -- correctly failed with no
+brief produced). All briefs generated, sent for review. Findings:
+
+- **All regression checks held**: Mbappé's compound-surname fix, De Bruyne's and Declan Rice's
+  position-group quirks (Attack and Defense respectively), Van Dijk's context-confound score --
+  all reproduced exactly as previously documented, no drift.
+- **New finding -- Aaron Wan-Bissaka scored 5/5 Quality**, not "average" as expected for a
+  squad-level full-back. Root cause understood, not a bug: he's genuinely elite specifically by
+  the interceptions+tackles/90 metric (real-world known for exactly this), even though a human
+  scout might rate his overall game as more average given weak attacking output. Same class of
+  limitation as Van Dijk's low score, opposite direction -- a narrow metric can both over- and
+  under-rate a player relative to holistic scouting judgment.
+- **New finding -- the abbreviation-mismatch limitation is broader than documented.** Previously
+  written up as an Understat-only issue ("Vinicius Jr" won't match "Vinícius Júnior" there).
+  Testing now shows FBref's own search fails on "Vinicius Jr" too -- confirmed reproducible
+  (not transient), and isolated by confirming "Vinicius Junior" (full word) resolves cleanly
+  through the entire pipeline. So this can block a brief from being generated at all, not just
+  degrade the xG/xA section.
+- **New finding -- CLI vs UI error handling differs.** `scoutlite_combined.py`'s `main()` isn't
+  wrapped in try/except, so a "player not found" (or any other exception) surfaces as a raw
+  Python traceback on the CLI -- confirmed on both a genuine non-existent name and transient
+  FBref search flakiness. The actual product surface (`app.py`) already handles this cleanly
+  ("Something went wrong: No FBref match found for '...'", no traceback) since it wraps the
+  whole flow in try/except. Not a user-facing bug, but worth fixing in the CLI for anyone using
+  it directly or in a script.
+- Early-season thin data (Haaland, 3 matches/270 min at time of testing) flowed through cleanly
+  with no crashes -- small-sample caveats appeared appropriately in the LLM's own text.
+- Non-covered league (Macaulay Langstaff, League Two) correctly showed "not available" for both
+  Quality and xG/xA rather than a crash or a fabricated number.
+
 ## Bug found via a real generated brief (2026-09-01)
 
 Mbappé's brief came back with Quality "not available" and xG/xA "not available -- Understat
