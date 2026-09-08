@@ -195,6 +195,13 @@ def main():
     if not os.environ.get("DEEPSEEK_API_KEY"):
         sys.exit("DEEPSEEK_API_KEY is not set. Add it to .env in this project folder.")
 
+    try:
+        run(args)
+    except Exception as e:
+        sys.exit(f"Error: {e}")
+
+
+def run(args):
     philosophy = {
         "in_possession": {
             "vertical": "vertical, fast transitions",

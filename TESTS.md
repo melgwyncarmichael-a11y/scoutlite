@@ -39,11 +39,14 @@ confirming "Vinicius Junior" resolves cleanly through the whole pipeline. This m
 abbreviated name can block a brief from being generated at all, not just degrade the xG/xA
 section as originally thought.
 
-### Finding 3 — CLI vs UI error handling differs
-`scoutlite_combined.py`'s `main()` isn't wrapped in try/except, so any exception (not-found
-player, transient FBref flakiness) surfaces as a raw traceback on the CLI. The actual product
-surface (`app.py`) already handles this cleanly — confirmed side-by-side on the same garbage
-input. Not user-facing, but worth fixing for anyone using the CLI directly. **Not yet fixed.**
+### Finding 3 — CLI vs UI error handling differs (fixed 2026-09-08)
+`scoutlite_combined.py`'s `main()` wasn't wrapped in try/except, so any exception (not-found
+player, transient FBref flakiness) surfaced as a raw traceback on the CLI. The actual product
+surface (`app.py`) already handled this cleanly — confirmed side-by-side on the same garbage
+input. **Fixed:** pipeline logic moved into a `run(args)` function, called from `main()` inside
+a try/except that prints `Error: <message>` and exits with status 1, instead of a traceback.
+Re-verified on the same garbage-name case (clean one-line error, exit code 1) and on a normal
+run (Haaland, exit code 0, unaffected) to confirm no regression from the refactor.
 
 ## Report-content evals (Technical Vision doc, Section 6)
 
