@@ -35,32 +35,75 @@ def pace():
     time.sleep(delay)
 
 
-def fetch_player_page_html(player_name: str) -> tuple[str, str]:
-    """Return (final_url, html) for a player's FBref page via the site search."""
-    search_url = f"https://fbref.com/en/search/search.fcgi?search={quote(player_name)}"
+def _uc_fetch(url: str) -> tuple[str, str]:
+    """Paced, undetected-browser fetch of a single URL. Returns (final_url, html)."""
     driver = Driver(uc=True, headless=True)
     try:
         pace()
-        driver.uc_open_with_reconnect(search_url, reconnect_time=6)
+        driver.uc_open_with_reconnect(url, reconnect_time=6)
         driver.sleep(3)
-        current_url = driver.get_current_url()
-
-        if "/search/" in current_url:
-            # Ambiguous name: multiple matches, take the first result.
-            html = driver.get_page_source()
-            soup = BeautifulSoup(html, "lxml")
-            link = soup.select_one("div.search-item-name a")
-            if not link:
-                raise RuntimeError(f"No FBref match found for '{player_name}'")
-            player_url = "https://fbref.com" + link["href"]
-            pace()
-            driver.uc_open_with_reconnect(player_url, reconnect_time=6)
-            driver.sleep(3)
-            current_url = driver.get_current_url()
-
-        return current_url, driver.get_page_source()
+        return driver.get_current_url(), driver.get_page_source()
     finally:
         driver.quit()
+
+
+def search_player(player_name: str) -> list[dict]:
+    """Search FBref for a player name. Returns every candidate FBref could match -- does NOT
+    auto-pick one. Caller must confirm which candidate to use, then call
+    fetch_player_page_by_url() with its 'url' (unless 'html' is already populated below, for
+    the single-unambiguous-match case, which needs no second request).
+
+    Each candidate: {name, url, years_active, nationality, alt_name, clubs, html}.
+    years_active/nationality/alt_name/clubs are "" when unknown (always true for the single-
+    match case, since that info only appears on the search-results page, not the player page).
+    """
+    search_url = f"https://fbref.com/en/search/search.fcgi?search={quote(player_name)}"
+    current_url, html = _uc_fetch(search_url)
+
+    if "/search/" not in current_url:
+        # FBref auto-redirected: exactly one unambiguous match. We already have the page,
+        # so pull the name straight from it rather than issue a second request.
+        soup = BeautifulSoup(html, "lxml")
+        name_el = soup.select_one("#meta h1 span")
+        return [{
+            "name": name_el.text.strip() if name_el else player_name,
+            "url": current_url,
+            "years_active": "",
+            "nationality": "",
+            "alt_name": "",
+            "clubs": "",
+            "html": html,
+        }]
+
+    soup = BeautifulSoup(html, "lxml")
+    candidates = []
+    for item in soup.select("div.search-item"):
+        name_div = item.select_one("div.search-item-name")
+        link = name_div.select_one("a") if name_div else None
+        if not link:
+            continue
+        parts = [p.strip() for p in name_div.get_text(" ", strip=True).split("\xb7")]
+        alt_el = item.select_one("div.search-item-alt-names")
+        clubs_el = item.select_one("div.search-item-team")
+        candidates.append({
+            "name": link.get_text(strip=True),
+            "url": "https://fbref.com" + link["href"],
+            "years_active": parts[1] if len(parts) > 1 else "",
+            "nationality": parts[2] if len(parts) > 2 else "",
+            "alt_name": alt_el.get_text(strip=True) if alt_el else "",
+            "clubs": clubs_el.get_text(strip=True).removeprefix("Clubs:").strip() if clubs_el else "",
+            "html": None,
+        })
+
+    if not candidates:
+        raise RuntimeError(f"No FBref match found for '{player_name}'")
+    return candidates
+
+
+def fetch_player_page_by_url(url: str) -> tuple[str, str]:
+    """Fetch a specific, already-identified FBref player URL (paced). Used once the caller has
+    confirmed which search_player() candidate to proceed with."""
+    return _uc_fetch(url)
 
 
 def _season_rows(soup: BeautifulSoup, table_id: str):

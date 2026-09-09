@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """
-ScoutLite UI shell: two-step flow.
-1. Search a player -> fetches FBref once (paced), caches the page + available seasons.
-2. Pick a season, optionally add your own short role notes and a club philosophy to assess a
+ScoutLite UI shell: three-step flow.
+1. Search a player -> FBref may return one unambiguous match (proceeds straight through) or
+   several candidates for a common name (Danny Ward, etc.) -- shown for explicit confirmation
+   rather than silently taking the first result.
+2. Confirm which candidate, if there was more than one.
+3. Pick a season, optionally add your own short role notes and a club philosophy to assess a
    fit signal against, then generate the combined research brief (FBref + Understat + NewsAPI
    -> one DeepSeek-V3 call). Changing the season re-parses the already-cached FBref page -- no
    second scrape/pacing hit.
@@ -25,8 +28,9 @@ from scoutlite import (
     extract_latest_season,
     extract_misc_stats,
     extract_player_bio,
-    fetch_player_page_html,
+    fetch_player_page_by_url,
     list_available_seasons,
+    search_player,
 )
 from scoring import compute_quality_signal
 from scoutlite_combined import ROLE_NOTES_MAX_CHARS, summarize_combined
@@ -43,6 +47,25 @@ if not os.environ.get("DEEPSEEK_API_KEY"):
 
 if "player_data" not in st.session_state:
     st.session_state.player_data = None
+if "search_candidates" not in st.session_state:
+    st.session_state.search_candidates = None
+
+
+def _resolve_candidate(candidate: dict, player_name: str):
+    """Fetch the candidate's full page (if not already fetched) and populate player_data."""
+    if candidate["html"] is not None:
+        url, html = candidate["url"], candidate["html"]
+    else:
+        with st.spinner(f"Fetching {candidate['name']}'s page (rate-limit paced, ~7-9s)..."):
+            url, html = fetch_player_page_by_url(candidate["url"])
+    st.session_state.player_data = {
+        "player_name": player_name,
+        "url": url,
+        "html": html,
+        "seasons": list_available_seasons(html),
+    }
+    st.session_state.search_candidates = None
+
 
 player_name = st.text_input(
     "Player name",
@@ -54,20 +77,38 @@ player_name = st.text_input(
 search = st.button("Search player", type="primary", disabled=not player_name)
 
 if search:
+    st.session_state.player_data = None
+    st.session_state.search_candidates = None
     try:
         with st.spinner(f"Searching FBref for '{player_name}' (rate-limit paced, ~7-9s)..."):
-            url, html = fetch_player_page_html(player_name)
-            seasons = list_available_seasons(html)
-        st.session_state.player_data = {
-            "player_name": player_name,
-            "url": url,
-            "html": html,
-            "seasons": seasons,
-        }
-        st.success(f"Found: {url}")
+            candidates = search_player(player_name)
+        if len(candidates) == 1:
+            _resolve_candidate(candidates[0], player_name)
+            st.success(f"Found: {st.session_state.player_data['url']}")
+        else:
+            st.session_state.search_candidates = (candidates, player_name)
     except Exception as e:
-        st.session_state.player_data = None
         st.error(f"Something went wrong: {e}")
+
+if st.session_state.search_candidates:
+    candidates, searched_name = st.session_state.search_candidates
+    st.warning(
+        f"{len(candidates)} players matched \"{searched_name}\" — confirm which one before "
+        "continuing, rather than guessing for you."
+    )
+    labels = [
+        f"{c['name']}"
+        + (f" ({c['alt_name']})" if c["alt_name"] else "")
+        + f" — {c['nationality'] or '?'}, active {c['years_active'] or '?'}, {c['clubs'] or 'clubs unknown'}"
+        for c in candidates
+    ]
+    chosen_idx = st.radio("Which player did you mean?", range(len(candidates)), format_func=lambda i: labels[i])
+    if st.button("Confirm selection", type="primary"):
+        try:
+            _resolve_candidate(candidates[chosen_idx], searched_name)
+            st.success(f"Confirmed: {st.session_state.player_data['url']}")
+        except Exception as e:
+            st.error(f"Something went wrong: {e}")
 
 data = st.session_state.player_data
 if data:

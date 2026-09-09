@@ -30,7 +30,8 @@ from scoutlite import (
     extract_latest_season,
     extract_misc_stats,
     extract_player_bio,
-    fetch_player_page_html,
+    fetch_player_page_by_url,
+    search_player,
 )
 from scoring import compute_quality_signal
 from understat_xg import get_player_xg
@@ -186,6 +187,11 @@ def main():
         description="Combined ScoutLite pipeline: FBref + Understat + NewsAPI -> one summary"
     )
     parser.add_argument("player", help="Player name, e.g. 'Erling Haaland'")
+    parser.add_argument(
+        "--player-url",
+        help="Exact FBref player URL to use, skipping the name search entirely -- required "
+        "when the name search finds multiple candidates (the CLI won't guess which one).",
+    )
     parser.add_argument("--season", help="Specific season to report on, e.g. '2024-2025' (default: most recent)")
     parser.add_argument("--scout-notes", help="Your own short role notes (capped, adjective-style)")
     parser.add_argument("--in-possession", choices=["vertical", "possession"], help="Club philosophy: in-possession axis")
@@ -214,8 +220,28 @@ def run(args):
         }.get(args.out_of_possession, ""),
     }
 
-    print(f"Fetching FBref data for '{args.player}'...")
-    url, html = fetch_player_page_html(args.player)
+    if args.player_url:
+        print(f"Fetching FBref page directly: {args.player_url}")
+        url, html = fetch_player_page_by_url(args.player_url)
+    else:
+        print(f"Searching FBref for '{args.player}'...")
+        candidates = search_player(args.player)
+        if len(candidates) > 1:
+            listing = "\n".join(
+                f"  {i+1}. {c['name']}" + (f" ({c['alt_name']})" if c["alt_name"] else "")
+                + f" -- {c['nationality'] or '?'}, active {c['years_active'] or '?'}, "
+                + f"{c['clubs'] or 'clubs unknown'}\n     {c['url']}"
+                for i, c in enumerate(candidates)
+            )
+            raise RuntimeError(
+                f"{len(candidates)} players matched '{args.player}' -- won't guess which one. "
+                f"Re-run with --player-url pointing at the one you mean:\n{listing}"
+            )
+        candidate = candidates[0]
+        if candidate["html"] is not None:
+            url, html = candidate["url"], candidate["html"]
+        else:
+            url, html = fetch_player_page_by_url(candidate["url"])
     print(f"Resolved to: {url}")
 
     stats = extract_latest_season(html, args.season)

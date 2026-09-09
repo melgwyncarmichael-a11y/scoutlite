@@ -1,5 +1,38 @@
 # ScoutLite — Build Notes
 
+## Lookup confirmation step (2026-09-10)
+
+Architecture discussion led to three ideas: (1) a locally-cached "staging table" instead of
+live lookups every time, (2) upload a player photo for visual identification, (3) show every
+FBref search match and require explicit confirmation before proceeding, instead of silently
+taking the first result. Decided: (2) is out of scope (identification would rely on an LLM's
+ungrounded training-data memory of what public figures look like -- the one feature that
+would be pure guessing with no source to check, plus real biometric/privacy weight, same
+category of concern that already got Reddit dropped). (1) is being redesigned as a plain
+SQLite cache (not a vector DB -- our data is structured/numeric, vector search is for
+semantic retrieval over text, not looking up exact per-90 stats) -- not started yet. (3) is
+built, this entry.
+
+**What changed:** `scoutlite.py`'s `fetch_player_page_html` (which silently took the first
+FBref search result -- the exact risk we'd been testing around with "Danny Ward" rather than
+fixing) is replaced by `search_player()` (returns every candidate FBref found, with enough
+info to disambiguate -- name, alt name, nationality, active years, clubs -- never auto-picks)
+and `fetch_player_page_by_url()` (fetches a specific, already-confirmed URL). Single-match
+FBref auto-redirects skip the confirmation step entirely (zero added friction for the common
+case, since there's nothing to disambiguate) -- confirmation only appears when there's a real
+choice to make.
+
+- **`app.py`**: multi-match results now render as a radio selection with the disambiguating
+  info, gated behind a "Confirm selection" button before Step 2 (season/notes/philosophy)
+  appears.
+- **`scoutlite_combined.py`**: multi-match now fails cleanly with the full candidate list and
+  their FBref URLs printed, plus a new `--player-url` flag to specify the exact one directly
+  (consistent with the CLI's design as a non-interactive/scriptable tool, and reusing last
+  week's clean-error-message fix rather than a raw traceback).
+- Verified all four paths live: CLI ambiguous name (clean listing + exit 1), CLI
+  `--player-url` override (resolves the exact chosen candidate), UI ambiguous name (radio
+  confirmation, correct resolution), UI unambiguous name (unchanged, no added friction).
+
 ## 12-case test batch (2026-09-08)
 
 Ran the full test plan for real (11 succeeded, 1 -- a garbage name -- correctly failed with no
