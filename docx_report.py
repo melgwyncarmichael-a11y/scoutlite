@@ -49,6 +49,7 @@ def build_docx(
     output_path: Path,
     quality: dict | None = None,
     fit_score: int | None = None,
+    judge: dict | None = None,
 ) -> Path:
     doc = Document()
 
@@ -60,6 +61,19 @@ def build_docx(
         f"Season: {stats.get('season', 'unknown')}  ·  A data/research layer for a scout to "
         "weigh -- not a scouting verdict."
     ).italic = True
+
+    # --- Confidence warning (only if the automated judge didn't clear the threshold) ---------
+    if judge and judge.get("confidence_warning"):
+        warn = doc.add_paragraph()
+        warn.add_run(
+            f"⚠ CONFIDENCE WARNING — this brief's two written paragraphs scored "
+            f"{judge['source_accuracy']}% on automated claim-grounding after "
+            f"{judge['iterations']} revision pass(es), below the "
+            f"{judge.get('threshold', 80)}% threshold. Check the flagged points below before "
+            f"relying on the written sections; the data tables and signals are unaffected."
+        ).bold = True
+        for finding in judge.get("findings", []):
+            doc.add_paragraph(finding, style="List Bullet")
 
     # --- Signals block (top) -----------------------------------------------------------
     doc.add_heading("Signals", level=1)

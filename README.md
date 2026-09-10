@@ -35,6 +35,13 @@ judgment: a read on the news, and a Fit signal (1-5) against your club's
 philosophy + your role notes. Everything else is rendered straight from data.
         │
         ▼
+Judge loop — deterministic rules check the two written paragraphs against
+the exact inputs (every number grounded? quoted headlines real? no forbidden
+verdict/transfer-value language?), plus one narrow LLM check for unfair
+interpretation. Below 80% → revise, max 2 passes, then ship with a visible
+confidence warning rather than hand back nothing.
+        │
+        ▼
 Word document (.docx): Signals, Who He Is, Stats & Performance,
 What People Say, Signals & Fit Read
 ```

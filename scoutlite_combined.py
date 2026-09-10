@@ -23,6 +23,8 @@ import requests
 from dotenv import load_dotenv
 from openai import OpenAI
 
+import judge_llm
+import judge_rules
 from docx_report import build_docx
 from news_fetch import LOOKBACK_DAYS, fetch_articles
 from scoutlite import (
@@ -55,6 +57,7 @@ def build_prompt(
     keeper: dict | None = None,
     scout_notes: str | None = None,
     philosophy: dict | None = None,
+    prior_findings: list[str] | None = None,
 ) -> str:
     """Bio and stats are rendered as tables directly from data elsewhere -- no LLM restatement,
     no transcription risk. This prompt only asks for the two things that genuinely need
@@ -138,24 +141,28 @@ def build_prompt(
         "conclusion or verdict -- these are signals for the scout to weigh."
     )
 
+    if prior_findings:
+        joined = "\n".join(f"- {f}" for f in prior_findings)
+        instructions.append(
+            "\n\nYOUR PREVIOUS DRAFT was flagged for these problems -- fix every one of them in "
+            f"this rewrite, without introducing new claims:\n{joined}"
+        )
+
     body = "\n".join(s for s in sections if s)
     return "".join(instructions) + "\n\n" + body
 
 
-def summarize_combined(
-    player_name: str,
-    stats: dict,
-    xg: dict | None,
-    articles: list[dict],
-    misc: dict | None = None,
-    keeper: dict | None = None,
-    scout_notes: str | None = None,
-    philosophy: dict | None = None,
+SOURCE_ACCURACY_THRESHOLD = 80
+MAX_JUDGE_ITERATIONS = 2
+
+
+def _synthesize_once(
+    player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings
 ) -> dict:
-    """Returns {'news_synthesis': str, 'fit_read': str} -- the two sections that need LLM
-    synthesis. Bio/stats/news-list are rendered as tables directly from data, not through here."""
     client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
-    prompt = build_prompt(player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy)
+    prompt = build_prompt(
+        player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings
+    )
     response = client.chat.completions.create(
         model="deepseek-chat",
         messages=[{"role": "user", "content": prompt}],
@@ -168,8 +175,7 @@ def summarize_combined(
         news_synthesis = text.split(NEWS_MARKER, 1)[1].split(FIT_MARKER, 1)[0].strip()
         fit_read = text.split(FIT_MARKER, 1)[1].strip()
     else:
-        # Model didn't follow the marker format -- surface the raw text rather than lose it.
-        news_synthesis = text
+        news_synthesis = text  # model ignored the markers -- surface it rather than lose it
 
     fit_score = None
     fit_score_match = re.match(r"Fit:\s*(\d)/5", fit_read)
@@ -180,6 +186,74 @@ def summarize_combined(
         fit_read = fit_read[len("Fit: not assessed"):].strip()
 
     return {"news_synthesis": news_synthesis, "fit_read": fit_read, "fit_score": fit_score}
+
+
+def summarize_combined(
+    player_name: str,
+    stats: dict,
+    xg: dict | None,
+    articles: list[dict],
+    misc: dict | None = None,
+    keeper: dict | None = None,
+    scout_notes: str | None = None,
+    philosophy: dict | None = None,
+) -> dict:
+    """Synthesize the two LLM-authored sections, then run the judge (deterministic rules +
+    a narrow LLM check). If the draft doesn't clear SOURCE_ACCURACY_THRESHOLD, revise with the
+    findings as feedback -- up to MAX_JUDGE_ITERATIONS. If it still doesn't pass, ship it anyway
+    with judge['confidence_warning'] set and the outstanding findings attached, rather than
+    hard-failing and handing the scout nothing.
+
+    Returns {news_synthesis, fit_read, fit_score, judge: {source_accuracy, passed, iterations,
+    findings, confidence_warning}}.
+    """
+    prior_findings: list[str] = []
+    result = None
+    rule_report = None
+    llm_report = {"findings": [], "has_major": False}
+
+    for iteration in range(1, MAX_JUDGE_ITERATIONS + 1):
+        result = _synthesize_once(
+            player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings
+        )
+        rule_report = judge_rules.check(
+            player_name, result["news_synthesis"], result["fit_read"], result["fit_score"],
+            stats, misc, keeper, xg, articles, scout_notes, philosophy,
+        )
+
+        if rule_report["hard_fail"]:
+            llm_report = {"findings": [], "has_major": False}  # skip LLM tokens on a broken draft
+        else:
+            llm_report = judge_llm.review(
+                result["news_synthesis"], result["fit_read"], stats, misc, keeper, xg, philosophy, articles
+            )
+
+        passed = (
+            not rule_report["hard_fail"]
+            and rule_report["source_accuracy"] >= SOURCE_ACCURACY_THRESHOLD
+            and not llm_report["has_major"]
+        )
+        if passed or iteration == MAX_JUDGE_ITERATIONS:
+            break
+
+        prior_findings = rule_report["findings"] + [
+            f"{f.get('issue', '')} (in: \"{f.get('claim', '')}\")" for f in llm_report["findings"]
+        ]
+
+    # Findings are always surfaced (they're informational -- "these couldn't be auto-verified");
+    # only a below-threshold result raises the loud confidence_warning.
+    findings = rule_report["findings"] + [
+        f"{f.get('issue', '')} (in: \"{f.get('claim', '')}\")" for f in llm_report["findings"]
+    ]
+    result["judge"] = {
+        "source_accuracy": rule_report["source_accuracy"],
+        "threshold": SOURCE_ACCURACY_THRESHOLD,
+        "passed": passed,
+        "iterations": iteration,
+        "findings": findings,
+        "confidence_warning": not passed,
+    }
+    return result
 
 
 def main():
@@ -277,10 +351,17 @@ def run(args):
     else:
         print("NEWSAPI_KEY not set -- skipping news, continuing without it")
 
-    print("Calling DeepSeek-V3 for the research brief...")
+    print("Calling DeepSeek-V3 for the research brief (with judge loop)...")
     synthesis = summarize_combined(
         args.player, stats, xg, articles, misc, keeper, args.scout_notes, philosophy
     )
+    j = synthesis["judge"]
+    print(
+        f"Judge: {j['source_accuracy']}% source-grounding after {j['iterations']} pass(es) -- "
+        + ("PASSED" if j["passed"] else f"below {j['threshold']}%, shipping with a confidence warning")
+    )
+    for finding in j["findings"]:
+        print(f"  - {finding}")
 
     output_dir = ROOT / "output"
     output_dir.mkdir(exist_ok=True)
@@ -290,7 +371,7 @@ def run(args):
         args.player, bio, stats, xg, articles, misc, keeper,
         synthesis["news_synthesis"], synthesis["fit_read"],
         args.scout_notes, philosophy, out_path,
-        quality=quality, fit_score=synthesis["fit_score"],
+        quality=quality, fit_score=synthesis["fit_score"], judge=synthesis["judge"],
     )
 
     print(f"\nQuality: {quality['score'] if quality else 'N/A'}/5  ·  Fit: {synthesis['fit_score'] or 'N/A'}/5")

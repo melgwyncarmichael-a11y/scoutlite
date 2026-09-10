@@ -60,6 +60,30 @@ run (Haaland, exit code 0, unaffected) to confirm no regression from the refacto
 | B6. Time-to-brief | ⬜ Not yet measured | |
 | B7. Model comparison | ⬜ Blocked | Needs the model-tiering work (Vision doc Section 5) before there's a second model to compare against |
 
+## Judge loop (built 2026-09-10)
+
+Re-scoped from the Vision doc: deterministic rules (`judge_rules.py`) are the bulk and compute
+the 80% threshold; a narrow LLM check (`judge_llm.py`) is a small supplement for what rules
+can't do (fair-interpretation, faithful news characterization, subtle misframing). Loop caps
+at 2 iterations, then ships with a `confidence_warning` rather than hard-failing.
+
+| Check | Verified how | Result |
+|---|---|---|
+| Rule checks — clean brief | Unit test, crafted clean paragraphs | 100%, no findings |
+| Rule checks — dirty brief (fabricated numbers, `£120m`, invented headline, xG when none available, unattributed scout notes, verdict language) | Unit test | 0%, every check fired |
+| Hard-fail gates (empty section, philosophy given but no fit score) | Unit test | Correctly forces `hard_fail=True` |
+| Numeric grounding — false-positive control | Ran on real Haaland data | xG floats (`31.65`, `4.75`) correctly matched; "28" (news window) and headline numbers added to the known set to cut benign flags |
+| LLM judge missing-headlines bug | Full run | Caught + fixed — it was concluding "no news data" and failing every news claim; now receives `articles` |
+| Full CLI + UI run, normal player | Live | ~90-100% on iteration 1, PASSED, LLM surfaced genuine *minor* framing nuances (didn't block) |
+| Confidence-warning rendering | Synthetic failing judge dict → `build_docx` | Bold warning at top of .docx + bulleted findings; data tables/signals unaffected |
+| Persistent judge line in UI | Live | "Automated judge: 90.0% ... passed the threshold" shows near Signals |
+
+## Report-content evals (Technical Vision doc, Section 6)
+
+Note: B1 (factuality of the LLM-authored sections) is now partly enforced *in the pipeline* by
+the judge's numeric-grounding + headline-grounding checks, not only spot-checked after.
+
 ## Not yet built
-- LLM judge loop (structure/source-matching check, 2-iteration cap, 80% threshold)
 - Position-grouped scoring's own eval harness beyond the spot checks above
+- Model tiering (Vision doc Section 5) — would let `judge_llm.py` use a cheaper model and
+  unblock eval B7

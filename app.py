@@ -194,7 +194,7 @@ if data:
                     }.get(out_of_possession_choice, ""),
                 }
 
-                status.update(label="Calling DeepSeek-V3 for the research brief...")
+                status.update(label="Calling DeepSeek-V3 for the research brief (with judge loop)...")
                 synthesis = summarize_combined(
                     player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy
                 )
@@ -205,10 +205,20 @@ if data:
                     player_name, bio, stats, xg, articles, misc, keeper,
                     synthesis["news_synthesis"], synthesis["fit_read"],
                     scout_notes, philosophy, buffer,
-                    quality=quality, fit_score=synthesis["fit_score"],
+                    quality=quality, fit_score=synthesis["fit_score"], judge=synthesis["judge"],
                 )
                 buffer.seek(0)
                 status.update(label="Done", state="complete")
+
+            j = synthesis["judge"]
+            if j["confidence_warning"]:
+                st.warning(
+                    f"**Confidence warning** — the two written paragraphs scored "
+                    f"{j['source_accuracy']}% on automated claim-grounding after "
+                    f"{j['iterations']} revision pass(es), below the {j['threshold']}% threshold. "
+                    f"The data tables and signals are unaffected; verify the written sections "
+                    f"against these flags:\n\n" + "\n".join(f"- {f}" for f in j["findings"])
+                )
 
             combined = (
                 f"{quality['score'] + synthesis['fit_score']}/10"
@@ -232,6 +242,11 @@ if data:
                         f"{k.replace('_', ' ')} = {v:.0f} pct" for k, v in quality["components"].items()
                     )
                 )
+            st.caption(
+                f"Automated judge: written sections scored {j['source_accuracy']}% on "
+                f"claim-grounding after {j['iterations']} pass(es) — "
+                + ("passed the threshold." if j["passed"] else f"below {j['threshold']}%, see warning above.")
+            )
 
             st.subheader("Background")
             st.table({k: v for k, v in bio.items() if v})

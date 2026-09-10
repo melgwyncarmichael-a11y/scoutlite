@@ -1,5 +1,49 @@
 # ScoutLite — Build Notes
 
+## LLM-as-judge loop (2026-09-10)
+
+The Vision doc's judge concept, built -- but re-scoped once we discussed it: the LLM is a
+*small* part, deterministic rules are the bulk. Rationale: trusting an LLM to check an LLM
+shares blind spots; the verifiable stuff should be verified.
+
+**`judge_rules.py` (the bulk)** -- deterministic checks on the two LLM-authored paragraphs
+against the exact structured inputs, computing the source-accuracy % that actually gates the
+loop (the Vision doc's 80% threshold, now *computed* not asked):
+- Structure (hard gates): both marker sections present, `Fit: X/5` well-formed, non-empty,
+  sane length, fit-score matches whether philosophy was given.
+- Numeric grounding: every figure in the paragraphs must be in the input data (stats/misc/
+  keeper/xg dicts, headline text, the fixed "28 days" window). Ungrounded numbers are *flagged
+  for review*, not hard-failed -- they may be legitimately derived (per-game rates etc.).
+- Headline grounding: quoted phrases in the news read must overlap a real provided headline.
+- Honesty gates: no xG/xA figures if `xg` was None; "not assessed" present if no philosophy;
+  scout notes attributed ("the scout notes...") if notes were provided.
+- Forbidden content: transfer-value language, future-performance speculation, verdict language.
+- Player focus: the target player's name appears somewhere in the two paragraphs.
+
+**`judge_llm.py` (the small part)** -- one narrow structured call (DeepSeek for now; the
+natural first place for model tiering) covering only what rules structurally can't: is a stat
+interpretation a *fair* reading or an overreach, is the news characterization faithful, subtle
+misframing. Returns severity-tagged findings; only a "major" one blocks. Fails soft (empty
+findings on any API/parse error -- rules are the hard gate, this is a supplement).
+
+**The loop (`summarize_combined`)**: synthesize -> rules + LLM judge -> if it clears 80% with
+no hard-fail and no "major" LLM finding, ship. Otherwise revise with all findings as feedback,
+max 2 iterations, then ship anyway with `judge['confidence_warning']` set and the outstanding
+findings attached -- never hard-fail and hand the scout nothing (per the Vision doc).
+
+**Bug caught during testing:** `judge_llm.review()` originally didn't receive the headlines,
+so it concluded "no news data was provided" and flagged every news claim as unsupported --
+a false-positive cascade that failed an otherwise-fine brief through both revision passes.
+Fixed by passing `articles` in; also tightened the severity rubric so style nitpicks stay
+"minor".
+
+**Verified:** rule checks unit-tested (clean brief -> 100%, deliberately dirty brief -> 0%
+with every check firing, hard-fail gates on empty/malformed sections); full CLI + UI runs on
+a normal player pass at ~90-100% on iteration 1 with the LLM surfacing genuine *minor* framing
+nuances; confidence-warning rendering verified in the .docx via a synthetic failing judge
+result (bold warning at the top + bulleted findings, data tables unaffected); a persistent
+"Automated judge: N% ... passed/below threshold" line shows near Signals in the app.
+
 ## SQLite staging cache (2026-09-10)
 
 Concept 1 from the architecture discussion, built. Deliberately a plain SQLite table, not a
