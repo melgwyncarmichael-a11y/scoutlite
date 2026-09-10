@@ -5,3 +5,5 @@ __pycache__/
 .venv/
 .DS_Store
 downloaded_files/
+scoutlite_cache.db
+scoutlite_cache.db-*

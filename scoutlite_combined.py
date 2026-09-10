@@ -30,7 +30,7 @@ from scoutlite import (
     extract_latest_season,
     extract_misc_stats,
     extract_player_bio,
-    fetch_player_page_by_url,
+    get_player_page,
     search_player,
 )
 from scoring import compute_quality_signal
@@ -193,6 +193,11 @@ def main():
         "when the name search finds multiple candidates (the CLI won't guess which one).",
     )
     parser.add_argument("--season", help="Specific season to report on, e.g. '2024-2025' (default: most recent)")
+    parser.add_argument(
+        "--fresh", action="store_true",
+        help="Skip the cache, always fetch live from FBref/Understat (still updates the cache "
+        "afterward). Default (Quick mode) reuses recently-cached data when available.",
+    )
     parser.add_argument("--scout-notes", help="Your own short role notes (capped, adjective-style)")
     parser.add_argument("--in-possession", choices=["vertical", "possession"], help="Club philosophy: in-possession axis")
     parser.add_argument("--out-of-possession", choices=["high_line", "low_block", "mid_block"], help="Club philosophy: out-of-possession axis")
@@ -222,10 +227,10 @@ def run(args):
 
     if args.player_url:
         print(f"Fetching FBref page directly: {args.player_url}")
-        url, html = fetch_player_page_by_url(args.player_url)
+        url, html = get_player_page(args.player_url, requested_season=args.season, force_refresh=args.fresh)
     else:
         print(f"Searching FBref for '{args.player}'...")
-        candidates = search_player(args.player)
+        candidates = search_player(args.player, force_refresh=args.fresh)
         if len(candidates) > 1:
             listing = "\n".join(
                 f"  {i+1}. {c['name']}" + (f" ({c['alt_name']})" if c["alt_name"] else "")
@@ -237,11 +242,7 @@ def run(args):
                 f"{len(candidates)} players matched '{args.player}' -- won't guess which one. "
                 f"Re-run with --player-url pointing at the one you mean:\n{listing}"
             )
-        candidate = candidates[0]
-        if candidate["html"] is not None:
-            url, html = candidate["url"], candidate["html"]
-        else:
-            url, html = fetch_player_page_by_url(candidate["url"])
+        url, html = get_player_page(candidates[0]["url"], requested_season=args.season, force_refresh=args.fresh)
     print(f"Resolved to: {url}")
 
     stats = extract_latest_season(html, args.season)
@@ -252,12 +253,15 @@ def run(args):
     print(f"Goalkeeping stats: {'found' if keeper else 'not applicable'}")
 
     print("Looking up Understat xG/xA...")
-    xg = get_player_xg(args.player, stats["competition"], stats["season"], stats["squad"])
+    xg = get_player_xg(
+        args.player, stats["competition"], stats["season"], stats["squad"], force_refresh=args.fresh
+    )
     print(f"xG/xA: {'found' if xg else 'not available for this league'}")
 
     print("Computing Quality signal (non-AI, percentile-based)...")
     quality = compute_quality_signal(
-        bio["position"], stats["competition"], stats["season"], args.player, stats, misc, keeper, xg
+        bio["position"], stats["competition"], stats["season"], args.player, stats, misc, keeper, xg,
+        force_refresh=args.fresh,
     )
     print(f"Quality: {quality['score'] if quality else 'not available for this league/position'}")
 

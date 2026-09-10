@@ -19,6 +19,8 @@ import unicodedata
 
 import requests
 
+import cache
+
 UNDERSTAT_LEAGUES = {
     "premier league": "EPL",
     "la liga": "La liga",
@@ -50,7 +52,20 @@ def _name_tokens(name: str) -> set[str]:
     return set(_normalize_name(name).split())
 
 
-def fetch_league_players(league: str, year: str) -> list[dict]:
+def fetch_league_players(league: str, year: str, force_refresh: bool = False) -> list[dict]:
+    """Quick mode (default): serves a cached league-wide pull if within
+    cache.UNDERSTAT_POPULATION_TTL_HOURS. Fresh mode: always fetches live, still updates the
+    cache afterward. One flat TTL regardless of historical/current -- unlike FBref, this is a
+    single cheap request with no ban risk, so the main value of caching it is avoiding
+    redundant re-fetches of the same league within a short window, not protecting a rate limit."""
+    cache_key = f"{league}:{year}"
+    if not force_refresh:
+        cached = cache.get_cached_understat_population(cache_key)
+        if cached:
+            players, fetched_at = cached
+            if not cache.is_stale(fetched_at, cache.UNDERSTAT_POPULATION_TTL_HOURS):
+                return players
+
     session = requests.Session()
     session.headers.update({"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"})
     league_url = f"https://understat.com/league/{league}"
@@ -63,7 +78,9 @@ def fetch_league_players(league: str, year: str) -> list[dict]:
         timeout=15,
     )
     response.raise_for_status()
-    return response.json().get("players", [])
+    players = response.json().get("players", [])
+    cache.set_cached_understat_population(cache_key, players)
+    return players
 
 
 def find_player_xg(players: list[dict], player_name: str, team_hint: str = "") -> dict | None:
@@ -104,12 +121,14 @@ def find_player_xg(players: list[dict], player_name: str, team_hint: str = "") -
     }
 
 
-def get_player_xg(player_name: str, comp_level: str, season: str, team_hint: str = "") -> dict | None:
+def get_player_xg(
+    player_name: str, comp_level: str, season: str, team_hint: str = "", force_refresh: bool = False
+) -> dict | None:
     """High-level lookup: FBref-style comp_level/season -> Understat xG data, or None if the
     league isn't covered by Understat or the player isn't found in it."""
     league = fbref_comp_to_understat_league(comp_level)
     if league is None:
         return None
     year = fbref_season_to_understat_year(season)
-    players = fetch_league_players(league, year)
+    players = fetch_league_players(league, year, force_refresh=force_refresh)
     return find_player_xg(players, player_name, team_hint)

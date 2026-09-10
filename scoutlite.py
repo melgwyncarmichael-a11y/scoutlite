@@ -22,6 +22,8 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from seleniumbase import Driver
 
+import cache
+
 RATE_LIMIT_SECONDS = 6.5
 JITTER_SECONDS = 1.5
 
@@ -47,63 +49,95 @@ def _uc_fetch(url: str) -> tuple[str, str]:
         driver.quit()
 
 
-def search_player(player_name: str) -> list[dict]:
+def search_player(player_name: str, force_refresh: bool = False) -> list[dict]:
     """Search FBref for a player name. Returns every candidate FBref could match -- does NOT
-    auto-pick one. Caller must confirm which candidate to use, then call
-    fetch_player_page_by_url() with its 'url' (unless 'html' is already populated below, for
-    the single-unambiguous-match case, which needs no second request).
+    auto-pick one. Caller must confirm which candidate to use, then call get_player_page()
+    with its 'url' to get the actual page (instant if this was a single-match resolution,
+    since that page gets cached below as a side effect).
 
-    Each candidate: {name, url, years_active, nationality, alt_name, clubs, html}.
+    Each candidate: {name, url, years_active, nationality, alt_name, clubs}.
     years_active/nationality/alt_name/clubs are "" when unknown (always true for the single-
     match case, since that info only appears on the search-results page, not the player page).
+
+    Quick mode (default): serves a cached candidate list if one exists and isn't older than
+    cache.SEARCH_RESULTS_TTL_HOURS. Fresh mode (force_refresh=True): always searches live, but
+    still updates the cache afterward so the next Quick-mode search benefits.
     """
+    query_key = player_name.strip().lower()
+    if not force_refresh:
+        cached = cache.get_cached_search(query_key)
+        if cached:
+            candidates, fetched_at = cached
+            if not cache.is_stale(fetched_at, cache.SEARCH_RESULTS_TTL_HOURS):
+                return candidates
+
     search_url = f"https://fbref.com/en/search/search.fcgi?search={quote(player_name)}"
     current_url, html = _uc_fetch(search_url)
 
     if "/search/" not in current_url:
-        # FBref auto-redirected: exactly one unambiguous match. We already have the page,
-        # so pull the name straight from it rather than issue a second request.
+        # FBref auto-redirected: exactly one unambiguous match. We already have the page --
+        # cache it directly so a subsequent get_player_page() call is instant, not a second fetch.
+        cache.set_cached_player_page(current_url, html)
         soup = BeautifulSoup(html, "lxml")
         name_el = soup.select_one("#meta h1 span")
-        return [{
+        candidates = [{
             "name": name_el.text.strip() if name_el else player_name,
             "url": current_url,
             "years_active": "",
             "nationality": "",
             "alt_name": "",
             "clubs": "",
-            "html": html,
         }]
+    else:
+        soup = BeautifulSoup(html, "lxml")
+        candidates = []
+        for item in soup.select("div.search-item"):
+            name_div = item.select_one("div.search-item-name")
+            link = name_div.select_one("a") if name_div else None
+            if not link:
+                continue
+            parts = [p.strip() for p in name_div.get_text(" ", strip=True).split("\xb7")]
+            alt_el = item.select_one("div.search-item-alt-names")
+            clubs_el = item.select_one("div.search-item-team")
+            candidates.append({
+                "name": link.get_text(strip=True),
+                "url": "https://fbref.com" + link["href"],
+                "years_active": parts[1] if len(parts) > 1 else "",
+                "nationality": parts[2] if len(parts) > 2 else "",
+                "alt_name": alt_el.get_text(strip=True) if alt_el else "",
+                "clubs": clubs_el.get_text(strip=True).removeprefix("Clubs:").strip() if clubs_el else "",
+            })
+        if not candidates:
+            raise RuntimeError(f"No FBref match found for '{player_name}'")
 
-    soup = BeautifulSoup(html, "lxml")
-    candidates = []
-    for item in soup.select("div.search-item"):
-        name_div = item.select_one("div.search-item-name")
-        link = name_div.select_one("a") if name_div else None
-        if not link:
-            continue
-        parts = [p.strip() for p in name_div.get_text(" ", strip=True).split("\xb7")]
-        alt_el = item.select_one("div.search-item-alt-names")
-        clubs_el = item.select_one("div.search-item-team")
-        candidates.append({
-            "name": link.get_text(strip=True),
-            "url": "https://fbref.com" + link["href"],
-            "years_active": parts[1] if len(parts) > 1 else "",
-            "nationality": parts[2] if len(parts) > 2 else "",
-            "alt_name": alt_el.get_text(strip=True) if alt_el else "",
-            "clubs": clubs_el.get_text(strip=True).removeprefix("Clubs:").strip() if clubs_el else "",
-            "html": None,
-        })
-
-    if not candidates:
-        raise RuntimeError(f"No FBref match found for '{player_name}'")
+    cache.set_cached_search(query_key, candidates)
     return candidates
 
 
-def fetch_player_page_by_url(url: str) -> tuple[str, str]:
-    """Fetch a specific, already-identified FBref player URL (paced). Used once the caller has
-    confirmed which search_player() candidate to proceed with."""
-    return _uc_fetch(url)
+def get_player_page(url: str, requested_season: str | None = None, force_refresh: bool = False) -> tuple[str, str]:
+    """Fetch a specific, already-identified FBref player URL. Used once the caller has
+    confirmed which search_player() candidate to proceed with.
+
+    Quick mode (default): serves the cached page if it's within cache.PLAYER_PAGE_TTL_HOURS
+    OR if requested_season is a season in that cached page that is NOT its most-recent one --
+    historical season data is immutable, so an old cache is still 100% correct for it
+    regardless of age. Fresh mode (force_refresh=True): always fetches live, but still updates
+    the cache afterward.
+    """
+    if not force_refresh:
+        cached = cache.get_cached_player_page(url)
+        if cached:
+            html, fetched_at = cached
+            if not cache.is_stale(fetched_at, cache.PLAYER_PAGE_TTL_HOURS):
+                return url, html
+            if requested_season:
+                available = list_available_seasons(html)
+                if available and requested_season in available and requested_season != available[0]:
+                    return url, html  # stale for "current", but this season is historical -- still valid
+
+    url, html = _uc_fetch(url)
+    cache.set_cached_player_page(url, html)
+    return url, html
 
 
 def _season_rows(soup: BeautifulSoup, table_id: str):

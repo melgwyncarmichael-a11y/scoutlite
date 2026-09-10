@@ -28,7 +28,7 @@ from scoutlite import (
     extract_latest_season,
     extract_misc_stats,
     extract_player_bio,
-    fetch_player_page_by_url,
+    get_player_page,
     list_available_seasons,
     search_player,
 )
@@ -51,13 +51,11 @@ if "search_candidates" not in st.session_state:
     st.session_state.search_candidates = None
 
 
-def _resolve_candidate(candidate: dict, player_name: str):
-    """Fetch the candidate's full page (if not already fetched) and populate player_data."""
-    if candidate["html"] is not None:
-        url, html = candidate["url"], candidate["html"]
-    else:
-        with st.spinner(f"Fetching {candidate['name']}'s page (rate-limit paced, ~7-9s)..."):
-            url, html = fetch_player_page_by_url(candidate["url"])
+def _resolve_candidate(candidate: dict, player_name: str, fresh: bool):
+    """Fetch the candidate's full page (instant if search_player() already cached it for the
+    single-match case) and populate player_data."""
+    with st.spinner(f"Fetching {candidate['name']}'s page..."):
+        url, html = get_player_page(candidate["url"], force_refresh=fresh)
     st.session_state.player_data = {
         "player_name": player_name,
         "url": url,
@@ -74,6 +72,14 @@ player_name = st.text_input(
     "Wikipedia) -- nicknames, abbreviations (\"Jr\"), or a misspelling can fail to match or "
     "match the wrong player. Always check the resolved name/link after searching.",
 )
+fresh_mode = st.checkbox(
+    "⚡ Always fetch fresh data (skip cache)",
+    value=False,
+    help="Off (default): reuse recently-cached data when available -- much faster, and safe "
+    "since past-season data never changes. On: always pull live from FBref/Understat, useful "
+    "right after a match you want reflected immediately. Either way, results are always saved "
+    "to the cache for next time.",
+)
 search = st.button("Search player", type="primary", disabled=not player_name)
 
 if search:
@@ -81,17 +87,17 @@ if search:
     st.session_state.search_candidates = None
     try:
         with st.spinner(f"Searching FBref for '{player_name}' (rate-limit paced, ~7-9s)..."):
-            candidates = search_player(player_name)
+            candidates = search_player(player_name, force_refresh=fresh_mode)
         if len(candidates) == 1:
-            _resolve_candidate(candidates[0], player_name)
+            _resolve_candidate(candidates[0], player_name, fresh_mode)
             st.success(f"Found: {st.session_state.player_data['url']}")
         else:
-            st.session_state.search_candidates = (candidates, player_name)
+            st.session_state.search_candidates = (candidates, player_name, fresh_mode)
     except Exception as e:
         st.error(f"Something went wrong: {e}")
 
 if st.session_state.search_candidates:
-    candidates, searched_name = st.session_state.search_candidates
+    candidates, searched_name, fresh_mode = st.session_state.search_candidates
     st.warning(
         f"{len(candidates)} players matched \"{searched_name}\" — confirm which one before "
         "continuing, rather than guessing for you."
@@ -105,7 +111,7 @@ if st.session_state.search_candidates:
     chosen_idx = st.radio("Which player did you mean?", range(len(candidates)), format_func=lambda i: labels[i])
     if st.button("Confirm selection", type="primary"):
         try:
-            _resolve_candidate(candidates[chosen_idx], searched_name)
+            _resolve_candidate(candidates[chosen_idx], searched_name, fresh_mode)
             st.success(f"Confirmed: {st.session_state.player_data['url']}")
         except Exception as e:
             st.error(f"Something went wrong: {e}")
@@ -149,7 +155,9 @@ if data:
                 st.write(f"Season: {stats['season']} — {stats['squad']} ({stats['competition']})")
 
                 status.update(label="Looking up Understat xG/xA...")
-                xg = get_player_xg(player_name, stats["competition"], stats["season"], stats["squad"])
+                xg = get_player_xg(
+                    player_name, stats["competition"], stats["season"], stats["squad"], force_refresh=fresh_mode
+                )
                 if xg:
                     st.write(f"xG/xA found — matched to Understat's \"{xg['understat_matched_name']}\"")
                 else:
@@ -157,7 +165,8 @@ if data:
 
                 status.update(label="Computing Quality signal (non-AI, percentile-based)...")
                 quality = compute_quality_signal(
-                    bio["position"], stats["competition"], stats["season"], player_name, stats, misc, keeper, xg
+                    bio["position"], stats["competition"], stats["season"], player_name, stats, misc, keeper, xg,
+                    force_refresh=fresh_mode,
                 )
                 st.write(f"Quality: {quality['score']}/5" if quality else "Quality signal not available (league/position not covered)")
 

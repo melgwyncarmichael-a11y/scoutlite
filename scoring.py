@@ -146,9 +146,14 @@ def compute_quality_signal(
     misc: dict | None,
     keeper: dict | None,
     xg: dict | None,
+    force_refresh: bool = False,
 ) -> dict | None:
     """Returns {'score': 1-5, 'position_group': str, 'components': {metric: percentile}} or
-    None if the league isn't covered or the position/data needed isn't available."""
+    None if the league isn't covered or the position/data needed isn't available.
+
+    force_refresh (Fresh mode) also bypasses soccerdata's own on-disk cache for the reference
+    population pulls (its no_cache option), not just our Understat cache -- so Fresh mode is
+    consistent across every data source this function touches."""
     group = classify_position_group(position)
     if group is None:
         return None
@@ -160,7 +165,7 @@ def compute_quality_signal(
     if group == "goalkeeper":
         if soccerdata_league is None or keeper is None or not keeper.get("save_pct"):
             return None
-        sd_reader = sd.FBref(leagues=soccerdata_league, seasons=season)
+        sd_reader = sd.FBref(leagues=soccerdata_league, seasons=season, no_cache=force_refresh)
         keeper_pop = _fbref_keeper_population(sd_reader.read_player_season_stats(stat_type="keeper"))
         components["save_pct"] = percentile_rank(float(keeper["save_pct"]), keeper_pop)
 
@@ -171,7 +176,7 @@ def compute_quality_signal(
 
         if group in ("attack", "midfield") and understat_league and xg:
             year = fbref_season_to_understat_year(season)
-            players = fetch_league_players(understat_league, year)
+            players = fetch_league_players(understat_league, year, force_refresh=force_refresh)
             if group == "attack":
                 for field, key in [("goals", "goals_per90"), ("assists", "assists_per90"), ("xG", "xG_per90"), ("xA", "xA_per90")]:
                     pop = _understat_population_per90(players, group, field)
@@ -183,7 +188,7 @@ def compute_quality_signal(
                 components["xA_per90"] = percentile_rank(per90(float(xg["xA"]), float(xg["minutes"])), xa_pop)
 
         if group in ("midfield", "defense") and soccerdata_league and misc:
-            sd_reader = sd.FBref(leagues=soccerdata_league, seasons=season)
+            sd_reader = sd.FBref(leagues=soccerdata_league, seasons=season, no_cache=force_refresh)
             misc_df = sd_reader.read_player_season_stats(stat_type="misc")
             def_pop = _fbref_misc_population_per90(misc_df, group)
             def_value = per90(

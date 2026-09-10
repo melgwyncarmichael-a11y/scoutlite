@@ -1,5 +1,45 @@
 # ScoutLite — Build Notes
 
+## SQLite staging cache (2026-09-10)
+
+Concept 1 from the architecture discussion, built. Deliberately a plain SQLite table, not a
+vector DB -- our data is structured/numeric (per-90 stats, player identity), which needs exact
+lookups, not semantic retrieval. `cache.py`, three tables: `player_pages`, `understat_populations`,
+`search_results`.
+
+**Two lanes, one cache**, per the project owner's design: Quick mode (default) serves cached
+data when fresh enough; Fresh mode (opt-in -- a checkbox in the UI, `--fresh` on the CLI) always
+fetches live but still writes through to the cache afterward. This also wires into soccerdata's
+own `no_cache` option, so Fresh mode is consistent across every source `scoring.py` touches, not
+just our three tables.
+
+**Freshness policy** differs by table, deliberately:
+- `player_pages` gets the smart treatment: a cached page is served regardless of age if the
+  season being asked for is provably NOT the latest one in that cached copy (immutable historical
+  data, no TTL needed). Otherwise a flat 24h TTL applies. When no season is specified at all, the
+  stale path conservatively re-fetches rather than guessing it's safe.
+- `understat_populations` and `search_results` get a flat TTL each (24h, 7 days) -- simpler on
+  purpose. Understat's pull is one cheap request with no ban risk, so the main value of caching
+  it is avoiding same-session redundant re-fetches, not protecting a rate limit the way FBref's
+  cache does.
+
+**Verified live, not just unit-tested:**
+- Cold fetch (`search_player` + `get_player_page`) for Haaland: ~23s. Same lookup again: 0.00s
+  for both -- the single-match auto-redirect case caches the page directly inside
+  `search_player` itself, so the follow-up `get_player_page` call never re-fetches at all.
+- Fresh mode correctly bypassed a valid, freshly-cached entry and re-fetched live (~22s).
+- Simulated a 25h-old ("stale") cache entry directly in the DB and confirmed all three branches:
+  requesting a historical season served instantly (0.07s) despite the stale timestamp;
+  requesting the current season correctly triggered a live re-fetch (~24s); requesting with no
+  season specified also conservatively re-fetched rather than risk serving stale current data.
+- Full CLI run for a cached player: 27.8s cold -> 4.3s warm (a ~6.5x speedup; the remaining
+  4.3s is NewsAPI + the LLM call, unrelated to caching).
+- Regression: the lookup-confirmation feature (Danny Ward multi-match) still fails cleanly and
+  resolves correctly via `--player-url` with caching layered underneath.
+
+`scoutlite_cache.db` (WAL mode, for more graceful behavior under the CLI+UI concurrent-access
+pattern this project actually uses) is gitignored -- it's a local cache, not part of the repo.
+
 ## Lookup confirmation step (2026-09-10)
 
 Architecture discussion led to three ideas: (1) a locally-cached "staging table" instead of
