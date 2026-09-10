@@ -79,6 +79,21 @@ python3 scoutlite_combined.py "Erling Haaland" \
   --in-possession vertical --out-of-possession high_line
 ```
 
+If a name matches more than one player (common names like "Danny Ward"), the CLI won't guess —
+it prints every candidate with enough info to tell them apart and asks you to re-run with
+`--player-url` pointing at the one you mean. The Streamlit app shows the same choice as a
+selection step instead of failing.
+
+## Caching — Quick vs. Fresh
+
+Lookups are cached locally (SQLite, `cache.py`) so a repeat lookup for the same player is
+near-instant instead of paying FBref's ~7-9s pacing cost again. Past-season data is cached
+indefinitely (it can't change); the current season gets a 24h freshness window.
+
+- **Quick mode (default):** serve cached data when it's fresh enough
+- **Fresh mode (opt-in):** always pull live — a checkbox in the app, `--fresh` on the CLI —
+  still updates the cache afterward either way
+
 ## Known, disclosed limitations
 
 - Quality signal's position grouping takes FBref's first-listed position code — versatile players
