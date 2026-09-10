@@ -112,5 +112,16 @@ indefinitely (it can't change); the current season gets a 24h freshness window.
   name it matched, so this is visible and checkable, not silent
 - Only the top-5 European leagues have a Quality signal (Understat + soccerdata's overlap)
 
+## Tests
+
+```bash
+.venv/bin/python -m pytest -q
+```
+
+A `pytest` suite (`tests/`) covers the pure, deterministic layer — the rule-based judge checks,
+percentile / per-90 math, position classification, FBref↔Understat name matching, cache TTL
+logic, prompt assembly, and synthesis parsing — plus HTML-extractor regression guards run
+offline against captured FBref fixtures (`tests/fixtures/`). No network or API keys needed.
+
 See `NOTES.md` for the full build log, including bugs found and fixed, and every access decision
 with its reasoning.

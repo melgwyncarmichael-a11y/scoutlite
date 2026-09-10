@@ -161,7 +161,7 @@ if data:
                 if xg:
                     st.write(f"xG/xA found — matched to Understat's \"{xg['understat_matched_name']}\"")
                 else:
-                    st.write("xG/xA not available (league not covered by Understat, or no name match found)")
+                    st.write("xG/xA not available (league not covered, no name match, or Understat unreachable) — continuing without it")
 
                 status.update(label="Computing Quality signal (non-AI, percentile-based)...")
                 quality = compute_quality_signal(

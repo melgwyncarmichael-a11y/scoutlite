@@ -156,20 +156,10 @@ SOURCE_ACCURACY_THRESHOLD = 80
 MAX_JUDGE_ITERATIONS = 2
 
 
-def _synthesize_once(
-    player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings
-) -> dict:
-    client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
-    prompt = build_prompt(
-        player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings
-    )
-    response = client.chat.completions.create(
-        model="deepseek-chat",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.3,
-    )
-    text = response.choices[0].message.content.strip()
-
+def parse_synthesis(text: str) -> dict:
+    """Split a raw synthesis response into {news_synthesis, fit_read, fit_score}. Pure -- no
+    API call -- so it's unit-testable and reused by the tests."""
+    text = text.strip()
     news_synthesis, fit_read = "", ""
     if NEWS_MARKER in text and FIT_MARKER in text:
         news_synthesis = text.split(NEWS_MARKER, 1)[1].split(FIT_MARKER, 1)[0].strip()
@@ -186,6 +176,21 @@ def _synthesize_once(
         fit_read = fit_read[len("Fit: not assessed"):].strip()
 
     return {"news_synthesis": news_synthesis, "fit_read": fit_read, "fit_score": fit_score}
+
+
+def _synthesize_once(
+    player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings
+) -> dict:
+    client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
+    prompt = build_prompt(
+        player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings
+    )
+    response = client.chat.completions.create(
+        model="deepseek-chat",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.3,
+    )
+    return parse_synthesis(response.choices[0].message.content)
 
 
 def summarize_combined(
@@ -330,7 +335,7 @@ def run(args):
     xg = get_player_xg(
         args.player, stats["competition"], stats["season"], stats["squad"], force_refresh=args.fresh
     )
-    print(f"xG/xA: {'found' if xg else 'not available for this league'}")
+    print(f"xG/xA: {'found' if xg else 'not available (league not covered, no name match, or Understat unreachable)'}")
 
     print("Computing Quality signal (non-AI, percentile-based)...")
     quality = compute_quality_signal(

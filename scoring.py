@@ -24,7 +24,12 @@ import re
 
 import soccerdata as sd
 
-from understat_xg import fbref_comp_to_understat_league, fbref_season_to_understat_year, fetch_league_players
+from understat_xg import (
+    UnderstatUnavailable,
+    fbref_comp_to_understat_league,
+    fbref_season_to_understat_year,
+    fetch_league_players_safe,
+)
 
 SOCCERDATA_LEAGUES = {
     "premier league": "ENG-Premier League",
@@ -176,16 +181,20 @@ def compute_quality_signal(
 
         if group in ("attack", "midfield") and understat_league and xg:
             year = fbref_season_to_understat_year(season)
-            players = fetch_league_players(understat_league, year, force_refresh=force_refresh)
-            if group == "attack":
-                for field, key in [("goals", "goals_per90"), ("assists", "assists_per90"), ("xG", "xG_per90"), ("xA", "xA_per90")]:
-                    pop = _understat_population_per90(players, group, field)
-                    components[key] = percentile_rank(per90(float(xg[field]), float(xg["minutes"])), pop)
-            elif group == "midfield":
-                kp_pop = _understat_population_per90(players, group, "key_passes")
-                xa_pop = _understat_population_per90(players, group, "xA")
-                components["key_passes_per90"] = percentile_rank(per90(float(xg["key_passes"]), float(xg["minutes"])), kp_pop)
-                components["xA_per90"] = percentile_rank(per90(float(xg["xA"]), float(xg["minutes"])), xa_pop)
+            try:
+                players = fetch_league_players_safe(understat_league, year, force_refresh=force_refresh)
+            except UnderstatUnavailable:
+                players = None  # skip the Understat-based components rather than abort
+            if players is not None:
+                if group == "attack":
+                    for field, key in [("goals", "goals_per90"), ("assists", "assists_per90"), ("xG", "xG_per90"), ("xA", "xA_per90")]:
+                        pop = _understat_population_per90(players, group, field)
+                        components[key] = percentile_rank(per90(float(xg[field]), float(xg["minutes"])), pop)
+                elif group == "midfield":
+                    kp_pop = _understat_population_per90(players, group, "key_passes")
+                    xa_pop = _understat_population_per90(players, group, "xA")
+                    components["key_passes_per90"] = percentile_rank(per90(float(xg["key_passes"]), float(xg["minutes"])), kp_pop)
+                    components["xA_per90"] = percentile_rank(per90(float(xg["xA"]), float(xg["minutes"])), xa_pop)
 
         if group in ("midfield", "defense") and soccerdata_league and misc:
             sd_reader = sd.FBref(leagues=soccerdata_league, seasons=season, no_cache=force_refresh)

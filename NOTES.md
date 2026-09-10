@@ -1,5 +1,33 @@
 # ScoutLite — Build Notes
 
+## pytest suite + Understat graceful degradation (2026-09-11)
+
+Two follow-ups from the "build recommendations" review, done together.
+
+**Understat graceful degradation.** A timeout inside Understat was killing whole brief runs.
+`understat_xg.py` now has an `UnderstatUnavailable` exception and a `fetch_league_players_safe`
+wrapper; `get_player_xg` catches `(requests.RequestException, ValueError)` and returns `None`.
+`scoring.py`'s Quality signal catches `UnderstatUnavailable` and drops just the Understat-based
+components (still scores from FBref-misc / keeper data) instead of aborting. CLI and app now say
+"xG/xA not available (league not covered, no name match, or Understat unreachable) — continuing
+without it". Verified with a monkeypatched timeout: attacker path returns `None` cleanly, a
+defender still scored from FBref data.
+
+**Test suite (`tests/`, 77 tests, `pytest -q`, ~2s, no network).** Covers the pure layer:
+`judge_rules` checks (the richest target — structure gates, numeric grounding, invented-quote
+detection, honesty gates, forbidden-content regexes, player-focus), percentile / per-90 /
+1–5 mapping math, position classification, FBref↔Understat name matching (incl. the compound-
+surname fallback and the documented abbreviation gap), cache TTL + roundtrips (temp DB),
+`build_prompt` assembly across the xG / articles / philosophy / scout-notes / prior-findings
+branches, and `parse_synthesis` marker splitting. Plus offline HTML-extractor regression guards
+against captured fixtures (`tests/fixtures/haaland_page.html`, `danny_ward_search.html`) — these
+extractors have had real bugs (bio parsing, the search-item split), so they now have guards.
+
+To make this testable, `parse_synthesis(text)` was extracted as a pure function out of
+`_synthesize_once` in `scoutlite_combined.py` (no behaviour change; `_synthesize_once` now just
+calls it). Two test-side bugs found and fixed while writing: a `_check` helper that couldn't
+pass `xg=None` explicitly (needed a sentinel), and an over-broad substring assertion.
+
 ## LLM-as-judge loop (2026-09-10)
 
 The Vision doc's judge concept, built -- but re-scoped once we discussed it: the LLM is a

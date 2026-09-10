@@ -121,14 +121,34 @@ def find_player_xg(players: list[dict], player_name: str, team_hint: str = "") -
     }
 
 
+class UnderstatUnavailable(Exception):
+    """Understat couldn't be reached (timeout, connection error, bad response). xG/xA is
+    optional data -- callers should degrade gracefully, not abort the whole brief."""
+
+
 def get_player_xg(
     player_name: str, comp_level: str, season: str, team_hint: str = "", force_refresh: bool = False
 ) -> dict | None:
     """High-level lookup: FBref-style comp_level/season -> Understat xG data, or None if the
-    league isn't covered by Understat or the player isn't found in it."""
+    league isn't covered by Understat or the player isn't found in it. A network failure
+    reaching Understat also returns None (xG/xA is optional) rather than raising -- see
+    fetch_league_players_safe."""
     league = fbref_comp_to_understat_league(comp_level)
     if league is None:
         return None
     year = fbref_season_to_understat_year(season)
-    players = fetch_league_players(league, year, force_refresh=force_refresh)
+    try:
+        players = fetch_league_players(league, year, force_refresh=force_refresh)
+    except (requests.RequestException, ValueError):
+        return None
     return find_player_xg(players, player_name, team_hint)
+
+
+def fetch_league_players_safe(league: str, year: str, force_refresh: bool = False) -> list[dict]:
+    """Like fetch_league_players, but raises UnderstatUnavailable on any network/parse failure
+    so a caller (e.g. the Quality signal) can distinguish 'Understat is down' from 'no players
+    matched' and skip the affected score components instead of aborting."""
+    try:
+        return fetch_league_players(league, year, force_refresh=force_refresh)
+    except (requests.RequestException, ValueError) as e:
+        raise UnderstatUnavailable(str(e)) from e
