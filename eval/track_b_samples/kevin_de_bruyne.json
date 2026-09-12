@@ -1,0 +1,284 @@
+{
+  "player": "Kevin De Bruyne",
+  "fbref_url": "https://fbref.com/en/players/e46012d4/Kevin-De-Bruyne",
+  "season": "2026-2027",
+  "bio": {
+    "full_name": "",
+    "position": "FW-MF (AM-CM-WM)",
+    "footed": "Right",
+    "height_weight": "181cm, 68kg",
+    "birth_date": "1991-06-28",
+    "birthplace": "Gent, Belgium",
+    "national_team": "Belgium",
+    "club": "Napoli",
+    "contract_expires": "June 2027"
+  },
+  "stats": {
+    "season": "2026-2027",
+    "age": "35",
+    "squad": "Napoli",
+    "competition": "1. Serie A",
+    "matches_played": "3",
+    "starts": "0",
+    "minutes": "88",
+    "goals": "1",
+    "assists": "1",
+    "goals_plus_assists": "2",
+    "non_penalty_goals": "1",
+    "yellow_cards": "0",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "1",
+    "fouls_drawn": "1",
+    "offsides": "0",
+    "crosses": "5",
+    "interceptions": "1",
+    "tackles_won": "2",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Kevin De Bruyne",
+    "understat_url": "https://understat.com/player/447",
+    "understat_team": "Napoli",
+    "games": "3",
+    "minutes": "77",
+    "goals": "1",
+    "xG": 0.47,
+    "assists": "1",
+    "xA": 0.61,
+    "npxG": 0.47,
+    "shots": "2",
+    "key_passes": "7"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 50.0,
+      "assists_per90": 50.0,
+      "xG_per90": 50.0,
+      "xA_per90": 50.0
+    },
+    "avg_percentile": 50.0,
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against Serie A players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "Alloutsoccer.com"
+      },
+      "author": "Simon Bajkowski",
+      "title": "City's Ayyoub Bouaddi addresses upcoming Manchester derby after impressive Champions League showing",
+      "description": "Ayyoub Bouaddi has thoroughly impressed for Manchester City since joining from Lille this summer, with the youngster excited for his first Manchester derby on Sunday",
+      "url": "https://www.alloutsoccer.com/news/city-ayyoub-bouaddi-manchester-derby-2019615",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/67ce5cee759d6ff45085c744717c6fd70f0ad85c614131b2a05d4f29f5874bc9/lightyear_networkapi/resizefill_w810_h540%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fall_out_soccer_276%2F1953d7d02829b2bb79a34be46d8ce04c.jpg",
+      "publishedAt": "2026-09-10T21:41:09Z",
+      "content": "Ayyoub Bouaddi has handled everything thrown at him since joining Manchester City with remarkable composure - though his leisurely strolls may need rerouting after recent events.\r\nThe Moroccan midfie\u2026 [+4500 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Sporting News"
+      },
+      "author": "Kyle Bonn",
+      "title": "Champions League Power Rankings: Barcelona, Arsenal teams to beat as defending champs PSG faces uphill task",
+      "description": "Two-time defending champions PSG are looking for an historic three-peat, but they have exceptional competition from a number of massive clubs, including last year's finalists Arsenal plus La Liga giants Real Madrid and Barcelona.",
+      "url": "https://www.sportingnews.com/us/soccer/news/champions-league-power-rankings-teams-beat-list/3c7913d2d2aaa385a4ea023a",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/6c8857ce791242a4b821c21519d839709239c29b1e7de8a481a65a46b9dd6749/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_sporting_news_articles_584%2Ffc850fdf384dc3c6f2ebfd614073c1de",
+      "publishedAt": "2026-09-10T19:51:00Z",
+      "content": "Champions League Power Rankings: Barcelona, Arsenal teams to beat as defending champs PSG faces uphill task originally appeared on The Sporting News. Add The Sporting News as a Preferred Source by cl\u2026 [+24397 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Sam Wilson",
+      "title": "Napoli\u2019s De Bruyne defends performances after Arsenal loss: \u2018This is the real De Bruyne\u2019",
+      "description": "Napoli midfielder Kevin De Bruyne hit back at local media criticisms regarding his physical condition following the Partenopei\u2019s 1-0 defeat to Arsenal in",
+      "url": "https://football-italia.net/napolis-de-bruyne-defends-performances/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/09/Kevin-De-Bruyne-running.jpg",
+      "publishedAt": "2026-09-10T11:00:33Z",
+      "content": "Napoli midfielder Kevin De Bruyne hit back at local media criticisms regarding his physical condition following the Partenopeis 1-0 defeat to Arsenal in their Champions League opener at the Stadio Di\u2026 [+1652 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Susy Campanale",
+      "title": "Napoli give worrying injury updates on Alisson and Meret",
+      "description": "Max Allegri gave important injury updates for Napoli after their defeat to Arsenal. \u2018We\u2019ll be without Alisson Santos for a while, I\u2019m not sure about Alex Meret.\u2019",
+      "url": "https://football-italia.net/napoli-give-injury-updates-on-alisson-meret/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/09/Alisson-Santos.jpg",
+      "publishedAt": "2026-09-09T22:01:34Z",
+      "content": "Max Allegri gave important injury updates for Napoli after their defeat to Arsenal. Well be without Alisson Santos for a while, Im not sure about Alex Meret.\r\nThe Partenopei were already decimated go\u2026 [+1989 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Susy Campanale",
+      "title": "Allegri: \u2018Napoli progress, Arsenal needed extraordinary quality to beat us\u2019",
+      "description": "Max Allegri insists Napoli showed progress despite a third consecutive defeat, because \u2018Arsenal needed an extraordinary moment of quality to score against us\u2019 in the Champions League.",
+      "url": "https://football-italia.net/allegri-napoli-arsenal-needed-extraordinary/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/09/Max-Allegri-fist.jpg",
+      "publishedAt": "2026-09-09T21:50:16Z",
+      "content": "Max Allegri insists Napoli showed progress despite a third consecutive defeat, because Arsenal needed an extraordinary moment of quality to score against us in the Champions League.\r\nThe Partenopei k\u2026 [+4961 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The42"
+      },
+      "author": "The 42",
+      "title": "Sensational Martin \u00d8degaard strike secures Arsenal win at Napoli",
+      "description": "There were also wins for Barcelona, Stuttgart and PSG",
+      "url": "https://www.the42.ie/barcelona-feyenoord-report-7157597-Sep2026/",
+      "urlToImage": "https://img2.thejournal.ie/article/7157775/river/?height=400&version=7157721",
+      "publishedAt": "2026-09-09T21:42:22Z",
+      "content": "Updated at 22.29\r\nChampions League results:\r\n<ul><li>Barcelona 5-1 Feyenoord</li><li>VfB Stuttgart 3-1 Viking</li><li>Liverpool 2-1 Atletico Madrid</li><li>Napoli 0-1 Arsenal</li><li>PSG 6-1 Slovan</\u2026 [+7961 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dailymail.com"
+      },
+      "author": "Isaan Khan",
+      "title": "Martin Odegaard shows he is on a mission to put himself at top table of midfielders - as captain's brilliance gives Gunners winning Champions League start: Napoli 0-1 Arsenal",
+      "description": "That was their biggest statement of the day - before Martin Odegaard , the man whose previous season was tarnished by injury and form, decided to step up and put Napoli to the curb.",
+      "url": "https://www.dailymail.com/sport/football/article-16116915/Napoli-0-1-Arsenal-Champions-League-Martin-Odegaard.html",
+      "urlToImage": "https://i.dailymail.com/1s/2026/09/09/21/111150725-0-image-m-35_1788987293292.jpg",
+      "publishedAt": "2026-09-09T21:35:32Z",
+      "content": "Arsenal had issued a warning in Naples to their own fans before kick-off, strongly advising them not to wear club shirts or scarves, or use public transport to avoid being targeted by Napoli ultras.\r\u2026 [+4969 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Just Arsenal News"
+      },
+      "author": "Michelle",
+      "title": "Arsenal Conquer Naples as Odegaard Seals Champions League Victory",
+      "description": "Arsenal began their latest Champions League campaign with a hard-earned 1-0 victory over Napoli, with Martin Odegaard\u2019s second-half goal finally rewarding the Gunners for a night of sustained attacking pressure in Naples. Mikel Arteta\u2019s side had chances throu\u2026",
+      "url": "https://www.justarsenal.com/arsenal-conquer-naples-as-odegaard-seals-champions-league-victory/421710",
+      "urlToImage": "https://icdn.justarsenal.com/wp-content/uploads/2026/09/tzolis-odegaard-guimaraes.jpg",
+      "publishedAt": "2026-09-09T21:25:55Z",
+      "content": "Arsenal began their latest Champions League campaign with a hard-earned 1-0 victory over Napoli, with Martin Odegaards second-half goal finally rewarding the Gunners for a night of sustained attackin\u2026 [+3733 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "SB Nation"
+      },
+      "author": "Aaron Lerner",
+      "title": "Napoli 0 \u2013 Arsenal 1 match report: imperious (except on the scoreboard)",
+      "description": "That is about the most dominant 1-0 win you\u2019ll ever see, which is somewhat amusing because you could say the same about Arsenal\u2019s 2-1 win over Chelsea at the weekend. The Gunners played Napoli off the park and should have been well-clear of the Italian side. \u2026",
+      "url": "https://theshortfuse.sbnation.com/uefa-champions-league/37493/napoli-0-arsenal-1-match-report-imperious-except-on-the-scoreboard",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/b64263a20fe258e635ca1465041bb5c778d399fa93fb56f66cfc45dd2c082893/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fsb_nation_articles_115%2F31a1ac79a52a4583e15526c14a9921ee.jpg",
+      "publishedAt": "2026-09-09T21:24:18Z",
+      "content": "That is about the most dominant 1-0 win you'll ever see, which is somewhat amusing because you could say the same about Arsenal's 2-1 win over Chelsea at the weekend. The Gunners played Napoli off th\u2026 [+3408 chars]"
+    },
+    {
+      "source": {
+        "id": "al-jazeera-english",
+        "name": "Al Jazeera English"
+      },
+      "author": null,
+      "title": "Misfiring Arsenal beat Napoli with Odegaard stunner in Champions League",
+      "description": "Arsenal dominate the play but need a screamer from Martin Odegaard to seal three points in Napoli to open league phase.",
+      "url": "https://www.aljazeera.com/sports/2026/9/9/misfiring-arsenal-beat-napoli-with-odegaard-stunner-in-champions-league",
+      "urlToImage": "https://www.aljazeera.com/wp-content/uploads/2026/09/2026-09-09T204050Z_602733913_UP1EM991LBZFI_RTRMADP_3_SOCCER-CHAMPIONS-NAP-ARS-1788987282.jpg?resize=1920%2C1440",
+      "publishedAt": "2026-09-09T21:20:20Z",
+      "content": "Arsenal captain Martin Odegaards sensational late strike broke stern Napoli resistance as the English champions began their bid for Champions League glory with a hard-fought 1-0 win in Naples on Wedn\u2026 [+3100 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Susy Campanale",
+      "title": "Di Lorenzo: \u2018Napoli defended too deep, but we knew Arsenal were strong\u2019",
+      "description": "Napoli captain Giovanni Di Lorenzo admits they \u2018defended a little too deep\u2019 against Arsenal and are smarting after three defeats, but not all is lost in the Champions League.",
+      "url": "https://football-italia.net/di-lorenzo-napoli-defended-too-deep-arsenal/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/09/Giovanni-Di-Lorenzo.jpg",
+      "publishedAt": "2026-09-09T21:16:15Z",
+      "content": "Napoli captain Giovanni Di Lorenzo admits they defended a little too deep against Arsenal and are smarting after three defeats, but not all is lost in the Champions League.\r\nIt was a frustrating even\u2026 [+2905 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "AFP",
+      "title": "Odegaard gives Arsenal winning Champions League start at Napoli",
+      "description": "Arsenal captain Martin Odegaard's sensational late strike broke stern Napoli resistance as the English champions began their bid for Champions League glory with a hard-fought 1-0 win in Naples on Wednesday.It continued a perfect start to the campaign for Arse\u2026",
+      "url": "https://sports.yahoo.com/articles/odegaard-gives-arsenal-winning-champions-211546865.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/e2a205ce88eea801cb053c94c4af68f691ff908d4e41cfbae983c348c225ed50/lightyear_networkapi/resizefill_w768_h512%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fafp.com%2Fd673d140cc08c2cf6795d7472cb33f66.jpg",
+      "publishedAt": "2026-09-09T21:15:46Z",
+      "content": "Arsenal captain Martin Odegaard's sensational late strike broke stern Napoli resistance as the English champions began their bid for Champions League glory with a hard-fought 1-0 win in Naples on Wed\u2026 [+3122 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Sky Sports"
+      },
+      "author": "Nick Wright",
+      "title": "Odegaard gives dominant Arsenal win over Napoli",
+      "description": "Report as Martin Odegaard's goal ensures a 1-0 win for Arsenal in their Champions League league phase opener against Napoli; Mikel Arteta's side dominated the game but wasted chances through Bukayo Saka, Mikel Merino and others before Odegaard's winner",
+      "url": "https://www.skysports.com/football/news/11945/13582864/napoli-0-1-arsenal-martin-odegaard-goal-clinches-win-for-dominant-gunners-in-champions-league-opener",
+      "urlToImage": "https://e0.365dm.com/26/09/1600x900/skysports-odegaard-martin-arsenal_7346526.jpg?20260909214019",
+      "publishedAt": "2026-09-09T21:07:00Z",
+      "content": "Martin Odegaard's superb strike gave Arsenal a deserved 1-0 victory over Napoli in their Champions League opener.\r\nThe Gunners should have won by a bigger margin but missed a succession of chances be\u2026 [+1175 chars]"
+    },
+    {
+      "source": {
+        "id": "rte",
+        "name": "RTE"
+      },
+      "author": "RT\u00c9 Sport",
+      "title": "Odegaard fires Gunners to victory at Napoli",
+      "description": "Martin Odegaard's fine second-half goal saw Arsenal kick off their Champions League campaign with a 1-0 win at Napoli.",
+      "url": "https://www.rte.ie/sport/soccer/2026/0909/1590845-odegaard-fires-gunners-to-victory-at-napoli/",
+      "urlToImage": "https://www.rte.ie/images/0024fb25-1600.jpg",
+      "publishedAt": "2026-09-09T21:03:22Z",
+      "content": "Martin Odegaard's fine second-half goal saw Arsenal kick off their Champions League campaign with a 1-0 win at Napoli.\r\nThe Gunners, who are aiming to go one better than last seasons final defeat thi\u2026 [+2917 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "NBCSports.com"
+      },
+      "author": "Nicholas Mendola",
+      "title": "Martin Odegaard's scorched strike leads Arsenal at Napoli: Has Arteta's unlocked Norwegian's peak?",
+      "description": "Martin Odegaard has so long been a part of the soccer world that it's easy to forget that Arsenal's Norwegian playmaker is still 27 until late December.",
+      "url": "https://www.nbcsports.com/soccer/news/martin-odegaards-scorched-strike-leads-arsenal-at-napoli-has-artetas-unlocked-norwegians-peak",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/9af3e3984d6a35563a16fac9ca47eb8b38306a298d56d6b207681062863e5b91/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fnbcsports.com%2F7a92567b4d4e09e80d390f14200ccb92.jpg",
+      "publishedAt": "2026-09-09T21:01:58Z",
+      "content": "Martin Odegaard has so long been a part of the soccer world that it's easy to forget that Arsenal's Norwegian playmaker is still 27 until late December.\r\nA player who in his low teens was recruited b\u2026 [+1598 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "",
+    "out_of_possession": ""
+  },
+  "news_synthesis": "Recent coverage over the last 28 days centers on Napoli's Champions League loss to Arsenal, with one headline noting De Bruyne defending his performances after that match (\"This is the real De Bruyne\"). Other listed headlines cover the Arsenal win itself (\u00d8degaard's goal, match reports), Allegri's post-match comments, Napoli injury updates on Alisson and Meret, and unrelated Manchester derby/Champions League power-ranking items. No other De Bruyne-specific news appears in the listed headlines.",
+  "fit_read": "Scout's role notes: none were provided in the information listed above, so there is no scout observation to attribute.",
+  "fit_score": null,
+  "judge": {
+    "source_accuracy": 90.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "HONESTY: no philosophy given, but the fit read doesn't say 'not assessed'."
+    ],
+    "confidence_warning": false
+  }
+}

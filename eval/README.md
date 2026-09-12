@@ -54,14 +54,43 @@ itself."
    adjective inflation like "electric" or "generational talent"). This eval either confirms or
    kills that.
 
-**Sample:** reuse the 12-case test batch (`TESTS.md`) rather than generating fresh players —
-it's already deliberately diverse (elite/average/fringe, ambiguous name, uncovered league,
-thin-data season) and keeps NewsAPI/FBref calls to a minimum. Add 2-3 new captures with a club
-philosophy set (`--in-possession` / `--out-of-possession`), since that batch never exercised
-the Fit-score path at all.
+**Sample:** the 11 successful players from the 12-case test batch (`TESTS.md`) are captured in
+`track_b_samples/` — reused rather than generating fresh players since the batch is already
+deliberately diverse (elite/average/fringe, ambiguous name, uncovered league, thin-data
+season, compound surname), and it keeps NewsAPI/FBref calls to a minimum. None of them have a
+club philosophy set (same as the original batch), so the Fit-score/philosophy path is still
+untested — **add 2-3 new captures with `--in-possession` / `--out-of-possession` set** before
+calling the sample complete.
 
-`erling_haaland.json` in `track_b_samples/` is a working example from getting this scaffolding
-running — the point is to extend the sample from here, not to treat one brief as the eval.
+Every capture currently scores 90% on one pass, which is a real result, not a placeholder --
+see "Two real bugs" below. It also means the current sample has no diversity on the
+pass/confidence-warning axis; the philosophy captures above are one way to add some, since a
+missing philosophy is itself one of the judge's honesty-gate checks.
+
+### Two real bugs the first capture run found (2026-09-12)
+
+Running the batch immediately paid for itself: Virgil van Dijk and Declan Rice both came back
+with source-accuracy in the 20-65% range on the first pass. Investigating turned up two
+distinct bugs in `judge_rules.py`'s quote-extraction regex, not real hallucination:
+
+1. A bare apostrophe (`'`) was treated as a valid opening quote character, so a possessive like
+   "Ødegaard's resurgence..." got misread as an invented quote spanning most of the paragraph.
+2. Trivially short real quotes (a headline's single word "found", or "decision time") fell
+   under the grounding check's own 15-character floor and were skipped by the regex entirely --
+   which left their quote marks unconsumed, free to pair up with each other across the
+   intervening plain narrative and manufacture one long fake quote out of real prose.
+
+Both fixed in `judge_rules.py` (only straight/curly double quotes delimit a quote now;
+apostrophes are allowed as content, not as delimiters; pairing happens for every quote
+regardless of length, with the length filter applied afterward, only to the grounding check).
+Verified against both real briefs (Rice: 20% → 90%; Van Dijk: 65% → 90%, then a fresh
+regeneration surfaced bug #2 too: 40% → 90%), then a sweep across all 11 captures found 4 more
+silently affected (David Raya, Kevin De Bruyne, Trent Alexander-Arnold, Vinicius Junior — all
+recovering to 90%) and re-captured them. 3 new regression tests added to
+`tests/test_judge_rules.py` (94 tests total). Full writeup in `NOTES.md`.
+
+`track_b_samples/` holds all 11 resulting captures — the point is to extend from here (the
+philosophy-set cases above), not to treat these as the finished sample.
 
 ## Track A — Quality signal validity (next up)
 

@@ -1,0 +1,297 @@
+{
+  "player": "David Raya",
+  "fbref_url": "https://fbref.com/en/players/98ea5115/David-Raya",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "David Raya Mart\u00edn",
+    "position": "GK",
+    "footed": "Right",
+    "height_weight": "186cm, 79kg",
+    "birth_date": "1995-09-15",
+    "birthplace": "Barcelona, Spain",
+    "national_team": "Spain",
+    "club": "Arsenal",
+    "contract_expires": "June 2028"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "27",
+    "squad": "Arsenal",
+    "competition": "1. Premier League",
+    "matches_played": "32",
+    "starts": "32",
+    "minutes": "2,880",
+    "goals": "0",
+    "assists": "0",
+    "goals_plus_assists": "0",
+    "non_penalty_goals": "0",
+    "yellow_cards": "2",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "0",
+    "fouls_drawn": "4",
+    "offsides": "0",
+    "crosses": "0",
+    "interceptions": "0",
+    "tackles_won": "1",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": {
+    "gk_matches_played": "32",
+    "gk_starts": "32",
+    "gk_minutes": "2,880",
+    "goals_against": "24",
+    "shots_on_target_against": "69",
+    "saves": "45",
+    "save_pct": "65.2",
+    "wins": "23",
+    "draws": "4",
+    "losses": "5",
+    "clean_sheets": "14",
+    "clean_sheet_pct": "43.8",
+    "penalties_faced": "3",
+    "penalties_allowed": "2",
+    "penalties_saved": "1"
+  },
+  "xg": {
+    "understat_matched_name": "David Raya",
+    "understat_url": "https://understat.com/player/9676",
+    "understat_team": "Arsenal",
+    "games": "32",
+    "minutes": "2880",
+    "goals": "0",
+    "xG": 0.0,
+    "assists": "0",
+    "xA": 0.0,
+    "npxG": 0.0,
+    "shots": "0",
+    "key_passes": "0"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "goalkeeper",
+    "components": {
+      "save_pct": 40.625
+    },
+    "avg_percentile": 40.6,
+    "explanation": "Evaluated as a goalkeeper: save percentage, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "The4thofficial.net"
+      },
+      "author": "The 4th Official",
+      "title": "Havertz To Lead The Line | 4-2-3-1 Arsenal Predicted Lineup Vs Sunderland",
+      "description": "Arsenal will lock horns with Sunderland at the Stadium of Light this Saturday evening as they look to earn a good result on the road in the Premier League. The Gunners managed to secure a narrow 1-0 w...",
+      "url": "https://the4thofficial.net/2026/09/havertz-to-lead-the-line-4-2-3-1-arsenal-predicted-lineup-vs-sunderland/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/623a67a0175241f0c764254a01e736d570537d77df334b5689d263cb8984fae9/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_4th_official_articles_868%2F7e1d65593daa67f5657ff1c11436bab4.jpg",
+      "publishedAt": "2026-09-10T21:05:00Z",
+      "content": "Arsenal will lock horns with Sunderland at the Stadium of Light this Saturday evening as they look to earn a good result on the road in the Premier League. The Gunners managed to secure a narrow 1-0 \u2026 [+2036 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "SB Nation"
+      },
+      "author": "Tony DelMonego",
+      "title": "Arsenal vs Sunderland Premier League preview: Injuries, Suspensions, and Predicted Lineups",
+      "description": "Looking at who is fit, who misses out, and how the Gunners could line up this weekend",
+      "url": "https://theshortfuse.sbnation.com/arsenal-injury-news/37496/arsenal-vs-sunderland-premier-league-preview-injuries-suspensions-and-predicted-lineups-arteta-saka-rice",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/54c44409cd67b5f150e4f33a5eeca918a4fac06b2affb0b437daa7c19a319177/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fsb_nation_articles_115%2Fdd59592f5da7db972a80934a0c697b58.jpg",
+      "publishedAt": "2026-09-10T16:00:00Z",
+      "content": "The away days keep on keepin' on after Arsenal's successful visit to Naples on Wednesday in the Champions League. The Gunners return to England for their 4th Premier League tie of the season, this ti\u2026 [+6601 chars]"
+    },
+    {
+      "source": {
+        "id": "usa-today",
+        "name": "USA Today"
+      },
+      "author": "Jon Arnold, USA TODAY",
+      "title": "Brian Schwake took the long road to Nashville. Now he's making a USMNT push",
+      "description": "The 25-year-old goalkeeper felt leaving for Europe at a young age was his only chance but now is standing out for the top team in MLS.",
+      "url": "https://www.usatoday.com/story/sports/soccer/mls/2026/09/10/brian-schwake-nashville-sc-usmnt-push-messi-penalty-save/91661626007/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/061f476281514fe867f264c5de5b9b9f6bff7b670ffbc2d7364a510ed34a0397/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fusa_today_sports_articles_558%2F9c39b45954bde29e9aaf18a418f20c88.jpg",
+      "publishedAt": "2026-09-10T15:47:36Z",
+      "content": "It takes around eight hours to drive from Chicago to Nashville. There are more than a dozen direct flights each day that will get you there in 90 minutes. But Brian Schwake went the long way, getting\u2026 [+8202 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "CBS Sports"
+      },
+      "author": "James Benge",
+      "title": "What is a Viktor Gyokeres game? Arsenal's Champions League win over Napoli happened in spite of their striker",
+      "description": "Viktor Gyokeres failed to register a single shot in the Gunners' 1-0 win at Napoli, highlighting a troubling trend for a marquee striker struggling to generate chances in a dominant attack.",
+      "url": "https://www.cbssports.com/soccer/news/viktor-gyokeres-arsenal-champions-league-napoli-striker/",
+      "urlToImage": "https://sportshub.cbsistatic.com/i/r/2026/09/09/a2a6ecc1-8026-42ba-9975-0e6793ddea62/thumbnail/1200x675/b82912f2aeab6dfe74a3c9f5ec6c4afc/untitled-design-2026-09-10t004501-676.png",
+      "publishedAt": "2026-09-09T21:47:51Z",
+      "content": "Suppose you were designing the ideal Arsenal game for Viktor Gyokeres, what would it look like? You would want his team mates parked in the final third, weaving intricate patterns before Martin Odega\u2026 [+4237 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The42"
+      },
+      "author": "The 42",
+      "title": "Sensational Martin \u00d8degaard strike secures Arsenal win at Napoli",
+      "description": "There were also wins for Barcelona, Stuttgart and PSG",
+      "url": "https://www.the42.ie/barcelona-feyenoord-report-7157597-Sep2026/",
+      "urlToImage": "https://img2.thejournal.ie/article/7157775/river/?height=400&version=7157721",
+      "publishedAt": "2026-09-09T21:42:22Z",
+      "content": "Updated at 22.29\r\nChampions League results:\r\n<ul><li>Barcelona 5-1 Feyenoord</li><li>VfB Stuttgart 3-1 Viking</li><li>Liverpool 2-1 Atletico Madrid</li><li>Napoli 0-1 Arsenal</li><li>PSG 6-1 Slovan</\u2026 [+7961 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The4thofficial.net"
+      },
+      "author": "The 4th Official",
+      "title": "Odegaard Gets 8.5, Gabriel With 7.5 | Arsenal Players Rated In Narrow Win Vs Napoli",
+      "description": "Arsenal faced off against Napoli at the Stadio Diego Armando Maradona earlier tonight as they hoped to secure a good result on the road in the UEFA Champions League. The Gunners made a bright start to...",
+      "url": "https://the4thofficial.net/2026/09/odegaard-gets-8-5-gabriel-with-7-5-arsenal-players-rated-in-narrow-win-vs-napoli/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/57e870c48a4c41551591db07447a27d5878382fec0623bd58550a22ee20596d9/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_4th_official_articles_868%2Fe94cfa28ad0b5250fb11a3947e3789da.jpg",
+      "publishedAt": "2026-09-09T21:40:00Z",
+      "content": "Arsenal faced off against Napoli at the Stadio Diego Armando Maradona earlier tonight as they hoped to secure a good result on the road in the UEFA Champions League. The Gunners made a bright start t\u2026 [+1999 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The Punch"
+      },
+      "author": "Punch Newspapers",
+      "title": "UCL: \u00d8degaard fires Arsenal to 1-0 win at Napoli",
+      "description": "Martin \u00d8degaard\u2019s superb 75th-minute strike secured Arsenal a hard-fought 1-0 victory away at Napoli in their Champions League league-phase opener at the Stadio Diego Armando Maradona. The Arsenal captain, on Wednesday night, curled a left-footed effort from \u2026",
+      "url": "https://punchng.com/ucl-odegaard-fires-arsenal-to-1-0-win-at-napoli/",
+      "urlToImage": "https://cdn.punchng.com/wp-content/uploads/2016/10/17155511/punchlogo.png",
+      "publishedAt": "2026-09-09T21:36:24Z",
+      "content": "Martin \u00d8degaards superb 75th-minute strike secured Arsenal a hard-fought 1-0 victory away at Napoli in their Champions League league-phase opener at the Stadio Diego Armando Maradona.\r\nThe Arsenal ca\u2026 [+2160 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Just Arsenal News"
+      },
+      "author": "Michelle",
+      "title": "Arsenal Conquer Naples as Odegaard Seals Champions League Victory",
+      "description": "Arsenal began their latest Champions League campaign with a hard-earned 1-0 victory over Napoli, with Martin Odegaard\u2019s second-half goal finally rewarding the Gunners for a night of sustained attacking pressure in Naples. Mikel Arteta\u2019s side had chances throu\u2026",
+      "url": "https://www.justarsenal.com/arsenal-conquer-naples-as-odegaard-seals-champions-league-victory/421710",
+      "urlToImage": "https://icdn.justarsenal.com/wp-content/uploads/2026/09/tzolis-odegaard-guimaraes.jpg",
+      "publishedAt": "2026-09-09T21:25:55Z",
+      "content": "Arsenal began their latest Champions League campaign with a hard-earned 1-0 victory over Napoli, with Martin Odegaards second-half goal finally rewarding the Gunners for a night of sustained attackin\u2026 [+3733 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "SB Nation"
+      },
+      "author": "Aaron Lerner",
+      "title": "Napoli 0 \u2013 Arsenal 1 match report: imperious (except on the scoreboard)",
+      "description": "That is about the most dominant 1-0 win you\u2019ll ever see, which is somewhat amusing because you could say the same about Arsenal\u2019s 2-1 win over Chelsea at the weekend. The Gunners played Napoli off the park and should have been well-clear of the Italian side. \u2026",
+      "url": "https://theshortfuse.sbnation.com/uefa-champions-league/37493/napoli-0-arsenal-1-match-report-imperious-except-on-the-scoreboard",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/b64263a20fe258e635ca1465041bb5c778d399fa93fb56f66cfc45dd2c082893/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fsb_nation_articles_115%2F31a1ac79a52a4583e15526c14a9921ee.jpg",
+      "publishedAt": "2026-09-09T21:24:18Z",
+      "content": "That is about the most dominant 1-0 win you'll ever see, which is somewhat amusing because you could say the same about Arsenal's 2-1 win over Chelsea at the weekend. The Gunners played Napoli off th\u2026 [+3408 chars]"
+    },
+    {
+      "source": {
+        "id": "al-jazeera-english",
+        "name": "Al Jazeera English"
+      },
+      "author": null,
+      "title": "Misfiring Arsenal beat Napoli with Odegaard stunner in Champions League",
+      "description": "Arsenal dominate the play but need a screamer from Martin Odegaard to seal three points in Napoli to open league phase.",
+      "url": "https://www.aljazeera.com/sports/2026/9/9/misfiring-arsenal-beat-napoli-with-odegaard-stunner-in-champions-league",
+      "urlToImage": "https://www.aljazeera.com/wp-content/uploads/2026/09/2026-09-09T204050Z_602733913_UP1EM991LBZFI_RTRMADP_3_SOCCER-CHAMPIONS-NAP-ARS-1788987282.jpg?resize=1920%2C1440",
+      "publishedAt": "2026-09-09T21:20:20Z",
+      "content": "Arsenal captain Martin Odegaards sensational late strike broke stern Napoli resistance as the English champions began their bid for Champions League glory with a hard-fought 1-0 win in Naples on Wedn\u2026 [+3100 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "AFP",
+      "title": "Odegaard gives Arsenal winning Champions League start at Napoli",
+      "description": "Arsenal captain Martin Odegaard's sensational late strike broke stern Napoli resistance as the English champions began their bid for Champions League glory with a hard-fought 1-0 win in Naples on Wednesday.It continued a perfect start to the campaign for Arse\u2026",
+      "url": "https://sports.yahoo.com/articles/odegaard-gives-arsenal-winning-champions-211546865.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/e2a205ce88eea801cb053c94c4af68f691ff908d4e41cfbae983c348c225ed50/lightyear_networkapi/resizefill_w768_h512%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fafp.com%2Fd673d140cc08c2cf6795d7472cb33f66.jpg",
+      "publishedAt": "2026-09-09T21:15:46Z",
+      "content": "Arsenal captain Martin Odegaard's sensational late strike broke stern Napoli resistance as the English champions began their bid for Champions League glory with a hard-fought 1-0 win in Naples on Wed\u2026 [+3122 chars]"
+    },
+    {
+      "source": {
+        "id": "rte",
+        "name": "RTE"
+      },
+      "author": "RT\u00c9 Sport",
+      "title": "Odegaard fires Gunners to victory at Napoli",
+      "description": "Martin Odegaard's fine second-half goal saw Arsenal kick off their Champions League campaign with a 1-0 win at Napoli.",
+      "url": "https://www.rte.ie/sport/soccer/2026/0909/1590845-odegaard-fires-gunners-to-victory-at-napoli/",
+      "urlToImage": "https://www.rte.ie/images/0024fb25-1600.jpg",
+      "publishedAt": "2026-09-09T21:03:22Z",
+      "content": "Martin Odegaard's fine second-half goal saw Arsenal kick off their Champions League campaign with a 1-0 win at Napoli.\r\nThe Gunners, who are aiming to go one better than last seasons final defeat thi\u2026 [+2917 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "101 Great Goals"
+      },
+      "author": "Tom Rostance",
+      "title": "Napoli 0-1 Arsenal: Odegaard strikes to earn Champions League win in Naples",
+      "description": "Odegaard continues his fine goalscoring form",
+      "url": "https://www.101greatgoals.com/news/napoli-0-1-arsenal-odegaard-strikes-to-earn-champions-league-win-in-naples/",
+      "urlToImage": "https://www.101greatgoals.com/wp-content/uploads/2026/09/3FFRDN3.jpg",
+      "publishedAt": "2026-09-09T20:55:23Z",
+      "content": "Martin Odegaard continued his fine start to the season as Premier League champions Arsenal kicked off their Champions League campaign with a fine away win.\r\nThe Gunners captain only scored three time\u2026 [+1878 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Susy Campanale",
+      "title": "UCL | Napoli 0-1 Arsenal: Odegaard and injuries add to crisis",
+      "description": "Napoli suffered a third consecutive defeat in all competition, as Martin Odegaard eventually made Arsenal pressure count in the Champions League, but there were fresh injury problems.",
+      "url": "https://football-italia.net/ucl-napoli-0-1-arsenal-odegaard-injury-crisis/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/09/Martin-Odegaard-celebrate.jpg",
+      "publishedAt": "2026-09-09T20:55:09Z",
+      "content": "Napoli suffered a third consecutive defeat in all competition, as Martin Odegaard eventually made Arsenal pressure count in the Champions League, but there were fresh injury problems.\r\nThe Partenopei\u2026 [+3492 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Onefootball.com"
+      },
+      "author": "OneFootball",
+      "title": "Arsenal lean on rare experience in Champions League outing ",
+      "description": "Arsenal have plenty of young prospects knocking on the first-team door, currently. 16-year-old Max Dowman, midfield regular\u00a0Myles Lewis-Skelly, and defender\u00a0Cristhian Mosquera are just some of the y...",
+      "url": "https://onefootball.com/en/news/arsenal-lean-on-rare-experience-in-champions-league-outing-43430894",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/4b53b19f9f8f6b4490b0d3199ac84d12da97cc8d5aaf360b487662a37610bff1/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fonefootball_articles_802%2Fed5f458ec3296dc95acfd4c82cef6695.jpg",
+      "publishedAt": "2026-09-09T18:57:00Z",
+      "content": "Arsenal have plenty of young prospects knocking on the first-team door, currently.\r\n16-year-old Max Dowman, midfield regular\u00a0Myles Lewis-Skelly, and defender\u00a0Cristhian Mosquera are just some of the y\u2026 [+478 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "",
+    "out_of_possession": ""
+  },
+  "news_synthesis": "The recent news headlines over the last 28 days are largely focused on Arsenal's team performances and other players, with no direct relevance to David Raya. Headlines mention Arsenal's predicted lineup against Sunderland, a Champions League win over Napoli, and Martin \u00d8degaard's standout performance, but none provide specific updates or information about Raya himself.",
+  "fit_read": "No scout role notes were provided for this player.",
+  "fit_score": null,
+  "judge": {
+    "source_accuracy": 90.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "HONESTY: no philosophy given, but the fit read doesn't say 'not assessed'."
+    ],
+    "confidence_warning": false
+  }
+}

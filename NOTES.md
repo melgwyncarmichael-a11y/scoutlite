@@ -1,5 +1,46 @@
 # ScoutLite — Build Notes
 
+## Two real judge bugs, found by running the Track B batch for real (2026-09-12, later still)
+
+Ran the Track B capture script (previous entry) across 10 of the 12-case batch's players
+(Vinicius Jr and the garbage-name case are designed to fail before a brief exists, so skipped
+-- see `eval/README.md`). This immediately paid for itself: Virgil van Dijk and Declan Rice
+both scored far below the other cases (65% and 20%, vs. everyone else's 90%). Investigating
+found two distinct bugs in `judge_rules.py`'s quote-extraction regex (`_QUOTED`) -- both false
+positives, not real hallucination:
+
+1. **A bare apostrophe read as an opening quote.** Rice's news read said "...a piece on Martin
+   Ødegaard's resurgence..." -- the possessive apostrophe was misread as opening a quote, which
+   then swallowed everything up to the next real quote mark as one giant "invented quote"
+   spanning most of the paragraph. First fix: exclude bare apostrophes from the delimiter set
+   entirely (only straight/curly double quotes delimit a quote now), allow apostrophes inside
+   the quoted content instead of treating them as a boundary.
+2. **Trivially short real quotes left their marks dangling.** Re-running Van Dijk after fix #1
+   surfaced a second, subtler bug: real quotes shorter than the grounding check's own 15-char
+   floor (a headline's single word "found", or "decision time") were skipped by the regex
+   entirely at that length -- which meant their own quote marks never got consumed, and were
+   free to pair up with each OTHER across the plain narrative in between, manufacturing one
+   long fake quote out of real prose. Fix: the regex now pairs every quote mark in order
+   regardless of length (with a generous upper cap against a malformed string); the 15-120 char
+   floor is applied afterward, only to decide which real quotes are worth grounding-checking.
+
+**Verified against the real data that found them**, not just synthetic cases: Rice went from
+20% → 90% after fix #1 (fully explained by the bug -- the only remaining finding was a
+legitimate, minor formatting one). Van Dijk went 65% → 90% after fix #1, then a fresh
+regeneration (same inputs, new LLM call) hit bug #2 and dropped to 40% -- fixed, back to 90%.
+Then swept all 11 captures' stored judge scores against a re-check with the fixed code: 4 more
+were silently affected (David Raya 20→90, Kevin De Bruyne 23.3→90, Trent Alexander-Arnold
+40→90, Vinicius Junior 20→90) -- all re-captured. 3 new regression tests added directly from
+these real cases (`tests/test_judge_rules.py`, 94 tests total) rather than only from synthetic
+examples, per this project's habit of turning a bug found on real output into a permanent test.
+
+All 11 captures now score 90% on one pass -- the honest reading is that this is a real, correct
+result (none of the 12-case batch ever set a club philosophy, and the resulting "no philosophy
+given, but the fit read doesn't say 'not assessed'" formatting nit is the one finding every
+capture shares), not evidence the judge is lenient. It does mean the current sample has zero
+diversity on the pass/confidence-warning axis -- the planned philosophy-set additions
+(`eval/README.md`) are now the only way to exercise that path at all.
+
 ## Eval scaffolding for Track B, priority order set (2026-09-12, later same day)
 
 Discussed prioritizing the three eval tracks below: **Track B (hallucination/hype) matters

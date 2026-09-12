@@ -1,0 +1,268 @@
+{
+  "player": "Virgil van Dijk",
+  "fbref_url": "https://fbref.com/en/players/e06683ca/Virgil-van-Dijk",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "",
+    "position": "DF (CB)",
+    "footed": "Right",
+    "height_weight": "193cm, 92kg",
+    "birth_date": "1991-07-08",
+    "birthplace": "Breda, Netherlands",
+    "national_team": "Netherlands",
+    "club": "Liverpool",
+    "contract_expires": "June 2027"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "32",
+    "squad": "Liverpool",
+    "competition": "1. Premier League",
+    "matches_played": "36",
+    "starts": "36",
+    "minutes": "3,177",
+    "goals": "2",
+    "assists": "2",
+    "goals_plus_assists": "4",
+    "non_penalty_goals": "2",
+    "yellow_cards": "3",
+    "red_cards": "1"
+  },
+  "misc": {
+    "fouls_committed": "23",
+    "fouls_drawn": "13",
+    "offsides": "1",
+    "crosses": "0",
+    "interceptions": "35",
+    "tackles_won": "23",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Virgil van Dijk",
+    "understat_url": "https://understat.com/player/833",
+    "understat_team": "Liverpool",
+    "games": "36",
+    "minutes": "3177",
+    "goals": "2",
+    "xG": 3.3,
+    "assists": "2",
+    "xA": 1.86,
+    "npxG": 3.3,
+    "shots": "45",
+    "key_passes": "11"
+  },
+  "quality": {
+    "score": 2,
+    "position_group": "defense",
+    "components": {
+      "defensive_actions_per90": 21.678321678321677
+    },
+    "avg_percentile": 21.7,
+    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "The4thofficial.net"
+      },
+      "author": "The 4th Official",
+      "title": "Munoz To Start, Barcola On The Bench | 4-2-3-1 Liverpool Predicted Lineup Vs Fulham",
+      "description": "Liverpool will welcome Fulham at Anfield this Saturday afternoon as they look to secure a good result at home in the Premier League. The Reds managed to secure a hard-fought 2-1 victory over Atletico ...",
+      "url": "https://the4thofficial.net/2026/09/munoz-to-start-barcola-on-the-bench-4-2-3-1-liverpool-predicted-lineup-vs-fulham/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/986c48a59fa79c94256a7f89b68340824bd99ebdaf138f45748c62f59900d458/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_4th_official_articles_868%2F22d77da6b851bf122a6ff9826aaf4910.jpg",
+      "publishedAt": "2026-09-10T18:35:00Z",
+      "content": "Liverpool will welcome Fulham at Anfield this Saturday afternoon as they look to secure a good result at home in the Premier League. The Reds managed to secure a hard-fought 2-1 victory over Atletico\u2026 [+2107 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dailymail.com"
+      },
+      "author": "Lewis Steele",
+      "title": "Liverpool Confidential: Insiders reveal Ronald Araujo's desire to stay at Anfield permanently and why he's already loving life on Merseyside, boost for 'next Gerrard' in Reds' academy and decision time for Virgil van Dijk",
+      "description": "The Uruguay international has only started two matches since joining the club on a season-long loan from Barcelona but has already become something of a cult hero.",
+      "url": "https://www.dailymail.com/sport/football/article-16120589/liverpool-ronald-araujo-luca-eden-van-dijk.html",
+      "urlToImage": "https://i.dailymail.com/1s/2026/09/10/14/111165823-0-image-a-21_1789045770279.jpg",
+      "publishedAt": "2026-09-10T15:57:43Z",
+      "content": "Ronald Araujo is loving life in England and can already picture himself staying at Liverpool beyond his loan spell.\r\nThe Uruguay international has only started two matches since joining the club on a\u2026 [+8188 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldindex.com"
+      },
+      "author": "Anfield Index",
+      "title": "Report: Liverpool already plotting 2027 midfield signing",
+      "description": "Liverpool Transfer Strategy Explained as Alexis Mac Allister Future Clouds and Alex Scott Link EmergesLiverpool appear to be shaping another significant midfield decision for the summers ahead, with A...",
+      "url": "https://anfieldindex.com/99844/report-liverpool-already-plotting-2027-midfield-signing.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/07bcd04a4cc7fe85fa8b3cde341e622cc550552eec92faeb999b3e13f67cf467/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_index_166%2F417691588e383f03c0aa9c643e975009.jpg",
+      "publishedAt": "2026-09-10T11:55:00Z",
+      "content": "Liverpool appear to be shaping another significant midfield decision for the summers ahead, with Alexis Mac Allister's long term future now under sharper focus following fresh reporting credited to t\u2026 [+6921 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Hayters.com"
+      },
+      "author": "Hayters TV",
+      "title": "Liverpool skipper van Dijk praises new centre-back partner Jacquet\u2019s start \u2013 but insists his side have plenty to improve on",
+      "description": "Virgil van Dijk praised young Liverpool defender Jeremy Jacquet after their 2-1 Champions League victory over Atletico Madrid but admitted Andoni Iraola\u2019s side still have plenty of room for improvem...",
+      "url": "https://hayters.com/liverpool-skipper-van-dijk-praises-new-centre-back-partner-jacquets-start-but-insists-his-side-have-plenty-to-improve-on/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/cd21edbd8d119d6ffca05e33ef3b1409b5d8e94c5dc0fb38bc60b4a35a50c14f/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fhayters_tv_491%2Fd6c4a2a5555d1c594c76bfd7d82a75b2.jpg",
+      "publishedAt": "2026-09-10T11:40:00Z",
+      "content": "Virgil van Dijk praised young Liverpool defender Jeremy Jacquet after their 2-1 Champions League victory over Atletico Madrid but admitted Andoni Iraola's side still have plenty of room for improveme\u2026 [+1537 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Empire of The Kop"
+      },
+      "author": "Empire of the Kop",
+      "title": "Spanish columnist accuses Liverpool of playing with \u2018severe roughness\u2019 in win over Atletico",
+      "description": "A Spanish columnist has accused Liverpool of playing with \u2018severe roughness\u2019 in their 2-1 victory against Atletico Madrid at Anfield on Wednesday night.The statistics wouldn\u2019t suggest that it ha...",
+      "url": "https://www.empireofthekop.com/2026/09/10/liverpool-accused-of-severe-roughness-in-win-over-atletico/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/ae373f2ddd74f69b353cb4b95ce8cbb36bef66dd0813e30775b36b6d63b6f217/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fempire_of_the_kop_articles_379%2F5e3f374ff51ecf38589eb0d6e28013e5.jpg",
+      "publishedAt": "2026-09-10T09:30:00Z",
+      "content": "A Spanish columnist has accused Liverpool of playing with 'severe roughness' in their 2-1 victory against Atletico Madrid at Anfield on Wednesday night.\r\nThe statistics wouldn't suggest that it had b\u2026 [+2574 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldwatch.co.uk"
+      },
+      "author": "Anfield Watch",
+      "title": "Virgil van Dijk's successor has been found by Liverpool, it's not Jeremy Jacquet",
+      "description": "One of the hardest players for Liverpool to replace in the future will be Virgil van Dijk. The 35-year-old is entering the final year of his contract with the Anfield outfit and, at the moment, no tal...",
+      "url": "https://www.anfieldwatch.co.uk/liverpool-fc/news/virgil-van-dijks-successor-has-been-found-by-liverpool-its-not-jeremy-jacquet/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/975425795201f47b6a3498c85e4837dee2dff9361bd877ae8bd2f8b6f2bf978a/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_watch_articles_625%2F89c9fe7672cab1241a6aadcf7d755261.jpg",
+      "publishedAt": "2026-09-10T07:05:00Z",
+      "content": "One of the hardest players for Liverpool to replace in the future will be Virgil van Dijk.\r\nThe 35-year-old is entering the final year of his contract with the Anfield outfit and, at the moment, no t\u2026 [+3468 chars]"
+    },
+    {
+      "source": {
+        "id": "rte",
+        "name": "RTE"
+      },
+      "author": "RT\u00c9 Sport",
+      "title": "Liverpool come from behind to see off Atletico",
+      "description": "A day after pledging his full commitment to Liverpool despite his sadness at their failure to offer him a new contract Mac Allister duly delivered with a brilliant winning goal against Atletico Madrid.",
+      "url": "https://www.rte.ie/sport/soccer/2026/0909/1590844-liverpool-come-from-behind-to-see-off-atletico/",
+      "urlToImage": "https://www.rte.ie/images/0024fb28-1600.jpg",
+      "publishedAt": "2026-09-09T21:36:43Z",
+      "content": "A day after pledging his full commitment to Liverpool despite his sadness at their failure to offer him a new contract Mac Allister duly delivered with a brilliant winning goal against Atletico Madri\u2026 [+3358 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The4thofficial.net"
+      },
+      "author": "The 4th Official",
+      "title": "Szoboszlai Gets 8.5, Mac Allister With 7.5 | Liverpool Players Rated In Hard-Fought Win Vs Atletico Madrid",
+      "description": "Liverpool welcomed Atletico Madrid at Anfield earlier tonight as they hoped to secure a win at home in the UEFA Champions League. The Reds made a slow start to the game and conceded the opening goal i...",
+      "url": "https://the4thofficial.net/2026/09/szoboszlai-gets-8-5-mac-allister-with-7-5-liverpool-players-rated-in-hard-fought-win-vs-atletico-madrid/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/fc0ec183a759a734c65ad1872d58964cb717ab494a4f08a8587a541f13dff1c2/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_4th_official_articles_868%2F575b9949945ea6ee9234c53ba9f924c5.jpg",
+      "publishedAt": "2026-09-09T21:30:00Z",
+      "content": "Liverpool welcomed Atletico Madrid at Anfield earlier tonight as they hoped to secure a win at home in the UEFA Champions League. The Reds made a slow start to the game and conceded the opening goal \u2026 [+2353 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Crypto Briefing"
+      },
+      "author": "Editorial Team",
+      "title": "Atletico Madrid leads Liverpool 1-0 in UCL match as Llorente strikes again at Anfield",
+      "description": "Atletico's early lead at Anfield highlights their strategic prowess, potentially shifting group dynamics and pressuring Liverpool's campaign start.\nThe post Atletico Madrid leads Liverpool 1-0 in UCL match as Llorente strikes again at Anfield appeared first o\u2026",
+      "url": "https://cryptobriefing.com/atletico-madrid-leads-liverpool-ucl/",
+      "urlToImage": "https://static.cryptobriefing.com/wp-content/uploads/2026/09/09152356/chip-slump-erases-1-3-trillion-in-stock-market-value-reuters-129-800x420.jpeg",
+      "publishedAt": "2026-09-09T19:23:57Z",
+      "content": "Marcos Llorente's 17th-minute goal continues his personal tradition of haunting Liverpool in the Champions League Marcos Llorente has made a career out of ruining Liverpool\u2019s evenings at Anfield. On \u2026 [+1916 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dailymail.com"
+      },
+      "author": "Michael Pavitt",
+      "title": "Original Liverpool 'This Is Anfield' sign sells for \u00a3115,000 at auction",
+      "description": "The winning bid was \u00a3115,000, reportedly a record price for any UK sports stadium interior sign, with the overall cost standing at\u00a0\u00a3149,500 due to\u00a0including commission and VAT.",
+      "url": "https://www.dailymail.com/sport/football/article-16118349/Original-Liverpool-Anfield-sign-sells-115-000-auction.html",
+      "urlToImage": "https://i.dailymail.com/1s/2026/09/09/18/111147011-0-image-m-23_1788974791055.jpg",
+      "publishedAt": "2026-09-09T18:46:26Z",
+      "content": "Liverpool's original 'This is Anfield' sign has sold for \u00a3115,000 at auction, exceeding the listed price by more than seven times.\r\nThe sign was first hung in the players tunnel at Anfield in 1972, h\u2026 [+3723 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dailymail.com"
+      },
+      "author": "Michael Pavitt",
+      "title": "Original Liverpool 'This Is Anfield' sign sells for \u00a3115,000 at auction",
+      "description": "The winning bid was \u00a3115,000, reportedly a record price for any UK sports stadium interior sign, with the overall cost standing at\u00a0\u00a3149,500 due to\u00a0including commission and VAT.",
+      "url": "https://www.dailymail.com/sport/football/article-16118349/Original-Liverpool-Anfield-sign-sells-115-000-auction.html",
+      "urlToImage": "https://i.dailymail.com/1s/2026/09/09/18/111147011-0-image-m-23_1788974791055.jpg",
+      "publishedAt": "2026-09-09T18:46:26Z",
+      "content": "Liverpool's original 'This is Anfield' sign has sold for \u00a3115,000 at auction, exceeding the listed price by more than seven times.\r\nThe sign was first hung in the players tunnel at Anfield in 1972, h\u2026 [+3723 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "101 Great Goals"
+      },
+      "author": "Tom Rostance",
+      "title": "Liverpool v Atletico Madrid: Starting XIs confirmed at Anfield for Champions League test",
+      "description": "Barcola starts for Reds",
+      "url": "https://www.101greatgoals.com/football/liverpool-v-atletico-madrid-starting-xis-confirmed-at-anfield-for-champions-league-test/",
+      "urlToImage": "https://www.101greatgoals.com/wp-content/uploads/2026/08/3F9WWCW-2.jpg",
+      "publishedAt": "2026-09-09T18:03:48Z",
+      "content": "Liverpool and Atletico Madrid begin their 2026-27 Champions League campaigns with a heavyweight League Phase clash at Anfield.\r\nLiverpool were knocked out by eventual champions Paris Saint-Germain at\u2026 [+1715 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Empire of The Kop"
+      },
+      "author": "Empire of the Kop",
+      "title": "Liverpool team news v Atletico: Barcola makes first Reds start among 2 changes by Iraola",
+      "description": "Andoni Iraola takes charge of his first Champions League game as Liverpool head coach tonight as the Reds host Atletico Madrid at Anfield.It\u2019s a repeat of both teams\u2019 opening fixture in the compet...",
+      "url": "https://www.empireofthekop.com/2026/09/09/liverpool-team-news-atletico-champions-league/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/a340750c032d7af1b3e34dafdf768d681ffa0284e259bfe5b29a0155152a4a6c/lightyear_networkapi/resizefill_w940_h788%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fempire_of_the_kop_articles_379%2Fb66e7f5fe16e1d4bfbc704c39d6ddb86.jpg",
+      "publishedAt": "2026-09-09T17:55:00Z",
+      "content": "Andoni Iraola takes charge of his first Champions League game as Liverpool head coach tonight as the Reds host Atletico Madrid at Anfield.\r\nIt's a repeat of both teams' opening fixture in the competi\u2026 [+1543 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldwatch.co.uk"
+      },
+      "author": "Anfield Watch",
+      "title": "Andoni Iraola has already made his decision on future of \u2018strong\u2019 defender",
+      "description": "Andoni Iraola made a fair few changes to Liverpool's squad during the summer transfer window. The Spaniard welcomed four new players through the Anfield doors and, although this is a decent number of ...",
+      "url": "https://www.anfieldwatch.co.uk/liverpool-fc/news/andoni-iraola-has-already-made-his-decision-on-future-of-strong-defender/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/4ccc9eb59766c2eff7343fe2f87ce9ff0a89838d9d5d480b7f401e317219545b/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_watch_articles_625%2F28550a22461967b235694ba0514c70b3.jpg",
+      "publishedAt": "2026-09-09T15:10:00Z",
+      "content": "Andoni Iraola made a fair few changes to Liverpool's squad during the summer transfer window.\r\nThe Spaniard welcomed four new players through the Anfield doors and, although this is a decent number o\u2026 [+3528 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "",
+    "out_of_possession": ""
+  },
+  "news_synthesis": "Recent headlines over the last 28 days include a predicted lineup piece, a report on Ronald Araujo's desire to stay at Anfield, a note on a 2027 midfield signing, and a claim that Liverpool have \"found\" a successor to van Dijk. Other items cover van Dijk praising new centre-back partner Jacquet, a Spanish columnist accusing Liverpool of \"severe roughness\" in a win over Atletico, and match coverage/player ratings from that same fixture. No headline in this window reports a confirmed transfer, contract, or injury event involving van Dijk.",
+  "fit_read": "Scout's role notes: none were provided in the information listed above, so there is no scout observation to attribute here.",
+  "fit_score": null,
+  "judge": {
+    "source_accuracy": 90.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "HONESTY: no philosophy given, but the fit read doesn't say 'not assessed'."
+    ],
+    "confidence_warning": false
+  }
+}

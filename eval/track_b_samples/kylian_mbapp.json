@@ -1,0 +1,274 @@
+{
+  "player": "Kylian Mbapp\u00e9",
+  "fbref_url": "https://fbref.com/en/players/42fd9c7f/Kylian-Mbappe",
+  "season": "2026-2027",
+  "bio": {
+    "full_name": "Kylian Mbapp\u00e9 Lottin",
+    "position": "FW-MF",
+    "footed": "Right",
+    "height_weight": "178cm, 74kg",
+    "birth_date": "1998-12-20",
+    "birthplace": "Paris 19 Buttes-Chaumont, France",
+    "national_team": "France",
+    "club": "Real Madrid",
+    "contract_expires": "June 2029"
+  },
+  "stats": {
+    "season": "2026-2027",
+    "age": "27",
+    "squad": "Real Madrid",
+    "competition": "1. La Liga",
+    "matches_played": "4",
+    "starts": "4",
+    "minutes": "360",
+    "goals": "4",
+    "assists": "0",
+    "goals_plus_assists": "4",
+    "non_penalty_goals": "4",
+    "yellow_cards": "0",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "3",
+    "fouls_drawn": "3",
+    "offsides": "2",
+    "crosses": "3",
+    "interceptions": "1",
+    "tackles_won": "0",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Kylian Mbappe-Lottin",
+    "understat_url": "https://understat.com/player/3423",
+    "understat_team": "Real Madrid",
+    "games": "4",
+    "minutes": "360",
+    "goals": "4",
+    "xG": 6.71,
+    "assists": "0",
+    "xA": 0.33,
+    "npxG": 5.97,
+    "shots": "31",
+    "key_passes": "4"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 50.0,
+      "assists_per90": 50.0,
+      "xG_per90": 50.0,
+      "xA_per90": 50.0
+    },
+    "avg_percentile": 50.0,
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against La Liga players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "Getfootballnewsspain.com"
+      },
+      "author": "Get Spanish Football News",
+      "title": "The only 4 players who have scored more Champions League goals than Real Madrid star Kylian Mbapp\u00e9",
+      "description": "Real Madrid star Kylian Mbapp\u00e9 this week continued his climb up the all-time goalscoring ranks in European football\u2019s most prestigious club competition.This came courtesy of his latest strike in th...",
+      "url": "https://getfootballnewsspain.com/the-only-4-players-who-have-scored-more-champions-league-goals-than-real-madrid-star-kylian-mbappe/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/4b54b0c217aba30efa6327b700a3c4c917d4652474e1fd4787865b4af3d0e6f8/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fget_spanish_football_news_articles_403%2F9ab897ce7409cb2687f109dcf1aee259.jpg",
+      "publishedAt": "2026-09-10T22:10:00Z",
+      "content": "Real Madrid star Kylian Mbapp\u00e9 this week continued his climb up the all-time goalscoring ranks in European football's most prestigious club competition.\r\nThis came courtesy of his latest strike in th\u2026 [+895 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Getfootballnewsspain.com"
+      },
+      "author": "Get Spanish Football News",
+      "title": "Lamine Yamal broke a Kylian Mbapp\u00e9 record during Barcelona\u2019s win over Feyenoord",
+      "description": "Barcelona star Lamine Yamal secured yet another piece of European football history for himself during the club\u2019s latest outing. This came courtesy of his starring performance in the Blaugrana\u2019s me...",
+      "url": "https://getfootballnewsspain.com/lamine-yamal-broke-a-kylian-mbappe-record-during-barcelonas-win-over-feyenoord/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/a0be2da4f0ede2cc330ddddc43b5062ca1a364a02cd700bb1bc5721df6d17ac2/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fget_spanish_football_news_articles_403%2F158789943d1cc14c89fba97b80696c3b.jpg",
+      "publishedAt": "2026-09-10T20:45:00Z",
+      "content": "Barcelona star Lamine Yamal secured yet another piece of European football history for himself during the club's latest outing. This came courtesy of his starring performance in the Blaugrana's meeti\u2026 [+1065 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Managing Madrid"
+      },
+      "author": "Don Amancio",
+      "title": "Analysis: How Real Madrid\u2019s Press Looked Against Inter Milan",
+      "description": "Valverde leads Madrid in pressures, Mbapp\u00e9 & Vinicius record half of defensive actions last season in first CL match",
+      "url": "https://www.managingmadrid.com/real-madrid-cf-data-analysis/112675/analysis-tactics-real-madrid-inter-milan-pressing-champions-league",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/a86b3411674cfe8196b9e1e3cdc452b5b50aaac2e2c1577154190180e62335f1/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fsb_nation_articles_115%2F76a9215877770141afb8f717e1c41a72.jpg",
+      "publishedAt": "2026-09-10T14:32:06Z",
+      "content": "Real Madrid's starting 11 realized 153 pressures, including 18 counterpressures (pressures shortly after losing possession) compared to 103 pressures by Inter Milan starters on Tuesday evening. While\u2026 [+3755 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Get French Football News"
+      },
+      "author": "Get French Football News",
+      "title": "Lille\u2019s Ethan Mbapp\u00e9 risks five-game ban",
+      "description": "Ethan Mbapp\u00e9 (19) risks a ban of up to five games for his red card during Lille OSC\u2019s loss to Real Betis on Tuesday (2-3), as per a report from L\u2019\u00c9quipe. Mbapp\u00e9 was shown a straight red card in...",
+      "url": "https://www.getfootballnewsfrance.com/2026/lilles-ethan-mbappe-risks-five-game-ban/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/08a14208c75ed82a8239f7b95482df3fbb94cc513096aa16f2cbfcfd5f987995/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fget_french_football_news_702%2F840a88a374114484330d35bb3d450130.jpg",
+      "publishedAt": "2026-09-10T13:25:00Z",
+      "content": "Ethan Mbapp\u00e9 (19) risks a ban of up to five games for his red card during Lille OSC's loss to Real Betis on Tuesday (2-3), as per a report from L'\u00c9quipe.\r\nMbapp\u00e9 was shown a straight red card in the \u2026 [+720 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dazed"
+      },
+      "author": "Sophia Medina Crack",
+      "title": "What is it about a man and his bleached buzzcut?",
+      "description": "A man\u2019s bleached buzz can make the difference between a Hinge match or pass \u2013 and for many, it signals far more than good hair",
+      "url": "https://www.dazeddigital.com/beauty/article/70895/1/man-bleached-buzzcut-justin-bieber-nettspend-david-beckham-romeo-hair?utm_source=Link&utm_medium=Link&utm_campaign=RSSFeed&utm_term=what-is-it-about-a-man-and-his-bleached-buzzcut",
+      "urlToImage": "https://images-prod.dazeddigital.com/1200/475-52-1445-963/azure/dazed-prod/1450/3/1453589.png",
+      "publishedAt": "2026-09-10T12:54:00Z",
+      "content": "It was one (of many)hungover Saturday mornings. My friend and I were scrolling through Hinge when she suddenly lamented how all her matcheswould be 10x hotter if they had a bleached buzzcut. Having a\u2026 [+6196 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Inter.it"
+      },
+      "author": "Inter Milan",
+      "title": "Lautato nominated for 2026 Ballon d'Or",
+      "description": "A special day for the football world, with one of the most prestigious and eagerly anticipated events on the annual calendar drawing closer: the Ballon d'Or is back, one of the most important individu...",
+      "url": "https://www.inter.it/en/news/lautato-nominee-ballon-d-or-2026",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/7ab150a0710e57991de8ff4842f19882cd4e6dc55c4cb6f3acbb39b9efb31bec/lightyear_networkapi/resizefill_w800_h533%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Finter_milan_articles_502%2F62a545c26fbcd521e645323b049aab4b.jpg",
+      "publishedAt": "2026-09-10T12:12:00Z",
+      "content": "A special day for the football world, with one of the most prestigious and eagerly anticipated events on the annual calendar drawing closer: the Ballon d'Or is back, one of the most important individ\u2026 [+3444 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Thoughtcatalog.com"
+      },
+      "author": "Nadia Santiago",
+      "title": "Ester Exp\u00f3sito Posed with Ex Hugo Diego Garcia at Their Movie Premiere, After Going Public with Kylian Mbapp\u00e9 This Summer",
+      "description": "Their real-life history adds an extra layer to the film. She plays kidnapping survivor Marfil Cort\u00e9s, and he plays Sebasti\u00e1n Moore, the bodyguard assigned to protect her. The September 9 Madrid pho\u2026",
+      "url": "https://thoughtcatalog.com/nadia-santiago/2026/09/ester-exposito-posed-with-ex-hugo-diego-garcia-at-their-movie-premiere-after-going-public-with-kylian-mbappe-this-summer/",
+      "urlToImage": "https://thoughtcatalog.com/wp-content/uploads/2026/09/ester-exposito-posed-with-ex-hugo-diego-garcia-at-their-movie-premiere-after-goi.jpg?w=1536&h=768&crop=1",
+      "publishedAt": "2026-09-10T11:00:00Z",
+      "content": "Their real-life history adds an extra layer to the film. She plays kidnapping survivor Marfil Cort\u00e9s, and he plays Sebasti\u00e1n Moore, the bodyguard assigned to protect her.\r\nThe September 9 Madrid phot\u2026 [+1268 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "Associated Press",
+      "title": "Bod\u00f8/Glimt visits Bayern Munich and upstart Como makes its Champions League debut",
+      "description": "Six-time winner Bayern Munich hosts last season\u2019s surprise package Bod\u00f8/Glimt and upstart Como makes its debut against Leipzig in the Champions League on Thursday. Bod\u00f8/Glimt is coming off a run to the last 16 that included victories over Manchester City, Atl\u2026",
+      "url": "https://sports.yahoo.com/articles/bod-glimt-visits-bayern-munich-101827344.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/9ad1df8177b75ab2cf329b219aefa6cc7a5512402e700a6559f5991a166d42bb/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fap.org%2F820c9b970c237b6c83fd249c4eef9919.jpg",
+      "publishedAt": "2026-09-10T10:18:27Z",
+      "content": "LONDON (AP) Six-time winner Bayern Munich hosts last season's surprise package Bod\u00f8/Glimt and upstart Como makes its debut against Leipzig in the Champions League on Thursday.\r\nBod\u00f8/Glimt is coming o\u2026 [+1278 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dpa-international.com"
+      },
+      "author": "DPA",
+      "title": "Bar\u00e7a coach Flick: Yamal deserves the Ballon d'Or",
+      "description": "Barcelona coach Hansi Flick believes his star winger Lamine Yamal is the clear favourite to win the Ballon d'Or as the planet's best male footballer. The ceremony is on October 26 in London where the Spain World Cup winner will be up against the likes of Harr\u2026",
+      "url": "https://dpa-international.com/sports/urn:newsml:dpa.com:20090101:260910-930-662885/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/e26b55a48626b7f45f60b95c558d06904bda5edcafec85dc506ebfa1699e8fe4/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fdpa_international_526%2Fce9a762e2beb9b626e7dc8b1cecc4da4.jpg",
+      "publishedAt": "2026-09-10T08:18:37Z",
+      "content": "Barcelona coach Hansi Flick believes his star winger Lamine Yamal is the clear favourite to win the Ballon d'Or as the planet's best male footballer.\r\nThe ceremony is on October 26 in London where th\u2026 [+470 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Siempremadrid.com"
+      },
+      "author": "Madrid Voice Articles",
+      "title": "Thierry Henry backs Real Madrid star for Ballon d\u2019Or glory",
+      "description": "Real Madrid were unable to win any major trophy during the last season, but still, some of their players impressed a lot at an individual level. This was particularly true for Kylian Mbappe, who retai...",
+      "url": "https://siempremadrid.com/thierry-henry-backs-real-madrid-star-for-ballon-dor-glory/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/b1c712bbef9d9b6f191721a794bf103d860beb022cb4caeef001d8cc3b45d553/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmadrid_voice_articles_898%2F5bc8d7e9d1ada9e0128ed1da83dee5cb",
+      "publishedAt": "2026-09-10T07:20:00Z",
+      "content": "Real Madrid were unable to win any major trophy during the last season, but still, some of their players impressed a lot at an individual level. This was particularly true for Kylian Mbappe, who reta\u2026 [+2311 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Alloutsoccer.com"
+      },
+      "author": "Anthony Wood",
+      "title": "Jos\u00e9 Mourinho shares Ballon d\u2019Or verdict as Real Madrid boss compares Kylian Mbapp\u00e9 to Brazil icon",
+      "description": "Following their UEFA Champions League win against Inter Milan, Real Madrid boss Jos\u00e9 Mourinho heaped praise on Kylian Mbapp\u00e9, as he also weighed in on this year's Ballon d'Or",
+      "url": "https://www.alloutsoccer.com/news/real-mourinho-mbappe-ballon-dor-2017902",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/748e4d44d4a48b97b4ef8ba99a80811a51f5a3dfcf0f2079b70002da4120e345/lightyear_networkapi/resizefill_w810_h539%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fall_out_soccer_276%2Fc0500178dfa47553f06a446730e9a5fe.jpg",
+      "publishedAt": "2026-09-09T20:39:35Z",
+      "content": "In his second stint in charge of Real Madrid, Jos\u00e9 Mourinho got their UEFA Champions League campaign off to a solid start on Tuesday with a 2-1 home win against another of his former sides, Inter Mil\u2026 [+3436 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Rediff.com"
+      },
+      "author": "sports@rediff.co.in (REDIFF SPORTS )",
+      "title": "Why Thierry Henry Tips Kylian Mbappe To Win Ballon d'Or",
+      "description": "Former Arsenal and France legend Thierry Henry has publicly backed Kylian Mbappe to win the prestigious Ballon d'Or award, citing his exceptional individual scoring achievements across the Champions League, LaLiga, and the World Cup.",
+      "url": "https://www.rediff.com/sports/report/thierry-henry-endorses-kylian-mbappe-for-ballon-dor-amidst-star-studded-race/20260910.htm",
+      "urlToImage": "https://im.rediff.com/1200-630/sports/2026/sep/09mbappe.jpg",
+      "publishedAt": "2026-09-09T19:13:05Z",
+      "content": "Former Arsenal and France icon Thierry Henry has thrown his support behind Kylian Mbappe for the coveted Ballon d'Or, emphasising the French forward's remarkable individual scoring achievements acros\u2026 [+2644 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "Associated Press",
+      "title": "Stuttgart's Demirovi\u0107 scores first hat trick of Champions League season against Viking",
+      "description": "Stuttgart\u2019s Ermedin Demirovi\u0107 scored the first hat trick of the Champions League season in the span of 12 first-half minutes against Viking on Wednesday. Demirovi\u0107 found his rhythm to strike in the 20th, 26th and 32nd minutes and give Stuttgart a 3-1 lead at \u2026",
+      "url": "https://sports.yahoo.com/articles/stuttgarts-demirovi-scores-first-hat-180521817.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/e60e0897fac01d08367a0d73a8a1c4938a038c8ef33256ce268d79e88493b3dd/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fap.org%2Fc7c7d6240831d99f79caa0d008e6a8c9.jpg",
+      "publishedAt": "2026-09-09T18:05:21Z",
+      "content": "STUTTGART, Germany (AP) Stuttgart's Ermedin Demirovi scored the first hat trick of the Champions League season in the span of 12 first-half minutes against Viking on Wednesday.\r\nDemirovi found his rh\u2026 [+1395 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The Punch"
+      },
+      "author": "Punch Newspapers",
+      "title": "FULL LIST: Five players chasing Ronaldo\u2019s Champions League goals record",
+      "description": "Cristiano Ronaldo\u2019s Champions League goal record is under threat. See the five players, including Mbapp\u00e9 and Haaland, who could surpass his 17-goal season.\n\nRead More: https://punchng.com/full-list-five-players-chasing-ronaldos-champions-league-goals-record/",
+      "url": "https://punchng.com/full-list-five-players-chasing-ronaldos-champions-league-goals-record/",
+      "urlToImage": "https://cdn.punchng.com/wp-content/uploads/2026/09/09080037/images-53_1788937237.webp",
+      "publishedAt": "2026-09-09T16:54:52Z",
+      "content": "Cristiano Ronaldos record of 17 goals in a single Champions League season remains one of the competitions most remarkable individual achievements.\r\nThe Portuguese superstar set the record with Real M\u2026 [+3559 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "",
+    "out_of_possession": ""
+  },
+  "news_synthesis": "Recent coverage over the last 28 days is mostly tangential to on-pitch performance. Headlines reference Mbapp\u00e9 in a Champions League scoring-context listicle, a record of his being broken by Lamine Yamal, a tactical analysis of Real Madrid's press against Inter Milan, and a story about his brother Ethan Mbapp\u00e9 facing a possible ban at Lille. Other items are non-football or unrelated (a haircut piece, a Ballon d'Or nomination for another player, a celebrity item, and a Bod\u00f8/Glimt/Como Champions League note). No headline in this window directly reports on his current form, fitness, or match involvement.",
+  "fit_read": "No scout role notes were provided in the information listed above, so there is no attributed observation to pass along.",
+  "fit_score": null,
+  "judge": {
+    "source_accuracy": 90.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "HONESTY: no philosophy given, but the fit read doesn't say 'not assessed'.",
+      "This is a fair characterization, but the tactical analysis of Real Madrid's press against Inter Milan is directly about on-pitch performance, so calling the coverage 'mostly tangential' slightly overstates the tangentiality. (in: \"Recent coverage over the last 28 days is mostly tangential to on-pitch performance.\")",
+      "The headline is about Real Madrid's press, not Mbapp\u00e9 specifically, so listing it as coverage referencing Mbapp\u00e9 is a mild overreach. (in: \"a tactical analysis of Real Madrid's press against Inter Milan\")",
+      "The Champions League scoring-context listicle and the Yamal record headline both directly involve Mbapp\u00e9's on-pitch performance, contradicting the claim that no headline touches his form or match involvement. (in: \"No headline in this window directly reports on his current form, fitness, or match involvement.\")"
+    ],
+    "confidence_warning": false
+  }
+}

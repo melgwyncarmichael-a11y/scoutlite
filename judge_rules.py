@@ -30,7 +30,26 @@ _FORBIDDEN_VERDICT = re.compile(
 )
 
 _NUMBER = re.compile(r"\d[\d,]*(?:\.\d+)?")
-_QUOTED = re.compile(r"[\"“‘']([^\"”’']{15,120})[\"”’']")
+# Only straight/curly DOUBLE quotes delimit a quote -- deliberately not a bare "'"/"'". Real
+# headlines routinely contain possessives/contractions inside a real quote ("Jacquet's start",
+# "it's not Jeremy Jacquet"), and treating an apostrophe as a delimiter breaks in two ways at
+# once: it reads a possessive as an opening quote (misreads "Ødegaard's resurgence..." as an
+# invented quote spanning most of the paragraph), and it closes a real quote early at its first
+# internal apostrophe -- which then strands the real closing " as a fresh false "opener" for
+# whatever text follows. Both found via a real generated brief (Declan Rice's news read scored
+# 20% from cascading false positives caused by exactly this; Virgil van Dijk's scored a lower
+# 65% for the same reason). Excluding apostrophes from the delimiter set entirely, and allowing
+# them inside the content instead, fixes both at once.
+#
+# Deliberately no length bound in the regex itself (just a generous upper cap against a
+# malformed/unbalanced string) -- matching pairs in order, whatever their length, is what keeps
+# every real quote mark correctly paired with its own partner. A minimum-length FILTER lives in
+# the caller instead: a real but trivially short quote (e.g. a headline's "found" or "decision
+# time") still has to consume its own quote marks here, or the marks either side of it pair up
+# with each other and manufacture a fake quote out of the plain narrative in between -- the
+# second real bug this same Van Dijk brief surfaced, on the very next capture after the first
+# fix went in.
+_QUOTED = re.compile(r'["“]([^"“”]{0,200})["”]')
 
 
 def _normalize_number(tok: str) -> str:
@@ -126,7 +145,10 @@ def check(
 
     # --- C. Headline grounding (news read only) -------------------------------------------
     headline_token_sets = [_tokens(a.get("title", "")) for a in articles[:8]]
-    quotes = _QUOTED.findall(news_synthesis)
+    # Trivially short quotes (a single word like "found") are skipped for the actual grounding
+    # check -- checked here, after pairing, so a short real quote still consumes its own marks
+    # rather than leaving them to pair up with something else. See _QUOTED's comment.
+    quotes = [q for q in _QUOTED.findall(news_synthesis) if 15 <= len(q) <= 120]
     ungrounded_quotes = []
     for q in quotes:
         q_tokens = _tokens(q)

@@ -1,0 +1,78 @@
+{
+  "player": "Macaulay Langstaff",
+  "fbref_url": "https://fbref.com/en/players/ca9b48af/Macaulay-Langstaff",
+  "season": "2026-2027",
+  "bio": {
+    "full_name": "Macaulay Kevin Langstaff",
+    "position": "FW",
+    "footed": "",
+    "height_weight": "",
+    "birth_date": "1997-02-03",
+    "birthplace": "Stockton-on-Tees, England, United Kingdom",
+    "national_team": "",
+    "club": "Salford City FC",
+    "contract_expires": ""
+  },
+  "stats": {
+    "season": "2026-2027",
+    "age": "29",
+    "squad": "Salford City FC",
+    "competition": "4. League Two",
+    "matches_played": "5",
+    "starts": "5",
+    "minutes": "430",
+    "goals": "0",
+    "assists": "0",
+    "goals_plus_assists": "0",
+    "non_penalty_goals": "0",
+    "yellow_cards": "1",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "4",
+    "fouls_drawn": "0",
+    "offsides": "5",
+    "crosses": "5",
+    "interceptions": "1",
+    "tackles_won": "0",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": null,
+  "quality": null,
+  "articles": [
+    {
+      "source": {
+        "id": "bbc-news",
+        "name": "BBC News"
+      },
+      "author": "BBC Sport",
+      "title": "Are Charlton ready to challenge? - Sam Parkin's EFL takeaways",
+      "description": "BBC Final Score pundit Sam Parkin looks at the weekend's talking points in the EFL, including a perfect start for Charlton Athletic.",
+      "url": "https://www.bbc.co.uk/sport/football/articles/c305n87mdjro",
+      "urlToImage": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/93db/live/2d4a1790-801e-11f0-ab3e-bd52082cd0ae.png",
+      "publishedAt": "2026-08-29T19:43:28Z",
+      "content": "Salford City finished eighth in 2024-2025, and then lost the 2025-2026 League Two play-of final, before sacking Karl Robinson. His successor, Peter Cklamovski, has lost his opening three league match\u2026 [+1101 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "",
+    "out_of_possession": ""
+  },
+  "news_synthesis": "No recent news items from the last 28 days are relevant to Macaulay Langstaff. The only headline provided concerns Charlton and Sam Parkin's EFL takeaways, which does not reference this player.",
+  "fit_read": "No scout role notes were provided for this player.",
+  "fit_score": null,
+  "judge": {
+    "source_accuracy": 90.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "HONESTY: no philosophy given, but the fit read doesn't say 'not assessed'."
+    ],
+    "confidence_warning": false
+  }
+}

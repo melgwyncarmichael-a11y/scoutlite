@@ -1,0 +1,273 @@
+{
+  "player": "Vinicius Junior",
+  "fbref_url": "https://fbref.com/en/players/7111d552/Vinicius-Junior",
+  "season": "2026-2027",
+  "bio": {
+    "full_name": "Vin\u00edcius Jos\u00e9 Paix\u00e3o de Oliveira J\u00fanior",
+    "position": "FW-MF (AM, left)",
+    "footed": "Right",
+    "height_weight": "177cm, 73kg",
+    "birth_date": "2000-07-12",
+    "birthplace": "S\u00e3o Gon\u00e7alo, Brazil",
+    "national_team": "Brazil",
+    "club": "Real Madrid",
+    "contract_expires": "June 2032"
+  },
+  "stats": {
+    "season": "2026-2027",
+    "age": "26",
+    "squad": "Real Madrid",
+    "competition": "1. La Liga",
+    "matches_played": "4",
+    "starts": "4",
+    "minutes": "353",
+    "goals": "1",
+    "assists": "2",
+    "goals_plus_assists": "3",
+    "non_penalty_goals": "1",
+    "yellow_cards": "2",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "4",
+    "fouls_drawn": "17",
+    "offsides": "0",
+    "crosses": "14",
+    "interceptions": "0",
+    "tackles_won": "1",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Vin\u00edcius J\u00fanior",
+    "understat_url": "https://understat.com/player/7008",
+    "understat_team": "Real Madrid",
+    "games": "4",
+    "minutes": "356",
+    "goals": "1",
+    "xG": 2.36,
+    "assists": "2",
+    "xA": 2.2,
+    "npxG": 2.36,
+    "shots": "11",
+    "key_passes": "10"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 50.0,
+      "assists_per90": 50.0,
+      "xG_per90": 50.0,
+      "xA_per90": 50.0
+    },
+    "avg_percentile": 50.0,
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against La Liga players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "AFP",
+      "title": "Mourinho seeking 'killer' Vinicius as Real Madrid face Rayo",
+      "description": "Many Real Madrid fans were disappointed when the club extended Vinicius Junior's contract this summer, amid speculation he might depart for Arsenal.Vinicius has insisted he can play alongside Mbappe and said Mourinho helped convince him there was nowhere bett\u2026",
+      "url": "https://sports.yahoo.com/articles/mourinho-seeking-killer-vinicius-real-030617295.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/ffdf6ecaf4be75e8f68341b2afa194275322b72bbb677c1c35f209498ae12b79/lightyear_networkapi/resizefill_w768_h511%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fafp.com%2Fe1953ec92e78dffc551b136ba750e6ad.jpg",
+      "publishedAt": "2026-09-11T03:06:17Z",
+      "content": "Many Real Madrid fans were disappointed when the club extended Vinicius Junior's contract this summer, amid speculation he might depart for Arsenal.\r\nThe Brazilian remains one of the key players of t\u2026 [+3486 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Madriduniversal.com"
+      },
+      "author": "Madrid Universal",
+      "title": "Rayo Vallecano manager names the one Real Madrid figure he would remove from the team",
+      "description": "Rayo Vallecano face a daunting trip to the Santiago Bernabeu to take on a wounded Real Madrid this weekend.Life after Inigo Perez has not been kind to the Vallecas-based club, who have already had to ...",
+      "url": "https://madriduniversal.com/rayo-vallecano-manager-names-the-one-real-madrid-figure-he-would-remove-from-the-team/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/dd22517d835721206d6fa185e042c23adc4ab3524657378e901de7aef3478135/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmadrid_universal_articles_561%2F72774647a857f996cd674576a54b29c8.jpg",
+      "publishedAt": "2026-09-10T18:30:00Z",
+      "content": "Rayo Vallecano face a daunting trip to the Santiago Bernabeu to take on a wounded Real Madrid this weekend.\r\nLife after Inigo Perez has not been kind to the Vallecas-based club, who have already had \u2026 [+2559 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Business Standard"
+      },
+      "author": "Press Trust of India",
+      "title": "Vinicius Jr, Raphinha lead Brazil's squad for historic clash against India",
+      "description": "Real Madrid forward Vinicius Junior, Barcelona winger Raphinha and Paris Saint-Germain veteran Marquinhos headline Brazil's 26-member squad for their historic first-ever meeting with India on October 3.\nThe Selecao will face India at the Salt Lake Stadium in \u2026",
+      "url": "https://www.business-standard.com/sports/football-news/vinicius-jr-raphinha-lead-brazil-s-squad-for-historic-clash-against-india-126091000258_1.html",
+      "urlToImage": "https://bsmedia.business-standard.com/_media/bs/img/article/2026-06/26/thumb/featurecrop/1200X628/1782442787-9248.jpg",
+      "publishedAt": "2026-09-10T08:23:12Z",
+      "content": "Real Madrid forward Vinicius Junior, Barcelona winger Raphinha and Paris Saint-Germain veteran Marquinhos headline Brazil's 26-member squad for their historic first-ever meeting with India on October\u2026 [+4412 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The Punch"
+      },
+      "author": "Punch Newspapers",
+      "title": "Jo\u00e3o Pedro returns to Brazil squad as Ancelotti begins rebuild after World Cup",
+      "description": "Carlo Ancelotti names his new Brazil squad for upcoming friendlies, recalling Chelsea\u2019s Jo\u00e3o Pedro and Barcelona\u2019s Raphinha for the team\u2019s rebuild.\n\nRead More: https://punchng.com/joao-pedro-returns-to-brazil-squad-as-ancelotti-begins-rebuild-after-world-cup/",
+      "url": "https://punchng.com/joao-pedro-returns-to-brazil-squad-as-ancelotti-begins-rebuild-after-world-cup/",
+      "urlToImage": "https://cdn.punchng.com/wp-content/uploads/2026/09/10063044/images-54_1789018244-480x630.webp",
+      "publishedAt": "2026-09-10T05:37:43Z",
+      "content": "Brazil have begun rebuilding after their disappointing 2026 World Cup campaign, with Carlo Ancelotti recalling Chelsea striker Pedro and Barcelona captain Raphinha for friendlies against Australia an\u2026 [+3836 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Rediff.com"
+      },
+      "author": "sports@rediff.co.in (Rediff Sports Desk)",
+      "title": "Brazil Squad Announced For Historic India Encounter",
+      "description": "Brazil has announced a 26-member squad, featuring stars like Vinicius Junior, Raphinha, and Marquinhos, for their historic first-ever football match against India on October 3 in Kolkata. Coach Carlo Ancelotti is overseeing a significant rebuild, integrating \u2026",
+      "url": "https://www.rediff.com/sports/report/vinicius-jr-raphinha-headline-brazil-squad-for-india-clash/20260910.htm",
+      "urlToImage": "https://im.rediff.com/1200-630/sports/2025/may/12ancelotti.jpg",
+      "publishedAt": "2026-09-10T04:55:38Z",
+      "content": "Brazil's national football team, featuring stars like Vinicius Junior and Raphinha, is set to make history with their first-ever match against India in Kolkata on October 3, as coach Carlo Ancelotti \u2026 [+5318 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Rediff.com"
+      },
+      "author": "sports@rediff.co.in (Rediff Sports Desk)",
+      "title": "Brazil Names Squad For First-Ever India Football Match",
+      "description": "Brazil has announced its 26-member squad, featuring stars like Vinicius Junior, Raphinha, and Marquinhos, for a historic first-ever football match against India on October 3 in Kolkata. This landmark fixture follows Brazil's Australia tour and promises a gran\u2026",
+      "url": "https://www.rediff.com/sports/report/brazil-squad-announced-for-historic-india-clash/20260910.htm",
+      "urlToImage": "https://im.rediff.com/1200-630/sports/2025/nov/09vinicius-junior.jpg",
+      "publishedAt": "2026-09-10T04:20:29Z",
+      "content": "Football enthusiasts in India are buzzing as Brazil announces a star-studded 26-member squad, featuring global talents like Vinicius Junior and Raphinha, for their historic first-ever match against I\u2026 [+2262 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Worldsoccertalk.com"
+      },
+      "author": "Dante Gonzalez",
+      "title": "Neymar and Casemiro out, Raphinha in: Carlo Ancelotti drops 15 players from Brazil\u2019s 2026 World Cup squad for rebuild",
+      "description": "While including Raphinha and leaving Neymar and Casemiro out, head coach Carlo Ancelotti has dropped a total of 15 players from his 2026 World Cup squad for the upcoming international window. \nCarlo Ancelotti has initiated the blueprint for his second World C\u2026",
+      "url": "https://worldsoccertalk.com/news/neymar-and-casemiro-out-raphinha-in-carlo-ancelotti-drops-15-players-from-brazils-2026-world-cup-squad-for-rebuild/",
+      "urlToImage": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/09/09211316/neymar-carlo-ancelotti-casemiro-brazil-1200x740.webp",
+      "publishedAt": "2026-09-10T01:15:13Z",
+      "content": "Carlo Ancelotti has initiated the blueprint for his second World Cup cycle following a disappointing round-of-16 exit against Norway. Omitting established stars like Neymar and Casemiro while recalli\u2026 [+3972 chars]"
+    },
+    {
+      "source": {
+        "id": "fox-sports",
+        "name": "Fox Sports"
+      },
+      "author": null,
+      "title": "Brazil Begins Post-Neymar Era With Jo\u00e3o Pedro And Estev\u00e3o In Squad",
+      "description": "Carlo Ancelotti started his complete overhaul of Brazil's national team on Wednesday by announcing a squad with few of the players he took to the World Cup three months ago and several young talents.",
+      "url": "https://www.foxsports.com/stories/soccer/brazil-begins-post-neymar-era-joao-pedro-estevao-squad",
+      "urlToImage": "https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2026/09/1294/728/brazil1.jpg?ve=1&tl=1",
+      "publishedAt": "2026-09-09T21:27:23Z",
+      "content": "Carlo Ancelotti started his complete overhaul of Brazil's national team on Wednesday by announcing a squad with few of the players he took to the World Cup three months ago and several young talents.\u2026 [+1236 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Onefootball.com"
+      },
+      "author": "Confedera\u00e7\u00e3o Brasileira de Futebol",
+      "title": "Ancelotti urges calm, youth focus for Brazil before Copa, World Cup",
+      "description": "Carlo Ancelotti named the national team squad for friendlies against Australia and IndiaCredits: Rafael Ribeiro/CBFCoach Carlo Ancelotti spoke about \u201cprioritizing young players\u201d and \u201ccalmness\u201d...",
+      "url": "https://onefootball.com/en/news/ancelotti-urges-calm-youth-focus-for-brazil-before-copa-world-cup-43431289",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/6d2e3c82a11b33b9ab4dc7222a1b5433a30a583279ff92219f4afa359c88cd9b/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fcbf_articles_956%2Fd621e4e4bfa1617725a7ae0e2874f919.jpg",
+      "publishedAt": "2026-09-09T20:09:00Z",
+      "content": "Carlo Ancelotti named the national team squad for friendlies against Australia and IndiaCredits: Rafael Ribeiro/CBF\r\nCoach Carlo Ancelotti spoke about \"prioritizing young players\" and \"calmness\" afte\u2026 [+3379 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Vanguard"
+      },
+      "author": "Henry Oduah",
+      "title": "Messi agrees to buy second Spanish club after Argentina retirement",
+      "description": "Lionel Messi has reached a preliminary agreement to become majority shareholder of Spanish second-tier club Eldense, days after ending his Argentina international career.\nThe post Messi agrees to buy second Spanish club after Argentina retirement appeared fir\u2026",
+      "url": "https://www.vanguardngr.com/2026/09/messi-agrees-to-buy-second-spanish-club-after-argentina-retirement/",
+      "urlToImage": "https://cdn.vanguardngr.com/wp-content/uploads/2026/05/AFP__20260512__B2NA6CT__v1__MidRes__FilesFblArgUsMlsInterMiami.jpg",
+      "publishedAt": "2026-09-09T14:56:27Z",
+      "content": "(FILES) Inter Miami\u2019s Argentine forward #10 Lionel Messi celebrates a goal during a Major League Soccer (MLS) regular season football match between Inter Miami CF and Orlando City SC at NU Stadium in\u2026 [+2118 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Sky Sports"
+      },
+      "author": "Paul Merson",
+      "title": "Merson: Arsenal didn't make X factor signing to win Champions League",
+      "description": "Paul Merson gives his verdict on Arsenal's Champions League hopes in his latest column; Sky Sports pundit believes Gunners needed more than Kai Havertz up front; <strong>Follow Napoli vs Arsenal on the Sky Sports app with our dedicated match commentary from 6\u2026",
+      "url": "https://www.skysports.com/football/news/11095/13583541/arsenal-didnt-make-x-factor-signing-like-vinicius-junior-or-julian-alvarez-to-win-champions-league-says-paul-merson",
+      "urlToImage": "https://e0.365dm.com/26/09/1600x900/skysports-merson-says-vinicius-jr_7346081.jpg?20260909131959",
+      "publishedAt": "2026-09-09T11:43:00Z",
+      "content": "Arsenal's record last year was amazing in the Champions League and they're going to be there or thereabouts again but I don't think they bought that X factor signing to take them to that next level.\r\u2026 [+2887 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Lorenzo Bettoni",
+      "title": "Diouf: Inter frustrated after Real Madrid loss, but Mbapp\u00e9 \u2018the best player in the world\u2019 \u2013 video",
+      "description": "Inter midfielder Andy Diouf feels the Nerazzurri had 'enough quality' to beat Real Madrid and praises his compatriot Kylian Mbapp\u00e9: 'He's the best player in",
+      "url": "https://football-italia.net/diouf-inter-frustration-mbappe-best-player/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/09/Andy-Diouf-Marc-Cucurella.jpg",
+      "publishedAt": "2026-09-09T10:01:45Z",
+      "content": "Inter midfielder Andy Diouf feels the Nerazzurri had enough quality to beat Real Madrid and praises his compatriot Kylian Mbapp\u00e9: Hes the best player in the world.\r\nCristian Chivus Inter suffered a 2\u2026 [+1991 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Siempremadrid.com"
+      },
+      "author": "Madrid Voice Articles",
+      "title": "Four Real Madrid players make Ballon d\u2019Or shortlist",
+      "description": "Real Madrid is one of the European clubs with a very rich history and a very strong element of tradition in its culture. Around 124 years after its founding, the club has developed some characteristic...",
+      "url": "https://siempremadrid.com/four-real-madrid-players-make-ballon-dor-shortlist/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/fcbe130947315463e15119247b739dacafbf3660613764893ed39e42f9a59aa3/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmadrid_voice_articles_898%2F227fd73e3442d23326724b439294e737.jpg",
+      "publishedAt": "2026-09-09T08:30:00Z",
+      "content": "Real Madrid is one of the European clubs with a very rich history and a very strong element of tradition in its culture. Around 124 years after its founding, the club has developed some characteristi\u2026 [+1960 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Madriduniversal.com"
+      },
+      "author": "Madrid Universal",
+      "title": "Jose Mourinho talks Mbappe, Vinicius, Courtois, Trent after Real Madrid 2-1 Inter Milan",
+      "description": "Real Madrid kicked off their UEFA Champions League campaign with a win over Inter Milan last night, securing the biggest result of their season so far.After suffering their first defeat under Jose Mou...",
+      "url": "https://madriduniversal.com/jose-mourinho-talks-mbappe-vinicius-courtois-trent-after-real-madrid-2-1-inter-milan/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/9784f2c04cab51380ac5de1a08ffac33483831c142f5e828f6883329581aac59/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmadrid_universal_articles_561%2Fa201447f386221d573ace2df151cdd59.jpg",
+      "publishedAt": "2026-09-09T06:20:00Z",
+      "content": "Real Madrid kicked off their UEFA Champions League campaign with a win over Inter Milan last night, securing the biggest result of their season so far.\r\nAfter suffering their first defeat under Jose \u2026 [+4585 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "",
+    "out_of_possession": ""
+  },
+  "news_synthesis": "Recent headlines over the last 28 days center on Vinicius Junior's club and international involvement. On the club side, coverage references Mourinho seeking a \"killer\" Vinicius as Real Madrid face Rayo, and a Rayo Vallecano manager naming a Real Madrid figure he would remove from the team. On the international side, multiple headlines report Vinicius Jr among the players leading Brazil's squad for a historic clash against India, set within a broader Brazil rebuild under Ancelotti following the World Cup, with Neymar and Casemiro out and Raphinha in.",
+  "fit_read": "Scout's role notes: none were provided in the information listed above, so there is no scout observation to attribute.",
+  "fit_score": null,
+  "judge": {
+    "source_accuracy": 90.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "HONESTY: no philosophy given, but the fit read doesn't say 'not assessed'.",
+      "Only one headline explicitly names Vinicius Jr as leading the squad; the other Brazil/India headlines do not mention him, so 'multiple headlines' overstates the sourcing. (in: \"multiple headlines report Vinicius Jr among the players leading Brazil's squad for a historic clash against India\")",
+      "The rebuild framing is supported by the headlines, but attributing it as context for the India clash conflates separate headline threads (World Cup squad rebuild vs. India match squad) that the data does not establish as the same event. (in: \"set within a broader Brazil rebuild under Ancelotti following the World Cup, with Neymar and Casemiro out and Raphinha in\")"
+    ],
+    "confidence_warning": false
+  }
+}

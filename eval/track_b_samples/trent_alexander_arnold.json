@@ -1,0 +1,281 @@
+{
+  "player": "Trent Alexander-Arnold",
+  "fbref_url": "https://fbref.com/en/players/cd1acf9d/Trent-Alexander-Arnold",
+  "season": "2026-2027",
+  "bio": {
+    "full_name": "Trent John Alexander-Arnold",
+    "position": "DF-MF (FB, right)",
+    "footed": "Right",
+    "height_weight": "175cm, 68kg",
+    "birth_date": "1998-10-07",
+    "birthplace": "Liverpool, England, United Kingdom",
+    "national_team": "England",
+    "club": "Real Madrid",
+    "contract_expires": "June 2031"
+  },
+  "stats": {
+    "season": "2026-2027",
+    "age": "27",
+    "squad": "Real Madrid",
+    "competition": "1. La Liga",
+    "matches_played": "3",
+    "starts": "1",
+    "minutes": "128",
+    "goals": "0",
+    "assists": "1",
+    "goals_plus_assists": "1",
+    "non_penalty_goals": "0",
+    "yellow_cards": "0",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "0",
+    "fouls_drawn": "1",
+    "offsides": "0",
+    "crosses": "18",
+    "interceptions": "4",
+    "tackles_won": "1",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Trent Alexander-Arnold",
+    "understat_url": "https://understat.com/player/1791",
+    "understat_team": "Real Madrid",
+    "games": "3",
+    "minutes": "117",
+    "goals": "0",
+    "xG": 0.12,
+    "assists": "1",
+    "xA": 0.59,
+    "npxG": 0.12,
+    "shots": "2",
+    "key_passes": "4"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "defense",
+    "components": {
+      "defensive_actions_per90": 50.0
+    },
+    "avg_percentile": 50.0,
+    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against La Liga players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": "bbc-news",
+        "name": "BBC News"
+      },
+      "author": null,
+      "title": "Ballon d'Or shortlist and a shock resignation",
+      "description": "The Ballon D'or shortlist, the dominance of Spanish coaches and a shock resignation",
+      "url": "https://www.bbc.co.uk/sounds/play/p0p9273l?at_campaign=rss",
+      "urlToImage": "https://ichef.bbci.co.uk/images/ic/1024x576/p0p4zrww.jpg",
+      "publishedAt": "2026-09-10T22:25:00Z",
+      "content": "Available for over a year\r\nJohn Bennet is joined by Julien Laurens, James Horncastle and Guillem Balague to discuss who should win the Ballon D'or, the dominance of Spanish coaches, the strange atmos\u2026 [+606 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Sporting News"
+      },
+      "author": "Kyle Bonn",
+      "title": "Champions League Power Rankings: Barcelona, Arsenal teams to beat as defending champs PSG faces uphill task",
+      "description": "Two-time defending champions PSG are looking for an historic three-peat, but they have exceptional competition from a number of massive clubs, including last year's finalists Arsenal plus La Liga giants Real Madrid and Barcelona.",
+      "url": "https://www.sportingnews.com/us/soccer/news/champions-league-power-rankings-teams-beat-list/3c7913d2d2aaa385a4ea023a",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/6c8857ce791242a4b821c21519d839709239c29b1e7de8a481a65a46b9dd6749/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_sporting_news_articles_584%2Ffc850fdf384dc3c6f2ebfd614073c1de",
+      "publishedAt": "2026-09-10T19:51:00Z",
+      "content": "Champions League Power Rankings: Barcelona, Arsenal teams to beat as defending champs PSG faces uphill task originally appeared on The Sporting News. Add The Sporting News as a Preferred Source by cl\u2026 [+24397 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldindex.com"
+      },
+      "author": "Anfield Index",
+      "title": "Journalist: Liverpool could have the next Steven Gerrard on their hands",
+      "description": "Luca Eden Makes Liverpool History as David Lynch Hails Exciting Academy TalentLiverpool\u2019s UEFA Youth League opener against Atletico Madrid ended in frustration, but the afternoon at Kirkby may event...",
+      "url": "https://anfieldindex.com/99893/journalist-liverpool-could-have-the-next-steven-gerrard-on-their-hands.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/ab097c5be21467df42a11c35ca36256ce5a59d139a65e92102d61cc21811b5ec/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_index_166%2F117f7d9e813221d3d5ac31c31eab34f8.jpg",
+      "publishedAt": "2026-09-10T19:25:00Z",
+      "content": "Liverpool's UEFA Youth League opener against Atletico Madrid ended in frustration, but the afternoon at Kirkby may eventually be remembered for something considerably more significant.\r\nAt 15 years a\u2026 [+3840 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Managing Madrid"
+      },
+      "author": "Kiyan Sobhani",
+      "title": "Five Bullet Points From Real Madrid\u2019s Win Over Inter Milan",
+      "description": "A new post-match series. Seventh edition.",
+      "url": "https://www.managingmadrid.com/kiyans-observations/112707/five-bullet-points-from-real-madrids-win-over-inter-milan",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/c4063bfad3cfb57e1cf12b4890c4d51381c42b446e60396df95c68263320c3c8/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fsb_nation_articles_115%2Fc6102710ed000f94eee892b5500ad0ad.jpg",
+      "publishedAt": "2026-09-10T17:48:43Z",
+      "content": "These observations where I look at\u00a0Real Madrid's history, its players on loan, Castilla, tactical tidbits, and other relevant thoughts are now a regular thing. All previous editions can be found\u00a0here\u2026 [+5629 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldindex.com"
+      },
+      "author": "Anfield Index",
+      "title": "Liverpool now have another record-breaking youngster on their books",
+      "description": "Luca Eden Sets Liverpool Youth Record in UEFA Youth League DebutLiverpool talk plenty about youth development, and every so often the academy gives you something concrete rather than marketing fluff. ...",
+      "url": "https://anfieldindex.com/99865/liverpool-now-have-another-record-breaking-youngster-on-their-books.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/55d394a9ef8119a79c22007afd062c992e2ad0a79f9a8649185480f99a8e3600/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_index_166%2F118b7019592f0d13608edacfb82b1f06.jpg",
+      "publishedAt": "2026-09-10T15:55:00Z",
+      "content": "Liverpool talk plenty about youth development, and every so often the academy gives you something concrete rather than marketing fluff. This week, it did exactly that. Luca Eden, aged 15 years, five \u2026 [+2164 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Managing Madrid"
+      },
+      "author": "Don Amancio",
+      "title": "Analysis: How Real Madrid\u2019s Press Looked Against Inter Milan",
+      "description": "Valverde leads Madrid in pressures, Mbapp\u00e9 & Vinicius record half of defensive actions last season in first CL match",
+      "url": "https://www.managingmadrid.com/real-madrid-cf-data-analysis/112675/analysis-tactics-real-madrid-inter-milan-pressing-champions-league",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/a86b3411674cfe8196b9e1e3cdc452b5b50aaac2e2c1577154190180e62335f1/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fsb_nation_articles_115%2F76a9215877770141afb8f717e1c41a72.jpg",
+      "publishedAt": "2026-09-10T14:32:06Z",
+      "content": "Real Madrid's starting 11 realized 153 pressures, including 18 counterpressures (pressures shortly after losing possession) compared to 103 pressures by Inter Milan starters on Tuesday evening. While\u2026 [+3755 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Madriduniversal.com"
+      },
+      "author": "Madrid Universal",
+      "title": "Report: Mourinho\u2019s preferred pivot combination for Real Madrid\u2019s big games this season",
+      "description": "The midfield pecking order at Real Madrid still remains unclear five games into the new season, especially given that Los Blancos could not make the signings they expected.Federico Valverde has remain...",
+      "url": "https://madriduniversal.com/report-mourinhos-preferred-pivot-combination-for-real-madrids-big-games-this-season/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/a38cc070054633fca081bffcbd09fe16c602acaeb6321e18615efc0e8c3e0c81/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmadrid_universal_articles_561%2F9872411d6fd151bf50987a85cc051965.jpg",
+      "publishedAt": "2026-09-10T12:35:00Z",
+      "content": "The midfield pecking order at Real Madrid still remains unclear five games into the new season, especially given that Los Blancos could not make the signings they expected.\r\nFederico Valverde has rem\u2026 [+2108 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldindex.com"
+      },
+      "author": "Anfield Index",
+      "title": "Report: Liverpool already plotting 2027 midfield signing",
+      "description": "Liverpool Transfer Strategy Explained as Alexis Mac Allister Future Clouds and Alex Scott Link EmergesLiverpool appear to be shaping another significant midfield decision for the summers ahead, with A...",
+      "url": "https://anfieldindex.com/99844/report-liverpool-already-plotting-2027-midfield-signing.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/07bcd04a4cc7fe85fa8b3cde341e622cc550552eec92faeb999b3e13f67cf467/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_index_166%2F417691588e383f03c0aa9c643e975009.jpg",
+      "publishedAt": "2026-09-10T11:55:00Z",
+      "content": "Liverpool appear to be shaping another significant midfield decision for the summers ahead, with Alexis Mac Allister's long term future now under sharper focus following fresh reporting credited to t\u2026 [+6921 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldwatch.co.uk"
+      },
+      "author": "Anfield Watch",
+      "title": "Wow, Liverpool wonderkid writes himself in history books with incredible moment",
+      "description": "A Liverpool wonderkid has written history with an incredible moment. It's a new era, an exciting new generation led by Andoni Iraola. Liverpool's young team are going to be a work in progress but ther...",
+      "url": "https://www.anfieldwatch.co.uk/liverpool-fc/news/wow-liverpool-wonderkid-writes-himself-in-history-books-with-incredible-moment/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/66aefec8ea45a7bf12c7d0e2026d85680fe60303b038ad1aa362aedd5b07624b/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_watch_articles_625%2Fc106fc97f2111cac4045ea6ac43b851a.jpg",
+      "publishedAt": "2026-09-10T11:05:00Z",
+      "content": "A Liverpool wonderkid has written history with an incredible moment.\r\nIt's a new era, an exciting new generation led by Andoni Iraola. Liverpool's young team are going to be a work in progress but th\u2026 [+1907 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldwatch.co.uk"
+      },
+      "author": "Anfield Watch",
+      "title": "Liverpool offered lifeline to help Andoni Iraola solve major problem",
+      "description": "Liverpool may have brought four new players in during the 2026-27 summer transfer window but, there are still a fair few changes that need to be made. The Anfield outfit massively underperformed last ...",
+      "url": "https://www.anfieldwatch.co.uk/liverpool-fc/news/liverpool-offered-lifeline-to-help-andoni-iraola-solve-major-problem/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/7d51abd4c74dfc821315dd73c3d780937d1780d3a6bbeffed5505b71e0ddf3da/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_watch_articles_625%2F3c2ec198bfdd848d2641f25463b1879f.jpg",
+      "publishedAt": "2026-09-10T08:35:00Z",
+      "content": "Liverpool may have brought four new players in during the 2026-27 summer transfer window but, there are still a fair few changes that need to be made.\r\nThe Anfield outfit massively underperformed las\u2026 [+3012 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldwatch.co.uk"
+      },
+      "author": "Anfield Watch",
+      "title": "Liverpool blown away by African duo, big move now imminent",
+      "description": "A Liverpool move is now imminent after the club were blown away by an African duo. It's a really interesting time at Anfield right now. Liverpool are now very distant from the legacy of Jurgen Klopp.T...",
+      "url": "https://www.anfieldwatch.co.uk/liverpool-fc/news/liverpool-blown-away-by-african-duo-big-move-now-imminent/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/aa3e4b4c54c89229df26a3d66ef7ac8307346e58a959e95d3e512a2ca5757b0c/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_watch_articles_625%2Ff2c1dcc6ad595c3b3f3c07e487301710.jpg",
+      "publishedAt": "2026-09-10T07:35:00Z",
+      "content": "A Liverpool move is now imminent after the club were blown away by an African duo.\r\nIt's a really interesting time at Anfield right now. Liverpool are now very distant from the legacy of Jurgen Klopp\u2026 [+1968 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Madriduniversal.com"
+      },
+      "author": "Madrid Universal",
+      "title": "Real Madrid\u2019s Dumfries opens up on facing former club Inter Milan: \u2018A very special match\u2019",
+      "description": "Real Madrid and Inter Milan produced a thrilling and dramatic contest at the Santiago Bernabeu on Tuesday night, with the hosts eventually securing a 2-1 victory in their opening UEFA Champions League...",
+      "url": "https://madriduniversal.com/real-madrids-dumfries-opens-up-on-facing-former-club-inter-milan-a-very-special-match/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/60b738378056a908f763bc4b30edd9ad6e51c74389761171d6fbfc95ac863aed/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmadrid_universal_articles_561%2Fa6b7fa87c2b6d3cca800df82d2dd2372.jpg",
+      "publishedAt": "2026-09-09T18:35:00Z",
+      "content": "Real Madrid and Inter Milan produced a thrilling and dramatic contest at the Santiago Bernabeu on Tuesday night, with the hosts eventually securing a 2-1 victory in their opening UEFA Champions Leagu\u2026 [+2094 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldindex.com"
+      },
+      "author": "Anfield Index",
+      "title": "Liverpool considered moves for Chelsea man and PSG star this summer",
+      "description": "Liverpool Moves for Palestra and Mendes Reveal Richard Hughes Transfer PlanTransfer windows are generally remembered for what happened. There is, though, another version of recruitment history, one co...",
+      "url": "https://anfieldindex.com/99784/liverpool-considered-moves-for-chelsea-man-and-psg-star-this-summer.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/8b4baf6e3794e99096bd5c39ace9e8d6d3fdbee94e7cf65cb0368b4579dcbec3/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_index_166%2Fb96bb0d8363720eb5382c4bf6dfb491f.jpg",
+      "publishedAt": "2026-09-09T15:25:00Z",
+      "content": "Transfer windows are generally remembered for what happened. There is, though, another version of recruitment history, one constructed from the deals that were considered, explored and eventually aba\u2026 [+5264 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Alloutsoccer.com"
+      },
+      "author": "Samuel Meade & Sam Meade",
+      "title": "Jos\u00e9 Mourinho weighs in on Trent Alexander-Arnold's midfield stint in Champions League win",
+      "description": "Jos\u00e9 Mourinho insists Trent Alexander-Arnold is 'not a midfielder' despite deploying him in the middle of the park during Real Madrid's UEFA Champions League win over Inter Milan",
+      "url": "https://www.alloutsoccer.com/news/mourinho-alexander-arnold-real-madrid-2017381",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/16a2edc10e211779e2da0d875d4890e42209d35de9d139ff2d437e4e11ad90d0/lightyear_networkapi/resizefill_w810_h539%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fall_out_soccer_276%2F70612bc06c42d0b31d584cffee73e6f2.jpg",
+      "publishedAt": "2026-09-09T15:16:13Z",
+      "content": "Jos\u00e9 Mourinho maintains that Trent Alexander-Arnold is \"not a midfielder\" despite utilizing the ex-Liverpool player in that central role on Tuesday.\r\n'The Special One' extended his encouraging beginn\u2026 [+2294 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dailymail.com"
+      },
+      "author": "Jonathan McEvoy",
+      "title": "The definitive top 10 greatest F1 drives of all time: I've reported on nearly 400 grands prix. This is where Kimi Antonelli's Monza Miracle ranks among the best of Schumacher, Lewis and Max - and who claims top spot",
+      "description": "Daily Mail Sport's Jonathan McEvoy has been covering Formula One for 21 seasons - so he is well placed to spot genuine greatness on the track.",
+      "url": "https://www.dailymail.com/sport/formulaone/article-16113683/10-greatest-F1-drives-Antonelli-Monza.html",
+      "urlToImage": "https://i.dailymail.com/1s/2026/09/09/13/111113341-0-image-a-7_1788957696826.jpg",
+      "publishedAt": "2026-09-09T12:41:58Z",
+      "content": "<ul><li>Jose Mourinho fires back at Raul's criticism after Real Madrid's nervy 2-1 Champions League win over Inter Milan - as he admits Trent Alexander-Arnold is 'not a midfielder' and Jude Bellingha\u2026 [+4091 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "",
+    "out_of_possession": ""
+  },
+  "news_synthesis": "The recent news items listed do not contain anything specific to Trent Alexander-Arnold; they cover broader topics such as the Ballon d'Or shortlist, Champions League power rankings, Liverpool youth prospects, and Real Madrid's win over Inter Milan. No headline directly reports on this player, so there is no relevant recent news to summarize from the last 28 days.",
+  "fit_read": "No scout role notes were provided in the information listed.",
+  "fit_score": null,
+  "judge": {
+    "source_accuracy": 90.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "HONESTY: no philosophy given, but the fit read doesn't say 'not assessed'."
+    ],
+    "confidence_warning": false
+  }
+}

@@ -68,6 +68,53 @@ def test_headline_numbers_count_as_grounded():
     assert "300" not in r["ungrounded_numbers"]
 
 
+def test_possessive_apostrophe_is_not_misread_as_a_quote():
+    # Real bug, found via a real generated brief (Declan Rice, 2026-09-12): a bare possessive
+    # apostrophe ("Ødegaard's") was misread as an opening quote, then swallowed everything up
+    # to the next real quote mark as a fake "invented quote" spanning most of the paragraph --
+    # collapsing the brief's score from ~90% to 20% for a reason that had nothing to do with
+    # actual hallucination.
+    articles = [{"title": "Martin Ødegaard's resurgence lifts Arsenal ahead of derby"}]
+    r = _check(
+        "A piece on Martin Ødegaard's resurgence and Arsenal's advanced talks over new deals "
+        "for three players headlines this window.",
+        "fit read text long enough here to pass length check",
+        articles=articles,
+    )
+    assert not any("HEADLINES" in f for f in r["findings"])
+
+
+def test_real_quote_with_internal_apostrophe_still_grounds_correctly():
+    # The other half of the same bug: a real quote CONTAINING a possessive/contraction used to
+    # get closed early at its own internal apostrophe, stranding the real closing " as a false
+    # opener for whatever followed (found on Virgil van Dijk's brief the same day).
+    articles = [{"title": "Van Dijk praises new centre-back partner Jacquet's start"}]
+    r = _check(
+        "A headline notes Van Dijk \"praises new centre-back partner Jacquet's start\" this week.",
+        "fit read text long enough here to pass length check",
+        articles=articles,
+    )
+    assert not any("HEADLINES" in f for f in r["findings"])
+
+
+def test_trivially_short_real_quotes_dont_manufacture_a_fake_one_between_them():
+    # A third variant of the same underlying bug, found on the very next Van Dijk regeneration
+    # after fixing the first two: two short (<15 char) real quotes like "found" and "decision
+    # time" fall under the grounding-check's own length floor, but if the regex itself also
+    # ignored them, their leftover quote marks paired across the plain narrative connecting the
+    # two -- manufacturing one long fake "quote" out of real prose. Pairing must happen for
+    # every quote mark regardless of length; only the grounding CHECK skips trivially short ones.
+    articles = [{"title": "Liverpool: decision time as club search for Van Dijk successor"},
+                {"title": "Liverpool have found their long-term Van Dijk successor"}]
+    r = _check(
+        'A headline notes "decision time" for Van Dijk amid reporting that Liverpool have '
+        '"found" a successor, according to separate coverage this week.',
+        "fit read text long enough here to pass length check",
+        articles=articles,
+    )
+    assert not any("HEADLINES" in f for f in r["findings"])
+
+
 def test_invented_quote_flagged():
     r = _check('Reports say he is "set for a shock move to Real Madrid this summer" per sources.',
               "fit read long enough here to pass length check")

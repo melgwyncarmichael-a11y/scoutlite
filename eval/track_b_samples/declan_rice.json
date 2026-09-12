@@ -1,0 +1,257 @@
+{
+  "player": "Declan Rice",
+  "fbref_url": "https://fbref.com/en/players/1c7012b8/Declan-Rice",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "",
+    "position": "DF-MF (CM-DM)",
+    "footed": "Right",
+    "height_weight": "185cm, 83kg",
+    "birth_date": "1999-01-14",
+    "birthplace": "London, England, United Kingdom",
+    "national_team": "England",
+    "club": "Arsenal",
+    "contract_expires": "June 2028"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "24",
+    "squad": "Arsenal",
+    "competition": "1. Premier League",
+    "matches_played": "38",
+    "starts": "37",
+    "minutes": "3,225",
+    "goals": "7",
+    "assists": "8",
+    "goals_plus_assists": "15",
+    "non_penalty_goals": "7",
+    "yellow_cards": "5",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "34",
+    "fouls_drawn": "14",
+    "offsides": "2",
+    "crosses": "61",
+    "interceptions": "44",
+    "tackles_won": "50",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Declan Rice",
+    "understat_url": "https://understat.com/player/5553",
+    "understat_team": "Arsenal",
+    "games": "38",
+    "minutes": "3256",
+    "goals": "7",
+    "xG": 3.19,
+    "assists": "8",
+    "xA": 5.9,
+    "npxG": 3.19,
+    "shots": "58",
+    "key_passes": "47"
+  },
+  "quality": {
+    "score": 4,
+    "position_group": "defense",
+    "components": {
+      "defensive_actions_per90": 79.02097902097903
+    },
+    "avg_percentile": 79.0,
+    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "The4thofficial.net"
+      },
+      "author": "The 4th Official",
+      "title": "Havertz To Lead The Line | 4-2-3-1 Arsenal Predicted Lineup Vs Sunderland",
+      "description": "Arsenal will lock horns with Sunderland at the Stadium of Light this Saturday evening as they look to earn a good result on the road in the Premier League. The Gunners managed to secure a narrow 1-0 w...",
+      "url": "https://the4thofficial.net/2026/09/havertz-to-lead-the-line-4-2-3-1-arsenal-predicted-lineup-vs-sunderland/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/623a67a0175241f0c764254a01e736d570537d77df334b5689d263cb8984fae9/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_4th_official_articles_868%2F7e1d65593daa67f5657ff1c11436bab4.jpg",
+      "publishedAt": "2026-09-10T21:05:00Z",
+      "content": "Arsenal will lock horns with Sunderland at the Stadium of Light this Saturday evening as they look to earn a good result on the road in the Premier League. The Gunners managed to secure a narrow 1-0 \u2026 [+2036 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "Hayden Winks",
+      "title": "Fantasy Football Week 1 Rankings: Hayden Winks' WR2/3 (ranked 13-36) wide receiver projections",
+      "description": "Fantasy football analyst Hayden Winks shares his Week 1 projections for key WR2/3s.",
+      "url": "https://sports.yahoo.com/fantasy/article/fantasy-football-week-1-rankings-hayden-winks-wr23-ranked-13-36-wide-receiver-projections-184526457.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/3e007e8096235cf2dc3d9404d48c5d7aee7dc0ef02107f66144836b62234163c/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fd29szjachogqwa.cloudfront.net%2Fimages%2F2026-09%2Fe5e1b337-c607-4507-b2ac-4e4fdd0f6a91",
+      "publishedAt": "2026-09-10T18:45:26Z",
+      "content": "Fantasy football analyst Hayden Winks reveals his WR2 rankings and analysis for Week 1. He'll continue to update his rankings for every position throughout the week.\r\nLondon was the WR5 on WR5 usage \u2026 [+20907 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "Hayden Winks",
+      "title": "Fantasy Football Week 1 Rankings: Hayden Winks' WR2 (ranked 13-36) wide receiver projections",
+      "description": "Fantasy football analyst Hayden Winks shares his Week 1 projections for key WR2s.",
+      "url": "https://sports.yahoo.com/fantasy/article/fantasy-football-week-1-rankings-hayden-winks-wr2-ranked-13-36-wide-receiver-projections-184526457.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/3e007e8096235cf2dc3d9404d48c5d7aee7dc0ef02107f66144836b62234163c/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fd29szjachogqwa.cloudfront.net%2Fimages%2F2026-09%2Fe5e1b337-c607-4507-b2ac-4e4fdd0f6a91",
+      "publishedAt": "2026-09-10T18:45:26Z",
+      "content": "Fantasy football analyst Hayden Winks reveals his WR2 rankings and analysis for Week 1. He'll continue to update his rankings for every position throughout the week.\r\nLondon was the WR5 on WR5 usage \u2026 [+20888 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "SB Nation"
+      },
+      "author": "Tony DelMonego",
+      "title": "Arsenal vs Sunderland Premier League preview: Injuries, Suspensions, and Predicted Lineups",
+      "description": "Looking at who is fit, who misses out, and how the Gunners could line up this weekend",
+      "url": "https://theshortfuse.sbnation.com/arsenal-injury-news/37496/arsenal-vs-sunderland-premier-league-preview-injuries-suspensions-and-predicted-lineups-arteta-saka-rice",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/54c44409cd67b5f150e4f33a5eeca918a4fac06b2affb0b437daa7c19a319177/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fsb_nation_articles_115%2Fdd59592f5da7db972a80934a0c697b58.jpg",
+      "publishedAt": "2026-09-10T16:00:00Z",
+      "content": "The away days keep on keepin' on after Arsenal's successful visit to Naples on Wednesday in the Champions League. The Gunners return to England for their 4th Premier League tie of the season, this ti\u2026 [+6601 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Alloutsoccer.com"
+      },
+      "author": "John Cross",
+      "title": "Martin \u00d8degaard's resurgence is transforming Arsenal amidst perfect start to the season",
+      "description": "Arsenal captain Martin \u00d8degaard has already surpassed his goal tally from last season, with the revitalized Norwegian driving the Gunners' impressive start to the campaign",
+      "url": "https://www.alloutsoccer.com/news/martin-odegaard-resurgence-transforming-arsenal-2019092",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/b9fc49e87603fa04b926695fd5002927d05d26196a681e12a42865e00728a5fd/lightyear_networkapi/resizefill_w810_h539%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fall_out_soccer_276%2F1aff3db68cae5451a467d5944f129c31.jpg",
+      "publishedAt": "2026-09-10T15:34:13Z",
+      "content": "Martin \u00d8degaard has already eclipsed his numbers from last season. And if the revitalized Arsenal captain maintains this level of form, he will swiftly surpass the combined output of the previous two\u2026 [+4337 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Acast.com"
+      },
+      "author": "editor@secondcaptains.com (Second Captains), Second Captains",
+      "title": "Champions League Week, My Beak Is Soft, Troy Media",
+      "description": "The English teams have been tearing it up in the Champions League so far this week. We chatted to Lars Sivertsen about Martin \u00d8degaard\u2019s blistering early-season form and signs that adoption of\u00a0tactics long-favoured at Arsenal and Manchester City might be help\u2026",
+      "url": "https://shows.acast.com/the-second-captains-podcast-1/episodes/champions-league-week-my-beak-is-soft-troy-media",
+      "urlToImage": "https://open-images.acast.com/shows/627a2e8f84f3d50012cf11fb/1789051638708-7408d125-4776-4cdf-89c7-c9f4d61cde7c.jpeg?height=315",
+      "publishedAt": "2026-09-10T14:58:21Z",
+      "content": "The English teams have been tearing it up in the Champions League so far this week. We chatted to Lars Sivertsen about Martin \u00d8degaards blistering early-season form and signs that adoption of\u00a0tactics\u2026 [+1039 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Just Arsenal News"
+      },
+      "author": "Admin Martin",
+      "title": "Arsenal advances in talks over new deal for three players",
+      "description": "This is a really good time for Arsenal as a football club as they look to ensure they have the best possible season by the end of this campaign. They have won all their competitive matches so far, and it appears that this could be another important season for\u2026",
+      "url": "https://www.justarsenal.com/arsenal-advances-in-talks-over-new-deal-for-three-players/421798",
+      "urlToImage": "https://icdn.justarsenal.com/wp-content/uploads/2026/09/Odegaard-rice-v-chelsea.jpg",
+      "publishedAt": "2026-09-10T14:00:00Z",
+      "content": "This is a really good time for Arsenal as a football club as they look to ensure they have the best possible season by the end of this campaign.\r\nThey have won all their competitive matches so far, a\u2026 [+2546 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Inter.it"
+      },
+      "author": "Inter Milan",
+      "title": "Lautato nominated for 2026 Ballon d'Or",
+      "description": "A special day for the football world, with one of the most prestigious and eagerly anticipated events on the annual calendar drawing closer: the Ballon d'Or is back, one of the most important individu...",
+      "url": "https://www.inter.it/en/news/lautato-nominee-ballon-d-or-2026",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/7ab150a0710e57991de8ff4842f19882cd4e6dc55c4cb6f3acbb39b9efb31bec/lightyear_networkapi/resizefill_w800_h533%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Finter_milan_articles_502%2F62a545c26fbcd521e645323b049aab4b.jpg",
+      "publishedAt": "2026-09-10T12:12:00Z",
+      "content": "A special day for the football world, with one of the most prestigious and eagerly anticipated events on the annual calendar drawing closer: the Ballon d'Or is back, one of the most important individ\u2026 [+3444 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "101 Great Goals"
+      },
+      "author": "Jon Fisher",
+      "title": "Barcelona chief Deco says Lamine Yamal should win the 2026 Ballon d\u2019Or, \u2018no discussion\u2019",
+      "description": "Barcelona winger Lamine Yamal is among the favourites to win the Ballon d\"or and his case has been endorsed by the club's sporting director Deco",
+      "url": "https://www.101greatgoals.com/football/la-liga/barcelona-chief-deco-says-lamine-yamal-should-win-the-2026-ballon-dor-no-discussion/",
+      "urlToImage": "https://www.101greatgoals.com/wp-content/uploads/2026/07/shutterstock_2426374327-1-1.jpg",
+      "publishedAt": "2026-09-10T11:37:27Z",
+      "content": "Barcelona sporting director Deco says there should be no discussion around the winner of the 2026 Ballon dOr and also outlined his anger at the omission of two Blaugrana favourites among the 30 conte\u2026 [+3406 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dailymail.com"
+      },
+      "author": "Kieran Gill",
+      "title": "Chelsea Confidential: Marco Palestra injury update revealed, scouting blow for Blues, Xabi Alonso's view on the Declan Rice 'foul', club's stance on Mauricio Pochettino title talk and latest on missing Geovany Quenda",
+      "description": "Chelsea signed Palestra for \u00a347million from Atalanta but he picked up an injury before making his debut. Now Confidential can reveal the latest on his return.",
+      "url": "https://www.dailymail.com/sport/football/article-16120209/chelsea-marco-palestra-injury-update.html",
+      "urlToImage": "https://i.dailymail.com/1s/2026/09/10/11/111163417-0-image-m-5_1789037936572.jpg",
+      "publishedAt": "2026-09-10T11:13:55Z",
+      "content": "Marco Palestra is getting closer to his Premier League debut after this week taking part in individual training with one of Xabi Alonsos coaches at Cobham, Confidential can reveal.\u00a0\r\nThat was a precu\u2026 [+9647 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Sam Wilson",
+      "title": "Napoli\u2019s De Bruyne defends performances after Arsenal loss: \u2018This is the real De Bruyne\u2019",
+      "description": "Napoli midfielder Kevin De Bruyne hit back at local media criticisms regarding his physical condition following the Partenopei\u2019s 1-0 defeat to Arsenal in",
+      "url": "https://football-italia.net/napolis-de-bruyne-defends-performances/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/09/Kevin-De-Bruyne-running.jpg",
+      "publishedAt": "2026-09-10T11:00:33Z",
+      "content": "Napoli midfielder Kevin De Bruyne hit back at local media criticisms regarding his physical condition following the Partenopeis 1-0 defeat to Arsenal in their Champions League opener at the Stadio Di\u2026 [+1652 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Hayters.com"
+      },
+      "author": "Hayters TV",
+      "title": "Arsenal midfielder Declan Rice: \u2018That trophy and seeing PSG lift it, that stays with you\u2019",
+      "description": "Declan Rice insists he is ready to put another marathon season behind him and help Arsenal make another serious Champions League challenge after admitting the pain of last season\u2019s final defeat by P...",
+      "url": "https://hayters.com/arsenal-midfielder-declan-rice-that-trophy-and-seeing-psg-lift-it-that-stays-with-you/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/cda534b47d0d08f07eb72497c893e1ed81c248e3b845c8413cd648455db68842/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fhayters_tv_491%2F80dd114e4e8a3df1e92f7d43f9e6783d.jpg",
+      "publishedAt": "2026-09-10T11:00:00Z",
+      "content": "Declan Rice insists he is ready to put another marathon season behind him and help Arsenal make another serious Champions League challenge after admitting the pain of last season's final defeat by Pa\u2026 [+3509 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Just Arsenal News"
+      },
+      "author": "Admin Martin",
+      "title": "Rice says Arsenal could have scored up to five goals against Napoli",
+      "description": "Arsenal beat Napoli 1-0 in the Champions League last night, but the Gunners carved the Italians open time after time and ended the match with an expected goals figure of more than 4. It was telling that they only scored once after Martin Odegaard stepped up t\u2026",
+      "url": "https://www.justarsenal.com/rice-says-arsenal-could-have-scored-up-to-five-goals-against-napoli/421774",
+      "urlToImage": "https://icdn.justarsenal.com/wp-content/uploads/2026/09/Rice-v-Napoli.jpg",
+      "publishedAt": "2026-09-10T08:00:00Z",
+      "content": "Arsenal beat Napoli 1-0 in the Champions League last night, but the Gunners carved the Italians open time after time and ended the match with an expected goals figure of more than 4.\r\nIt was telling \u2026 [+2540 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "",
+    "out_of_possession": ""
+  },
+  "news_synthesis": "The recent news items (last 28 days) are largely not relevant to Declan Rice. Headlines include Arsenal lineup previews, fantasy football rankings, a piece on Martin \u00d8degaard's form, a Champions League week item, a note that Arsenal has advanced talks over new deals for three players (Rice not named), and a Ballon d'Or nomination for Lautaro. No headline directly reports on Rice's performances, status, or role.",
+  "fit_read": "No scout role notes were provided.",
+  "fit_score": null,
+  "judge": {
+    "source_accuracy": 90.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "HONESTY: no philosophy given, but the fit read doesn't say 'not assessed'.",
+      "The headline says 'Lautato nominated for 2026 Ballon d'Or,' and the paragraph silently corrects the name to Lautaro while also dropping the year, which is a minor alteration of the source headline. (in: \"a Ballon d'Or nomination for Lautaro\")",
+      "This is a fair summary of the listed headlines, but it is stated as an absolute conclusion about all recent news rather than about the provided sample, which slightly overreaches beyond the available data. (in: \"No headline directly reports on Rice's performances, status, or role.\")"
+    ],
+    "confidence_warning": false
+  }
+}
