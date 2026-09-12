@@ -1,5 +1,48 @@
 # ScoutLite — Build Notes
 
+## Sources in the brief + a planned human eval of the judge loop (2026-09-12)
+
+Prompted by planning where to eval the pipeline (Quality signal comparisons, and whether the
+LLM-written sections hallucinate or hype). Two things came out of that discussion.
+
+**Shipped: real sources in the .docx.** The brief claimed to be "a research brief a scout can
+check," but couldn't actually be checked -- headlines were plain bulleted text (no link, no
+publisher, no date), and neither the FBref stats page nor the Understat xG/xA page was linked
+anywhere. Fixed:
+- Each headline in "What People Say" is now a real hyperlink to its article, with publisher +
+  date alongside (`docx_report.py` gained `_add_hyperlink` -- python-docx has no built-in
+  hyperlink support, so this hand-builds the `<w:hyperlink>` OOXML run, the standard recipe).
+- A new "5. Sources" section links the FBref profile the stats came from and the Understat
+  profile the xG/xA came from.
+- `understat_xg.find_player_xg` now also returns `understat_url` (Understat's league JSON
+  actually includes a per-player `id` -- `understat.com/player/<id>` -- that just wasn't being
+  captured before).
+- `player_url` threaded through `scoutlite_combined.run()` and `app.py` into `build_docx`.
+- `tests/test_docx_report.py` added (docx generation is deterministic given its inputs, so it
+  fits the existing pure-layer suite) -- covers linked/unlinked headlines, the Sources section
+  in both populated and empty states, and that the raw URL doesn't leak into the stats table
+  as a junk row.
+
+**Planned, not built: calibrate the judge against a human.** The rule-based judge's 80%
+source-accuracy threshold has never been checked against actual human judgment -- we know what
+it catches (numeric grounding, invented quotes, forbidden hype/verdict language, honesty
+gates), but not its false-negative rate (real hype it lets through) or false-positive rate
+(fine sentences it flags). This is the deferred eval-harness recommendation, and TESTS.md's
+B3-B7 rows were never run. Protocol, when there's time to run it:
+1. Sample ~15-20 real generated briefs spanning the edge cases: Understat-covered vs. -uncovered
+   league, philosophy given vs. not, a thin-news week, an ambiguous FBref/Understat name match.
+2. A human independently labels every sentence in "What People Say" and "Signals & Fit Read"
+   against the underlying stats/xG/articles as grounded / invented / overstated (hype on a real
+   fact) / verdict-language -- without looking at what the automated judge already flagged.
+3. Score the judge's findings against those labels (precision/recall), which tells us whether
+   80% is actually the right cut, not just a number that felt right.
+
+Also worth noting for the Quality signal: it's an intra-league comparison only (same league +
+season + position group, never cross-league or cross-position) -- see `scoring.py`'s own
+docstring and `describe_quality()` for the exact stats compared per group. A 4/5 in Ligue 1 and
+a 4/5 in the Premier League are not directly comparable in absolute terms, which is implicit
+but easy to misread across players from different leagues.
+
 ## pytest suite + Understat graceful degradation (2026-09-11)
 
 Two follow-ups from the "build recommendations" review, done together.

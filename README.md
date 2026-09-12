@@ -43,8 +43,12 @@ confidence warning rather than hand back nothing.
         │
         ▼
 Word document (.docx): Signals, Who He Is, Stats & Performance,
-What People Say, Signals & Fit Read
+What People Say, Signals & Fit Read, Sources
 ```
+
+Every headline in "What People Say" is a real hyperlink to its article (with publisher and
+date); "Sources" at the end links back to the FBref profile and Understat profile the stats
+came from — a scout can check any claim without leaving the document.
 
 ## Data sources and why each one is used the way it is
 

@@ -206,6 +206,7 @@ if data:
                     synthesis["news_synthesis"], synthesis["fit_read"],
                     scout_notes, philosophy, buffer,
                     quality=quality, fit_score=synthesis["fit_score"], judge=synthesis["judge"],
+                    player_url=data["url"],
                 )
                 buffer.seek(0)
                 status.update(label="Done", state="complete")

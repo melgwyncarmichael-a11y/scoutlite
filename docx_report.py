@@ -9,8 +9,12 @@ Structure follows the Technical Vision doc (2026-08-22):
     given) -- shown as "not available" rather than a fabricated number.
   - 1. Who he is -- bio/background (pure data, no LLM)
   - 2. Stats & performance -- season/misc/keeper/xG tables (pure data, no LLM)
-  - 3. What people say -- news headlines (data) + a short LLM-synthesized read
+  - 3. What people say -- news headlines (data, each linked to its actual article) + a short
+    LLM-synthesized read
   - 4. Signals & fit read -- LLM fit-signal paragraph + scout's role notes + philosophy chosen
+  - 5. Sources -- every link a scout needs to check a claim themselves: the FBref profile the
+    stats came from, the Understat profile the xG/xA came from, and NewsAPI's publisher/date
+    per headline (also inline above) -- this is a research brief, not a black box
 
 Deliberately named "research brief," never "report" or "verdict" -- ScoutLite is a data/
 research layer for a scout, not a conclusion reached on their behalf.
@@ -20,14 +24,45 @@ from pathlib import Path
 
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.opc.constants import RELATIONSHIP_TYPE
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 from docx.shared import Pt
 
 
-def _add_dict_table(doc: Document, data: dict):
+def _add_hyperlink(paragraph, url: str, text: str):
+    """python-docx has no built-in hyperlink support -- this is the standard low-level recipe:
+    register the URL as an external relationship on the paragraph's part, then hand-build the
+    <w:hyperlink> run pointing at it, styled like a normal link (blue, underlined)."""
+    part = paragraph.part
+    r_id = part.relate_to(url, RELATIONSHIP_TYPE.HYPERLINK, is_external=True)
+
+    hyperlink = OxmlElement("w:hyperlink")
+    hyperlink.set(qn("r:id"), r_id)
+
+    run = OxmlElement("w:r")
+    run_props = OxmlElement("w:rPr")
+    color = OxmlElement("w:color")
+    color.set(qn("w:val"), "1155CC")
+    run_props.append(color)
+    underline = OxmlElement("w:u")
+    underline.set(qn("w:val"), "single")
+    run_props.append(underline)
+    run.append(run_props)
+
+    text_el = OxmlElement("w:t")
+    text_el.text = text
+    run.append(text_el)
+    hyperlink.append(run)
+    paragraph._p.append(hyperlink)
+    return hyperlink
+
+
+def _add_dict_table(doc: Document, data: dict, skip: tuple[str, ...] = ()):
     table = doc.add_table(rows=0, cols=2)
     table.style = "Light Grid Accent 1"
     for key, value in data.items():
-        if value in (None, ""):
+        if value in (None, "") or key in skip:
             continue
         row = table.add_row().cells
         row[0].text = key.replace("_", " ").title()
@@ -50,6 +85,7 @@ def build_docx(
     quality: dict | None = None,
     fit_score: int | None = None,
     judge: dict | None = None,
+    player_url: str | None = None,
 ) -> Path:
     doc = Document()
 
@@ -132,7 +168,11 @@ def build_docx(
             f"abbreviations, this can occasionally match the wrong player or miss a real one. "
             f"Verify the matched name against who you actually mean before trusting these numbers."
         ).italic = True
-        _add_dict_table(doc, xg)
+        if xg.get("understat_url"):
+            link_p = doc.add_paragraph()
+            link_p.add_run("Source: ")
+            _add_hyperlink(link_p, xg["understat_url"], xg["understat_url"])
+        _add_dict_table(doc, xg, skip=("understat_url",))
     else:
         doc.add_paragraph("Advanced stats (xG/xA): not available -- Understat doesn't cover this player's league, or no name match was found.")
 
@@ -142,7 +182,17 @@ def build_docx(
     if articles:
         doc.add_heading("Recent headlines (last 28 days)", level=2)
         for a in articles[:8]:
-            doc.add_paragraph(a.get("title", ""), style="List Bullet")
+            bullet = doc.add_paragraph(style="List Bullet")
+            title = a.get("title", "")
+            if a.get("url"):
+                _add_hyperlink(bullet, a["url"], title)
+            else:
+                bullet.add_run(title)
+            source = a.get("source", {}).get("name", "")
+            published = (a.get("publishedAt") or "")[:10]
+            attribution = " · ".join(v for v in (source, published) if v)
+            if attribution:
+                bullet.add_run(f"  ({attribution})").italic = True
 
     # --- 4. Signals & fit read -------------------------------------------------------------
     doc.add_heading("4. Signals & Fit Read", level=1)
@@ -154,6 +204,27 @@ def build_docx(
     if scout_notes and scout_notes.strip():
         doc.add_paragraph().add_run(f"Scout's role notes: \"{scout_notes.strip()}\"").italic = True
     doc.add_paragraph(fit_read or "No fit signal available.")
+
+    # --- 5. Sources -------------------------------------------------------------------------
+    # Every link a scout would need to check a claim themselves -- this is a research brief,
+    # not a black box. Headline sources are already linked inline above; this section is the
+    # profile pages the stats tables came from.
+    doc.add_heading("5. Sources", level=1)
+    if player_url:
+        p = doc.add_paragraph(style="List Bullet")
+        p.add_run("FBref profile (season stats, bio, defensive/goalkeeping stats): ")
+        _add_hyperlink(p, player_url, player_url)
+    if xg and xg.get("understat_url"):
+        p = doc.add_paragraph(style="List Bullet")
+        p.add_run("Understat profile (xG/xA): ")
+        _add_hyperlink(p, xg["understat_url"], xg["understat_url"])
+    if articles:
+        doc.add_paragraph(
+            "News headlines are linked individually in \"What People Say\" above, each with "
+            "its publisher and date.", style="List Bullet"
+        )
+    if not player_url and not (xg and xg.get("understat_url")) and not articles:
+        doc.add_paragraph("No sourced links available for this brief.")
 
     doc.save(output_path)
     return output_path

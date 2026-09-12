@@ -108,6 +108,7 @@ def find_player_xg(players: list[dict], player_name: str, team_hint: str = "") -
     p = candidates[0]
     return {
         "understat_matched_name": p["player_name"],  # verify this is really the searched player
+        "understat_url": f"https://understat.com/player/{p['id']}" if p.get("id") else None,
         "understat_team": p["team_title"],
         "games": p["games"],
         "minutes": p["time"],

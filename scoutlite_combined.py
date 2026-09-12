@@ -376,7 +376,7 @@ def run(args):
         args.player, bio, stats, xg, articles, misc, keeper,
         synthesis["news_synthesis"], synthesis["fit_read"],
         args.scout_notes, philosophy, out_path,
-        quality=quality, fit_score=synthesis["fit_score"], judge=synthesis["judge"],
+        quality=quality, fit_score=synthesis["fit_score"], judge=synthesis["judge"], player_url=url,
     )
 
     print(f"\nQuality: {quality['score'] if quality else 'N/A'}/5  ·  Fit: {synthesis['fit_score'] or 'N/A'}/5")
