@@ -1,0 +1,272 @@
+{
+  "player": "Erling Haaland",
+  "fbref_url": "https://fbref.com/en/players/1f44ac21/Erling-Haaland",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "Erling Braut Haaland",
+    "position": "FW-MF",
+    "footed": "Left",
+    "height_weight": "191cm, 92kg",
+    "birth_date": "2000-07-21",
+    "birthplace": "Leeds, England, United Kingdom",
+    "national_team": "Norway",
+    "club": "Manchester City",
+    "contract_expires": "June 2034"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "23",
+    "squad": "Manchester City",
+    "competition": "1. Premier League",
+    "matches_played": "31",
+    "starts": "29",
+    "minutes": "2,552",
+    "goals": "27",
+    "assists": "5",
+    "goals_plus_assists": "32",
+    "non_penalty_goals": "20",
+    "yellow_cards": "1",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "18",
+    "fouls_drawn": "30",
+    "offsides": "6",
+    "crosses": "5",
+    "interceptions": "2",
+    "tackles_won": "3",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Erling Haaland",
+    "understat_url": "https://understat.com/player/8260",
+    "understat_team": "Manchester City",
+    "games": "31",
+    "minutes": "2581",
+    "goals": "27",
+    "xG": 31.65,
+    "assists": "5",
+    "xA": 4.75,
+    "npxG": 25.56,
+    "shots": "122",
+    "key_passes": "29"
+  },
+  "quality": {
+    "score": 4,
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 100.0,
+      "assists_per90": 56.074766355140184,
+      "xG_per90": 99.06542056074767,
+      "xA_per90": 53.271028037383175
+    },
+    "avg_percentile": 77.1,
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "AFP",
+      "title": "Manchester derby poses Maresca's first big test, Chelsea aim to end Hull Honeymoon",
+      "description": "Enzo Maresca faces his first major test since stepping into Pep Guardiola's shoes as City visit United in the Manchester derby on Sunday, while Arsenal aim to extend their flawless start at Sunderland.A trip to Liverpool, where Arbeloa played for two-and-a-ha\u2026",
+      "url": "https://sports.yahoo.com/articles/manchester-derby-poses-marescas-first-030539752.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/4d906c75efdf16fe98aa7aec2f2892b8aabec4d51eb0948e858164ce3588135c/lightyear_networkapi/resizefill_w768_h512%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fafp.com%2F7bbc5e86292fb0ea9b60c34c731170df.jpg",
+      "publishedAt": "2026-09-11T03:05:39Z",
+      "content": "Enzo Maresca faces his first major test since stepping into Pep Guardiola's shoes as City visit United in the Manchester derby on Sunday, while Arsenal aim to extend their flawless start at Sunderlan\u2026 [+3577 chars]"
+    },
+    {
+      "source": {
+        "id": "the-times-of-india",
+        "name": "The Times of India"
+      },
+      "author": "ET Online",
+      "title": "Haaland, Maresca and a Manchester derby test await United at the historic Old Trafford",
+      "description": "Manchester United faces Manchester City in a significant derby match this Sunday.  The team has shown inconsistent results and defensive frailties this season.  Manchester City arrives with a perfect record under their new manager Enzo Maresca.  Arsenal and L\u2026",
+      "url": "https://economictimes.indiatimes.com/news/sports/football/haaland-maresca-and-a-manchester-derby-test-await-united-at-the-historic-old-trafford/articleshow/134040051.cms",
+      "urlToImage": "https://img.etimg.com/thumb/msid-134040142,width-1200,height-630,imgsize-126972,overlay-economictimes/articleshow.jpg",
+      "publishedAt": "2026-09-11T01:55:32Z",
+      "content": "Manchester United's inconsistent start to the Premier League season faces its biggest test yet on Sunday when they host Manchester City, with the derby offering Michael Carrick's side an early opport\u2026 [+4086 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dailymail.com"
+      },
+      "author": "Jack Gaughan",
+      "title": "Why Man City are fired up to end their Old Trafford hoodoo: Squad unity, the star duo drumming standards into newcomers and the missing ingredient players say Enzo Maresca has added ahead of Man United clash",
+      "description": "Ayyoub Bouaddi has done his homework. Aside from naming four City midfielders when asked for a Premier League idol, he learned his lines on this weekend's Manchester derby.",
+      "url": "https://www.dailymail.com/sport/football/article-16117927/man-city-old-trafford-united-maresca.html",
+      "urlToImage": "https://i.dailymail.com/1s/2026/09/09/16/111145151-0-image-m-51_1788968753176.jpg",
+      "publishedAt": "2026-09-11T01:00:46Z",
+      "content": "Ayyoub Bouaddi has done his homework. He looks a little bit bookish, so that stands to reason.\r\nAside from naming no fewer than four Manchester City midfielders Messrs Toure, De Bruyne, Gundogan and \u2026 [+5502 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "BBC News"
+      },
+      "author": "Gary Rose - BBC Sport journalist",
+      "title": "Kane scores in rout as Bayern Munich beat Bodo/Glimt",
+      "description": "Harry Kane scores his 55th Champions League goal and Michael Olise hits a late double as Bayern Munich brush off Bodo/Glimt.",
+      "url": "https://www.bbc.com/sport/football/live/cwp80y752j71t?xtor=AL-72-%5Bpartner%5D-%5Byahoo.north.america%5D-%5Bheadline%5D-%5Bsport%5D-%5Bbizdev%5D-%5Bisapi%5D",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/31d196f0afc2bce6d60678371d34c59a0636ddac1e202cf919dcd473af813460/lightyear_networkapi/resizefill_w913_h514%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fbbc_us_articles_995%2Fd1de126b6cef92a871f9cef2aa73e9bd.jpg",
+      "publishedAt": "2026-09-10T21:08:33Z",
+      "content": "UEFA Champions League\r\nBayern Munich 5 - 0 Bod\u00f8 / Glimt FT\r\nHarry Kane's goal was his third of the season for Bayern Munich [AFP via Getty Images]\r\nEngland captain Harry Kane scored his 55th Champion\u2026 [+1561 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Esteemedkompany.com"
+      },
+      "author": "Esteemed Kompany",
+      "title": "The signs are trending upwards for one Manchester City player but one moment may spark the fuse",
+      "description": "As Manchester City beat FC Porto 2-0 on Tuesday night to begin their UEFA Champions League campaign on the right foot a host of players played well at the Est\u00e1dio do Drag\u00e3o. One of those was Phil Fo...",
+      "url": "https://esteemedkompany.com/2026/09/10/the-signs-are-trending-upwards-for-one-manchester-city-player-but-one-moment-may-spark-the-fuse/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/a644c6c19ea8b949c5c4daa956b419b40ac916fc144d439938cd9f3cae10074d/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Festeemed_kompany_articles_332%2F0cdf1fe61d398e2e80c786243e5dfcfe.jpg",
+      "publishedAt": "2026-09-10T20:40:00Z",
+      "content": "As Manchester Citybeat FC Porto 2-0 on Tuesday night to begin their UEFA Champions League campaign on the right foot a host of players played well at the Est\u00e1dio do Drag\u00e3o. One of those was Phil Fode\u2026 [+2369 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "CNA"
+      },
+      "author": null,
+      "title": "Manchester rivals set for early-season litmus test at Old Trafford",
+      "description": "LONDON, Sept 10 : After all the pre-season optimism, Manchester United's start to the Premier League season has been inconsistent but Sunday's derby against visiting Manchester City offers Michael Carrick's side an early chance to show they are genuine conten\u2026",
+      "url": "https://www.channelnewsasia.com/sport/manchester-rivals-set-early-season-litmus-test-old-trafford-6376306",
+      "urlToImage": "https://dam.mediacorp.sg/image/upload/s--GPZt-fve--/c_fill,g_auto,h_676,w_1200/fl_relative,g_south_east,l_mediacorp:cna:watermark:2024-04:reuters_1,w_0.1/f_auto,q_auto/v1/one-cms/core/2026-09-10T125513Z_1_LYNXMPEM8917M_RTROPTP_3_SOCCER-CHAMPIONS-MUN-SAB-PREVIEW.JPG?itok=lhN77OKi",
+      "publishedAt": "2026-09-10T12:55:13Z",
+      "content": "LONDON, Sept 10 : After all the pre-season optimism, Manchester United's start to the Premier League season has been inconsistent but Sunday's derby against visiting Manchester City offers Michael Ca\u2026 [+3719 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dazed"
+      },
+      "author": "Sophia Medina Crack",
+      "title": "What is it about a man and his bleached buzzcut?",
+      "description": "A man\u2019s bleached buzz can make the difference between a Hinge match or pass \u2013 and for many, it signals far more than good hair",
+      "url": "https://www.dazeddigital.com/beauty/article/70895/1/man-bleached-buzzcut-justin-bieber-nettspend-david-beckham-romeo-hair?utm_source=Link&utm_medium=Link&utm_campaign=RSSFeed&utm_term=what-is-it-about-a-man-and-his-bleached-buzzcut",
+      "urlToImage": "https://images-prod.dazeddigital.com/1200/475-52-1445-963/azure/dazed-prod/1450/3/1453589.png",
+      "publishedAt": "2026-09-10T12:54:00Z",
+      "content": "It was one (of many)hungover Saturday mornings. My friend and I were scrolling through Hinge when she suddenly lamented how all her matcheswould be 10x hotter if they had a bleached buzzcut. Having a\u2026 [+6196 chars]"
+    },
+    {
+      "source": {
+        "id": "al-jazeera-english",
+        "name": "Al Jazeera English"
+      },
+      "author": "Bassil Mikdadi",
+      "title": "Is Egypt\u2019s Hamza Abdelkarim set to be Barcelona\u2019s next breakout star?",
+      "description": "Four goals in five games made the 18-year-old striker Barcelona's top scorer during preseason.",
+      "url": "https://www.aljazeera.com/sports/2026/9/10/is-egypts-hamza-abdelkarim-set-to-be-barcelonas-next-breakout-star",
+      "urlToImage": "https://www.aljazeera.com/wp-content/uploads/2026/09/getty_6aa2948514-1789039749_38a752-1789039936.jpg?resize=1200%2C630&quality=80",
+      "publishedAt": "2026-09-10T12:24:25Z",
+      "content": "The chatter among Barcelona fans this summer was all about who would be the clubs next star striker after Robert Lewandowski\u00a0 the teams top scorer for the past four seasons left to play in the United\u2026 [+4869 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Barcauniversal.com"
+      },
+      "author": "Barca Universal",
+      "title": "Barcelona director backs Lamine Yamal to win the Ballon d\u2019Or: \u2018I see no doubt about it\u2019",
+      "description": "In an interview with RAC1 (h/t Mundo Deportivo), FC Barcelona sporting director Deco claimed that he has no doubts about who should win the next Ballon d\u2019Or, insisting that the top prize should go t...",
+      "url": "https://barcauniversal.com/barcelona-director-backs-lamine-yamal-to-win-the-ballon-dor-i-see-no-doubt-about-it/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/dc23a31c916c01b8959214c8ca35f0b6eb281719700507973d71fe79fae2100c/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fbarca_universal_articles_732%2F6ec621ded8015d7d200b6019651ed3bf.jpg",
+      "publishedAt": "2026-09-10T12:20:00Z",
+      "content": "In an interview with RAC1 (h/t Mundo Deportivo), FC Barcelona sporting director Deco claimed that he has no doubts about who should win the next Ballon d'Or, insisting that the top prize should go to\u2026 [+2178 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Inter.it"
+      },
+      "author": "Inter Milan",
+      "title": "Lautato nominated for 2026 Ballon d'Or",
+      "description": "A special day for the football world, with one of the most prestigious and eagerly anticipated events on the annual calendar drawing closer: the Ballon d'Or is back, one of the most important individu...",
+      "url": "https://www.inter.it/en/news/lautato-nominee-ballon-d-or-2026",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/7ab150a0710e57991de8ff4842f19882cd4e6dc55c4cb6f3acbb39b9efb31bec/lightyear_networkapi/resizefill_w800_h533%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Finter_milan_articles_502%2F62a545c26fbcd521e645323b049aab4b.jpg",
+      "publishedAt": "2026-09-10T12:12:00Z",
+      "content": "A special day for the football world, with one of the most prestigious and eagerly anticipated events on the annual calendar drawing closer: the Ballon d'Or is back, one of the most important individ\u2026 [+3444 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "101 Great Goals"
+      },
+      "author": "Jon Fisher",
+      "title": "Barcelona chief Deco says Lamine Yamal should win the 2026 Ballon d\u2019Or, \u2018no discussion\u2019",
+      "description": "Barcelona winger Lamine Yamal is among the favourites to win the Ballon d\"or and his case has been endorsed by the club's sporting director Deco",
+      "url": "https://www.101greatgoals.com/football/la-liga/barcelona-chief-deco-says-lamine-yamal-should-win-the-2026-ballon-dor-no-discussion/",
+      "urlToImage": "https://www.101greatgoals.com/wp-content/uploads/2026/07/shutterstock_2426374327-1-1.jpg",
+      "publishedAt": "2026-09-10T11:37:27Z",
+      "content": "Barcelona sporting director Deco says there should be no discussion around the winner of the 2026 Ballon dOr and also outlined his anger at the omission of two Blaugrana favourites among the 30 conte\u2026 [+3406 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Manchester City FC"
+      },
+      "author": "Manchester City FC",
+      "title": "City's last five meetings with Manchester United",
+      "description": "Ahead of Sunday\u2019s eagerly awaited Manchester derby clash away to Manchester United we look back to our most recent games against our nearest rivals. Men's Team Analysing Manchester United ahead of S...",
+      "url": "https://www.mancity.com/news/mens/manchester-united-manchester-city-last-five-meetings-63924632",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/514dc6525515dc43fc948a81830a33a480b5ed72a7c8645338a0868884fdb2a6/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmanchester_city_fc_articles_899%2F16f576d083a2d200579b320e2714adfd.jpg",
+      "publishedAt": "2026-09-10T11:05:00Z",
+      "content": "Ahead of Sunday's eagerly awaited Manchester derby clash away to Manchester United we look back to our most recent games against our nearest rivals.\r\nMen's Team\r\nOld Trafford can be one of the most t\u2026 [+4685 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Nevermanagealone.com"
+      },
+      "author": "Elvis",
+      "title": "Premier League Gameweek 3 Review: Biggest Talking Points and Takeaways",
+      "description": "Gameweek 3 of the 2026/27 Premier League season delivered high-octane drama, defensive masterclasses, and an unprecedented level of parity across the league. A record six out of the ten weekend fixtures ended in draws, creating plenty of tactical intrigue at \u2026",
+      "url": "https://www.nevermanagealone.com/premier-league/16518/premier-league-gameweek-3-review-biggest-talking-points-and-takeaways",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/71bf8254bbc5cc418bde2049175cfdc438627df82d314a198f6699e570f83fe2/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fsb_nation_articles_115%2F674b3a54357284ada20d9b802cd29ef5.jpg",
+      "publishedAt": "2026-09-10T10:17:04Z",
+      "content": "Gameweek 3 of the 2026/27 Premier League season delivered high-octane drama, defensive masterclasses, and an unprecedented level of parity across the league.\r\nA record six out of the ten weekend fixt\u2026 [+2741 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Football Italia",
+      "title": "How to buy Premier League tickets for Man United vs. Man City",
+      "description": "Manchester United welcome Manchester City to Old Trafford on Sunday, 13 September 2026, for the...",
+      "url": "https://football-italia.net/buy-premier-league-tickets-man-united-v-city/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/08/manchester-city-v-afc-bournemouth-premier-league-2026-27-e1787501715580.jpg",
+      "publishedAt": "2026-09-10T09:22:31Z",
+      "content": "Manchester United welcome Manchester City to Old Trafford on Sunday, 13 September 2026, for the first Manchester derby of the new Premier League season.\r\nBUY MAN UNITED VS. MAN CITY TICKETS HERE\r\nThe\u2026 [+3737 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "",
+    "out_of_possession": ""
+  },
+  "news_synthesis": "Recent coverage over the last 28 days centers on an upcoming Manchester derby at Old Trafford, framed as an early-season litmus test for both Manchester clubs, with Haaland named among the figures in that buildup. One headline notes Manchester City's motivation to end an Old Trafford hoodoo, referencing squad unity and a \"star duo\" drumming standards into newcomers. A separate piece suggests signs are trending upwards for one Manchester City player, though it does not name Haaland. Other headlines in the window (Kane at Bayern, Chelsea/Hull, a bleached buzzcut piece, and a Barcelona youth item) do not appear relevant to Haaland.",
+  "fit_read": "No scout role notes were provided in the material listed, so there is no attributed observation to pass along here.",
+  "fit_score": null,
+  "judge": {
+    "source_accuracy": 90.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "HONESTY: no philosophy given, but the fit read doesn't say 'not assessed'.",
+      "The headline 'The signs are trending upwards for one Manchester City player but one moment may spark the fuse' does not identify the player, so asserting it is not Haaland is an unsupported conclusion. (in: \"A separate piece suggests signs are trending upwards for one Manchester City player, though it does not name Haaland.\")"
+    ],
+    "confidence_warning": false
+  }
+}

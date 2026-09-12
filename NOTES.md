@@ -1,5 +1,35 @@
 # ScoutLite — Build Notes
 
+## Eval scaffolding for Track B, priority order set (2026-09-12, later same day)
+
+Discussed prioritizing the three eval tracks below: **Track B (hallucination/hype) matters
+most, Track A (Quality signal validity) follows, Track C (Fit-signal consistency) is parked**
+for whenever there's time to test it -- project owner's call. Scaffolded Track B accordingly;
+Track A stays a written design for now (see `eval/README.md`), Track C untouched.
+
+Built, under `eval/`:
+- `track_b_capture.py` -- runs the same library calls `scoutlite_combined.py`'s CLI does, but
+  keeps the intermediate data (judge findings, articles with real URLs, the exact stats the
+  LLM saw) as JSON instead of only rendering a `.docx`.
+- `build_labeling_sheet.py` -- flattens every captured JSON into one CSV, one row per sentence
+  in "What People Say" + "Signals & Fit Read", pre-filled with that brief's judge findings for
+  context. Automates the tedious part; the actual `human_label` judgment call stays manual.
+- `score_track_b.py` -- once labeled, computes the judge's recall per issue category
+  (invented/overstated/verdict-language) and its false-positive rate on sentences called
+  grounded. Pure aggregation, covered by `tests/test_score_track_b.py` against a synthetic
+  CSV so the scoring logic is verified independent of whether real labeling has happened yet.
+- `eval/README.md` -- the full workflow, plus Track A's and Track C's plans.
+
+Smoke-tested end to end on Erling Haaland (2023-2024, cached): capture → 5-sentence CSV →
+scorer correctly reports "0/5 labeled, n/a" on the unlabeled sheet. One real, useful thing
+surfaced by just running it once: the LLM's news synthesis explicitly declined to link an
+unnamed-player headline to Haaland ("does not name Haaland") rather than assuming -- exactly
+the caution this eval exists to check for, caught for free on the first sample.
+
+Next: extend the sample by reusing the 12-case test batch's players (keeps NewsAPI/FBref calls
+low) plus 2-3 new captures with a club philosophy set (that batch never exercised the Fit-score
+path), then actually label and score it.
+
 ## Sources in the brief + a planned human eval of the judge loop (2026-09-12)
 
 Prompted by planning where to eval the pipeline (Quality signal comparisons, and whether the

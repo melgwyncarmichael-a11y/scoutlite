@@ -1,0 +1,86 @@
+# ScoutLite evals
+
+Two tracks, prioritized per the project owner's call (2026-09-12): **Track B matters most,
+Track A follows, Track C is parked** for whenever there's time to test it. See `NOTES.md`
+("Sources in the brief + a planned human eval of the judge loop") for how this was designed.
+
+## Track B — does the LLM hallucinate or hype? (priority)
+
+Calibrates the automated judge (`judge_rules.py` + `judge_llm.py`)'s 80% threshold against an
+actual human reading the brief against its sources — not just "does the judge agree with
+itself."
+
+**Workflow:**
+
+1. **Capture** a brief's full data (not just the rendered `.docx`) — stats, articles with real
+   URLs, and the judge's findings — for each sample player:
+   ```bash
+   .venv/bin/python eval/track_b_capture.py "Erling Haaland" --season 2023-2024
+   ```
+   Supports `--player-url`, `--fresh`, `--scout-notes`, `--in-possession`, `--out-of-possession`
+   the same as `scoutlite_combined.py`'s CLI. Each run writes one JSON file to
+   `track_b_samples/`.
+
+2. **Build the labeling sheet** from every captured JSON:
+   ```bash
+   .venv/bin/python eval/build_labeling_sheet.py
+   ```
+   Writes `track_b_labels.csv` — one row per sentence in "What People Say" + "Signals & Fit
+   Read", pre-filled with that brief's `source_accuracy` and the judge's raw findings for
+   context. Re-running it rebuilds the CSV from scratch, so don't hand-edit rows you want kept
+   without saving a copy first.
+
+3. **Label by hand.** Open the CSV in a spreadsheet. For every row, fill in:
+   - `human_label` — one of `grounded` / `invented` / `overstated` / `verdict-language` /
+     `unclear`. Click through the article/FBref/Understat links in the actual generated
+     brief (now that sources are hyperlinked) to check each claim rather than guessing.
+   - `caught_by_judge` — `y`/`n`, whether the judge's findings (shown in the row) already
+     flagged this specific sentence.
+   - `notes` — why, especially for anything `unclear`.
+
+   One rater (you) is fine for a course-project timeline — no inter-rater math needed. If you
+   want a self-consistency check, re-label one brief blind a few days later and compare.
+
+4. **Score it:**
+   ```bash
+   .venv/bin/python eval/score_track_b.py
+   ```
+   Reports the judge's recall per issue category (of what you flagged as invented/overstated/
+   verdict-language, what fraction did it already catch) and its false-positive rate on
+   sentences you called grounded. The category breakdown matters more than the overall number
+   — the working hypothesis (from `judge_rules.py`'s regexes) is that it's strong on
+   `invented` (numeric/quote grounding is regex-catchable) and weak on `overstated` (hype is
+   tonal, not factual — the forbidden-content list only catches specific phrases, not
+   adjective inflation like "electric" or "generational talent"). This eval either confirms or
+   kills that.
+
+**Sample:** reuse the 12-case test batch (`TESTS.md`) rather than generating fresh players —
+it's already deliberately diverse (elite/average/fringe, ambiguous name, uncovered league,
+thin-data season) and keeps NewsAPI/FBref calls to a minimum. Add 2-3 new captures with a club
+philosophy set (`--in-possession` / `--out-of-possession`), since that batch never exercised
+the Fit-score path at all.
+
+`erling_haaland.json` in `track_b_samples/` is a working example from getting this scaffolding
+running — the point is to extend the sample from here, not to treat one brief as the eval.
+
+## Track A — Quality signal validity (next up)
+
+Designed, not yet scaffolded. Two checks:
+
+- **A1. Position-group accuracy survey** (completes `TESTS.md`'s B5): run bio parsing across
+  ~15-20 players spanning a clean case per position group plus known versatile-player
+  misclassifications (De Bruyne → Attack, Rice → Defense already documented) — build a
+  complete table of `classify_position_group` outcomes, not just the 2 existing data points.
+- **A2. Face-validity spot check** (completes B3, the "Ronaldo test"): pick ~10 players by
+  reputation *before* looking at their Quality score, compare against a quick manual
+  reputation/market-value-tier lookup. Checking for gross face-validity failures (a squad
+  player scoring 5/5), not precision — Wan-Bissaka's honest 5/5 (`TESTS.md` Finding 1) is the
+  template for how a "surprising" score gets investigated and either explained or flagged.
+
+## Track C — Fit-signal consistency (parked)
+
+B4 in `TESTS.md`: same inputs, 3-5 reruns, check whether the Fit score itself flips (not just
+prose wording drifting, which `temperature=0.3` makes expected). Parked until there's time —
+picking it back up just means running `track_b_capture.py` on the same player/philosophy
+several times and diffing `fit_score` + `fit_read` across the resulting JSON files; the
+capture script already returns everything needed.
