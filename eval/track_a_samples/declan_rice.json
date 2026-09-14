@@ -1,0 +1,66 @@
+{
+  "player": "Declan Rice",
+  "fbref_url": "https://fbref.com/en/players/1c7012b8/Declan-Rice",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "",
+    "position": "DF-MF (CM-DM)",
+    "footed": "Right",
+    "height_weight": "185cm, 83kg",
+    "birth_date": "1999-01-14",
+    "birthplace": "London, England, United Kingdom",
+    "national_team": "England",
+    "club": "Arsenal",
+    "contract_expires": "June 2028"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "24",
+    "squad": "Arsenal",
+    "competition": "1. Premier League",
+    "matches_played": "38",
+    "starts": "37",
+    "minutes": "3,225",
+    "goals": "7",
+    "assists": "8",
+    "goals_plus_assists": "15",
+    "non_penalty_goals": "7",
+    "yellow_cards": "5",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "34",
+    "fouls_drawn": "14",
+    "offsides": "2",
+    "crosses": "61",
+    "interceptions": "44",
+    "tackles_won": "50",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Declan Rice",
+    "understat_url": "https://understat.com/player/5553",
+    "understat_team": "Arsenal",
+    "games": "38",
+    "minutes": "3256",
+    "goals": "7",
+    "xG": 3.19,
+    "assists": "8",
+    "xA": 5.9,
+    "npxG": 3.19,
+    "shots": "58",
+    "key_passes": "47"
+  },
+  "quality": {
+    "score": 4,
+    "position_group": "defense",
+    "components": {
+      "defensive_actions_per90": 79.02097902097903
+    },
+    "avg_percentile": 79.0,
+    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  }
+}

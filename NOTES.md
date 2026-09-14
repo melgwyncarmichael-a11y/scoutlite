@@ -1,5 +1,29 @@
 # ScoutLite — Build Notes
 
+## Track A scaffolded: position-group survey + Quality face-validity spot check (2026-09-14)
+
+Built, under `eval/`: `track_a_capture.py` (bio + stats + Quality signal only -- no LLM, no
+NewsAPI, so much cheaper than Track B's), `build_position_survey.py` (A1, completes `TESTS.md`
+B5) and `build_quality_spotcheck.py` (A2, completes B3's "Ronaldo test"), plus
+`score_track_a.py` with two pure aggregation functions covered by
+`tests/test_score_track_a.py` (101 tests total across the whole suite now).
+
+Sample: 11 of the 15 captures are reused directly from Track B's already-captured data (zero
+extra FBref calls -- same bio/stats/quality fields Track B already saved). The other 4 were
+added specifically to close a real gap: every single `FW-MF`/`DF-MF` player already in the
+sample classifies as attack/defense (first-listed code wins), so there was no genuine
+`midfield` case at all. Added Rodri, Martin Ødegaard, and Bruno Fernandes -- all confirmed
+misclassified the same way (De Bruyne's known pattern, not a one-off) -- and Casemiro, the
+first clean `MF`-primary case in the whole sample. Notably, Rodri -- a Ballon d'Or-level
+defensive midfielder -- gets filed under **Defense**, not Midfield, since FBref lists him
+`DF-MF (CM-DM)` with DF first. Worth stating plainly once A1 is actually labeled: the pattern
+looks less like "occasional versatile-player edge case" and more like "any midfielder with
+real attacking or defensive involvement doesn't stay classified as one."
+
+Both CSVs (`track_a_position_survey.csv`, `track_a_quality_spotcheck.csv`) are built and ready
+-- labeling (`expected_group`/`defensible` for A1, `reputation_tier`/`surprising` for A2) is
+still open, same as Track B's CSV.
+
 ## Philosophy-set captures close out the Track B sample (2026-09-14)
 
 The 11 batch captures all skipped the Fit-score path entirely -- no club philosophy was ever

@@ -1,0 +1,66 @@
+{
+  "player": "Rodri",
+  "fbref_url": "https://fbref.com/en/players/6434f10d/Rodri",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "Rodrigo Hern\u00e1ndez Cascante",
+    "position": "DF-MF (CM-DM)",
+    "footed": "Right",
+    "height_weight": "190cm, 84kg",
+    "birth_date": "1996-06-22",
+    "birthplace": "Madrid, Spain",
+    "national_team": "Spain",
+    "club": "Barcelona",
+    "contract_expires": "June 2030"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "27",
+    "squad": "Manchester City",
+    "competition": "1. Premier League",
+    "matches_played": "34",
+    "starts": "34",
+    "minutes": "2,931",
+    "goals": "8",
+    "assists": "9",
+    "goals_plus_assists": "17",
+    "non_penalty_goals": "8",
+    "yellow_cards": "8",
+    "red_cards": "1"
+  },
+  "misc": {
+    "fouls_committed": "41",
+    "fouls_drawn": "35",
+    "offsides": "6",
+    "crosses": "12",
+    "interceptions": "25",
+    "tackles_won": "43",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Rodri",
+    "understat_url": "https://understat.com/player/2496",
+    "understat_team": "Manchester City",
+    "games": "34",
+    "minutes": "2967",
+    "goals": "8",
+    "xG": 4.29,
+    "assists": "9",
+    "xA": 5.33,
+    "npxG": 4.29,
+    "shots": "62",
+    "key_passes": "50"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "defense",
+    "components": {
+      "defensive_actions_per90": 48.25174825174825
+    },
+    "avg_percentile": 48.3,
+    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  }
+}

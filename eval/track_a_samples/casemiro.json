@@ -1,0 +1,68 @@
+{
+  "player": "Casemiro",
+  "fbref_url": "https://fbref.com/en/players/4d224fe8/Casemiro",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "Carlos Henrique Casimiro",
+    "position": "MF (CM-DM)",
+    "footed": "Right",
+    "height_weight": "184cm, 83kg",
+    "birth_date": "1992-02-23",
+    "birthplace": "S\u00e3o Jos\u00e9 dos Campos, Brazil",
+    "national_team": "Brazil",
+    "club": "Inter Miami",
+    "contract_expires": "June 2027"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "31",
+    "squad": "Manchester Utd",
+    "competition": "1. Premier League",
+    "matches_played": "25",
+    "starts": "24",
+    "minutes": "1,982",
+    "goals": "1",
+    "assists": "2",
+    "goals_plus_assists": "3",
+    "non_penalty_goals": "1",
+    "yellow_cards": "7",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "30",
+    "fouls_drawn": "10",
+    "offsides": "6",
+    "crosses": "13",
+    "interceptions": "18",
+    "tackles_won": "54",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Casemiro",
+    "understat_url": "https://understat.com/player/2248",
+    "understat_team": "Manchester United",
+    "games": "25",
+    "minutes": "2006",
+    "goals": "1",
+    "xG": 3.12,
+    "assists": "2",
+    "xA": 1.39,
+    "npxG": 3.12,
+    "shots": "38",
+    "key_passes": "16"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "midfield",
+    "components": {
+      "key_passes_per90": 25.37313432835821,
+      "xA_per90": 20.895522388059703,
+      "defensive_actions_per90": 92.61363636363636
+    },
+    "avg_percentile": 46.3,
+    "explanation": "Evaluated as a midfielder: key passes and xA per 90 (creativity) plus interceptions + tackles won per 90 (defensive work), ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  }
+}

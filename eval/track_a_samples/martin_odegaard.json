@@ -1,0 +1,69 @@
+{
+  "player": "Martin Odegaard",
+  "fbref_url": "https://fbref.com/en/players/79300479/Martin-Odegaard",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "",
+    "position": "FW-MF (AM-CM)",
+    "footed": "Left",
+    "height_weight": "179cm, 68kg",
+    "birth_date": "1998-12-17",
+    "birthplace": "Drammen, Norway",
+    "national_team": "Norway",
+    "club": "Arsenal",
+    "contract_expires": "June 2028"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "24",
+    "squad": "Arsenal",
+    "competition": "1. Premier League",
+    "matches_played": "35",
+    "starts": "35",
+    "minutes": "3,091",
+    "goals": "8",
+    "assists": "10",
+    "goals_plus_assists": "18",
+    "non_penalty_goals": "6",
+    "yellow_cards": "2",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "30",
+    "fouls_drawn": "36",
+    "offsides": "3",
+    "crosses": "77",
+    "interceptions": "14",
+    "tackles_won": "18",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Martin Odegaard",
+    "understat_url": "https://understat.com/player/2517",
+    "understat_team": "Arsenal",
+    "games": "35",
+    "minutes": "3117",
+    "goals": "8",
+    "xG": 7.67,
+    "assists": "10",
+    "xA": 11.58,
+    "npxG": 6.15,
+    "shots": "77",
+    "key_passes": "102"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 38.3177570093458,
+      "assists_per90": 81.30841121495327,
+      "xG_per90": 27.102803738317757,
+      "xA_per90": 89.7196261682243
+    },
+    "avg_percentile": 59.1,
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  }
+}

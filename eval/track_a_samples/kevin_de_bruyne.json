@@ -1,0 +1,69 @@
+{
+  "player": "Kevin De Bruyne",
+  "fbref_url": "https://fbref.com/en/players/e46012d4/Kevin-De-Bruyne",
+  "season": "2026-2027",
+  "bio": {
+    "full_name": "",
+    "position": "FW-MF (AM-CM-WM)",
+    "footed": "Right",
+    "height_weight": "181cm, 68kg",
+    "birth_date": "1991-06-28",
+    "birthplace": "Gent, Belgium",
+    "national_team": "Belgium",
+    "club": "Napoli",
+    "contract_expires": "June 2027"
+  },
+  "stats": {
+    "season": "2026-2027",
+    "age": "35",
+    "squad": "Napoli",
+    "competition": "1. Serie A",
+    "matches_played": "3",
+    "starts": "0",
+    "minutes": "88",
+    "goals": "1",
+    "assists": "1",
+    "goals_plus_assists": "2",
+    "non_penalty_goals": "1",
+    "yellow_cards": "0",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "1",
+    "fouls_drawn": "1",
+    "offsides": "0",
+    "crosses": "5",
+    "interceptions": "1",
+    "tackles_won": "2",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Kevin De Bruyne",
+    "understat_url": "https://understat.com/player/447",
+    "understat_team": "Napoli",
+    "games": "3",
+    "minutes": "77",
+    "goals": "1",
+    "xG": 0.47,
+    "assists": "1",
+    "xA": 0.61,
+    "npxG": 0.47,
+    "shots": "2",
+    "key_passes": "7"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 50.0,
+      "assists_per90": 50.0,
+      "xG_per90": 50.0,
+      "xA_per90": 50.0
+    },
+    "avg_percentile": 50.0,
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against Serie A players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  }
+}

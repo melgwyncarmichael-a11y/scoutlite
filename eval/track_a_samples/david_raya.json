@@ -1,0 +1,82 @@
+{
+  "player": "David Raya",
+  "fbref_url": "https://fbref.com/en/players/98ea5115/David-Raya",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "David Raya Mart\u00edn",
+    "position": "GK",
+    "footed": "Right",
+    "height_weight": "186cm, 79kg",
+    "birth_date": "1995-09-15",
+    "birthplace": "Barcelona, Spain",
+    "national_team": "Spain",
+    "club": "Arsenal",
+    "contract_expires": "June 2028"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "27",
+    "squad": "Arsenal",
+    "competition": "1. Premier League",
+    "matches_played": "32",
+    "starts": "32",
+    "minutes": "2,880",
+    "goals": "0",
+    "assists": "0",
+    "goals_plus_assists": "0",
+    "non_penalty_goals": "0",
+    "yellow_cards": "2",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "0",
+    "fouls_drawn": "4",
+    "offsides": "0",
+    "crosses": "0",
+    "interceptions": "0",
+    "tackles_won": "1",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": {
+    "gk_matches_played": "32",
+    "gk_starts": "32",
+    "gk_minutes": "2,880",
+    "goals_against": "24",
+    "shots_on_target_against": "69",
+    "saves": "45",
+    "save_pct": "65.2",
+    "wins": "23",
+    "draws": "4",
+    "losses": "5",
+    "clean_sheets": "14",
+    "clean_sheet_pct": "43.8",
+    "penalties_faced": "3",
+    "penalties_allowed": "2",
+    "penalties_saved": "1"
+  },
+  "xg": {
+    "understat_matched_name": "David Raya",
+    "understat_url": "https://understat.com/player/9676",
+    "understat_team": "Arsenal",
+    "games": "32",
+    "minutes": "2880",
+    "goals": "0",
+    "xG": 0.0,
+    "assists": "0",
+    "xA": 0.0,
+    "npxG": 0.0,
+    "shots": "0",
+    "key_passes": "0"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "goalkeeper",
+    "components": {
+      "save_pct": 40.625
+    },
+    "avg_percentile": 40.6,
+    "explanation": "Evaluated as a goalkeeper: save percentage, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  }
+}

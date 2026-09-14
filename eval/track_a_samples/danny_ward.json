@@ -1,0 +1,45 @@
+{
+  "player": "Danny Ward",
+  "fbref_url": "https://fbref.com/en/players/cfb29823/Danny-Ward",
+  "season": "2024-2025",
+  "bio": {
+    "full_name": "Daniel Carl Ward",
+    "position": "FW-MF (AM-WM)",
+    "footed": "Right",
+    "height_weight": "180cm, 69kg",
+    "birth_date": "",
+    "birthplace": "",
+    "national_team": "",
+    "club": "",
+    "contract_expires": ""
+  },
+  "stats": {
+    "season": "2024-2025",
+    "age": "32",
+    "squad": "Huddersfield",
+    "competition": "3. League One",
+    "matches_played": "13",
+    "starts": "9",
+    "minutes": "615",
+    "goals": "0",
+    "assists": "1",
+    "goals_plus_assists": "1",
+    "non_penalty_goals": "0",
+    "yellow_cards": "0",
+    "red_cards": "1"
+  },
+  "misc": {
+    "fouls_committed": "3",
+    "fouls_drawn": "5",
+    "offsides": "2",
+    "crosses": "11",
+    "interceptions": "2",
+    "tackles_won": "4",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": null,
+  "quality": null
+}

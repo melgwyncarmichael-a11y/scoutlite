@@ -99,19 +99,67 @@ recovering to 90%) and re-captured them. 3 new regression tests added to
 `track_b_samples/` held these 11 at the time; the 3 philosophy-set captures described above
 were added straight after, bringing the sample to the 14/70 sentences it stands at now.
 
-## Track A — Quality signal validity (next up)
+## Track A — Quality signal validity (scaffolded, sample captured, not yet labeled)
 
-Designed, not yet scaffolded. Two checks:
+Two checks, both against a shared sample in `track_a_samples/` — no LLM, no NewsAPI, just bio
++ stats + the Quality signal, which makes captures here much cheaper than Track B's.
 
-- **A1. Position-group accuracy survey** (completes `TESTS.md`'s B5): run bio parsing across
-  ~15-20 players spanning a clean case per position group plus known versatile-player
-  misclassifications (De Bruyne → Attack, Rice → Defense already documented) — build a
-  complete table of `classify_position_group` outcomes, not just the 2 existing data points.
-- **A2. Face-validity spot check** (completes B3, the "Ronaldo test"): pick ~10 players by
-  reputation *before* looking at their Quality score, compare against a quick manual
-  reputation/market-value-tier lookup. Checking for gross face-validity failures (a squad
-  player scoring 5/5), not precision — Wan-Bissaka's honest 5/5 (`TESTS.md` Finding 1) is the
-  template for how a "surprising" score gets investigated and either explained or flagged.
+**Workflow:**
+
+1. **Capture** (only needed for a genuinely new player — see "Sample" below):
+   ```bash
+   .venv/bin/python eval/track_a_capture.py "Casemiro" --player-url <fbref-url> --season 2023-2024
+   ```
+   `--player-url` is usually necessary here in a way it often isn't for Track B — a short,
+   common first name like "Rodri" or "Bruno Fernandes" matches dozens of FBref players, so
+   search for the exact URL first (`search_player()` from a `python -c` one-liner, or just try
+   the plain name and read the candidate list `track_a_capture.py` prints on ambiguity).
+
+2. **Build both sheets** from whatever's in `track_a_samples/`:
+   ```bash
+   .venv/bin/python eval/build_position_survey.py       # -> track_a_position_survey.csv
+   .venv/bin/python eval/build_quality_spotcheck.py     # -> track_a_quality_spotcheck.csv
+   ```
+
+3. **Label by hand:**
+   - **A1 (position survey)** — completes `TESTS.md`'s B5. For each player, fill in
+     `expected_group` (your own call, looking at how they're actually used) and `defensible`
+     (y/n — a mismatch against your first guess can still be a defensible read, e.g. a
+     genuine fullback correctly landing in Defense even though you'd call them "fairly
+     attacking"; that's not the same failure mode as Rodri landing in Defense because FBref
+     happens to list "DF-MF" with DF first).
+   - **A2 (quality spotcheck)** — completes B3, the "Ronaldo test". Pick each player's
+     `reputation_tier` (elite / starter / squad / fringe) **before** looking at
+     `quality_score`, then mark `surprising` (y/n) and explain in `notes`. Wan-Bissaka's
+     honest 5/5 (`TESTS.md` Finding 1 — genuinely elite by the narrow interceptions+tackles
+     metric, not a bug) is the template for how a surprising score gets investigated and
+     either explained or flagged, not assumed wrong.
+
+4. **Summarize:**
+   ```bash
+   .venv/bin/python eval/score_track_a.py
+   ```
+   Reports the position survey's exact-match rate against your `expected_group` (a stricter,
+   less interesting number) alongside the `defensible` rate (the one that actually matters),
+   plus the quality spotcheck's count of `surprising` flags with which players they are.
+
+**Sample — 15 players captured, 13 with a Quality score:** 11 reused directly from Track B's
+already-captured data (zero extra FBref calls) plus 4 new captures chosen specifically to fill
+a gap the 11 didn't cover — every single `FW-MF`/`DF-MF` player in the batch classifies as
+attack/defense respectively (first-listed code wins), so there was no genuine `midfield` case
+at all until these were added:
+
+| Player | Raw FBref position | Assigned group |
+|---|---|---|
+| Casemiro | `MF (CM-DM)` | midfield — the one clean case |
+| Rodri | `DF-MF (CM-DM)` | defense — a Ballon d'Or-level defensive midfielder, misclassified |
+| Martin Ødegaard | `FW-MF (AM-CM)` | attack — same pattern as De Bruyne |
+| Bruno Fernandes | `FW-MF (AM-CM-DM)` | attack — same pattern again |
+
+That's not a coincidence worth glossing over: **every midfielder with any attacking or
+defensive involvement this season gets pulled out of "midfield" entirely**, and only a fairly
+narrow defensive-minded pivot (Casemiro-shaped) stays classified as one. Worth stating plainly
+once A1 is labeled, rather than leaving it as 4 anecdotes.
 
 ## Track C — Fit-signal consistency (parked)
 

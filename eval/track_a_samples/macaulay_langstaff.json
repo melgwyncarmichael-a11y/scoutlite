@@ -1,0 +1,45 @@
+{
+  "player": "Macaulay Langstaff",
+  "fbref_url": "https://fbref.com/en/players/ca9b48af/Macaulay-Langstaff",
+  "season": "2026-2027",
+  "bio": {
+    "full_name": "Macaulay Kevin Langstaff",
+    "position": "FW",
+    "footed": "",
+    "height_weight": "",
+    "birth_date": "1997-02-03",
+    "birthplace": "Stockton-on-Tees, England, United Kingdom",
+    "national_team": "",
+    "club": "Salford City FC",
+    "contract_expires": ""
+  },
+  "stats": {
+    "season": "2026-2027",
+    "age": "29",
+    "squad": "Salford City FC",
+    "competition": "4. League Two",
+    "matches_played": "5",
+    "starts": "5",
+    "minutes": "430",
+    "goals": "0",
+    "assists": "0",
+    "goals_plus_assists": "0",
+    "non_penalty_goals": "0",
+    "yellow_cards": "1",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "4",
+    "fouls_drawn": "0",
+    "offsides": "5",
+    "crosses": "5",
+    "interceptions": "1",
+    "tackles_won": "0",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": null,
+  "quality": null
+}

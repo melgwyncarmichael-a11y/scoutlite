@@ -1,0 +1,69 @@
+{
+  "player": "Bruno Fernandes",
+  "fbref_url": "https://fbref.com/en/players/507c7bdf/Bruno-Fernandes",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "Bruno Miguel Borges Fernandes",
+    "position": "FW-MF (AM-CM-DM)",
+    "footed": "Right",
+    "height_weight": "173cm, 66kg",
+    "birth_date": "1994-09-08",
+    "birthplace": "Maia, Portugal",
+    "national_team": "Portugal",
+    "club": "Manchester United",
+    "contract_expires": "June 2027"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "28",
+    "squad": "Manchester Utd",
+    "competition": "1. Premier League",
+    "matches_played": "35",
+    "starts": "35",
+    "minutes": "3,118",
+    "goals": "10",
+    "assists": "8",
+    "goals_plus_assists": "18",
+    "non_penalty_goals": "6",
+    "yellow_cards": "9",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "41",
+    "fouls_drawn": "27",
+    "offsides": "13",
+    "crosses": "225",
+    "interceptions": "25",
+    "tackles_won": "37",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Bruno Fernandes",
+    "understat_url": "https://understat.com/player/1228",
+    "understat_team": "Manchester United",
+    "games": "35",
+    "minutes": "3121",
+    "goals": "10",
+    "xG": 10.75,
+    "assists": "8",
+    "xA": 13.16,
+    "npxG": 6.94,
+    "shots": "95",
+    "key_passes": "113"
+  },
+  "quality": {
+    "score": 4,
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 50.467289719626166,
+      "assists_per90": 69.1588785046729,
+      "xG_per90": 42.99065420560748,
+      "xA_per90": 94.39252336448598
+    },
+    "avg_percentile": 64.3,
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  }
+}

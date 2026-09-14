@@ -1,0 +1,66 @@
+{
+  "player": "Virgil van Dijk",
+  "fbref_url": "https://fbref.com/en/players/e06683ca/Virgil-van-Dijk",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "",
+    "position": "DF (CB)",
+    "footed": "Right",
+    "height_weight": "193cm, 92kg",
+    "birth_date": "1991-07-08",
+    "birthplace": "Breda, Netherlands",
+    "national_team": "Netherlands",
+    "club": "Liverpool",
+    "contract_expires": "June 2027"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "32",
+    "squad": "Liverpool",
+    "competition": "1. Premier League",
+    "matches_played": "36",
+    "starts": "36",
+    "minutes": "3,177",
+    "goals": "2",
+    "assists": "2",
+    "goals_plus_assists": "4",
+    "non_penalty_goals": "2",
+    "yellow_cards": "3",
+    "red_cards": "1"
+  },
+  "misc": {
+    "fouls_committed": "23",
+    "fouls_drawn": "13",
+    "offsides": "1",
+    "crosses": "0",
+    "interceptions": "35",
+    "tackles_won": "23",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Virgil van Dijk",
+    "understat_url": "https://understat.com/player/833",
+    "understat_team": "Liverpool",
+    "games": "36",
+    "minutes": "3177",
+    "goals": "2",
+    "xG": 3.3,
+    "assists": "2",
+    "xA": 1.86,
+    "npxG": 3.3,
+    "shots": "45",
+    "key_passes": "11"
+  },
+  "quality": {
+    "score": 2,
+    "position_group": "defense",
+    "components": {
+      "defensive_actions_per90": 21.678321678321677
+    },
+    "avg_percentile": 21.7,
+    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  }
+}

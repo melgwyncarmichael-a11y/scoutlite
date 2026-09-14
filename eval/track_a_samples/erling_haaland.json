@@ -1,0 +1,69 @@
+{
+  "player": "Erling Haaland",
+  "fbref_url": "https://fbref.com/en/players/1f44ac21/Erling-Haaland",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "Erling Braut Haaland",
+    "position": "FW-MF",
+    "footed": "Left",
+    "height_weight": "191cm, 92kg",
+    "birth_date": "2000-07-21",
+    "birthplace": "Leeds, England, United Kingdom",
+    "national_team": "Norway",
+    "club": "Manchester City",
+    "contract_expires": "June 2034"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "23",
+    "squad": "Manchester City",
+    "competition": "1. Premier League",
+    "matches_played": "31",
+    "starts": "29",
+    "minutes": "2,552",
+    "goals": "27",
+    "assists": "5",
+    "goals_plus_assists": "32",
+    "non_penalty_goals": "20",
+    "yellow_cards": "1",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "18",
+    "fouls_drawn": "30",
+    "offsides": "6",
+    "crosses": "5",
+    "interceptions": "2",
+    "tackles_won": "3",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Erling Haaland",
+    "understat_url": "https://understat.com/player/8260",
+    "understat_team": "Manchester City",
+    "games": "31",
+    "minutes": "2581",
+    "goals": "27",
+    "xG": 31.65,
+    "assists": "5",
+    "xA": 4.75,
+    "npxG": 25.56,
+    "shots": "122",
+    "key_passes": "29"
+  },
+  "quality": {
+    "score": 4,
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 100.0,
+      "assists_per90": 56.074766355140184,
+      "xG_per90": 99.06542056074767,
+      "xA_per90": 53.271028037383175
+    },
+    "avg_percentile": 77.1,
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  }
+}

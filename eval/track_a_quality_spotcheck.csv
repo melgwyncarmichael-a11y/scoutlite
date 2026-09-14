@@ -1,0 +1,16 @@
+player,position_group,quality_score,avg_percentile,components,reputation_tier,surprising,notes
+Aaron Wan-Bissaka,defense,5,93.7,defensive actions per90=94%ile,,,
+Bruno Fernandes,attack,4,64.3,"goals per90=50%ile, assists per90=69%ile, xG per90=43%ile, xA per90=94%ile",,,
+Casemiro,midfield,3,46.3,"key passes per90=25%ile, xA per90=21%ile, defensive actions per90=93%ile",,,
+Danny Ward,(not available),,,,,,Quality signal not available for this player's league/position
+David Raya,goalkeeper,3,40.6,save pct=41%ile,,,
+Declan Rice,defense,4,79.0,defensive actions per90=79%ile,,,
+Erling Haaland,attack,4,77.1,"goals per90=100%ile, assists per90=56%ile, xG per90=99%ile, xA per90=53%ile",,,
+Kevin De Bruyne,attack,3,50.0,"goals per90=50%ile, assists per90=50%ile, xG per90=50%ile, xA per90=50%ile",,,
+Kylian Mbappé,attack,3,50.0,"goals per90=50%ile, assists per90=50%ile, xG per90=50%ile, xA per90=50%ile",,,
+Macaulay Langstaff,(not available),,,,,,Quality signal not available for this player's league/position
+Martin Odegaard,attack,3,59.1,"goals per90=38%ile, assists per90=81%ile, xG per90=27%ile, xA per90=90%ile",,,
+Rodri,defense,3,48.3,defensive actions per90=48%ile,,,
+Trent Alexander-Arnold,defense,3,50.0,defensive actions per90=50%ile,,,
+Vinicius Junior,attack,3,50.0,"goals per90=50%ile, assists per90=50%ile, xG per90=50%ile, xA per90=50%ile",,,
+Virgil van Dijk,defense,2,21.7,defensive actions per90=22%ile,,,

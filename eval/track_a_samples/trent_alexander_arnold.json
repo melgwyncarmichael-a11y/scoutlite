@@ -1,0 +1,66 @@
+{
+  "player": "Trent Alexander-Arnold",
+  "fbref_url": "https://fbref.com/en/players/cd1acf9d/Trent-Alexander-Arnold",
+  "season": "2026-2027",
+  "bio": {
+    "full_name": "Trent John Alexander-Arnold",
+    "position": "DF-MF (FB, right)",
+    "footed": "Right",
+    "height_weight": "175cm, 68kg",
+    "birth_date": "1998-10-07",
+    "birthplace": "Liverpool, England, United Kingdom",
+    "national_team": "England",
+    "club": "Real Madrid",
+    "contract_expires": "June 2031"
+  },
+  "stats": {
+    "season": "2026-2027",
+    "age": "27",
+    "squad": "Real Madrid",
+    "competition": "1. La Liga",
+    "matches_played": "3",
+    "starts": "1",
+    "minutes": "128",
+    "goals": "0",
+    "assists": "1",
+    "goals_plus_assists": "1",
+    "non_penalty_goals": "0",
+    "yellow_cards": "0",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "0",
+    "fouls_drawn": "1",
+    "offsides": "0",
+    "crosses": "18",
+    "interceptions": "4",
+    "tackles_won": "1",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Trent Alexander-Arnold",
+    "understat_url": "https://understat.com/player/1791",
+    "understat_team": "Real Madrid",
+    "games": "3",
+    "minutes": "117",
+    "goals": "0",
+    "xG": 0.12,
+    "assists": "1",
+    "xA": 0.59,
+    "npxG": 0.12,
+    "shots": "2",
+    "key_passes": "4"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "defense",
+    "components": {
+      "defensive_actions_per90": 50.0
+    },
+    "avg_percentile": 50.0,
+    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against La Liga players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  }
+}

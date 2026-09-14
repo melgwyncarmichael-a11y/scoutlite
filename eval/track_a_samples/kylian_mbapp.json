@@ -1,0 +1,69 @@
+{
+  "player": "Kylian Mbapp\u00e9",
+  "fbref_url": "https://fbref.com/en/players/42fd9c7f/Kylian-Mbappe",
+  "season": "2026-2027",
+  "bio": {
+    "full_name": "Kylian Mbapp\u00e9 Lottin",
+    "position": "FW-MF",
+    "footed": "Right",
+    "height_weight": "178cm, 74kg",
+    "birth_date": "1998-12-20",
+    "birthplace": "Paris 19 Buttes-Chaumont, France",
+    "national_team": "France",
+    "club": "Real Madrid",
+    "contract_expires": "June 2029"
+  },
+  "stats": {
+    "season": "2026-2027",
+    "age": "27",
+    "squad": "Real Madrid",
+    "competition": "1. La Liga",
+    "matches_played": "4",
+    "starts": "4",
+    "minutes": "360",
+    "goals": "4",
+    "assists": "0",
+    "goals_plus_assists": "4",
+    "non_penalty_goals": "4",
+    "yellow_cards": "0",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "3",
+    "fouls_drawn": "3",
+    "offsides": "2",
+    "crosses": "3",
+    "interceptions": "1",
+    "tackles_won": "0",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Kylian Mbappe-Lottin",
+    "understat_url": "https://understat.com/player/3423",
+    "understat_team": "Real Madrid",
+    "games": "4",
+    "minutes": "360",
+    "goals": "4",
+    "xG": 6.71,
+    "assists": "0",
+    "xA": 0.33,
+    "npxG": 5.97,
+    "shots": "31",
+    "key_passes": "4"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 50.0,
+      "assists_per90": 50.0,
+      "xG_per90": 50.0,
+      "xA_per90": 50.0
+    },
+    "avg_percentile": 50.0,
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against La Liga players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  }
+}

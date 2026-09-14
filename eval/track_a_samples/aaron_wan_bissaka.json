@@ -1,0 +1,66 @@
+{
+  "player": "Aaron Wan-Bissaka",
+  "fbref_url": "https://fbref.com/en/players/9e525177/Aaron-Wan-Bissaka",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "",
+    "position": "DF-MF (FB, right)",
+    "footed": "Right",
+    "height_weight": "182cm, 72kg",
+    "birth_date": "1997-11-26",
+    "birthplace": "Croydon, England, United Kingdom",
+    "national_team": "Congo DR",
+    "club": "Aston Villa",
+    "contract_expires": "June 2027"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "25",
+    "squad": "Manchester Utd",
+    "competition": "1. Premier League",
+    "matches_played": "22",
+    "starts": "20",
+    "minutes": "1,780",
+    "goals": "0",
+    "assists": "2",
+    "goals_plus_assists": "2",
+    "non_penalty_goals": "0",
+    "yellow_cards": "4",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "17",
+    "fouls_drawn": "9",
+    "offsides": "0",
+    "crosses": "12",
+    "interceptions": "39",
+    "tackles_won": "25",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Aaron Wan-Bissaka",
+    "understat_url": "https://understat.com/player/5584",
+    "understat_team": "Manchester United",
+    "games": "22",
+    "minutes": "1784",
+    "goals": "0",
+    "xG": 0.15,
+    "assists": "2",
+    "xA": 1.43,
+    "npxG": 0.15,
+    "shots": "3",
+    "key_passes": "12"
+  },
+  "quality": {
+    "score": 5,
+    "position_group": "defense",
+    "components": {
+      "defensive_actions_per90": 93.7062937062937
+    },
+    "avg_percentile": 93.7,
+    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  }
+}
