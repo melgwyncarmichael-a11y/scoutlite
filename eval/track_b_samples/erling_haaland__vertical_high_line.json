@@ -1,0 +1,273 @@
+{
+  "player": "Erling Haaland",
+  "fbref_url": "https://fbref.com/en/players/1f44ac21/Erling-Haaland",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "Erling Braut Haaland",
+    "position": "FW-MF",
+    "footed": "Left",
+    "height_weight": "191cm, 92kg",
+    "birth_date": "2000-07-21",
+    "birthplace": "Leeds, England, United Kingdom",
+    "national_team": "Norway",
+    "club": "Manchester City",
+    "contract_expires": "June 2034"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "23",
+    "squad": "Manchester City",
+    "competition": "1. Premier League",
+    "matches_played": "31",
+    "starts": "29",
+    "minutes": "2,552",
+    "goals": "27",
+    "assists": "5",
+    "goals_plus_assists": "32",
+    "non_penalty_goals": "20",
+    "yellow_cards": "1",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "18",
+    "fouls_drawn": "30",
+    "offsides": "6",
+    "crosses": "5",
+    "interceptions": "2",
+    "tackles_won": "3",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Erling Haaland",
+    "understat_url": "https://understat.com/player/8260",
+    "understat_team": "Manchester City",
+    "games": "31",
+    "minutes": "2581",
+    "goals": "27",
+    "xG": 31.65,
+    "assists": "5",
+    "xA": 4.75,
+    "npxG": 25.56,
+    "shots": "122",
+    "key_passes": "29"
+  },
+  "quality": {
+    "score": 4,
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 100.0,
+      "assists_per90": 56.074766355140184,
+      "xG_per90": 99.06542056074767,
+      "xA_per90": 53.271028037383175
+    },
+    "avg_percentile": 77.1,
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": "rte",
+        "name": "RTE"
+      },
+      "author": "RT\u00c9 Sport",
+      "title": "City new boy Anderson knows it pays to keep Haaland happy",
+      "description": "Elliot Anderson has quickly learned what his first job at Manchester City is \u2013 to give the ball to Erling Haaland.",
+      "url": "https://www.rte.ie/sport/soccer/2026/0912/1591325-city-new-boy-anderson-knows-it-pays-to-keep-haaland-happy/",
+      "urlToImage": "https://www.rte.ie/images/0024fff1-1600.jpg",
+      "publishedAt": "2026-09-12T21:34:59Z",
+      "content": "Elliot Anderson has quickly learned what his first job at Manchester City is to give the ball to Erling Haaland.\r\nThe England midfielder has slotted straight into the City side since his \u00a3116m summer\u2026 [+2109 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Sporting News"
+      },
+      "author": "Dom Farrell",
+      "title": "Enzo Maresca banking on Elliot Anderson and Enzo Fernandez villainy for Man City's Old Trafford 'war game'",
+      "description": "Elliot Anderson and Enzo Fernandez will be expected to live up to their price tags when Manchester City make the short trip to Manchester United.",
+      "url": "https://www.sportingnews.com/us/soccer/news/man-united-man-city-maresca-anderson-fernandez-old-trafford-war-game/07ace6aadaa23f694a540eaf",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/af413decd4b267670750345d7d1fd857b94ee3442f5204f678c80223413d25b6/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_sporting_news_articles_584%2Fccfb892777e3789bbd8b1b706dc7d384",
+      "publishedAt": "2026-09-12T21:30:01Z",
+      "content": "Enzo Maresca banking on Elliot Anderson and Enzo Fernandez villainy for Man City's Old Trafford 'war game' originally appeared on The Sporting News. Add The Sporting News as a Preferred Source by cli\u2026 [+6708 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Crypto Briefing"
+      },
+      "author": "Estefano Gomez",
+      "title": "Mbapp\u00e9\u2019s La Liga stats spark debate amid Ballon d\u2019Or 2026 race",
+      "description": "The debate over Mbapp's La Liga stats underscores the critical role of accurate data in shaping perceptions and influencing award races.\nThe post Mbapp\u00e9\u2019s La Liga stats spark debate amid Ballon d\u2019Or 2026 race appeared first on Crypto Briefing.",
+      "url": "https://cryptobriefing.com/mbapps-la-liga-stats-spark-debate-amid-ballon-dor-2026-race/",
+      "urlToImage": "https://static.cryptobriefing.com/wp-content/uploads/2026/09/12153831/library-mbapp-s-la-liga-stats-spark-debate-amid-ballon-d-or-2026-1-800x450.png",
+      "publishedAt": "2026-09-12T19:38:33Z",
+      "content": "Kylian Mbapp\u00e9\u2019s performance in the early stages of the La Liga season has drawn attention, with reports suggesting he has scored five goals and provided one assist in five matches. This claim, source\u2026 [+1234 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "CBS Sports"
+      },
+      "author": "Chuck Booth",
+      "title": "Manchester Derby: Manchester City face Manchester United without Pep Guardiola for the first time in a decade",
+      "description": "Michael Carrick and the Red Devils face their biggest test yet as Enzo Maresca takes charge in the first Manchester Derby without Pep Guardiola in a decade.",
+      "url": "https://www.cbssports.com/soccer/news/manchester-derby-manchester-city-face-manchester-united-without-pep-guardiola-for-the-first-time-in-a-decade/",
+      "urlToImage": "https://sportshub.cbsistatic.com/i/r/2026/09/12/014e7aff-3a20-4327-a744-b206ca9faea3/thumbnail/1200x675/7f5e418691d0d29a2d060b99c4f13c12/untitled-design-2026-09-12t221047-442.png",
+      "publishedAt": "2026-09-12T19:22:08Z",
+      "content": "For the first time in 10 years, there will be a Manchester Derby without Pep Guardiola on the sidelines. Much has changed during that decade, but City's dominance has been clear. Under Michael Carric\u2026 [+3252 chars]"
+    },
+    {
+      "source": {
+        "id": "the-times-of-india",
+        "name": "The Times of India"
+      },
+      "author": "AP",
+      "title": "A new era for the Manchester derby after Pep Guardiola''s departure",
+      "description": "Manchester City maintains a perfect record under new manager Enzo Maresca.  The team has opened a significant league advantage over Manchester United.  United faces inconsistency issues after a promising resurgence last season.  Michael Carrick's side seeks t\u2026",
+      "url": "https://economictimes.indiatimes.com/news/sports/football/a-new-era-for-the-manchester-derby-after-pep-guardiolas-departure/articleshow/134147980.cms",
+      "urlToImage": "https://img.etimg.com/thumb/msid-134148176,width-1200,height-630,imgsize-162578,overlay-economictimes/articleshow.jpg",
+      "publishedAt": "2026-09-12T17:40:36Z",
+      "content": "Manchester: Pep Guardiola's departure was expected to shift the balance of power in Manchester.The early signs suggest otherwise.\r\nFor the first time in 10 years on Sunday, Manchester United goes int\u2026 [+3096 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The Peoples Person"
+      },
+      "author": "The Peoples Person",
+      "title": "\u201cI have to\u2026\u201d: Man United warrior opens up on his rivalry with City\u2019s Erling Haaland",
+      "description": "1 Up next for Manchester United is the all-important Manchester derby, with their noisy neighbours Manchester City set to come to Old Trafford.A win on Sunday could kickstart their Premier League camp...",
+      "url": "https://thepeoplesperson.com/2026/09/12/i-have-to-man-united-warrior-opens-up-on-his-rivalry-with-citys-erling-haaland-315744/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/e4795ba67069a03ecf56157f2aab6778196d1f594ae2815c145f5ed56b5623c1/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_peoples_person_articles_356%2F2077882ebb357e31a4ae93ff81482fef.jpg",
+      "publishedAt": "2026-09-12T17:05:00Z",
+      "content": "1\r\nUp next for Manchester United is the all-important Manchester derby, with their noisy neighbours Manchester City set to come to Old Trafford.\r\nA win on Sunday could kickstart their Premier League \u2026 [+2346 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Utdreport.co.uk"
+      },
+      "author": "Stretty News",
+      "title": "Man Utd predicted XI vs Man City: Rashford to start, three changes at the back",
+      "description": "Manchester United head coach Michael Carrick is expected to make a series of changes to his starting lineup when his team hosts Manchester City on Sunday.The Red Devils have only collected four points...",
+      "url": "https://utdreport.co.uk/2026/09/12/man-united-predicted-lineup-city-marcus-rashford/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/467f8c382a97e94a187a12115dd44d56fc68bf48a54f1da19719d63d8d87985b/lightyear_networkapi/resizefill_w1121_h675%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fstretty_news_articles_240%2Fe331d87d810b41d3aeba7ba964c24880.jpg",
+      "publishedAt": "2026-09-12T15:10:00Z",
+      "content": "Manchester United head coach Michael Carrick is expected to make a series of changes to his starting lineup when his team hosts Manchester City on Sunday.\r\nThe Red Devils have only collected four poi\u2026 [+2154 chars]"
+    },
+    {
+      "source": {
+        "id": "usa-today",
+        "name": "USA Today"
+      },
+      "author": "Seth Vertelney, USA TODAY",
+      "title": "Premier League top scorers: Golden Boot rankings for 2026-27 season",
+      "description": "The race for the Premier League's Golden Boot is on and once again, it appears to be Erling Haaland's prize to lose.",
+      "url": "https://www.usatoday.com/story/sports/soccer/epl/2026/09/12/premier-league-golden-boot-rankings-top-scorers-2026-27/91729638007/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/1db8f6a3a75430e29d7d628b30ca631f7daa2a4608604f8bbaf3318f8a202342/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fusa_today_sports_articles_558%2F714887e71f33d5d39f9692e235de1a45.jpg",
+      "publishedAt": "2026-09-12T13:41:23Z",
+      "content": "The race for the Premier League's Golden Boot is on and once again, it appears to be Erling Haaland's prize to lose.\r\nThe Manchester City star has won the prize in three of the past four seasons, inc\u2026 [+753 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "BBC News"
+      },
+      "author": "Paul Birch - BBC Sport journalist",
+      "title": "Man Utd v Man City: Key stats and talking points",
+      "description": "The 199th Manchester derby takes place with City travelling to Old Trafford looking for a win which would extend their lead over rivals United to eight points after just four games. BBC Sport takes a look at the key themes going into Sunday's fixture. For the\u2026",
+      "url": "https://www.bbc.com/sport/football/articles/ce8x4kd6056o?xtor=AL-72-%5Bpartner%5D-%5Byahoo.north.america%5D-%5Bheadline%5D-%5Bsport%5D-%5Bbizdev%5D-%5Bisapi%5D",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/17e9d0f406f62a6fde30bbd8f92b0b8d85a7f0fe6abd830a13fa2e9bbfeaf000/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fbbc_us_articles_995%2F08025ff50f98266f34b85c8068a80436.png",
+      "publishedAt": "2026-09-12T13:15:59Z",
+      "content": "The 199th Manchester derby takes place with City travelling to Old Trafford looking for a win which would extend their lead over rivals United to eight points after just four games. BBC Sport takes a\u2026 [+3215 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Bavarian Football Works"
+      },
+      "author": "CSmith1919",
+      "title": "Inside the first time Bayern Munich missed on signing Erling Haaland",
+      "description": "How many times did FC Bayern whiff on Erling Haaland? 1, 2, 3\u2026",
+      "url": "https://www.bavarianfootballworks.com/bayern-munich-transfer-rumors-news/255340/inside-the-first-time-bayern-munich-missed-on-signing-erling-haaland-molde-transfer-manchester-city-borussia-dortmund-gerland-red-bull-salzburg",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/4335c726a7849b320e3fbfa519455db29676973651b67dd9698562a104a2044f/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fsb_nation_articles_115%2F5c2bab046ed637add5e1a3be4098089c.jpg",
+      "publishedAt": "2026-09-12T13:00:00Z",
+      "content": "It is well known that Bayern Munich had the chance to sign superstar Erling Haaland before he made the move form Borussia Dortmund to Manchester City.\r\nHeck, some are even aware that Bayern Munich al\u2026 [+2948 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Onefootball.com"
+      },
+      "author": "OneFootball",
+      "title": " This week's kit news ",
+      "description": "Official announcements, leaks and great finds: OneFootball rounds up all the kit news of the week.Record for Liverpool (official)The Reds have signed a record deal with Turkish Airlines. A \u00a3300m agre...",
+      "url": "https://onefootball.com/en/news/this-weeks-kit-news-43446263",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/1ccb51484f5c7b26049669688dc0e8edafeeadf1aa943268ac6768dcbcff7892/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fonefootball_articles_802%2F5fc1ca8648ebaa576be4f1804fb6a750.jpg",
+      "publishedAt": "2026-09-12T12:29:00Z",
+      "content": "Official announcements, leaks and great finds: OneFootball rounds up all the kit news of the week.\r\nThe Reds have signed a record deal with Turkish Airlines. A \u00a3300m agreement has been reached betwee\u2026 [+695 chars]"
+    },
+    {
+      "source": {
+        "id": "al-jazeera-english",
+        "name": "Al Jazeera English"
+      },
+      "author": "Manasi Pathak",
+      "title": "Manchester United vs Man City: Premier League \u2013 predictions, teams, lineups",
+      "description": "Premier League leaders Manchester City gear up for their first derby under new boss Enzo Maresca against rivals United.",
+      "url": "https://www.aljazeera.com/sports/2026/9/12/man-united-vs-man-city-premier-league-predictions-schedule-team-news-lineups",
+      "urlToImage": "https://www.aljazeera.com/wp-content/uploads/2026/09/Untitled-design-1-1789114954_9c9ac0-1789119906.png?resize=1200%2C630&quality=80",
+      "publishedAt": "2026-09-12T12:12:29Z",
+      "content": "Who: Manchester United vs Manchester CityWhat:\u00a0English Premier LeagueWhere: Old Trafford, Manchester, United KingdomWhen: Sunday, September 13 at 4:30pm (15:30 GMT)How to follow: Well have all the bu\u2026 [+5399 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Talk Chelsea"
+      },
+      "author": "The Chelsea News",
+      "title": "Romano exclusive claims Chelsea are set to offer new contract to teenager linked with move away",
+      "description": "Chelsea are considering a new contract offer to Estevao, to ward off rumours of discontent over a lack of minutes.If you enjoy Talk Chelsea coverage and want to see more of it, add us as a preferred s...",
+      "url": "https://www.talkchelsea.net/news-now/romano-exclusive-chelsea-offer-new-contract/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/b9818261bc563b4e5f97ddf0a603ad7db8182fa50dd870b4b21fb81b4cefd74f/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_chelsea_news_articles_133%2F1011c403276a90b000dd33921a45c9b1.png",
+      "publishedAt": "2026-09-12T11:05:00Z",
+      "content": "Chelsea are considering a new contract offer to Estevao, to ward off rumours of discontent over a lack of minutes.\r\nIf you enjoy Talk Chelsea coverage and want to see more of it, add us as a preferre\u2026 [+1428 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "BBC News"
+      },
+      "author": "Simon Stone - Manchester United reporter",
+      "title": "Man Utd's Martinez ready for Haaland derby test",
+      "description": "Manchester United defender Lisandro Martinez is not taking his previous success against Erling Haaland as proof it will happen again at Old Trafford tomorrow. Despite the relative size difference, Argentina centre-back Martinez has a decent record against the\u2026",
+      "url": "https://www.bbc.com/sport/football/articles/cpwlv72l7yxo?xtor=AL-72-%5Bpartner%5D-%5Byahoo.north.america%5D-%5Bheadline%5D-%5Bsport%5D-%5Bbizdev%5D-%5Bisapi%5D",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/ae8152c6803250a3cd004ed7c729b354cf18b9e2e03e50911e83d89e128b8f3d/lightyear_networkapi/resizefill_w1024_h576%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fbbc_us_articles_995%2Ff2c9f390ed7702015b7bb76e31d49195.jpg",
+      "publishedAt": "2026-09-12T11:02:01Z",
+      "content": "Manchester United defender Lisandro Martinez is not taking his previous success against Erling Haaland as proof it will happen again at Old Trafford tomorrow.\r\nDespite the relative size difference, A\u2026 [+1529 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "vertical, fast transitions",
+    "out_of_possession": "high line, counter-press"
+  },
+  "news_synthesis": "Recent coverage over the last 28 days is dominated by Manchester derby buildup and the wider context of Pep Guardiola's departure, with Haaland appearing mainly as a referenced figure rather than the subject of substantive news. Headlines touch on his rivalry with a Manchester United player, a teammate's comments about keeping him happy, and a Premier League Golden Boot rankings piece. None of these items offer meaningful new information about his form, role, or situation beyond what the season stats already show.",
+  "fit_read": "The listed stats give a mixed and incomplete picture for a vertical, fast-transition, high-line, counter-press system. The defensive and pressing-related numbers are very low \u2014 2 interceptions, 3 tackles won, 18 fouls committed across 2,552 minutes \u2014 which on its own would suggest limited engagement in counter-pressing demands, though these raw counts are also consistent with a player whose role keeps him high and central rather than involved in defensive phases. The attacking profile is heavily shot-and-goal oriented: 122 shots, 31.65 xG, 25.56 npxG, 27 goals, but only 29 key passes and 5 crosses, indicating a finisher rather than a link or wide progression role. For a vertical, transition-heavy side, the goal and shot volume fit the \"finish the transition\" end of the pitch, but there is no pace, sprint, or distance-covered data listed here, so the speed-dependent aspect of transition fit cannot be assessed. Likewise, no progressive carries, pressures, or possession-adjusted defensive data are provided, so the counter-press and high-line compatibility can't be judged directly. With key attacking output clearly present but the pressing and transition-mobility dimensions unverifiable from these stats, the signal sits at neutral rather than a confident extreme.",
+  "fit_score": 3,
+  "judge": {
+    "source_accuracy": 100.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "This overstates the news characterization, since one headline is directly about Haaland's rivalry and another is about keeping him happy, making him more than a mere referenced figure. (in: \"Haaland appearing mainly as a referenced figure rather than the subject of substantive news\")",
+      "This is an overreach because the headlines do not contain enough detail to establish that none offer meaningful new information about his situation. (in: \"None of these items offer meaningful new information about his form, role, or situation beyond what the season stats already show.\")",
+      "Interceptions, tackles won, and fouls committed are not sufficient to infer counter-pressing engagement, so this conclusion overreaches from the available stats. (in: \"The defensive and pressing-related numbers are very low \u2014 2 interceptions, 3 tackles won, 18 fouls committed across 2,552 minutes \u2014 which on its own would suggest limited engagement in counter-pressing demands\")"
+    ],
+    "confidence_warning": false
+  }
+}

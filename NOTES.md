@@ -1,5 +1,28 @@
 # ScoutLite — Build Notes
 
+## Philosophy-set captures close out the Track B sample (2026-09-14)
+
+The 11 batch captures all skipped the Fit-score path entirely -- no club philosophy was ever
+set, so `Fit: X/5` and its reasoning had zero coverage. Added 3 more: Haaland (vertical, fast
+transitions / high line, counter-press), De Bruyne (slow, methodical possession / mid block,
+hybrid), Wan-Bissaka (slow, methodical possession / low block, counter) -- all reusing players
+already in the sample rather than adding new ones, to keep FBref/NewsAPI calls low.
+
+`track_b_capture.py`'s filename slug now appends the philosophy when one is set
+(`<slug>__<philosophy>.json`), so these land alongside the plain no-philosophy capture for the
+same player instead of overwriting it. That in turn meant `build_labeling_sheet.py` needed a
+fix too -- it was grouping/counting by player NAME, so the two captures of e.g. Haaland were
+indistinguishable in the CSV (and the printed "N briefs" count silently deduplicated them).
+Added `capture_id` (the actual filename stem) and `philosophy` as their own CSV columns.
+
+All 3 new captures scored 100% and landed `fit_score: 3` (neutral / insufficient signal) with
+visibly hedged language ("stats offer limited signal for assessing fit..."). Flagged in
+`eval/README.md` as specifically worth a labeler's judgment -- genuinely warranted caution
+given how sparse the inputs are, or a safe-default score of 3 the model reaches for regardless
+of input? Not something a regex can tell apart; exactly the kind of thing this eval exists for.
+
+Sample is now 14 captures / 70 sentences, ready to label.
+
 ## Two real judge bugs, found by running the Track B batch for real (2026-09-12, later still)
 
 Ran the Track B capture script (previous entry) across 10 of the 12-case batch's players

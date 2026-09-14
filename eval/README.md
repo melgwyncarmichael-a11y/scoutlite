@@ -54,18 +54,25 @@ itself."
    adjective inflation like "electric" or "generational talent"). This eval either confirms or
    kills that.
 
-**Sample:** the 11 successful players from the 12-case test batch (`TESTS.md`) are captured in
-`track_b_samples/` — reused rather than generating fresh players since the batch is already
+**Sample — done, 14 captures:** the 11 successful players from the 12-case test batch
+(`TESTS.md`), reused rather than generating fresh players since the batch is already
 deliberately diverse (elite/average/fringe, ambiguous name, uncovered league, thin-data
-season, compound surname), and it keeps NewsAPI/FBref calls to a minimum. None of them have a
-club philosophy set (same as the original batch), so the Fit-score/philosophy path is still
-untested — **add 2-3 new captures with `--in-possession` / `--out-of-possession` set** before
-calling the sample complete.
+season, compound surname), plus 3 philosophy-set variants of players already in that set
+(Haaland/vertical+high-line, De Bruyne/possession+mid-block, Wan-Bissaka/possession+low-block)
+to exercise the Fit-score path the plain batch never touches. A philosophy-set capture gets its
+own `<slug>__<philosophy>.json` file rather than overwriting the plain one, so both exist side
+by side for the same player — `capture_id` in the CSV (not `player`) is what actually
+distinguishes them.
 
-Every capture currently scores 90% on one pass, which is a real result, not a placeholder --
-see "Two real bugs" below. It also means the current sample has no diversity on the
-pass/confidence-warning axis; the philosophy captures above are one way to add some, since a
-missing philosophy is itself one of the judge's honesty-gate checks.
+The 11 plain captures all score 90% on one pass (the same minor "no philosophy given" wording
+nit on every one — a real result, not a placeholder, see "Two real bugs" below). The 3
+philosophy captures all score 100% and all landed `fit_score: 3` (neutral / insufficient
+signal) with visibly hedged reasoning ("stats offer limited signal for assessing fit...") --
+worth a labeler's attention specifically: is that hedging genuinely warranted by the sparse
+data, or is 3 becoming a safe default the model reaches for regardless of input? That's a
+judgment call no regex can make, which is exactly what Track B is for.
+
+70 sentences across 14 captures, ready to label.
 
 ### Two real bugs the first capture run found (2026-09-12)
 
@@ -89,8 +96,8 @@ silently affected (David Raya, Kevin De Bruyne, Trent Alexander-Arnold, Vinicius
 recovering to 90%) and re-captured them. 3 new regression tests added to
 `tests/test_judge_rules.py` (94 tests total). Full writeup in `NOTES.md`.
 
-`track_b_samples/` holds all 11 resulting captures — the point is to extend from here (the
-philosophy-set cases above), not to treat these as the finished sample.
+`track_b_samples/` held these 11 at the time; the 3 philosophy-set captures described above
+were added straight after, bringing the sample to the 14/70 sentences it stands at now.
 
 ## Track A — Quality signal validity (next up)
 

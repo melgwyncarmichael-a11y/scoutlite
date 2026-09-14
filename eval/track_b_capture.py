@@ -117,6 +117,12 @@ def capture(
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     slug = re.sub(r"[^a-z0-9]+", "_", player.lower()).strip("_")
+    if in_possession or out_of_possession:
+        # A philosophy-set capture is a genuinely different sample (it exercises the Fit-score
+        # path a no-philosophy capture doesn't) -- suffix the slug so it lands alongside the
+        # plain capture instead of silently overwriting it.
+        phil_slug = "_".join(p for p in (in_possession, out_of_possession) if p)
+        slug = f"{slug}__{phil_slug}"
     out_path = OUT_DIR / f"{slug}.json"
     out_path.write_text(json.dumps(record, indent=2, default=str))
     print(f"Judge: {synthesis['judge']['source_accuracy']}% after {synthesis['judge']['iterations']} pass(es)")
