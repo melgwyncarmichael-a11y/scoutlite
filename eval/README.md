@@ -161,10 +161,31 @@ defensive involvement this season gets pulled out of "midfield" entirely**, and 
 narrow defensive-minded pivot (Casemiro-shaped) stays classified as one. Worth stating plainly
 once A1 is labeled, rather than leaving it as 4 anecdotes.
 
-## Track C — Fit-signal consistency (parked)
+## Track C — Fit-signal consistency (scaffolded, one real result so far)
 
 B4 in `TESTS.md`: same inputs, 3-5 reruns, check whether the Fit score itself flips (not just
-prose wording drifting, which `temperature=0.3` makes expected). Parked until there's time —
-picking it back up just means running `track_b_capture.py` on the same player/philosophy
-several times and diffing `fit_score` + `fit_read` across the resulting JSON files; the
-capture script already returns everything needed.
+prose wording drifting, which `temperature=0.3` makes expected).
+
+**Workflow:**
+
+```bash
+.venv/bin/python eval/track_c_repeat.py "Erling Haaland" --season 2023-2024 \
+    --in-possession vertical --out-of-possession high_line --runs 5
+.venv/bin/python eval/score_track_c.py
+```
+
+`track_c_repeat.py` reuses `track_b_capture.capture()` directly (it now takes optional
+`out_dir`/`out_name`, backward-compatible, Track B's own behaviour is unchanged) rather than
+duplicating the pipeline — FBref/Understat data is fetched once and reused across runs (via the
+normal cache, `force_refresh=False` throughout), so only the LLM call actually varies run to
+run. Each run saves to `track_c_samples/<player>__<philosophy>__run<N>.json`; `score_track_c.py`
+groups runs by player+philosophy and reports whether `fit_score` stayed identical across them
+(pure aggregation, covered by `tests/test_score_track_c.py`).
+
+**One real result already:** Haaland, vertical/high-line, 3 runs — `fit_score` landed on **3**
+every single time, while the `fit_read` prose visibly reworded itself run to run ("give a
+mixed and largely incomplete picture" / "give only a partial read" / "give only partial
+purchase" — same underlying stats cited each time, same conclusion, different phrasing). That's
+exactly the pattern the design predicted: `temperature=0.3` drifts the wording, not the score.
+Not enough runs yet to call this "verified" (B4 asks for 3-5 reruns per case, this is one case),
+but the first data point is the expected one, not a surprise.

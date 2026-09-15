@@ -1,5 +1,26 @@
 # ScoutLite — Build Notes
 
+## Track C scaffolded ahead of order, on request (2026-09-15)
+
+Project owner asked to see Track C built before finishing B's/A's labeling, despite the
+earlier B > A > C priority call -- fine, it's cheap and doesn't block the labeling work, which
+is still open on both.
+
+`track_b_capture.py`'s `capture()` gained two optional params, `out_dir` and `out_name`
+(default `None`, fully backward-compatible -- Track B's own captures are unaffected). Rather
+than duplicate the whole pipeline for "run the same inputs N times," `eval/track_c_repeat.py`
+just calls `capture()` in a loop with those overridden, `force_refresh=False` throughout so
+FBref/Understat data is fetched once and reused -- the only thing meant to vary run to run is
+the LLM call itself. `eval/score_track_c.py` groups the resulting `track_c_samples/*__runN.json`
+files by player+philosophy and reports whether `fit_score` stayed identical across them (pure
+aggregation, `tests/test_score_track_c.py`, 108 tests total across the suite now).
+
+**First real result:** Haaland, vertical/high-line, 3 runs -- `fit_score` landed on 3 every
+time; `fit_read`'s wording visibly reworded itself run to run while citing the same stats and
+reaching the same read. Exactly what B4's premise predicted (temperature drifts prose, not the
+score), on the first case tried. One case, three runs -- not enough to call B4 "passed", just a
+first data point pointing the expected direction.
+
 ## Track A scaffolded: position-group survey + Quality face-validity spot check (2026-09-14)
 
 Built, under `eval/`: `track_a_capture.py` (bio + stats + Quality signal only -- no LLM, no

@@ -49,7 +49,12 @@ def capture(
     in_possession: str = "",
     out_of_possession: str = "",
     force_refresh: bool = False,
+    out_dir: Path | None = None,
+    out_name: str | None = None,
 ) -> Path:
+    """out_dir/out_name let a caller (track_c_repeat.py) reuse this exact pipeline for a
+    different purpose -- repeated runs of the SAME inputs -- without landing in
+    track_b_samples/ or overwriting each other. Both default to Track B's normal behaviour."""
     philosophy = {
         "in_possession": {
             "vertical": "vertical, fast transitions",
@@ -115,15 +120,19 @@ def capture(
         "judge": synthesis["judge"],
     }
 
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    slug = re.sub(r"[^a-z0-9]+", "_", player.lower()).strip("_")
-    if in_possession or out_of_possession:
-        # A philosophy-set capture is a genuinely different sample (it exercises the Fit-score
-        # path a no-philosophy capture doesn't) -- suffix the slug so it lands alongside the
-        # plain capture instead of silently overwriting it.
-        phil_slug = "_".join(p for p in (in_possession, out_of_possession) if p)
-        slug = f"{slug}__{phil_slug}"
-    out_path = OUT_DIR / f"{slug}.json"
+    target_dir = out_dir or OUT_DIR
+    target_dir.mkdir(parents=True, exist_ok=True)
+    if out_name:
+        slug = out_name
+    else:
+        slug = re.sub(r"[^a-z0-9]+", "_", player.lower()).strip("_")
+        if in_possession or out_of_possession:
+            # A philosophy-set capture is a genuinely different sample (it exercises the
+            # Fit-score path a no-philosophy capture doesn't) -- suffix the slug so it lands
+            # alongside the plain capture instead of silently overwriting it.
+            phil_slug = "_".join(p for p in (in_possession, out_of_possession) if p)
+            slug = f"{slug}__{phil_slug}"
+    out_path = target_dir / f"{slug}.json"
     out_path.write_text(json.dumps(record, indent=2, default=str))
     print(f"Judge: {synthesis['judge']['source_accuracy']}% after {synthesis['judge']['iterations']} pass(es)")
     print(f"Saved {out_path}")

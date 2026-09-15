@@ -1,0 +1,288 @@
+{
+  "player": "Erling Haaland",
+  "fbref_url": "https://fbref.com/en/players/1f44ac21/Erling-Haaland",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "Erling Braut Haaland",
+    "position": "FW-MF",
+    "footed": "Left",
+    "height_weight": "191cm, 92kg",
+    "birth_date": "2000-07-21",
+    "birthplace": "Leeds, England, United Kingdom",
+    "national_team": "Norway",
+    "club": "Manchester City",
+    "contract_expires": "June 2034"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "23",
+    "squad": "Manchester City",
+    "competition": "1. Premier League",
+    "matches_played": "31",
+    "starts": "29",
+    "minutes": "2,552",
+    "goals": "27",
+    "assists": "5",
+    "goals_plus_assists": "32",
+    "non_penalty_goals": "20",
+    "yellow_cards": "1",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "18",
+    "fouls_drawn": "30",
+    "offsides": "6",
+    "crosses": "5",
+    "interceptions": "2",
+    "tackles_won": "3",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Erling Haaland",
+    "understat_url": "https://understat.com/player/8260",
+    "understat_team": "Manchester City",
+    "games": "31",
+    "minutes": "2581",
+    "goals": "27",
+    "xG": 31.65,
+    "assists": "5",
+    "xA": 4.75,
+    "npxG": 25.56,
+    "shots": "122",
+    "key_passes": "29"
+  },
+  "quality": {
+    "score": 4,
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 100.0,
+      "assists_per90": 56.074766355140184,
+      "xG_per90": 99.06542056074767,
+      "xA_per90": 53.271028037383175
+    },
+    "avg_percentile": 77.1,
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "Worldsoccertalk.com"
+      },
+      "author": "Dante Gonzalez",
+      "title": "Lamine Yamal narrows 2026 Ballon d\u2019Or race down to himself or Kylian Mbappe: \u2018I\u2019d deserve it because of what I\u2019ve won\u2019",
+      "description": "Lamine Yamal has narrowed the discussion for the 2026 Ballon d'Or down to him and Kylian Mbappe, while proclaiming himself as the winner: \"I'd deserve it because of what I've won.\" \nWith Lionel Messi and Cristiano Ronaldo removed from the European spotlight, \u2026",
+      "url": "https://worldsoccertalk.com/news/lamine-yamal-narrows-2026-ballon-dor-race-down-to-himself-or-kylian-mbappe-id-deserve-it-because-of-what-ive-won/",
+      "urlToImage": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/09/09163011/yamal-mbappe-1200x740.webp",
+      "publishedAt": "2026-09-14T04:18:28Z",
+      "content": "With Lionel Messi and Cristiano Ronaldo removed from the European spotlight, the race for the 2026 Ballon dOr has opened up without a clear consensus frontrunner. However, Barcelona phenom Lamine Yam\u2026 [+3246 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dailymail.com"
+      },
+      "author": "Jack Gaughan",
+      "title": "Goading, running himself into the ground and feeding off Man United distain - Enzo Fernandez showed what \u00a3125m buys you and his innate desire to win at all costs is gold dust for City",
+      "description": "JACK GAUGHAN: He may have joined on deadline day for a British record fee but Sunday was when Enzo Fernandez arrived as a Manchester City player, as what Enzo Maresca needed.",
+      "url": "https://www.dailymail.com/sport/football/article-16124737/Enzo-Fernandez-Manchester-City-Manchester-United-Premier-League.html",
+      "urlToImage": "https://i.dailymail.com/1s/2026/09/13/20/111224163-0-image-m-66_1789326896919.jpg",
+      "publishedAt": "2026-09-14T01:00:49Z",
+      "content": "A goal up and a man light, there is a specific type of person required when the heat of a derby tumble dryer is dialled up that little bit higher. Certainly not a shrinker.\r\nProbably the sort of pers\u2026 [+4865 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "Kari Anderson",
+      "title": "Premier League refereeing body admits 'an error of judgement' in Man City's game-winning goal over Manchester United",
+      "description": "Man City, short-handed after an early red card, pulled off a 1-0 victory \u2014 with referees now saying that Erling Haaland's goal should have been called offsides.",
+      "url": "https://sports.yahoo.com/soccer/article/premier-league-refereeing-body-admits-an-error-of-judgement-in-man-citys-game-winning-goal-over-manchester-united-003804471.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/4f6a74c3a6d167701c80e633927f7b92450deb402726fcd197088566c1c90da7/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fd29szjachogqwa.cloudfront.net%2Fimages%2F2026-09%2F6ef3e609-1a45-45ed-bdba-9fe6674afec7",
+      "publishedAt": "2026-09-14T00:38:04Z",
+      "content": "The Premier League's refereeing association has admitted that it made \"an error of judgement\" in Manchester City's 1-0 victory over Manchester United on Sunday, according to a statement shared with m\u2026 [+2331 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Worldsoccertalk.com"
+      },
+      "author": "Dante Gonzalez",
+      "title": "Erling Haaland\u2019s winning goal in Man City vs Man United derby wrongly allowed after an \u2018error of judgement,\u2019 confirms Pro Ref",
+      "description": "The Pro Ref released an official statement on Erling Haaland's winning goal in the Manchester City vs. Manchester United derby, claiming it to be wrongly allowed after an \"error of judgement.\" \nErling Haaland stole the spotlight on Sunday afternoon by scoring\u2026",
+      "url": "https://worldsoccertalk.com/news/erling-haalands-winning-goal-in-man-city-vs-man-united-derby-wrongly-allowed-after-an-error-of-judgement-confirms-pro-ref/",
+      "urlToImage": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/09/13192048/erling-haaland-manchester-city-8-1200x740.webp",
+      "publishedAt": "2026-09-13T23:26:20Z",
+      "content": "Erling Haaland stole the spotlight on Sunday afternoon by scoring the match-winning goal for Manchester City to secure three points in the Manchester derby against Manchester United. However, followi\u2026 [+3985 chars]"
+    },
+    {
+      "source": {
+        "id": "bbc-news",
+        "name": "BBC News"
+      },
+      "author": null,
+      "title": "Getting goal decision so wrong is 'baffling' - Rooney",
+      "description": "Match of the Day pundits Wayne Rooney and Danny Murphy finds it \"baffling\" that Erling Haaland's winning goal in the Manchester derby was not ruled out by VAR, but think Phil Foden's red card was the correct decision.",
+      "url": "https://www.bbc.co.uk/sport/football/videos/c9w4755n70wo",
+      "urlToImage": "https://ichef.bbci.co.uk/ace/standard/1024/cpsprodpb/4c60/live/260a9c80-afbf-11f1-bc1f-3f186ca4140c.jpg",
+      "publishedAt": "2026-09-13T22:59:17Z",
+      "content": "Match of the Day pundits Wayne Rooney and Danny Murphy finds it \"baffling\" that Erling Haaland's winning goal in the Manchester derby was not ruled out by VAR, but think Phil Foden's red card was the\u2026 [+123 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "BBC News"
+      },
+      "author": "BBC",
+      "title": "'Their intelligence & resilience was key' - how Man City earned 'statement win'",
+      "description": "Match of the Day pundit Danny Murphy explains how Manchester City beat Manchester United at Old Trafford despite being down to 10 men for most of the game.",
+      "url": "https://www.bbc.com/sport/football/articles/cq6384g0pqyo?xtor=AL-72-%5Bpartner%5D-%5Byahoo.north.america%5D-%5Bheadline%5D-%5Bsport%5D-%5Bbizdev%5D-%5Bisapi%5D",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/6f490203fbcfa60fd5560bb679a89192e7c2658986c305dbc9dea8c702403be6/lightyear_networkapi/resizefill_w1024_h576%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fbbc_us_articles_995%2F1d69aec1af02949b24063ee8a5c0d6c7.png",
+      "publishedAt": "2026-09-13T22:20:49Z",
+      "content": "If you go to Old Trafford in a derby, go down to 10 men in the first 25 minutes and still come away with a 1-0 victory, it tells you a lot about your players.\r\nSunday's result was a statement win for\u2026 [+4845 chars]"
+    },
+    {
+      "source": {
+        "id": "bbc-news",
+        "name": "BBC News"
+      },
+      "author": "BBC Sport",
+      "title": "'Their intelligence & resilience was key' - how Man City earned 'statement win'",
+      "description": "Match of the Day pundit Danny Murphy explains how Manchester City beat Manchester United at Old Trafford despite being down to 10 men for most of the game.",
+      "url": "https://www.bbc.co.uk/sport/football/articles/cq6384g0pqyo",
+      "urlToImage": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/db32/live/824c7730-afa5-11f1-a540-61c3f7fc4e6c.png",
+      "publishedAt": "2026-09-13T22:20:42Z",
+      "content": "City were also superb further up the field. Antoine Semenyo and Erling Haaland were keeping the ball when it was played up to them, as well as winning free-kicks or beating people.\r\nWhen he came on f\u2026 [+1353 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Vanguard"
+      },
+      "author": "efosataiwo@vanguardngr.com",
+      "title": "Referee body admits \u2018error\u2019 for Haaland goal in Manchester derby",
+      "description": "Professional Game Referees (Pro Ref) admitted Sunday that the decision to allow Erling Haaland's winner in Manchester City's 1-0 victory over Manchester United was an \"error of judgment\".\nThe post Referee body admits \u2018error\u2019 for Haaland goal in Manchester der\u2026",
+      "url": "https://www.vanguardngr.com/2026/09/referee-body-admits-error-for-haaland-goal-in-manchester-derby/",
+      "urlToImage": "https://cdn.vanguardngr.com/wp-content/uploads/2026/09/AFP__20260913__C87R4T6__v1__MidRes__FblEngPrManUtdManCity-1.jpg",
+      "publishedAt": "2026-09-13T22:07:13Z",
+      "content": "Manchester City\u2019s Norwegian striker #09 Erling Haaland celebrates scoring the team\u2019s first goal during the English Premier League football match between Manchester United and Manchester City at Old T\u2026 [+2465 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "NBCSports.com"
+      },
+      "author": "Nicholas Mendola",
+      "title": "Referees group Pro Ref acknowledges error on Erling Haaland's goal to win Manchester derby",
+      "description": "\"Contact has been made with Manchester United this evening to acknowledge what we deem is an error of judgement. A review of the incident will take place,\" said a spokesman for Pro Ref",
+      "url": "https://www.nbcsports.com/soccer/news/referees-group-pro-ref-acknowledges-error-on-erling-haalands-goal-to-win-manchester-derby",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/1d3c975d25a4f65c5a2d11aee671fe9c9e938e9b6b701a6caaa866fc10e1d608/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fnbcsports.com%2F28237e8d04fd57542a6bd169015c617b.jpg",
+      "publishedAt": "2026-09-13T22:00:34Z",
+      "content": "The body responsible refereeing games in English football has acknowledged that an incorrect decision was made to award Erling Haaland's goal in 10-man Manchester City's 1-0 win over Manchester Unite\u2026 [+2017 chars]"
+    },
+    {
+      "source": {
+        "id": "al-jazeera-english",
+        "name": "Al Jazeera English"
+      },
+      "author": null,
+      "title": "Manchester City wrongly awarded Haaland goal by VAR at United: Refs\u2019 body",
+      "description": "Erling Haaland's derby winner against Manchester United should not have stood, Premier League referees' body admits.",
+      "url": "https://www.aljazeera.com/sports/2026/9/13/manchester-city-wrongly-awarded-haaland-goal-by-var-at-united-refs-body",
+      "urlToImage": "https://www.aljazeera.com/wp-content/uploads/2026/09/2026-09-13T173939Z_1996020805_UP1EM9D1D22FH_RTRMADP_3_SOCCER-ENGLAND-MUN-MCI-1789334672.jpg?resize=1920%2C1440",
+      "publishedAt": "2026-09-13T21:58:17Z",
+      "content": "Professional Game Referees (Pro Ref) admitted on Sunday that the decision to allow Erling Haalands winner in Manchester Citys 1-0 victory over Manchester United was an error of judgment.\r\nWith City d\u2026 [+1735 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Rediff.com"
+      },
+      "author": "sports@rediff.co.in (Ivan Crasto)",
+      "title": "VAR wrong on Haaland goal, confirms Pro Ref",
+      "description": "Refereeing body Pro Ref has admitted that the Video Assistant Referee (VAR) made an error in allowing Erling Haaland's decisive goal for Manchester City against Manchester United. The VAR failed to account for the offside position and potential impact of Enzo\u2026",
+      "url": "https://www.rediff.com/sports/report/epl-manchester-united-vs-manchester-city-var-controversy-pro-ref-admits-error-on-haaland-goal/20260914.htm",
+      "urlToImage": "https://im.rediff.com/1200-630/sports/2026/sep/14referees.jpg",
+      "publishedAt": "2026-09-13T21:57:00Z",
+      "content": "Refereeing body Pro Ref has officially admitted a significant VAR error in the Manchester Derby, confirming Erling Haaland's decisive goal for Manchester City against Manchester United should have be\u2026 [+2480 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "101 Great Goals"
+      },
+      "author": "Nicholas McGee",
+      "title": "ProRef acknowledge \u2018error of judgement\u2019 over Haaland\u2019s Manchester derby-winning goal",
+      "description": "Refereeing body ProRef acknowledged an error in awarding Erling Haaland's Manchester derby-winning goal.",
+      "url": "https://www.101greatgoals.com/football/premier-league/proref-acknowledge-error-of-judgement-over-haaland-manchester-derby-winning-goal/",
+      "urlToImage": "https://www.101greatgoals.com/wp-content/uploads/2026/09/3FGMYN0-2.jpg",
+      "publishedAt": "2026-09-13T21:43:35Z",
+      "content": "Refereeing body ProRef has contacted Manchester United to acknowledge an error in awarding the goal scored by Erling Haaland that condemned them to defeat in the derby.\r\nManchester City claimed all t\u2026 [+2785 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The Punch"
+      },
+      "author": "Punch Newspapers",
+      "title": "EPL: Ref body admits error over Haaland winner against Man United",
+      "description": "Premier League refereeing body Pro Ref has admitted an error of judgement was made by VAR in allowing Erling Haaland\u2019s winning goal against Manchester Unit\n\nRead More: https://punchng.com/epl-ref-body-admits-error-over-haaland-winner-against-man-united/",
+      "url": "https://punchng.com/epl-ref-body-admits-error-over-haaland-winner-against-man-united/",
+      "urlToImage": "https://punchng.com/wp-content/uploads/2026/07/An-image-of-Erling-Haaland-for-FPL_1784790491.webp",
+      "publishedAt": "2026-09-13T21:22:07Z",
+      "content": "Premier League refereeing body Pro Ref has admitted an error of judgement over Erling Haalands winning goal in Manchester Citys 1-0 victory against Manchester United.\r\nThe striker scored in the 60th \u2026 [+977 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Hayters.com"
+      },
+      "author": "Hayters TV",
+      "title": "Refereeing body Pro Ref admits \u2018error of judgement\u2019 in Haaland\u2019s winning goal against Man Utd",
+      "description": "Refereeing body Pro Ref have admitted VAR made an error by failing to recommend an on-field review of Erling Haaland\u2019s winning goal in Manchester City\u2019s 1-0 victory over Manchester United.Haaland\ufffd...",
+      "url": "https://hayters.com/refereeing-body-pro-ref-admits-error-of-judgement-in-haalands-winning-goal-against-man-utd/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/28c5cd170ecb8fec765e3efff83fc8e71bce02ac4e56dff385b9299fe990370b/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fhayters_tv_491%2F186b7bf1b971f55a2e87410b88948d41.jpg",
+      "publishedAt": "2026-09-13T21:20:00Z",
+      "content": "Refereeing body Pro Ref have admitted VAR made an error by failing to recommend an on-field review of Erling Haaland's winning goal in Manchester City's 1-0 victory over Manchester United.\r\nHaaland's\u2026 [+1117 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "AFP",
+      "title": "Referee body admits 'error' for Haaland goal in Manchester derby",
+      "description": "Professional Game Referees (Pro Ref) admitted Sunday that the decision to allow Erling Haaland's winner in Manchester City's 1-0 victory over Manchester United was an \"error of judgment\".\"Contact has been made with Manchester United this evening to acknowledg\u2026",
+      "url": "https://sports.yahoo.com/articles/referee-body-admits-error-haaland-210649889.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/3f19bc5461f191022f9e15a155c8c8d4b2cacfdd6b62f4e4bb3d2e1a81697fb7/lightyear_networkapi/resizefill_w768_h511%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fafp.com%2Fe31fc029f52b6c3a56e891886fd675cd.jpg",
+      "publishedAt": "2026-09-13T21:06:49Z",
+      "content": "Professional Game Referees (Pro Ref) admitted Sunday that the decision to allow Erling Haaland's winner in Manchester City's 1-0 victory over Manchester United was an \"error of judgment\".\r\nWith City \u2026 [+1758 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "vertical, fast transitions",
+    "out_of_possession": "high line, counter-press"
+  },
+  "news_synthesis": "The only recent item touching Haaland directly is the refereeing controversy from the Manchester derby, where the Premier League's refereeing body admitted an \"error of judgement\" in allowing his winning goal against Manchester United \u2014 a decision described as \"baffling\" by Wayne Rooney. The remaining headlines in the window concern other players and matches (Yamal, Enzo Fernandez, and general City coverage) and are not relevant to Haaland. There is no other recent news about him in this window.",
+  "fit_read": "The listed stats give a mixed and largely incomplete picture for a vertical, fast-transition, high-line, counter-press system. On the pressing side, the defensive action numbers are very low \u2014 2 interceptions, 3 tackles won, 18 fouls committed across 2,552 minutes \u2014 which offers little evidence of the counter-press workload such a system demands, though a centre-forward's defensive volume is only one input and these figures alone don't establish whether he can or can't press. The attacking profile is heavily shot- and box-oriented: 122 shots, 31.65 xG, 25.56 npxG, 27 goals, but only 29 key passes and 5 crosses, which reads more as a finisher than a link/possession hub \u2014 relevant to transition play mainly as an endpoint rather than a connector. Critically, there is no pace, sprint, or distance data here, so the speed-dependent aspect of a fast-transition fit cannot be assessed at all, and no role notes from the scout were provided to weigh. With pressing evidence thin and transition speed unmeasurable from these stats, this sits at a neutral signal rather than a confident one \u2014 a 3 for the scout to weigh, not a verdict.",
+  "fit_score": 3,
+  "judge": {
+    "source_accuracy": 100.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "This asserts exclusivity ('only') about Haaland-related news, but the data does not establish that no other Haaland items exist in the window; it only shows what is in the provided list. (in: \"The only recent item touching Haaland directly is the refereeing controversy from the Manchester derby\")",
+      "The Enzo Fernandez headline explicitly mentions City and the derby context, and the 'statement win' headlines relate to the same City match involving Haaland's goal, so characterizing them as not relevant to Haaland is an overreach. (in: \"The remaining headlines in the window concern other players and matches (Yamal, Enzo Fernandez, and general City coverage) and are not relevant to Haaland.\")",
+      "This is an absolute claim about the absence of news that the provided data cannot support; the list is not guaranteed exhaustive. (in: \"There is no other recent news about him in this window.\")",
+      "Low defensive counting stats for a centre-forward do not fairly support an inference about counter-press workload, since pressing contribution is not captured by interceptions/tackles/fouls alone. (in: \"which offers little evidence of the counter-press workload such a system demands\")",
+      "This is a reasonable reading of low key passes/crosses, but the stats alone (without role context or comparison baselines) do not fairly support a definitive stylistic characterization. (in: \"which reads more as a finisher than a link/possession hub\")"
+    ],
+    "confidence_warning": false
+  }
+}
