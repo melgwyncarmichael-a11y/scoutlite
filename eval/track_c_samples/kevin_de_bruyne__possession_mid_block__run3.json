@@ -1,0 +1,277 @@
+{
+  "player": "Kevin De Bruyne",
+  "fbref_url": "https://fbref.com/en/players/e46012d4/Kevin-De-Bruyne",
+  "season": "2026-2027",
+  "bio": {
+    "full_name": "",
+    "position": "FW-MF (AM-CM-WM)",
+    "footed": "Right",
+    "height_weight": "181cm, 68kg",
+    "birth_date": "1991-06-28",
+    "birthplace": "Gent, Belgium",
+    "national_team": "Belgium",
+    "club": "Napoli",
+    "contract_expires": "June 2027"
+  },
+  "stats": {
+    "season": "2026-2027",
+    "age": "35",
+    "squad": "Napoli",
+    "competition": "1. Serie A",
+    "matches_played": "4",
+    "starts": "1",
+    "minutes": "175",
+    "goals": "1",
+    "assists": "1",
+    "goals_plus_assists": "2",
+    "non_penalty_goals": "1",
+    "yellow_cards": "0",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "2",
+    "fouls_drawn": "1",
+    "offsides": "0",
+    "crosses": "17",
+    "interceptions": "1",
+    "tackles_won": "2",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Kevin De Bruyne",
+    "understat_url": "https://understat.com/player/447",
+    "understat_team": "Napoli",
+    "games": "4",
+    "minutes": "167",
+    "goals": "1",
+    "xG": 0.71,
+    "assists": "1",
+    "xA": 1.3,
+    "npxG": 0.71,
+    "shots": "5",
+    "key_passes": "11"
+  },
+  "quality": null,
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "Sporting News"
+      },
+      "author": "Dom Farrell",
+      "title": "Why Elliot Anderson and Man City's new heroes were 'bouncing up and down' after 10-man derby win",
+      "description": "Manchester City have endured a summer of change, but Elliot Anderson's performance in the derby win over Manchester United underlined a steely mentality Enzo Maresca has harnessed in his squad.",
+      "url": "https://www.sportingnews.com/us/soccer/manchester-city/news/elliot-anderson-man-city-new-heroes-10-man-derby-win/1536c8f795aad695b40dd04d",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/11ced41f6a7b002142ae0888fb75d24ce4d54175589324cc4314c90dc166d718/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_sporting_news_articles_584%2F7327a7b336477cb749264595f6440daa",
+      "publishedAt": "2026-09-14T12:00:54Z",
+      "content": "Why Elliot Anderson and Man City's new heroes were 'bouncing up and down' after 10-man derby win originally appeared on The Sporting News. Add The Sporting News as a Preferred Source by clicking here\u2026 [+5403 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Rediff.com"
+      },
+      "author": "normag@rediff.co.in (Norma Godinho)",
+      "title": "PSG, Bayern, Napoli register important wins",
+      "description": "Paris St Germain, Bayern Munich, and Napoli all secured crucial victories in their respective European football leagues, with Ferran Torres, Harry Kane, and Stanislav Lobotka scoring decisive goals. Juventus, however, suffered a late defeat to Sassuolo.",
+      "url": "https://www.rediff.com/sports/report/psg-bayern-munich-napoli-secure-key-wins-in-ligue-1-bundesliga-serie-a/20260914.htm",
+      "urlToImage": "https://im.rediff.com/1200-630/sports/2026/sep/14psg-ferran-torres.jpg",
+      "publishedAt": "2026-09-14T04:04:20Z",
+      "content": "European football leagues saw significant action as Paris St Germain, Bayern Munich, and Napoli clinched vital victories, while Juventus faced a dramatic defeat.\r\nIMAGE: Paris St Germain's Ferran Tor\u2026 [+8410 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "CNA"
+      },
+      "author": null,
+      "title": "Sassuolo beat Juventus 3-2 after late drama, Napoli return to winning ways",
+      "description": "Sept 13 : Juventus suffered a 3-2 defeat following a frantic finish at Sassuolo on Sunday, while Napoli snapped a three-match losing run with a 1-0 home win over Bologna as both sides continued their inconsistent starts to the Serie A season.Juventus have sta\u2026",
+      "url": "https://www.channelnewsasia.com/sport/sassuolo-beat-juventus-3-2-after-late-drama-napoli-return-winning-ways-6381911",
+      "urlToImage": "https://dam.mediacorp.sg/image/upload/s--RXO0NFUA--/c_fill,g_auto,h_676,w_1200/fl_relative,g_south_east,l_mediacorp:cna:watermark:2024-04:reuters_1,w_0.1/f_auto,q_auto/v1/one-cms/core/2026-09-13T214200Z_1_LYNXMPEM8C0OE_RTROPTP_3_SOCCER-ITALY-SAS-JUV.JPG?itok=PPFRHqaw",
+      "publishedAt": "2026-09-13T21:42:00Z",
+      "content": "Sept 13 : Juventus suffered a 3-2 defeat following a frantic finish at Sassuolo on Sunday, while Napoli snapped a three-match losing run with a 1-0 home win over Bologna as both sides continued their\u2026 [+2323 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "AFP",
+      "title": "Sassuolo stun Juve, Lobotka eases pressure on Allegri with Napoli winner",
+      "description": "Sassuolo midfielder Vasilije Adzic scored a last-gasp winner against his parent club to consign Juventus to their first defeat of the season after a five-goal thriller on Sunday, while Napoli broke a three-match losing streak to beat Bologna.The action was fa\u2026",
+      "url": "https://sports.yahoo.com/articles/sassuolo-stun-juve-lobotka-eases-213833459.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/c416b80dc550e0368eb375d816f8f6fb1d3f018eaeb0e3e1823ab60bbbe83ddb/lightyear_networkapi/resizefill_w768_h512%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fafp.com%2F187872defa5eb1d506c85b5fbc1ef43c.jpg",
+      "publishedAt": "2026-09-13T21:38:33Z",
+      "content": "Sassuolo midfielder Vasilije Adzic scored a last-gasp winner against his parent club to consign Juventus to their first defeat of the season after a five-goal thriller on Sunday, while Napoli broke a\u2026 [+3969 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Sam Wilson",
+      "title": "Allegri provides De Bruyne update and reveals what he told Lucca in Napoli win: \u2018Open your shoulders\u2019",
+      "description": "Massimiliano Allegri has eased fears over Kevin De Bruyne, confirming the Belgian was withdrawn late in Napoli's win over Bologna with cramp rather than",
+      "url": "https://football-italia.net/allegri-provides-de-bruyne-update-lucca-napoli/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/09/Max-Allegri-scream.jpg",
+      "publishedAt": "2026-09-13T19:16:37Z",
+      "content": "Massimiliano Allegri has eased fears over Kevin De Bruyne, confirming the Belgian was withdrawn late in Napolis win over Bologna with cramp rather than anything more serious.\r\nThe coach addressed the\u2026 [+2468 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Crypto Briefing"
+      },
+      "author": "Editorial Team",
+      "title": "Napoli tops Bologna 1-0 as Lobotka\u2019s strike ends three-match losing streak",
+      "description": "Napoli's victory could boost team morale and momentum, while Bologna faces mounting pressure to avoid relegation amid early struggles.\nThe post Napoli tops Bologna 1-0 as Lobotka\u2019s strike ends three-match losing streak appeared first on Crypto Briefing.",
+      "url": "https://cryptobriefing.com/napoli-beats-bologna-lobotka-goal/",
+      "urlToImage": "https://static.cryptobriefing.com/wp-content/uploads/2026/09/13144332/library-napoli-tops-bologna-1-0-as-lobotka-s-strike-ends-three-m-800x450.png",
+      "publishedAt": "2026-09-13T18:43:37Z",
+      "content": "Stanislav Lobotka's 66th-minute goal lifts Massimiliano Allegri's side to 6 points in Serie A while Bologna sink closer to the relegation zone Three straight losses will test any squad\u2019s nerve. Stani\u2026 [+2128 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dpa-international.com"
+      },
+      "author": "DPA",
+      "title": "Lobotka strikes as Napoli claim victory over Bologna",
+      "description": "Massimiliano Allegri toasted a first Napoli win at Stadio Diego Armando Maradona at the third time of asking after Stanislav Lobotka scored the only goal in a 1-0 win over Bologna on Sunday. After Napoli had experienced home defeats to Como and Arsenal alread\u2026",
+      "url": "https://dpa-international.com/sports/urn:newsml:dpa.com:20090101:260913-930-679917/",
+      "urlToImage": null,
+      "publishedAt": "2026-09-13T18:33:30Z",
+      "content": "Massimiliano Allegri toasted a first Napoli win at Stadio Diego Armando Maradona at the third time of asking after Stanislav Lobotka scored the only goal in a 1-0 win over Bologna on Sunday.\r\nAfter N\u2026 [+1369 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Sam Wilson",
+      "title": "De Bruyne injury scare mars Napoli win over Bologna",
+      "description": "Napoli's win over Bologna was soured by a late injury concern involving Kevin De Bruyne, who asked to come off in the closing stages at the Stadio Diego",
+      "url": "https://football-italia.net/de-bruyne-injury-scare-mars-napoli-bologna/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/09/Kevin-De-Bruyne-Mikel-Amondarain.jpg",
+      "publishedAt": "2026-09-13T18:23:03Z",
+      "content": "Napolis win over Bologna was soured by a late injury concern involving Kevin De Bruyne, who asked to come off in the closing stages at the Stadio Diego Armando Maradona.\r\nAccording to Fantacalcio, th\u2026 [+1176 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "AFP",
+      "title": "Lobotka eases pressure on Allegri with Napoli winner",
+      "description": "Napoli ended a three-match losing streak as Stanislav Lobotka struck to earn a 1-0 Serie A win over Bologna on Sunday, and ease pressure on coach Massimiliano Allegri.Bologna coach Domenico Tedesco could only watch on from the stands due to suspension as his \u2026",
+      "url": "https://sports.yahoo.com/articles/lobotka-eases-pressure-allegri-napoli-181022663.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/3c52296cfb69d74ec78981f0b620d71a13b5f673c19796b27a8e912d3cbb1e9e/lightyear_networkapi/resizefill_w768_h512%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fafp.com%2F73079961c4e604c314a40769c8ed72e7.jpg",
+      "publishedAt": "2026-09-13T18:10:22Z",
+      "content": "Napoli ended a three-match losing streak as Stanislav Lobotka struck to earn a 1-0 Serie A win over Bologna on Sunday, and ease pressure on coach Massimiliano Allegri.\r\nThe Slovakian playmaker's cush\u2026 [+1390 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Susy Campanale",
+      "title": "Serie A | Napoli 1-0 Bologna: Lobotka light at the end of the tunnel",
+      "description": "Napoli scraped a 1-0 victory thanks to Stanislav Lobotka to stem the crisis, but Bologna\u2019s disastrous campaign has them on one point from four rounds.",
+      "url": "https://football-italia.net/serie-a-napoli-10-bologna-lobotka-light-tunnel/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/09/Stanislav-Lobotka-celebrate.jpg",
+      "publishedAt": "2026-09-13T17:57:58Z",
+      "content": "Napoli scraped a 1-0 victory thanks to Stanislav Lobotka to stem the crisis, but Bolognas disastrous campaign has them on one point from four rounds.\r\nThe Partenopei were in crisis after three consec\u2026 [+3355 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Susy Campanale",
+      "title": "Allegri: \u2018Napoli need calm, precision and concentration\u2019",
+      "description": "Max Allegri explains his somewhat surprising decisions as Napoli host Bologna after three consecutive defeats. \u2018We need to play with calm, precision, and more concentration.\u2019",
+      "url": "https://football-italia.net/allegri-napoli-calm-precision-concentration/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/09/Max-Allegri-shout.jpg",
+      "publishedAt": "2026-09-13T15:32:51Z",
+      "content": "Max Allegri explains his somewhat surprising decisions as Napoli host Bologna after three consecutive defeats. We need to play with calm, precision, and more concentration.\r\nIt kicks off at the Stadi\u2026 [+2134 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Susy Campanale",
+      "title": "Serie A official line-ups: Napoli vs. Bologna",
+      "description": "Napoli in crisis after three defeats in all competition cling to Rasmus Hojlund, Kevin De Bruyne and Antonio Vergara against Bologna\u2019s Federico Bernardeschi.",
+      "url": "https://football-italia.net/serie-a-official-line-ups-napoli-vs-bologna-w4/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/09/Kevin-De-Bruyne-running.jpg",
+      "publishedAt": "2026-09-13T14:58:54Z",
+      "content": "Napoli in crisis after three defeats in all competition cling to Rasmus Hojlund, Kevin De Bruyne and Antonio Vergara against Bolognas Federico Bernardeschi.\r\nIt kicks off at the Stadio Diego Armando \u2026 [+3255 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Sporting News"
+      },
+      "author": "Dom Farrell",
+      "title": "Man United vs. Man City live score, result, highlights, stats from 199th Manchester derby",
+      "description": "Manchester United host Manchester City in the first Manchester derby of the season, with several new faces set to make their bow in this historic fixture.",
+      "url": "https://www.sportingnews.com/us/soccer/news/man-united-vs-man-city-live-score-result-stats-premier-league/09f942b686ae40451f8aec18",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/7a927b34e334cec43709f00a575fdf9baabebdbb6bfdc11328848bdbea092e50/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_sporting_news_articles_584%2F7f356538e01b35da9e95ed74f34c20c7",
+      "publishedAt": "2026-09-13T13:30:01Z",
+      "content": "Man United vs. Man City live score, result, highlights, stats from 199th Manchester derby originally appeared on The Sporting News. Add The Sporting News as a Preferred Source by clicking here.\r\nJUMP\u2026 [+4026 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Esteemedkompany.com"
+      },
+      "author": "Esteemed Kompany",
+      "title": "Could Enzo Maresca unleash his new-look Manchester City midfield against United?",
+      "description": "Manchester City completely refitted their midfield this summer. With Rodri, Bernardo Silva, Tijjani Reijnders and Nico Gonzalez all departing the club, City had to strengthen their midfield with quali...",
+      "url": "https://esteemedkompany.com/2026/09/13/could-enzo-maresca-unleash-his-new-look-manchester-city-midfield-against-united/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/399bb406c272504619b54770a24e2ba4e877e1e728a7096ef2edaa8f9f6544bc/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Festeemed_kompany_articles_332%2F5ac1b70ef1c60d94d2306064ad96073c.jpg",
+      "publishedAt": "2026-09-13T08:50:00Z",
+      "content": "Manchester City completely refitted their midfield this summer. With Rodri, Bernardo Silva, Tijjani Reijnders and Nico Gonzalez all departing the club, City had to strengthen their midfield with qual\u2026 [+3123 chars]"
+    },
+    {
+      "source": {
+        "id": "football-italia",
+        "name": "Football Italia"
+      },
+      "author": "Peter Young",
+      "title": "Serie A: Napoli vs. Bologna \u2013 Probable line-ups and where to watch on TV",
+      "description": "Early pressure is creeping up on both Massimiliano Allegri and Domenico Tedesco ahead of Sunday evening\u2019s Serie A clash between Napoli and Bologna, which will",
+      "url": "https://football-italia.net/serie-a-napoli-vs-bologna-probable-line-ups-2/",
+      "urlToImage": "https://icdn.football-italia.net/wp-content/uploads/2026/05/Giovanni-Di-Lorenzo-Rasmus-Hojlund-celebrate.jpg",
+      "publishedAt": "2026-09-13T08:14:32Z",
+      "content": "Early pressure is creeping up on both Massimiliano Allegri and Domenico Tedesco ahead of Sunday evenings Serie A clash between Napoli and Bologna, which will be available to watch for free on the BBC\u2026 [+3449 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "slow, methodical possession",
+    "out_of_possession": "mid block, hybrid"
+  },
+  "news_synthesis": "Recent coverage over the last 28 days is mostly match-result reporting around Napoli \u2014 wins over Bologna and Sassuolo's upset of Juventus \u2014 with one item directly relevant to the player: an \"Allegri provides De Bruyne update\" headline and a separate \"De Bruyne injury scare mars Napoli win over Bologna\" headline. Beyond those two items, the listed headlines do not offer substantive recent news specifically about the player, so there is little else here to read into.",
+  "fit_read": "The listed stats give a mixed but broadly plausible picture for a slow, methodical possession / mid block side, though several aspects can't be judged. On the possession side, 11 key passes and 17 crosses in only 175 minutes (167 per Understat) point to a player heavily involved in chance creation and wide delivery \u2014 outputs that align with a team that holds the ball and builds methodically rather than one reliant on transition. xA of 1.3 against 1 assist, and xG 0.71 against 1 goal, are consistent with that creative role. Defensively, the volume is low \u2014 1 interception, 2 tackles won, 2 fouls committed \u2014 which is not obviously inconsistent with a mid-block, lower-pressing system, but the sample is far too small to read pressing demand or defensive workload reliably. What the stats cannot address: there is no pace, sprint, or distance data here, so fit for any speed-dependent transition or recovery aspect can't be assessed; nor is there any passing-volume, progressive-carry, or possession-share data, so the \"methodical possession\" element is inferred from key passes and crosses alone. Minutes are limited (175 across 4 matches, 1 start), so all of the above is a thin sample. The scout's role notes, if any, are not present in the material provided, so nothing here is attributed to the scout's own observation. On balance this reads as a neutral-to-mildly-positive signal rather than a clear one, hence 3/5 \u2014 a signal to weigh, not a verdict.",
+  "fit_score": 3,
+  "judge": {
+    "source_accuracy": 100.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "The headline is attributed to Allegri, but the available data does not establish that Allegri is the relevant manager for De Bruyne's club (Napoli), so this framing may misattribute the update. (in: \"an \"Allegri provides De Bruyne update\" headline\")",
+      "This phrasing bundles Napoli's win over Bologna with Sassuolo's upset of Juventus as if both were Napoli results, which is a misleading framing of the listed headlines. (in: \"wins over Bologna and Sassuolo's upset of Juventus\")",
+      "Crosses are not chance creation, and the data does not establish that the crosses were accurate or created chances, so calling this 'chance creation' overreaches. (in: \"17 crosses in only 175 minutes (167 per Understat) point to a player heavily involved in chance creation and wide delivery\")",
+      "Key passes and crosses alone do not distinguish possession-based buildup from transition play, so this conclusion is not fairly supported by the stats. (in: \"outputs that align with a team that holds the ball and builds methodically rather than one reliant on transition\")",
+      "xG relates to scoring, not creativity, so citing xG as consistent with a creative role is a mischaracterization. (in: \"xA of 1.3 against 1 assist, and xG 0.71 against 1 goal, are consistent with that creative role\")"
+    ],
+    "confidence_warning": false
+  }
+}

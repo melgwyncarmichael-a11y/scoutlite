@@ -1,5 +1,31 @@
 # ScoutLite — Build Notes
 
+## Track C: a real scope limitation, not just run-to-run instability (2026-09-16, later still)
+
+Expanded Track C from 1 case (Haaland, 3 runs, previous entry) to 4 cases, 12 runs total:
+De Bruyne (possession/mid-block), Wan-Bissaka (possession/low-block), and -- picked
+specifically to be an on-paper mismatch -- Trent Alexander-Arnold (known for attacking output,
+not recovery pace/defensive positioning) against `vertical, fast transitions / high line,
+counter-press`, a philosophy that specifically punishes that profile.
+
+Within-case stability held on all 4 (every run in a case matched every other run in that case,
+prose reworded itself as expected from `temperature=0.3`) -- but the finding that actually
+matters is across cases, not within them: **all 4 cases landed on `fit_score: 3`, zero
+exceptions, 12 for 12 individual runs.** Not from boilerplate reasoning -- each `fit_read`
+cites different real stats and reaches 3 by a different path. Trent's reasoning names the cause
+directly: *"There is no pace or sprint data listed, so the speed-dependent transition fit
+central to this club's philosophy cannot be assessed at all."*
+
+Read plainly: ScoutLite's actual sources (FBref counting stats, Understat xG) never carry pace,
+sprint, or pressing-volume data -- exactly what philosophy fit hinges on. The model is doing
+the right thing by refusing to guess (`build_prompt()` explicitly tells it to lean toward 3
+rather than a confident extreme when data's insufficient) -- but the consequence is that the
+Fit signal may be structurally unable to ever move off neutral for ANY player against ANY
+philosophy, given today's inputs. This is a real scope limitation to state plainly (matching
+this project's other documented limitations), not something more reruns would resolve -- the
+actual fix is sourcing pace/pressing data from somewhere, or being upfront in the product that
+Fit is close to a fixed neutral until that happens.
+
 ## Mbappé empty-population bug fixed (2026-09-16, later same day)
 
 The bug flagged in the previous entry ("still open, pending a decision on the fix") -- fixed.

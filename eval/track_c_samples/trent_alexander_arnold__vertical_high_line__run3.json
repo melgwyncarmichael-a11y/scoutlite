@@ -1,0 +1,276 @@
+{
+  "player": "Trent Alexander-Arnold",
+  "fbref_url": "https://fbref.com/en/players/cd1acf9d/Trent-Alexander-Arnold",
+  "season": "2026-2027",
+  "bio": {
+    "full_name": "Trent John Alexander-Arnold",
+    "position": "DF-MF (FB, right)",
+    "footed": "Right",
+    "height_weight": "175cm, 68kg",
+    "birth_date": "1998-10-07",
+    "birthplace": "Liverpool, England, United Kingdom",
+    "national_team": "England",
+    "club": "Real Madrid",
+    "contract_expires": "June 2031"
+  },
+  "stats": {
+    "season": "2026-2027",
+    "age": "27",
+    "squad": "Real Madrid",
+    "competition": "1. La Liga",
+    "matches_played": "4",
+    "starts": "2",
+    "minutes": "214",
+    "goals": "0",
+    "assists": "1",
+    "goals_plus_assists": "1",
+    "non_penalty_goals": "0",
+    "yellow_cards": "0",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "0",
+    "fouls_drawn": "1",
+    "offsides": "0",
+    "crosses": "22",
+    "interceptions": "7",
+    "tackles_won": "1",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Trent Alexander-Arnold",
+    "understat_url": "https://understat.com/player/1791",
+    "understat_team": "Real Madrid",
+    "games": "4",
+    "minutes": "206",
+    "goals": "0",
+    "xG": 0.18,
+    "assists": "1",
+    "xA": 0.7,
+    "npxG": 0.18,
+    "shots": "3",
+    "key_passes": "6"
+  },
+  "quality": null,
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "The Football Faithful"
+      },
+      "author": "The Football Faithful",
+      "title": "Real Madrid XI vs Elche \u2013 Predicted lineup and team news",
+      "description": "Real Madrid head to the Estadio Manuel Mart\u00ednez Valero on Tuesday night for their midweek La Liga away game against Elche.Los Blancos arrive in strong shape, sitting second in the La Liga table with ...",
+      "url": "https://thefootballfaithful.com/real-madrid-xi-vs-elche-predicted-lineup/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/2ddf41776169c83f9e62b59b7dad6b7250a9f3c6af3648d5b999eff40b58aeff/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_football_faithful_articles_458%2F5d1a4929086096eddb6faccce29f04c3.jpg",
+      "publishedAt": "2026-09-15T04:25:00Z",
+      "content": "Real Madrid head to the Estadio Manuel Mart\u00ednez Valero on Tuesday night for their midweek La Liga away game against Elche.\r\nLos Blancos arrive in strong shape, sitting second in the La Liga table wit\u2026 [+1567 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The Football Faithful"
+      },
+      "author": "The Football Faithful",
+      "title": "Elche vs Real Madrid \u2013 Match preview and team news",
+      "description": "Real Madrid travels away for their midweek La Liga fixture on Tuesday as they face Elche at the Estadio Manuel Mart\u00ednez Valero.Elche vs Real Madrid\u00a0\u2013 Match preview and team newsDate: Tuesday, 15th...",
+      "url": "https://thefootballfaithful.com/elche-vs-real-madrid-match-preview/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/389d8cbf5060bcd92e6acce275dc49158e50d83e0cf4d8c9c62409a290b3abb8/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_football_faithful_articles_458%2Fe05f88dce92b67768cec325ccba3f8be.jpg",
+      "publishedAt": "2026-09-15T04:25:00Z",
+      "content": "Real Madridtravels away for their midweek La Liga fixture on Tuesday as they face Elche at the Estadio Manuel Mart\u00ednez Valero.\r\n<ul><li>Date: Tuesday, 15th September.\r\n</li><li>Kick-off: 8:30pm BST.\r\u2026 [+2808 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Empire of The Kop"
+      },
+      "author": "Empire of the Kop",
+      "title": "\u2018Needs to do more\u2019 \u2013 Charlie Adam disappointed with Liverpool ace who had just 15 touches v Fulham",
+      "description": "Charlie Adam has said that one Liverpool player \u2018needs to do more\u2019 for the team, in light of the Reds\u2019 lacklustre 0-0 draw at home to Fulham on Saturday.The Reds put in their most subdued perfor...",
+      "url": "https://www.empireofthekop.com/2026/09/14/needs-to-do-more-charlie-adam-disappointed-with-liverpool-ace/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/37f392ab828188914125328a3ec9ac1fce4d5fad10cea86aa0c48fa9070cfaa4/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fempire_of_the_kop_articles_379%2F5bbc90119b28535373142129d3ba8eba.jpg",
+      "publishedAt": "2026-09-14T20:45:00Z",
+      "content": "Charlie Adam has said that one Liverpool player 'needs to do more' for the team, in light of the Reds' lacklustre 0-0 draw at home to Fulham on Saturday.\r\nThe Reds put in their most subdued performan\u2026 [+2372 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Madriduniversal.com"
+      },
+      "author": "Madrid Universal",
+      "title": "Three talking points ahead of Elche vs Real Madrid | La Liga MD 6",
+      "description": "Five games into the new season, Real Madrid are firmly placed second in the La Liga standings with 12 points to their name. Only Barcelona with a perfect 15 sit ahead of them.The one game Los Blancos ...",
+      "url": "https://madriduniversal.com/three-talking-points-ahead-of-elche-vs-real-madrid-la-liga-md-6/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/c8b130069db51cab1d7953c2b906d09305de0ac6e185d71ffbfb42c1ade2ead4/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmadrid_universal_articles_561%2F4e3d1ea1a969e42ddaf9e70ba36c4a1c.jpg",
+      "publishedAt": "2026-09-14T19:05:00Z",
+      "content": "Five games into the new season, Real Madrid are firmly placed second in the La Liga standings with 12 points to their name. Only Barcelona with a perfect 15 sit ahead of them.\r\nThe one game Los Blanc\u2026 [+4465 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Managing Madrid"
+      },
+      "author": "Kiyan Sobhani",
+      "title": "Five Bullet Points From Real Madrid\u2019s Win Over Rayo Vallecano",
+      "description": "A new post-match series. Seventh edition.",
+      "url": "https://www.managingmadrid.com/kiyans-observations/112854/five-bullet-points-from-real-madrids-win-over-rayo-vallecano",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/89140010f612fa6dee84f5c6a142a6321ea7a4187322274476f6d1ddaaced10e/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fsb_nation_articles_115%2F97505cbc891b87599b38f3330d92c3ed.jpg",
+      "publishedAt": "2026-09-14T14:37:59Z",
+      "content": "These observations where I look at Real Madrid's history, its players on loan, Castilla, tactical tidbits, and other relevant thoughts are now a regular thing. All previous editions can be found here\u2026 [+4854 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Madriduniversal.com"
+      },
+      "author": "Madrid Universal",
+      "title": "Confirmed: Real Madrid squad list to face Elche | La Liga MD 6",
+      "description": "Real Madrid are back in action tomorrow in La Liga as they take on Elche at Estadio Manuel Martinez Valero on Matchday 6.The Merengues go into the game on the back of a solid 4-1 win over Rayo Valleca...",
+      "url": "https://madriduniversal.com/confirmed-real-madrid-squad-list-to-face-elche-la-liga-md-6/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/5e5d53e5a3b0f2c5709025865fb73b890cff553bb698f0935d55c11a07b6a4a8/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmadrid_universal_articles_561%2Fc9366fdae6dd43611d954de33b04c755.jpg",
+      "publishedAt": "2026-09-14T12:15:00Z",
+      "content": "Real Madrid are back in action tomorrow in La Liga as they take on Elche at Estadio Manuel Martinez Valero on Matchday 6.\r\nThe Merengues go into the game on the back of a solid 4-1 win over Rayo Vall\u2026 [+1206 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Madriduniversal.com"
+      },
+      "author": "Madrid Universal",
+      "title": "Jose Mourinho settles on preferred Real Madrid defence for Atletico derby \u2013 report",
+      "description": "Jose Mourinho is already shaping his plans for Real Madrid\u2019s upcoming derby against Atletico Madrid, with the Portuguese coach making early tactical preparations.Los Blancos returned to winning ways...",
+      "url": "https://madriduniversal.com/jose-mourinho-settles-on-preferred-real-madrid-defence-for-atletico-derby-report/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/274ca1ddced53516dccf62c941c461ebe68c4bf4b9ac9edd09c13fad0dad1e80/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmadrid_universal_articles_561%2F1136d2b87f402cc4ac1aef5ecf513059.jpg",
+      "publishedAt": "2026-09-14T06:00:00Z",
+      "content": "Jose Mourinho is already shaping his plans for Real Madrid's upcoming derby against Atletico Madrid, with the Portuguese coach making early tactical preparations.\r\nLos Blancos returned to winning way\u2026 [+2493 chars]"
+    },
+    {
+      "source": {
+        "id": "the-times-of-india",
+        "name": "The Times of India"
+      },
+      "author": "Global Sports Desk",
+      "title": "Jude Bellingham brings brother Jobe to Spanish Grand Prix as Jos\u00e9 Mourinho\u2019s \u2018very special\u2019 verdict draws attention",
+      "description": "Jude Bellingham, Jobe Bellingham and Trent Alexander-Arnold joined several Real Madrid stars at the Spanish Grand Prix in Madrid. Jos\u00e9 Mourinho also attended after Real Madrid\u2019s 4-1 win over Rayo Vallecano. Bellingham met Mercedes drivers Kimi Antonelli and G\u2026",
+      "url": "https://timesofindia.indiatimes.com/sports/international-sports/jude-bellingham-brings-brother-jobe-to-spanish-grand-prix-as-jos-mourinhos-very-special-verdict-draws-attention/articleshow/134229817.cms",
+      "urlToImage": "https://static.toiimg.com/thumb/msid-134229821,width-1280,height-720,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
+      "publishedAt": "2026-09-14T00:24:17Z",
+      "content": "View All Comments \r\nShare your thoughts in the comments\r\nBe respectful \u00b7 TOI community guidelines"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Managing Madrid"
+      },
+      "author": "Managing Madrid",
+      "title": "Madrid Daily: Yamal\u2019s Mbapp\u00e9 verdict, Courtois\u2019 update, and the race to 100",
+      "description": "Real Madrid\u2019s players visit Formula 1\u2019s newest circuit, Courtois addresses concerns, and La F\u00e1brica prepares for a final",
+      "url": "https://www.managingmadrid.com/latest-news/112850/madrid-daily-yamals-mbappe-verdict-courtois-update-and-the-race-to-100",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/a1b2939ead023bead141a22dddf15c57d38fd19d4e661b1d78e7eb5159c5a218/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fsb_nation_articles_115%2F6ced87e65ca2b7d4c0315056d5e5d97a.jpg",
+      "publishedAt": "2026-09-13T23:52:10Z",
+      "content": "Jos\u00e9 Mourinho and much of Real Madrid's squad spent Sunday afternoon at the Spanish Grand Prix after completing their training session at Valdebebas. The race at Madring, the new circuit around IFEMA\u2026 [+6120 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldwatch.co.uk"
+      },
+      "author": "Anfield Watch",
+      "title": "Liverpool can now sign their next Florian Wirtz",
+      "description": "has been a bit of a flop for Liverpool. The midfielder was brought in for \u00a3116 million last summer with many people believing that his creativeness would be the key to Liverpool's next generation of ...",
+      "url": "https://www.anfieldwatch.co.uk/liverpool-fc/news/liverpool-can-now-sign-their-next-florian-wirtz/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/3f23c711ab92a17acd45f4d69fabdc925d0e0786983ac772d8f5bc30013f75c0/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_watch_articles_625%2Fa27ccd3514ac7e8e1cb1c4ac4713d23e.jpg",
+      "publishedAt": "2026-09-13T17:05:00Z",
+      "content": "has been a bit of a flop for Liverpool.\r\nThe midfielder was brought in for \u00a3116 million last summer with many people believing that his creativeness would be the key to Liverpool's next generation of\u2026 [+3080 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dailymail.com"
+      },
+      "author": "Michael Pavitt",
+      "title": "Real Madrid take over the Spanish Grand Prix: Jude Bellingham is joined by his brother Jobe and Trent Alexander-Arnold as Mourinho is collared trackside by Sky reporter",
+      "description": "Bellingham was seen embracing drivers' championship leader Kimi Antonelli and George Russell , with Real Madrid players and drivers exchanging signed shirts.",
+      "url": "https://www.dailymail.com/sport/football/article-16127739/Real-Madrid-Spanish-Grand-Prix-Jude-Bellingham-brother-Jobe-Trent-Alexander-Arnold-Mourinho.html",
+      "urlToImage": "https://i.dailymail.com/1s/2026/09/13/14/111219805-0-image-m-126_1789306052559.jpg",
+      "publishedAt": "2026-09-13T13:32:55Z",
+      "content": "Jude Bellingham led a cohort of Real Madrid stars in attending the Spanish Grand Prix in the capital, as he declared his support for Mercedes drivers.\r\nBellingham was joined by his brother Jobe whose\u2026 [+2704 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "101 Great Goals"
+      },
+      "author": "Ben Miller",
+      "title": "Real Madrid 4-1 Rayo Vallecano: Report, result, goals",
+      "description": "Kylian Mbappe contributed two goals and an assist as Madrid extended their perfect home record this season to four wins.",
+      "url": "https://www.101greatgoals.com/football/la-liga/real-madrid-rayo-vallecano-report-result-goals-mbappe-bellingham-carreras/",
+      "urlToImage": "https://www.101greatgoals.com/wp-content/uploads/2026/09/Real-Madrid-Inter-Milan-Mbappe-Bellingham.jpg",
+      "publishedAt": "2026-09-12T21:09:02Z",
+      "content": "Kylian Mbappe produced two goals and an assist and Jude Bellingham scored his third goal of the season as Real Madrid moved second in La Liga and stayed perfect at home this season with victory over \u2026 [+4156 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "101 Great Goals"
+      },
+      "author": "Ben Miller",
+      "title": "Real Madrid v Rayo Vallecano: Mbappe scores and assists",
+      "description": "Kylian Mbappe produced a goal and assist in the space of four first-half minutes as Madrid took a 2-0 lead at home to Vallecano.",
+      "url": "https://www.101greatgoals.com/football/la-liga/real-madrid-vs-rayo-vallecano-mbappe-penalty-carreras-goal/",
+      "urlToImage": "https://www.101greatgoals.com/wp-content/uploads/2026/09/Real-Madrid-Inter-Milan-Mbappe-Bellingham.jpg",
+      "publishedAt": "2026-09-12T19:28:38Z",
+      "content": "Kylian Mbappe produced a goal and assist in the space of four first-half minutes as Real Madrid took an early 2-0 lead at home to Rayo Vallecano in La Liga on Saturday.\r\nLast season\u2019s Liga top scorer\u2026 [+3599 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Madriduniversal.com"
+      },
+      "author": "Madrid Universal",
+      "title": "Guler, Bernardo start in a 4-2-3-1: How Real Madrid can line up against Rayo Vallecano",
+      "description": "Real Madrid are back in action in La Liga tonight as they take on Rayo Vallecano at the Santiago Bernabeu as part of Matchday 5.Having won their first three league games of the 2026/27 season under ne...",
+      "url": "https://madriduniversal.com/guler-bernardo-start-in-a-4-2-3-1-how-real-madrid-can-line-up-against-rayo-vallecano/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/3773e5430b7eb9e63ba10051f92a4ae1445a4b2abc58f9e8c594e10af8e50269/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmadrid_universal_articles_561%2Fad4cd21464f47c3eb72592574be0faee.jpg",
+      "publishedAt": "2026-09-12T09:25:00Z",
+      "content": "Real Madrid are back in action in La Liga tonight as they take on Rayo Vallecano at the Santiago Bernabeu as part of Matchday 5.\r\nHaving won their first three league games of the 2026/27 season under\u2026 [+3050 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldwatch.co.uk"
+      },
+      "author": "Anfield Watch",
+      "title": "'Outstanding' star makes Liverpool hierarchy eat their words about his future",
+      "description": "Liverpool have made a lot of changes to their squad this summer. Some players such as Harvey Elliott and Curtis Jones have been moved on, while others, such as Victor Munoz and Jeremy Jacquet have bee...",
+      "url": "https://www.anfieldwatch.co.uk/liverpool-fc/news/outstanding-star-makes-liverpool-hierarchy-eat-their-words-about-his-future/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/81da436e44f20a24344745a5e73041fa2913a50984e978dacc47437858ce3781/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_watch_articles_625%2F28b44b3e7340c6ef4ac1654727c6a6a0.jpg",
+      "publishedAt": "2026-09-12T07:05:00Z",
+      "content": "Liverpool have made a lot of changes to their squad this summer.\r\nSome players such as Harvey Elliott and Curtis Jones have been moved on, while others, such as Victor Munoz and Jeremy Jacquet have b\u2026 [+3274 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "vertical, fast transitions",
+    "out_of_possession": "high line, counter-press"
+  },
+  "news_synthesis": "The recent news cycle around Trent Alexander-Arnold is largely matchday logistics rather than substantive player reporting: Real Madrid lineup predictions and previews for the Elche fixture, a confirmed squad list, talking points ahead of that match, and a bullet-point recap of the win over Rayo Vallecano. One headline references a pundit's criticism of a \"Liverpool ace\" with 15 touches against Fulham, but nothing in the listed items ties that comment to Alexander-Arnold specifically, so it shouldn't be read as relevant to him. There is no meaningful recent news here about his form, role, or status beyond routine squad and fixture coverage.",
+  "fit_read": "The listed stats give a mixed and limited picture for a vertical, fast-transition, high-line, counter-press system. On the pressing/defensive side, 7 interceptions against only 1 tackle won and 0 fouls committed in 214 minutes is a small sample that doesn't clearly signal either strong counter-press engagement or a poor fit -- interception volume is modestly encouraging for reading passing lanes, but the near-absence of tackles and fouls makes it hard to judge duel involvement or aggressive ball-winning. On the ball, 22 crosses and 6 key passes point to a progressive, chance-creating distributor, which suits a team that wants to move the ball forward quickly, though crossing volume can also reflect slower buildup rather than pure transition play. The advanced numbers (0.18 xG, 0.7 xA, 3 shots) are low-output and consistent with a full-back rather than a primary attacking focal point. Critically, there is no pace, sprint, or distance-covered data listed here, so the speed-dependent aspects of transition fit cannot be assessed at all, and the 214-minute sample is too small to draw firm conclusions. With no scout role notes provided, there is no attributed observation to weigh. Given the gaps, this sits at a neutral 3 -- a signal to weigh, not a verdict.",
+  "fit_score": 3,
+  "judge": {
+    "source_accuracy": 100.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "The paragraph asserts the comment is not tied to Alexander-Arnold, but the data provides no basis to determine who the 'Liverpool ace' is, so this is an unsupported inference rather than a neutral reading. (in: \"One headline references a pundit's criticism of a \"Liverpool ace\" with 15 touches against Fulham, but nothing in the listed items ties that comment to Alexander-Arnold specifically, so it shouldn't be read as relevant to him.\")",
+      "This overstates the news read by dismissing all items as routine when the data does not establish that none of the headlines relate to his form, role, or status. (in: \"There is no meaningful recent news here about his form, role, or status beyond routine squad and fixture coverage.\")",
+      "Crosses alone do not establish chance creation, and the data does not show that the crosses were progressive or led to chances, so this conclusion overreaches. (in: \"22 crosses and 6 key passes point to a progressive, chance-creating distributor\")",
+      "Seven interceptions in 214 minutes is a small sample and the data provides no benchmark, so calling it encouraging is an unsupported evaluative conclusion. (in: \"interception volume is modestly encouraging for reading passing lanes\")"
+    ],
+    "confidence_warning": false
+  }
+}

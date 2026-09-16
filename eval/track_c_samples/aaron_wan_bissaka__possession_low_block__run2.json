@@ -1,0 +1,282 @@
+{
+  "player": "Aaron Wan-Bissaka",
+  "fbref_url": "https://fbref.com/en/players/9e525177/Aaron-Wan-Bissaka",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "",
+    "position": "DF-MF (FB, right)",
+    "footed": "Right",
+    "height_weight": "182cm, 72kg",
+    "birth_date": "1997-11-26",
+    "birthplace": "Croydon, England, United Kingdom",
+    "national_team": "Congo DR",
+    "club": "Aston Villa",
+    "contract_expires": "June 2027"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "25",
+    "squad": "Manchester Utd",
+    "competition": "1. Premier League",
+    "matches_played": "22",
+    "starts": "20",
+    "minutes": "1,780",
+    "goals": "0",
+    "assists": "2",
+    "goals_plus_assists": "2",
+    "non_penalty_goals": "0",
+    "yellow_cards": "4",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "17",
+    "fouls_drawn": "9",
+    "offsides": "0",
+    "crosses": "12",
+    "interceptions": "39",
+    "tackles_won": "25",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Aaron Wan-Bissaka",
+    "understat_url": "https://understat.com/player/5584",
+    "understat_team": "Manchester United",
+    "games": "22",
+    "minutes": "1784",
+    "goals": "0",
+    "xG": 0.15,
+    "assists": "2",
+    "xA": 1.43,
+    "npxG": 0.15,
+    "shots": "3",
+    "key_passes": "12"
+  },
+  "quality": {
+    "score": 5,
+    "position_group": "defense",
+    "components": {
+      "defensive_actions_per90": 93.7062937062937
+    },
+    "avg_percentile": 93.7,
+    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "BBC News"
+      },
+      "author": "Nick Mashiter - Football reporter",
+      "title": "Emery left searching for answers after another Villa loss",
+      "description": "Aston Villa have lost three of their opening four Premier League games to leave boss Unai Emery struggling for answers.",
+      "url": "https://www.bbc.com/sport/football/articles/clye91zj7l0o?xtor=AL-72-%5Bpartner%5D-%5Byahoo.north.america%5D-%5Bheadline%5D-%5Bsport%5D-%5Bbizdev%5D-%5Bisapi%5D",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/dd9031d915815c8658d1f3d42834e8a5785dad4472d581734c29a8e96b9fc305/lightyear_networkapi/resizefill_w953_h536%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fbbc_us_articles_995%2F699f86f9255461c13e595f3f465d7c0a.jpg",
+      "publishedAt": "2026-09-12T18:17:39Z",
+      "content": "Nobody said it was going to be easy.\r\nDefender Tyrone Mings summed up the Aston Villa mood as he slumped to the floor at full-time following a 2-1 defeat at home to Nottingham Forest.\r\nThree defeats \u2026 [+5808 chars]"
+    },
+    {
+      "source": {
+        "id": "bbc-news",
+        "name": "BBC News"
+      },
+      "author": "Nick Mashiter",
+      "title": "Emery left searching for answers after another Villa loss",
+      "description": "Aston Villa have lost three of their opening four Premier League games to leave boss Unai Emery struggling for answers.",
+      "url": "https://www.bbc.co.uk/sport/football/articles/clye91zj7l0o",
+      "urlToImage": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/0720/live/9088e100-aed6-11f1-91ea-91f4a2a08fa4.jpg",
+      "publishedAt": "2026-09-12T18:06:29Z",
+      "content": "A late Igor Jesus winner meant Oliver Glasner is now unbeaten in his eight games against Emery and, after a first win as Forest boss, he will view this as one of the sweetest. \r\nLiam Delap scored jus\u2026 [+3090 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Playmakerstats.com"
+      },
+      "author": "Playmakerstats",
+      "title": "Aston Villa x Nottingham Forest - Highlights, Summary and Match Report",
+      "description": "Incidents: The story of the matchAston Villa Official Line-ups: Zion Suzuki, Aaron Wan-Bissaka, Victor Lindel\u00f6f, Pau Torres, Ian Maatsen, Boubacar Kamara, Ross Barkley, Emiliano Buend\u00eda, John McGinn...",
+      "url": "https://www.playmakerstats.com/news/aston-villa-x-nottingham-forest-highlights-summary-and-match-report/1200986",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/ba6b16afb1bf16cb8719959d25f7f94023767dfc4158199ddbafefc84d63fb8a/lightyear_networkapi/resizefill_w620_h413%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fplaymakerstats_articles_264%2F3454940ddb56deea53884d0288a2318c.jpg",
+      "publishedAt": "2026-09-12T16:05:00Z",
+      "content": "(playmakerstats_articles_264)\r\nAston Villa Official Line-ups:\r\nZion Suzuki, Aaron Wan-Bissaka, Victor Lindel\u00f6f, Pau Torres, Ian Maatsen, Boubacar Kamara, Ross Barkley, Emiliano Buend\u00eda, John McGinn, \u2026 [+871 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "English Premier League Index - Opta Stats"
+      },
+      "author": "EPL Index",
+      "title": "Aston Villa Starting XI vs Nottingham Forest: Confirmed Team News and Predicted Lineup",
+      "description": "Aston Villa Predicted XI vs Nottingham Forest: Team News, Injuries and Selection CallsAston Villa go into the Nottingham Forest game looking for back-to-back wins after seeing off Club Brugge in midwe...",
+      "url": "https://eplindex.com/150382/aston-villa-starting-xi-vs-nottingham-forest-confirmed-team-news-and-predicted-lineup-3.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/41d65e0aa75573150ace747fc466c3e43565cbf09b481f4a3ea0900fbdf3c7cc/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fepl_index_articles_253%2Ff8435935f64aef1d6c40845547d3965e.jpg",
+      "publishedAt": "2026-09-12T10:00:00Z",
+      "content": "Aston Villa go into the Nottingham Forest game looking for back-to-back wins after seeing off Club Brugge in midweek. That matters. Momentum early in a season can shape the mood around a squad very q\u2026 [+1785 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Playmakerstats.com"
+      },
+      "author": "Playmakerstats",
+      "title": "PREVIEW | Aston Villa vs Nottingham Forest: team news, lineups, predictions (Premier League 12/09)",
+      "description": "Aston Villa and Nottingham Forest face each other this Saturday at the Villa Park for round four of the Premier League.Aston Villa have won 1 point to date and are placed in 17th position. In their la...",
+      "url": "https://www.playmakerstats.com/news/preview-aston-villa-vs-nottingham-forest-team-news-lineups-predictions-premier-league-12-09/1199251",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/16eda2ec29156e4cf585fe5ff0c0dace5cf5cfe034ae0543fe0aac5c611d943d/lightyear_networkapi/resizefill_w620_h413%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fplaymakerstats_articles_264%2F6b04913a0801f4b40767a2d88720f7cc.jpg",
+      "publishedAt": "2026-09-11T08:46:00Z",
+      "content": "Aston Villa and Nottingham Forest face each other this Saturday at the Villa Park for round four of the Premier League.\r\nAston Villa have won 1 point to date and are placed in 17th position. In their\u2026 [+1997 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The4thofficial.net"
+      },
+      "author": "The 4th Official",
+      "title": "Barkley And Mings To Start | 4-2-3-1 Aston Villa Predicted Lineup Vs Nottingham Forest",
+      "description": "Aston Villa will welcome Nottingham Forest at Villa Park this Saturday as they look to secure a win at home in the Premier League. The Villans managed to earn a hard-fought 3-2 win away at Club Brugge...",
+      "url": "https://the4thofficial.net/2026/09/barkley-and-mings-to-start-4-2-3-1-aston-villa-predicted-lineup-vs-nottingham-forest/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/0eb8457b0c8d2c71b1bb9fe2795c451bb999b60b40fb33318c94200e25cb150a/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_4th_official_articles_868%2F46ad1781274af81dece54518a083164f.jpg",
+      "publishedAt": "2026-09-10T19:25:00Z",
+      "content": "Aston Villa will welcome Nottingham Forest at Villa Park this Saturday as they look to secure a win at home in the Premier League. The Villans managed to earn a hard-fought 3-2 win away at Club Brugg\u2026 [+2064 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The Peoples Person"
+      },
+      "author": "The Peoples Person",
+      "title": "Former Man United ace concedes penalty on full debut for Premier League club",
+      "description": "1Former Manchester United defender Aaron Wan-Bissaka endured a difficult full debut for Aston Villa despite helping Unai Emery\u2019s side beat Club Brugge 3-2 in the Champions League.GiveMeSport judged ...",
+      "url": "https://thepeoplesperson.com/2026/09/10/former-man-united-ace-concedes-penalty-on-full-debut-for-premier-league-club-315498/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/274ff6cc97a54b2c6720f5f1b1056cfbc65f1658b1cb2290155de3342a66dfd8/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_peoples_person_articles_356%2F5f6cad52261fd63c707f453df5f9b8cb.jpg",
+      "publishedAt": "2026-09-10T12:30:00Z",
+      "content": "1\r\nFormer Manchester United defender Aaron Wan-Bissaka endured a difficult full debut for Aston Villa despite helping Unai Emery's side beat Club Brugge 3-2 in the Champions League.\r\nGiveMeSport judg\u2026 [+3378 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "Andy SCOTT",
+      "title": "Real Madrid win Champions League opener as Haaland stars for Man City",
+      "description": "Jose Mourinho got off to a winning start on his return to the Champions League with Real Madrid on Tuesday as the Spanish giants beat Inter Milan 2-1, while Erling Haaland scored twice in Manchester City's victory at Porto.- Welcome win for Villa -\nVilla, las\u2026",
+      "url": "https://sports.yahoo.com/articles/real-madrid-win-champions-league-220559154.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/459a0e6552887a309cf45bf8b277dacd4d02a535e837db764e8ad90ea7f1d49f/lightyear_networkapi/resizefill_w768_h512%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fafp.com%2Fa16ae0b48ca804d2f32ae92a5f0870be.jpg",
+      "publishedAt": "2026-09-08T22:05:59Z",
+      "content": "Jose Mourinho got off to a winning start on his return to the Champions League with Real Madrid on Tuesday as the Spanish giants beat Inter Milan 2-1, while Erling Haaland scored twice in Manchester \u2026 [+4033 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Hayters.com"
+      },
+      "author": "Hayters TV",
+      "title": "Emery delighted with Villa progress as new signings begin to adapt",
+      "description": "Unai Emery believes Aston Villa took an important step forward after securing a dramatic 3-2 Champions League victory over Club Brugge.Villa came out on top in a five-goal contest in Belgium to make a...",
+      "url": "https://hayters.com/emery-delighted-with-villa-progress-as-new-signings-begin-to-adapt/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/fe4ca9f8ac0b670e683269359d106437583cf466318a7916d49ffa253ffdd0e2/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fhayters_tv_491%2F876b60d0ec118063581c6007154a4b69.jpg",
+      "publishedAt": "2026-09-08T21:25:00Z",
+      "content": "Unai Emery believes Aston Villa took an important step forward after securing a dramatic 3-2 Champions League victory over Club Brugge.\r\nVilla came out on top in a five-goal contest in Belgium to mak\u2026 [+668 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The Punch"
+      },
+      "author": "Punch Newspapers",
+      "title": "UCL: Villa end goal drought, beat Brugge 3-2 in Champions League opener",
+      "description": "Aston Villa ended their goal drought with a thrilling 3-2 victory over Club Brugge in their opening UEFA Champions League (UCL) group stage match.\n\nRead More: https://punchng.com/ucl-villa-end-goal-drought-beat-brugge-3-2-in-champions-league-opener/",
+      "url": "https://punchng.com/ucl-villa-end-goal-drought-beat-brugge-3-2-in-champions-league-opener/",
+      "urlToImage": "https://cdn.punchng.com/wp-content/uploads/2026/09/08202151/AFP__20260908__C7PX2AP__v1__MidRes__FblEurC1BruggeAstonVilla_1788895311-1200x630.webp",
+      "publishedAt": "2026-09-08T19:36:19Z",
+      "content": "Aston Villa finally ended their goal drought as they kicked off their Champions League campaign with a 3-2 win against Club Brugge on Tuesday.\r\nUnai Emery\u2019s side have made a dismal start in the Premi\u2026 [+3235 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dailymail.com"
+      },
+      "author": "Tom Collomosse",
+      "title": "The summer signing giving Unai Emery an extra attacking dimension - and the new man he will be alarmed by:\u00a0Club Brugge 2-3 Aston Villa",
+      "description": "TOM COLLOMOSSE AT JAN BREYDEL STADIUM: A first win of the season, a first goal for Nicolas Jackson and the ideal start to Aston Villa's Champions League campaign.",
+      "url": "https://www.dailymail.com/sport/football/article-16113817/The-summer-signing-giving-Unai-Emery-extra-attacking-dimension-new-man-alarmed-Club-Brugge-2-3-Aston-Villa.html",
+      "urlToImage": "https://i.dailymail.com/1s/2026/09/08/20/111124877-0-image-a-11_1788894447078.jpg",
+      "publishedAt": "2026-09-08T19:16:52Z",
+      "content": "A first win of the season, a first goal for Nicolas Jackson and the ideal start to Aston Villa's Champions League campaign but we may not see the best of Unai Emery's men until after the internationa\u2026 [+4525 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The4thofficial.net"
+      },
+      "author": "The 4th Official",
+      "title": "McGinn And Jackson Get 8 | Aston Villa Players Rated In Hard-Fought Win Vs Club Brugge",
+      "description": "Aston Villa clashed heads with Club Brugge at the Jan Breydel Stadium earlier this evening as they looked to secure a good result on the road in the Premier League. The Villans made a good start to th...",
+      "url": "https://the4thofficial.net/2026/09/mcginn-and-jackson-get-8-aston-villa-players-rated-in-hard-fought-win-vs-club-brugge/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/06e813e13dfe403fe321bde3746e9222942f0dfbab1728049e8af93678db2d05/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_4th_official_articles_868%2Fa0395fd560ec9ebd8757fb56bc9789ed.jpg",
+      "publishedAt": "2026-09-08T19:10:00Z",
+      "content": "Aston Villa clashed heads with Club Brugge at the Jan Breydel Stadium earlier this evening as they looked to secure a good result on the road in the Premier League. The Villans made a good start to t\u2026 [+2564 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dpa-international.com"
+      },
+      "author": "DPA",
+      "title": "Aston Villa end scoring rot to beat Brugge in CL opener; AEK also win",
+      "description": "Aston Villa shrugged off their Premier League goal drought when they prevailed 3-2 at Belgium's Club Brugge in their Champions League opener on Tuesday. Veteran John McGinn opened the scoring for Villa with a curling shot into the far corner in the 11th minut\u2026",
+      "url": "https://dpa-international.com/sports/urn:newsml:dpa.com:20090101:260908-930-654873/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/a416ef376f1929595ed20a3794f541851b25f491d715382948dbef039e58d4fb/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fdpa_international_526%2F0dedf57556f5a8c9ff5d12faf3a36b77.jpg",
+      "publishedAt": "2026-09-08T19:03:49Z",
+      "content": "Aston Villa shrugged off their Premier League goal drought when they prevailed 3-2 at Belgium's Club Brugge in their Champions League opener on Tuesday.\r\nVeteran John McGinn opened the scoring for Vi\u2026 [+1550 chars]"
+    },
+    {
+      "source": {
+        "id": "rte",
+        "name": "RTE"
+      },
+      "author": "RT\u00c9 Sport",
+      "title": "Aston Villa fend off Club Brugge to make winning start",
+      "description": "Aston Villa put their goalscoring woes aside as they scored three first-half goals to start their Champions League campaign with a 3-2 victory over Club Brugge.",
+      "url": "https://www.rte.ie/sport/soccer/2026/0908/1590736-aston-villa-fend-off-club-brugge-to-make-winning-start/",
+      "urlToImage": "https://www.rte.ie/images/0024f97b-1600.jpg",
+      "publishedAt": "2026-09-08T18:54:10Z",
+      "content": "Aston Villa put their goalscoring woes aside as they scored three first-half goals to start their Champions League campaign with a 3-2 victory over Club Brugge.\r\nUnai Emery's side failed to score in \u2026 [+3159 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Sky Sports"
+      },
+      "author": null,
+      "title": "Aston Villa attack clicks in thrilling win over Club Brugge",
+      "description": "Report as Aston Villa earn thrilling victory over Club Brugge in Champions League league phase; John McGinn, Emiliano Buendia and Nicolas Jackson score in superb first-half display; Villa hadn't netted in three Premier League games; Unai Emery's side had 21 s\u2026",
+      "url": "https://www.skysports.com/football/news/11945/13582861/club-brugge-2-3-aston-villa-unai-emerys-side-end-scoring-concerns-as-nicolas-jackson-nets-first-goal-in-champions-league-win",
+      "urlToImage": "https://e0.365dm.com/26/09/1600x900/skysports-football-nicolas-jackson_7345387.jpg?20260908200209",
+      "publishedAt": "2026-09-08T18:45:00Z",
+      "content": "Aston Villa produced a superb attacking display to end their scoring concerns and begin their Champions League campaign with a thrilling 3-2 win over Club Brugge.\r\nThe Europa League winners had faile\u2026 [+1312 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "slow, methodical possession",
+    "out_of_possession": "low block, counter"
+  },
+  "news_synthesis": "The recent news items listed do not meaningfully concern Aaron Wan-Bissaka. The headlines are dominated by Aston Villa and Nottingham Forest match coverage, an Aston Villa predicted lineup, a former Manchester United player conceding a penalty on a full debut for another Premier League club (not identified here as Wan-Bissaka), and a Real Madrid/Manchester City Champions League item. Nothing in the last 28 days as listed provides relevant, attributable news about this player, so there is no recent-news signal to report.",
+  "fit_read": "The listed stats give a mixed and incomplete picture for a slow, methodical possession / low block, counter side. Defensively, 39 interceptions and 25 tackles won across 1,780 minutes suggest a player engaged in defensive actions, which is relevant to a low-block or counter-oriented setup, though the stats do not specify where on the pitch these occurred, so whether they reflect deep-block discipline or higher pressing engagement cannot be determined. On the possession side, 12 crosses and 12 key passes over 22 matches is a low attacking/creative volume, and with 0 goals, 2 assists, 0.15 xG and 1.43 xA, the listed output does not indicate a player who drives methodical possession or progressive build-up -- though these numbers alone don't tell us whether that reflects role, team style, or the player's own profile. Discipline markers (17 fouls committed, 4 yellow cards, 0 reds) are moderate and don't clearly signal either fit or misfit for this philosophy. Critically, no pace, sprint, carry, or transition data is listed, so the speed-dependent aspects of a counter-attacking fit cannot be assessed at all, and no role notes from the scout were provided to weigh. Given the mixed defensive signal, the low attacking/creative volume, and the absence of transition and role data, this sits at a neutral 3 -- a signal to weigh, not a verdict.",
+  "fit_score": 3,
+  "judge": {
+    "source_accuracy": 100.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "This asserts a conclusion about the news set's relevance to the player, but the headline 'Former Man United ace concedes penalty on full debut for Premier League club' is plausibly about Wan-Bissaka and the paragraph itself acknowledges the subject is 'not identified here as Wan-Bissaka,' so the flat dismissal overreaches beyond what the listed data establishes. (in: \"The recent news items listed do not meaningfully concern Aaron Wan-Bissaka.\")",
+      "This is a stronger, unhedged conclusion than the data supports, since the ambiguous 'Former Man United ace' headline could plausibly refer to the player and the paragraph cannot rule that out from the listed items alone. (in: \"Nothing in the last 28 days as listed provides relevant, attributable news about this player, so there is no recent-news signal to report.\")"
+    ],
+    "confidence_warning": false
+  }
+}
