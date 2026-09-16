@@ -1,5 +1,31 @@
 # ScoutLite — Build Notes
 
+## Mbappé empty-population bug fixed (2026-09-16, later same day)
+
+The bug flagged in the previous entry ("still open, pending a decision on the fix") -- fixed.
+`compute_quality_signal()` in `scoring.py` now only adds a component to the average when its
+reference population is non-empty (checked at each of the 5 population-building call sites:
+goalkeeper's save%, attack's 4 Understat metrics, midfield's 2 Understat + 1 FBref-misc metric,
+defense's 1 FBref-misc metric). An entirely-empty population (Mbappé's exact case -- 4 games
+into `2026-2027`, nobody league-wide had crossed `MIN_MINUTES_FOR_POPULATION` yet) now correctly
+falls through to the existing `if not components: return None`, same as an uncovered league. A
+*partially* empty case (only one of a midfield player's two source populations being empty)
+now just drops that one component instead of losing the whole signal -- a genuine improvement,
+not just a bug fix, since averaging in a fake 50 was never right even when other real
+components existed alongside it.
+
+Couldn't reproduce the original empty-population state live anymore -- more games have been
+played since Mbappé's capture, so his real reference population is no longer empty. Verified
+the fix two ways instead: (1) two new mocked-population tests in `tests/test_scoring.py`
+(113 tests total) covering the all-empty case (returns `None`) and the partially-empty case
+(drops just the empty component, keeps the real one); (2) re-ran Mbappé's actual capture against
+today's live (now-populated) data -- **5/5**, `avg_percentile: 85.7`, driven by real
+100th-percentile goals and xG per90, which is what a genuinely elite striker's profile should
+look like, and matches the "World's Elite" tier the labeler picked before ever seeing the
+(buggy) 3/5. `eval/track_a_quality_spotcheck.csv`'s Mbappé row updated with the corrected
+numbers and a note explaining the change; deliberately left the `surprising` flag itself as the
+labeler's own call to revisit rather than silently flipping it.
+
 ## Track B labeled and scored for real (2026-09-16)
 
 First full labeling pass on `track_b_labels.csv` (all 70 sentences), plus the A2 quality

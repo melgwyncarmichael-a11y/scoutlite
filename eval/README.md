@@ -131,7 +131,7 @@ recovering to 90%) and re-captured them. 3 new regression tests added to
 `track_b_samples/` held these 11 at the time; the 3 philosophy-set captures described above
 were added straight after, bringing the sample to the 14/70 sentences it stands at now.
 
-## Track A — Quality signal validity (scaffolded, sample captured, not yet labeled)
+## Track A — Quality signal validity (labeled, scored, one bug found and fixed)
 
 Two checks, both against a shared sample in `track_a_samples/` — no LLM, no NewsAPI, just bio
 + stats + the Quality signal, which makes captures here much cheaper than Track B's.
@@ -190,8 +190,52 @@ at all until these were added:
 
 That's not a coincidence worth glossing over: **every midfielder with any attacking or
 defensive involvement this season gets pulled out of "midfield" entirely**, and only a fairly
-narrow defensive-minded pivot (Casemiro-shaped) stays classified as one. Worth stating plainly
-once A1 is labeled, rather than leaving it as 4 anecdotes.
+narrow defensive-minded pivot (Casemiro-shaped) stays classified as one.
+
+### A1 result (2026-09-16): 67% exact match, 87% defensible
+
+The gap between those two numbers is the actual finding. 3 of the 5 mismatches (Bruno
+Fernandes, De Bruyne, Ødegaard — all `FW-MF` → Attack) were called defensible anyway: *"a
+number 10 is in the middle between attack and midfield... makes sense to put a 10 as an
+attacker too."* The other 2 (Declan Rice, Rodri — both `DF-MF (CM-DM)` → Defense) were called
+**not** defensible, and for a sharper reason than "coarse rule": Casemiro, same defensive-
+midfielder role, same `(CM-DM)` tag, gets correctly classified Midfield -- purely because
+FBref didn't prefix him with `DF-`. Same job, two different buckets, by coincidence of which
+code FBref lists first. That's a real inconsistency, not just a blunt simplification.
+
+### A2 result (2026-09-16): 9 of 13 flagged surprising — three distinct causes
+
+1. **Averaging dilutes a specialist's peak trait.** Haaland's components: `goals 100th %ile,
+   xG 99th %ile` but `assists 56th, xA 53rd` -- averaged to 77, just under the 80 cutoff for
+   5/5, landing at 4/5. He's literally top-of-population on the two metrics that define a pure
+   striker; the composite score undersells exactly the thing he's best at.
+2. **Position misclassification directly breaks the signal** for Rodri and Trent
+   Alexander-Arnold -- both land in Defense (see A1), so their *entire* Quality score is one
+   single `defensive_actions_per90` percentile (Rodri: 48th, Trent: 50th). Neither player's
+   actual defining trait (Rodri's tempo control, Trent's creativity from right-back) is
+   measured at all. Same mechanism as Wan-Bissaka's honest 5/5 in `TESTS.md`, just flipped --
+   he got lucky that his one measured metric is his strength; they didn't.
+3. **A real bug, not a limitation** — found and fixed. Mbappé's four components all came back
+   at exactly `50.0%`, which is `percentile_rank()`'s hardcoded empty-population fallback, not
+   four real percentiles. His capture's season (`2026-2027`) was only 4 games in -- essentially
+   no player league-wide had crossed the 450-minute floor yet, so the reference population was
+   genuinely empty, and the signal silently rendered a normal-looking `3/5` carrying zero
+   actual information. **Fixed in `scoring.py`**: a component is only added to the average when
+   its population is non-empty, so an entirely-empty population now correctly returns `None`
+   ("not available") instead of fabricating a neutral score; a *partially* empty case (e.g. one
+   of a midfielder's two source populations) now just drops that one component rather than
+   losing the whole signal. Verified against the real Mbappé data once the fix landed (see
+   below) and covered by two new tests in `tests/test_scoring.py` (113 tests total across the
+   suite) using a mocked empty population, since the real world moved on -- more games have
+   been played since, so the live population is no longer empty and the bug can't be
+   reproduced live anymore.
+
+Re-ran Mbappé's capture after the fix: **now 5/5** (`avg_percentile: 85.7`, driven by real
+100th-percentile goals and xG) — which actually matches the "World's Elite" tier and
+"surprising" flag from the original labeling, since a 3/5 was what looked wrong in the first
+place. `track_a_quality_spotcheck.csv`'s Mbappé row was updated with the corrected numbers and
+a note explaining the change; the `surprising` flag itself was deliberately left as the
+labeler's own call to revisit, not silently flipped.
 
 ## Track C — Fit-signal consistency (scaffolded, one real result so far)
 

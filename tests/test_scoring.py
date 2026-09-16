@@ -65,3 +65,43 @@ def test_understat_population_filters_by_position_and_minutes():
     ]
     pop = scoring._understat_population_per90(players, "attack", "goals")
     assert len(pop) == 1  # only the first player (forward, >= 450 min)
+
+
+class _DummyFBrefReader:
+    """Stands in for sd.FBref(...) so a test never touches soccerdata/network."""
+    def read_player_season_stats(self, stat_type=None):
+        return None
+
+
+def test_compute_quality_signal_returns_none_when_understat_population_is_empty(monkeypatch):
+    # Real bug, found via a real capture (Kylian Mbappe, 2026-2027, 4 games in): early in a
+    # season nobody league-wide has crossed MIN_MINUTES_FOR_POPULATION yet, so the reference
+    # population comes back genuinely empty. Before the fix, every attack component silently
+    # fell back to percentile_rank's 50.0 "neutral" default, producing a fake-looking 3/5 that
+    # was actually measuring nothing. It must return None instead, same as an uncovered league.
+    monkeypatch.setattr(scoring, "fetch_league_players_safe", lambda *a, **k: [])
+    stats = {"minutes": "360", "competition": "1. La Liga", "season": "2026-2027", "squad": "Real Madrid"}
+    xg = {"goals": "4", "assists": "0", "xG": 6.71, "xA": 0.33, "minutes": "360", "key_passes": "4"}
+    result = scoring.compute_quality_signal(
+        "FW-MF", "1. La Liga", "2026-2027", "Kylian Mbappe", stats, None, None, xg,
+    )
+    assert result is None
+
+
+def test_compute_quality_signal_drops_only_the_empty_component_not_the_whole_signal(monkeypatch):
+    # The midfield group draws from TWO separate populations (Understat for creativity, FBref
+    # misc for defensive actions) -- one being empty shouldn't zero out the other. A genuinely
+    # mixed case: Understat's population is empty (e.g. early season), but FBref's misc
+    # population has real data.
+    monkeypatch.setattr(scoring, "fetch_league_players_safe", lambda *a, **k: [])
+    monkeypatch.setattr(scoring.sd, "FBref", lambda *a, **k: _DummyFBrefReader())
+    monkeypatch.setattr(scoring, "_fbref_misc_population_per90", lambda *a, **k: [2.0, 4.0, 6.0])
+
+    stats = {"minutes": "900", "competition": "1. Premier League", "season": "2023-2024", "squad": "Arsenal"}
+    xg = {"key_passes": "10", "assists": "2", "xG": 3.0, "xA": 1.5, "minutes": "900", "goals": "1"}
+    misc = {"interceptions": "10", "tackles_won": "8"}
+    result = scoring.compute_quality_signal(
+        "MF", "1. Premier League", "2023-2024", "Some Midfielder", stats, misc, None, xg,
+    )
+    assert result is not None
+    assert set(result["components"]) == {"defensive_actions_per90"}  # key_passes/xA dropped, not faked

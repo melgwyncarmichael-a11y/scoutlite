@@ -167,12 +167,23 @@ def compute_quality_signal(
     soccerdata_league = fbref_comp_to_soccerdata_league(comp_level)
     components = {}
 
+    # A component is only added when its reference population is non-empty. percentile_rank()
+    # returns 50.0 ("neutral") for an empty population -- fine as a fallback for THAT function,
+    # but silently averaging one or more of those into the signal produces a real-looking score
+    # built on zero actual data. Found via a real capture: early in a season (a handful of games
+    # in), essentially no player league-wide has crossed MIN_MINUTES_FOR_POPULATION yet, so the
+    # WHOLE population comes back empty -- every component fell back to exactly 50.0, and the
+    # signal reported a normal-looking "3/5" that was actually measuring nothing (Kylian Mbappe,
+    # 2026-2027, 4 games in -- see NOTES.md). Skipping empty-population components here means
+    # the final `if not components: return None` below now catches that case correctly, the
+    # same way it already catches an uncovered league or missing data.
     if group == "goalkeeper":
         if soccerdata_league is None or keeper is None or not keeper.get("save_pct"):
             return None
         sd_reader = sd.FBref(leagues=soccerdata_league, seasons=season, no_cache=force_refresh)
         keeper_pop = _fbref_keeper_population(sd_reader.read_player_season_stats(stat_type="keeper"))
-        components["save_pct"] = percentile_rank(float(keeper["save_pct"]), keeper_pop)
+        if keeper_pop:
+            components["save_pct"] = percentile_rank(float(keeper["save_pct"]), keeper_pop)
 
     else:
         minutes = float(str(stats.get("minutes", "0")).replace(",", "") or 0)
@@ -189,21 +200,25 @@ def compute_quality_signal(
                 if group == "attack":
                     for field, key in [("goals", "goals_per90"), ("assists", "assists_per90"), ("xG", "xG_per90"), ("xA", "xA_per90")]:
                         pop = _understat_population_per90(players, group, field)
-                        components[key] = percentile_rank(per90(float(xg[field]), float(xg["minutes"])), pop)
+                        if pop:
+                            components[key] = percentile_rank(per90(float(xg[field]), float(xg["minutes"])), pop)
                 elif group == "midfield":
                     kp_pop = _understat_population_per90(players, group, "key_passes")
                     xa_pop = _understat_population_per90(players, group, "xA")
-                    components["key_passes_per90"] = percentile_rank(per90(float(xg["key_passes"]), float(xg["minutes"])), kp_pop)
-                    components["xA_per90"] = percentile_rank(per90(float(xg["xA"]), float(xg["minutes"])), xa_pop)
+                    if kp_pop:
+                        components["key_passes_per90"] = percentile_rank(per90(float(xg["key_passes"]), float(xg["minutes"])), kp_pop)
+                    if xa_pop:
+                        components["xA_per90"] = percentile_rank(per90(float(xg["xA"]), float(xg["minutes"])), xa_pop)
 
         if group in ("midfield", "defense") and soccerdata_league and misc:
             sd_reader = sd.FBref(leagues=soccerdata_league, seasons=season, no_cache=force_refresh)
             misc_df = sd_reader.read_player_season_stats(stat_type="misc")
             def_pop = _fbref_misc_population_per90(misc_df, group)
-            def_value = per90(
-                float(misc.get("interceptions", 0) or 0) + float(misc.get("tackles_won", 0) or 0), minutes
-            )
-            components["defensive_actions_per90"] = percentile_rank(def_value, def_pop)
+            if def_pop:
+                def_value = per90(
+                    float(misc.get("interceptions", 0) or 0) + float(misc.get("tackles_won", 0) or 0), minutes
+                )
+                components["defensive_actions_per90"] = percentile_rank(def_value, def_pop)
 
     if not components:
         return None
