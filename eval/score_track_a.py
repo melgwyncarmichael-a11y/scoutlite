@@ -18,7 +18,11 @@ DEFAULT_QUALITY_CSV = HERE / "track_a_quality_spotcheck.csv"
 
 
 def _truthy(v: str) -> bool:
-    return (v or "").strip().lower() in ("y", "yes", "true", "1")
+    # A real labeler writes a full sentence ("Yes, same role, I think it's correct"), not a
+    # bare "y" -- an exact-match check against "y"/"yes" silently reads every one of those as
+    # false. Read intent off the first word instead: starts with y/true, or is bare "1".
+    v = (v or "").strip().lower()
+    return v.startswith("y") or v.startswith("true") or v == "1"
 
 
 def load_rows(csv_path: Path) -> list[dict]:

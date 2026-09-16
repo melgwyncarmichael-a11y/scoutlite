@@ -1,16 +1,16 @@
 player,raw_position,assigned_group,expected_group,defensible,notes
-Aaron Wan-Bissaka,"DF-MF (FB, right)",defense,,,
-Bruno Fernandes,FW-MF (AM-CM-DM),attack,,,
-Casemiro,MF (CM-DM),midfield,,,
-Danny Ward,FW-MF (AM-WM),attack,,,
-David Raya,GK,goalkeeper,,,
-Declan Rice,DF-MF (CM-DM),defense,,,
-Erling Haaland,FW-MF,attack,,,
-Kevin De Bruyne,FW-MF (AM-CM-WM),attack,,,
-Kylian Mbappé,FW-MF,attack,,,
-Macaulay Langstaff,FW,attack,,,
-Martin Odegaard,FW-MF (AM-CM),attack,,,
-Rodri,DF-MF (CM-DM),defense,,,
-Trent Alexander-Arnold,"DF-MF (FB, right)",defense,,,
-Vinicius Junior,"FW-MF (AM, left)",attack,,,
-Virgil van Dijk,DF (CB),defense,,,
+Aaron Wan-Bissaka,"DF-MF (FB, right)",defense,defense,Yes same role I think its correct,Correct wan bissaka is a right back
+Bruno Fernandes,FW-MF (AM-CM-DM),attack,Midfield,Yes a reasonable read as number 10 is in the middle between attack and midfield,"I think bruno is midfield not attack, but makes sense to classify there as an AM"
+Casemiro,MF (CM-DM),midfield,Midfield,Yes even if Casemiro is a defensive midfielder by trade I would put him there,Correct Casemiro is a midfielder
+Danny Ward,FW-MF (AM-WM),attack,attack,Yes correct verified by transfermarkt,Yes I checked transfermarkt and I for ward is a centre forward
+David Raya,GK,goalkeeper,Goalkeeper,Yes correct David raya is a keeper ,Yes David Raya is a keeper for arsenal
+Declan Rice,DF-MF (CM-DM),defense,Midfield,"No, I think if Casemiro falls into midfield then Declan rice should fall into it as well",I think Declan needs to be treated like Casemiro as they are both defensive midfielres
+Erling Haaland,FW-MF,attack,attack,Yes correct,I think Haaland is a striker as well
+Kevin De Bruyne,FW-MF (AM-CM-WM),attack,Midfield,Yes a reasonable read as number 10 is in the middle between attack and midfield,I think that kdb is a midfielder and not an attacker but I think it makes sense to put a 10 as an attacker too
+Kylian Mbappé,FW-MF,attack,attack,Yes same role i think its correct,Yes mbappe is a striker
+Macaulay Langstaff,FW,attack,attack,Yes same role i think its correct,Yes I checked transfermarkt and heis a centre forward
+Martin Odegaard,FW-MF (AM-CM),attack,Midfield,Yes a reasonable read as number 10 is in the middle between attack and midfield,I think that odegaard is midfield not attack but it could make sense to classify him there as an AM
+Rodri,DF-MF (CM-DM),defense,Midfield,"No, I think Rodri should fall on the Casemiro line and rice too as well ",I think Rodri needs to fall into the defensive midfield and needs to be treated like the Casemiro case
+Trent Alexander-Arnold,"DF-MF (FB, right)",defense,Defense,Yes same role I think its correct,Correct Trent is by trade a right back
+Vinicius Junior,"FW-MF (AM, left)",attack,Attack,Yes same role i think its correct,Correct I think Vinicius is a left winger
+Virgil van Dijk,DF (CB),defense,Defense,Yes same role i think its correct,Correct I think VVD is a cb

@@ -25,6 +25,31 @@ from pathlib import Path
 DEFAULT_CSV = Path(__file__).resolve().parent / "track_b_labels.csv"
 ISSUE_LABELS = {"invented", "overstated", "verdict-language"}
 
+# A real labeler writes a full sentence ("I think this is invented because..."), not a bare
+# category word -- matching the cell verbatim against "invented" silently drops every one of
+# those into an "unrecognized label" bucket. Match by keyword instead; order matters where a
+# sentence could plausibly contain more than one (checked most-specific first).
+_LABEL_KEYWORDS = [
+    ("verdict-language", ("verdict",)),
+    ("invented", ("invent", "made up", "made-up", "fabricat")),
+    ("overstated", ("overstat", "hype", "exagg")),
+    ("unclear", ("unclear", "not sure", "unsure")),
+    ("grounded", ("ground",)),  # checked last -- the "fine" label shouldn't win a keyword tie
+]
+
+
+def _normalize_label(raw: str) -> str:
+    text = (raw or "").strip().lower()
+    for canonical, keywords in _LABEL_KEYWORDS:
+        if any(kw in text for kw in keywords):
+            return canonical
+    return text  # unrecognized -- kept as-is so it's visible in label_counts, not silently lost
+
+
+def _truthy(v: str) -> bool:
+    v = (v or "").strip().lower()
+    return v.startswith("y") or v.startswith("true") or v == "1"
+
 
 def load_rows(csv_path: Path) -> list[dict]:
     with csv_path.open(newline="", encoding="utf-8") as f:
@@ -39,8 +64,8 @@ def score(rows: list[dict]) -> dict:
     label_counts = Counter()
 
     for r in labeled:
-        label = r["human_label"].strip().lower()
-        caught = r.get("caught_by_judge", "").strip().lower() in ("y", "yes", "true", "1")
+        label = _normalize_label(r["human_label"])
+        caught = _truthy(r.get("caught_by_judge", ""))
         label_counts[label] += 1
         if label in ISSUE_LABELS:
             by_label[label]["total"] += 1
@@ -50,8 +75,7 @@ def score(rows: list[dict]) -> dict:
     grounded_total = label_counts.get("grounded", 0)
     grounded_flagged = sum(
         1 for r in labeled
-        if r["human_label"].strip().lower() == "grounded"
-        and r.get("caught_by_judge", "").strip().lower() in ("y", "yes", "true", "1")
+        if _normalize_label(r["human_label"]) == "grounded" and _truthy(r.get("caught_by_judge", ""))
     )
 
     recall_by_category = {

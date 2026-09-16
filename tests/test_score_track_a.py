@@ -40,6 +40,21 @@ def test_position_survey_defensible_is_separate_from_exact_match():
     assert r["defensible_rate"] == 1.0
 
 
+def test_defensible_full_sentence_answers_are_recognized():
+    # Real labeling (2026-09-16) came back as full sentences ("Yes, same role, I think it's
+    # correct" / "No, I think Rodri should fall on the Casemiro line..."), not bare y/n -- an
+    # exact-match check against "y" would silently read every one of these as false.
+    rows = [
+        {"player": "Wan-Bissaka", "assigned_group": "defense", "expected_group": "defense",
+         "defensible": "Yes same role I think its correct"},
+        {"player": "Rodri", "assigned_group": "defense", "expected_group": "midfield",
+         "defensible": "No, I think Rodri should fall on the Casemiro line and rice too as well"},
+    ]
+    r = score_position_survey(rows)
+    assert r["defensible_labeled"] == 2
+    assert r["defensible_rate"] == 0.5  # one clear "Yes...", one clear "No..."
+
+
 def test_position_survey_case_insensitive():
     rows = [{"player": "A", "assigned_group": "Attack", "expected_group": "attack", "defensible": ""}]
     r = score_position_survey(rows)
