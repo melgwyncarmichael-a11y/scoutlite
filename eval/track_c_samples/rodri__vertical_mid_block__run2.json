@@ -1,0 +1,286 @@
+{
+  "player": "Rodri",
+  "fbref_url": "https://fbref.com/en/players/6434f10d/Rodri",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "Rodrigo Hern\u00e1ndez Cascante",
+    "position": "DF-MF (CM-DM)",
+    "footed": "Right",
+    "height_weight": "190cm, 84kg",
+    "birth_date": "1996-06-22",
+    "birthplace": "Madrid, Spain",
+    "national_team": "Spain",
+    "club": "Barcelona",
+    "contract_expires": "June 2030"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "27",
+    "squad": "Manchester City",
+    "competition": "1. Premier League",
+    "matches_played": "34",
+    "starts": "34",
+    "minutes": "2,931",
+    "goals": "8",
+    "assists": "9",
+    "goals_plus_assists": "17",
+    "non_penalty_goals": "8",
+    "yellow_cards": "8",
+    "red_cards": "1"
+  },
+  "misc": {
+    "fouls_committed": "41",
+    "fouls_drawn": "35",
+    "offsides": "6",
+    "crosses": "12",
+    "interceptions": "25",
+    "tackles_won": "43",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Rodri",
+    "understat_url": "https://understat.com/player/2496",
+    "understat_team": "Manchester City",
+    "games": "34",
+    "minutes": "2967",
+    "goals": "8",
+    "xG": 4.29,
+    "assists": "9",
+    "xA": 5.33,
+    "npxG": 4.29,
+    "shots": "62",
+    "key_passes": "50"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "defense",
+    "components": {
+      "defensive_actions_per90": 48.25174825174825
+    },
+    "avg_percentile": 48.3,
+    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "Onefootball.com"
+      },
+      "author": "OneFootball",
+      "title": "\u2615\ufe0f Mbapp\u00e9-Demb\u00e9l\u00e9 feud?, English VAR in crisis and 5\ufe0f\u20e3 top stories",
+      "description": "Ready to get your Wednesday off to the best possible start? Do it with these five stories we\u2019ve picked out for you.\u2694\ufe0f \"Demb\u00e9l\u00e9 is very angry with Mbapp\u00e9\"Jerome Rothen (RMC) believes that many...",
+      "url": "https://onefootball.com/en/news/mbappe-dembele-feud-english-var-in-crisis-and-5-top-stories-43461716",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/efb77b7a2ae4d2fb85d316156dadb3be2f259325593687230d8d4201e2d35cb6/lightyear_networkapi/resizefill_w1024_h714%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fonefootball_articles_802%2Feb1d40b18478f6a702fc26b4b034716f.jpg",
+      "publishedAt": "2026-09-15T06:25:00Z",
+      "content": "Ready to get your Wednesday off to the best possible start? Do it with these five stories we've picked out for you.\r\nJerome Rothen (RMC) believes that many players in the French national team were st\u2026 [+1762 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Barcauniversal.com"
+      },
+      "author": "Barca Universal",
+      "title": "Rodri opens up on private conversation with Real Madrid manager Jose Mourinho before Barcelona move: \u2018Treated me very well\u2019",
+      "description": "Rodri has revealed details of his private conversation with Jose Mourinho after Real Madrid attempted to beat Barcelona to the blockbuster signing during the summer transfer window.The Spanish World C...",
+      "url": "https://barcauniversal.com/rodri-opens-up-on-private-conversation-with-real-madrid-manager-jose-mourinho-before-barcelona-move-treated-me-very-well/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/eb193e570c74b59660a49b7af94c4ef6c36db966e4b6584e3b2a623a9818b76e/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fbarca_universal_articles_732%2F879821fb43b849e6057b612f980bb4ca.jpg",
+      "publishedAt": "2026-09-15T06:20:00Z",
+      "content": "Rodri has revealed details of his private conversation with Jose Mourinho after Real Madrid attempted to beat Barcelona to the blockbuster signing during the summer transfer window.\r\nThe Spanish Worl\u2026 [+1946 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Barcauniversal.com"
+      },
+      "author": "Barca Universal",
+      "title": "Rodri explains what convinced him to reject Real Madrid for Barcelona: \u2018It was more about football itself\u2019",
+      "description": "Rodri has revealed that Barcelona\u2019s sporting project gave him more reason to choose the Catalan club over Real Madrid after deciding to leave Manchester City.The Barcelona summer signing discussed t...",
+      "url": "https://barcauniversal.com/rodri-explains-what-convinced-him-to-reject-real-madrid-for-barcelona-it-was-more-about-football-itself/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/015bb9dde7ea706405bac0e5474b33d3456dcfab7f007a46f09b022bba65d464/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fbarca_universal_articles_732%2Fa2e4f567ef8efc2fc5eb4d6d13a5e268.jpg",
+      "publishedAt": "2026-09-15T06:00:00Z",
+      "content": "Rodri has revealed that Barcelona's sporting project gave him more reason to choose the Catalan club over Real Madrid after deciding to leave Manchester City.\r\nThe Barcelona summer signing discussed \u2026 [+3092 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Madriduniversal.com"
+      },
+      "author": "Madrid Universal",
+      "title": "Barcelona midfielder Rodri reveals why he did not join Real Madrid: \u2018I made my decision based on..\u2019",
+      "description": "Spanish National Team captain Rodri was one of Real Madrid\u2019s top midfield targets in the recently concluded summer transfer window, and there was even a point when the club were said to have a verba...",
+      "url": "https://madriduniversal.com/barcelona-midfielder-rodri-reveals-why-he-did-not-join-real-madrid-i-made-my-decision-based-on/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/1c45d202597d446291927e2bc060021eabc96f3e6efe752f0cd65539904f1526/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmadrid_universal_articles_561%2F6b8d891244c9018aa0e4db455dc111c9.jpg",
+      "publishedAt": "2026-09-15T06:00:00Z",
+      "content": "Spanish National Team captain Rodri was one of Real Madrid's top midfield targets in the recently concluded summer transfer window, and there was even a point when the club were said to have a verbal\u2026 [+2111 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Onefootball.com"
+      },
+      "author": "OneFootball",
+      "title": "\ufe0f Front pages: the Ballon d'Or race is now unstoppable",
+      "description": "Are we already knee-deep in Ballon d'Or talk? We are already knee-deep in Ballon d'Or talk.There are 41 days left until the verdict, and the sports front pages are starting to fuel a very juicy debate...",
+      "url": "https://onefootball.com/en/news/front-pages-the-ballon-dor-race-is-now-unstoppable-43461617",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/7af95acc717d57562f59b2c83534b9006a7d63fa80fa3ae9ababde0e02ca9169/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fonefootball_articles_802%2Fff68f87ef42fd6d99fa4cef64336955c.jpg",
+      "publishedAt": "2026-09-15T05:50:00Z",
+      "content": "Are we already knee-deep in Ballon d'Or talk? We are already knee-deep in Ballon d'Or talk.\r\nThere are 41 days left until the verdict, and the sports front pages are starting to fuel a very juicy deb\u2026 [+1229 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Just Arsenal News"
+      },
+      "author": "Michelle",
+      "title": "Have Gooners Been Unfair On Martin Zubimendi? \u2013 Opinion",
+      "description": "The early rounds of the Carabao Cup are often an ideal opportunity for managers to rest key talent and give minutes to those in need of a start. It says a lot about Arsenal\u2019s squad depth that they could name a different XI to the one that started on Saturday \u2026",
+      "url": "https://www.justarsenal.com/have-gooners-been-unfair-on-martin-zubimendi-opinion/422008",
+      "urlToImage": "https://icdn.justarsenal.com/wp-content/uploads/2026/08/Martin-Zubimendi-v-Coventry.jpg",
+      "publishedAt": "2026-09-14T22:00:00Z",
+      "content": "The early rounds of the Carabao Cup are often an ideal opportunity for managers to rest key talent and give minutes to those in need of a start.\r\nIt says a lot about Arsenals squad depth that they co\u2026 [+3955 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Getfootballnewsspain.com"
+      },
+      "author": "Get Spanish Football News",
+      "title": "Barcelona star: \u2018We\u2019re not favourites to win the Champions League\u2019",
+      "description": "Barcelona summer signing Rodri has early this week revealed his take that he and his teammates should not be considered the frontrunners to go all the way on the continent this season.Barca are of cou...",
+      "url": "https://getfootballnewsspain.com/barcelona-star-were-not-favourites-to-win-the-champions-league/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/fee6150120b993e6c3f7be82e8a786b68c0bbef76cadb4e9f7420edc882de710/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fget_spanish_football_news_articles_403%2F282db788e4f2d3b19a08b40c587e4c48.jpg",
+      "publishedAt": "2026-09-14T20:20:00Z",
+      "content": "Barcelona summer signing Rodri has early this week revealed his take that he and his teammates should not be considered the frontrunners to go all the way on the continent this season.\r\nBarca are of \u2026 [+1825 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Playmakerstats.com"
+      },
+      "author": "Playmakerstats",
+      "title": "PREVIEW | Barcelona vs Racing Santander: team news, lineups, predictions (La Liga 16/09)",
+      "description": "Barcelona and Racing Santander face off this Wednesday at the Spotify Camp Nou in La Liga.Barcelona have picked up 15 points and currently lie in 1st position. In their last fixture, Hans-Dieter Flick...",
+      "url": "https://www.playmakerstats.com/news/preview-barcelona-vs-racing-santander-team-news-lineups-predictions-la-liga-16-09/1202867",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/1b78780aeec6640f0bcffe0d3f33f974537a9453b0624f136df6561c9d0f3e20/lightyear_networkapi/resizefill_w620_h413%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fplaymakerstats_articles_264%2F6fd99b2088758c1fb1bd2aa81b80621b.jpg",
+      "publishedAt": "2026-09-14T19:45:00Z",
+      "content": "Barcelona and Racing Santander face off this Wednesday at the Spotify Camp Nou in La Liga.\r\nBarcelona have picked up 15 points and currently lie in 1st position. In their last fixture, Hans-Dieter Fl\u2026 [+2418 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Barcauniversal.com"
+      },
+      "author": "Barca Universal",
+      "title": "Rodri rates Barcelona\u2019s chances of winning the Champions League: \u2018It\u2019s achievable, but I don\u2019t think we\u2019re favourites\u2019",
+      "description": "Having arrived from Manchester City in the summer, Rodri has quickly settled into life at FC Barcelona. The 30-year-old Spain captain has already become a permanent fixture in the team, elevating the ...",
+      "url": "https://barcauniversal.com/rodri-rates-barcelonas-chances-of-winning-the-champions-league-its-achievable-but-i-dont-think-were-favourites/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/3d99f1e88e5cef18c8c4977c9ae06158e4bb9b886bb49192ad8f567eff914c7f/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fbarca_universal_articles_732%2F263a105ad09ee12e79468c51ef0e704d.jpg",
+      "publishedAt": "2026-09-14T18:40:00Z",
+      "content": "Having arrived from Manchester City in the summer, Rodri has quickly settled into life at FC Barcelona.\r\nThe 30-year-old Spain captain has already become a permanent fixture in the team, elevating th\u2026 [+3774 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Barca Blaugranes"
+      },
+      "author": "Gill Clark",
+      "title": "Can Hansi Flick keep all his midfielders happy at Barcelona this season?",
+      "description": "The coach is spoilt for choice.",
+      "url": "https://www.barcablaugranes.com/cant-del-blog-barcelona-opinion/132422/can-hansi-flick-midfielders-happy",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/d9a271af3900d5ec42b70ca972d2f58ff5700244cebd8b6b5bef45922f12c1f0/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fsb_nation_articles_115%2F18260096ab5f9b58e6de3d6462aecefe.jpg",
+      "publishedAt": "2026-09-14T18:00:00Z",
+      "content": "Barcelona have put together a strong squad for the 2026-27 season after a busy summer in the transfer window, meaning Hansi Flick has plenty of options, particularly in midfield.\r\nThe German coach ha\u2026 [+1153 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Madriduniversal.com"
+      },
+      "author": "Madrid Universal",
+      "title": "Real Madrid could spend \u20ac120 million to sign a new midfielder in 2027",
+      "description": "Real Madrid showed their intent to return to the top of European football by spending a fortune on several players this summer.The biggest investment was Yan Diomande, who joined Real Madrid for a fee...",
+      "url": "https://madriduniversal.com/real-madrid-could-spend-e120-million-to-sign-a-new-midfielder-in-2027/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/3f19edd6241a42e31c899bee36dd1426184668e792bef4244f673fa73e3caaf1/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmadrid_universal_articles_561%2Fc5b787da4b4e59b92a0528998c47342b.jpg",
+      "publishedAt": "2026-09-14T15:25:00Z",
+      "content": "Real Madrid showed their intent to return to the top of European football by spending a fortune on several players this summer.\r\nThe biggest investment was Yan Diomande, who joined Real Madrid for a \u2026 [+2033 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "Jeff Rueter",
+      "title": "In Manchester, Premier League superiority is now separated by Haaland\u2019s cutting edge",
+      "description": "In a bad-tempered meeting at Old Trafford, United and City showed they are far from the finished product",
+      "url": "https://sports.yahoo.com/articles/manchester-premier-league-superiority-now-150011397.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/ef74ed50e3c73046294f47d590e447c24c498d0c2e48c3bab90a4b89eeb5de63/lightyear_networkapi/resizefill_w1000_h800%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_guardian_765%2F1a1872e5254a63c6ef49534d1a78c453.jpg",
+      "publishedAt": "2026-09-14T15:00:11Z",
+      "content": "While London has a host of top-flight clubs and Liverpool have been regular contenders, the story of the Premier League can almost entirely be told with Mancunian main characters.\r\nFrom Manchester Un\u2026 [+3621 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Ibtimes.com.au"
+      },
+      "author": "Chris Walker",
+      "title": "Lamine Yamal Is Entering the Lionel Messi Zone as Barcelona Star Declares He Deserves the 2026 Ballon d'Or",
+      "description": "Lamine Yamal scored twice in Barcelona's 4-2 win over Levante, extending their perfect La Liga start and adding weight to comparisons with Lionel Messi and his Ballon d'Or claim.",
+      "url": "https://www.ibtimes.com.au/lamine-yamal-barcelona-perfect-la-liga-start-1875508",
+      "urlToImage": "https://d.ibtimes.com.au/en/full/1895052/lamine-yamal-calls-lionel-messis-world-cup-form-incredible-ahead.jpg",
+      "publishedAt": "2026-09-14T14:28:40Z",
+      "content": "BARCELONA \u2014 Lamine Yamal scored twice as Barcelona beat Levante 4-2 on Sunday, extending the club's perfect start to the La Liga season and opening a three-point lead over Real Madrid, the latest mil\u2026 [+5711 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Siempremadrid.com"
+      },
+      "author": "Madrid Voice Articles",
+      "title": "Arsenal ready to approve \u20ac70m star\u2019s January move to Real Madrid",
+      "description": "Real Madrid decided against signing a new midfielder in the summer, after missing out on top targets Enzo Fernandez and Rodri. However, they have not discarded the matter completely, and a new move co...",
+      "url": "https://siempremadrid.com/arsenal-ready-to-approve-e70m-stars-january-move-to-real-madrid/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/0672899a2a7cc861e2def65b1bd01ee5a7fd5e4e456e4ae75ca613a5b108d293/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmadrid_voice_articles_898%2Fd359ec07b92e236d9198a85c2640cb25.jpg",
+      "publishedAt": "2026-09-14T12:15:00Z",
+      "content": "Real Madrid decided against signing a new midfielder in the summer, after missing out on top targets Enzo Fernandez and Rodri. However, they have not discarded the matter completely, and a new move c\u2026 [+1711 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dpa-international.com"
+      },
+      "author": "DPA",
+      "title": "Lamine Yamal stakes claim on this year\u2019s Ballon d\u2019Or",
+      "description": "Barcelona forward Lamine Yamal says he deserves to win the Ballon d\u2019Or this year. Yamal believes he and Real Madrid\u2019s Kylian Mbapp\u00e9 are the best players in the world, but the 19-year-old Spain World Cup winner says his trophy collection gives him the edge ahe\u2026",
+      "url": "https://dpa-international.com/sports/urn:newsml:dpa.com:20090101:260914-930-683044/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/6eba132ab8b9526530b5cd2e400b91d447475f50fb44bede4f74be74a4a6ba1c/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fdpa_international_526%2F8f7231dd5976ddaa777d26f14b0135f5.jpg",
+      "publishedAt": "2026-09-14T12:03:36Z",
+      "content": "Barcelona forward Lamine Yamal says he deserves to win the Ballon d'Or this year.\r\nYamal believes he and Real Madrid's Kylian Mbapp\u00e9 are the best players in the world, but the 19-year-old Spain World\u2026 [+1016 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "vertical, fast transitions",
+    "out_of_possession": "mid block, hybrid"
+  },
+  "news_synthesis": "The recent headlines are dominated by Rodri discussing his decision to reject Real Madrid in favor of Barcelona, including a private conversation with Jose Mourinho, and his reasoning being \"more about football itself.\" There is also a front-page mention of the Ballon d'Or race. Notably, these headlines reference Barcelona, not Manchester City, and do not provide performance-relevant news from the last 28 days. No recent news directly addresses his on-pitch form or role.",
+  "fit_read": "The stats listed show strong defensive involvement (43 tackles won, 25 interceptions, 41 fouls committed) and meaningful creative output (50 key passes, 9 assists, 5.33 xA) from a central midfield role. For a vertical, fast-transition / mid-block hybrid, the tackles won and interceptions suggest some capacity for defensive actions that could relate to pressing or mid-block recovery, but the stats do not specify where on the pitch these occur or how often he engages in high-intensity pressing. The key passes and assists indicate distribution quality, which could support quick transitions, but without pass direction, progressive carries, or sprint data, it is not possible to judge whether his distribution style matches fast vertical play. The low cross count (12) suggests he is not a wide or crossing-oriented midfielder, which is neutral for this philosophy. The scout's role notes are not present. Critically, no pace, sprint, or distance-covered data is listed, so speed-dependent transition fit cannot be assessed. Similarly, no pressing frequency or success-rate data is provided, so the mid-block and pressing demands cannot be fully evaluated. Given the lack of sufficient data on the specific demands of this philosophy, the score remains neutral at 3.",
+  "fit_score": 3,
+  "judge": {
+    "source_accuracy": 100.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "Only three of eight headlines concern Rodri's Real Madrid/Barcelona decision, so 'dominated' overstates their share of the news set. (in: \"The recent headlines are dominated by Rodri discussing his decision to reject Real Madrid in favor of Barcelona\")",
+      "The headline says the conversation was with 'Real Madrid manager Jose Mourinho,' but Mourinho was not Real Madrid manager in the relevant period, and the paragraph presents this framing without noting the headline's own questionable characterization. (in: \"including a private conversation with Jose Mourinho\")",
+      "This is accurate for the Rodri headlines but ignores that the available data lists Rodri's squad as Manchester City, creating an unremarked contradiction the paragraph treats as settled rather than flagging as a data/news mismatch. (in: \"Notably, these headlines reference Barcelona, not Manchester City\")",
+      "Tackles won and interceptions are defensive actions but do not by themselves indicate pressing or mid-block recovery, so this links the numbers to a specific tactical mechanism the stats do not measure. (in: \"the tackles won and interceptions suggest some capacity for defensive actions that could relate to pressing or mid-block recovery\")",
+      "Key passes and assists measure final-third creation, not transition distribution, so using them as evidence for quick-transition support is an overreach. (in: \"The key passes and assists indicate distribution quality, which could support quick transitions\")",
+      "A low cross count is consistent with a central role but does not establish that he is not crossing-oriented, since crossing volume also depends on role and team style. (in: \"The low cross count (12) suggests he is not a wide or crossing-oriented midfielder\")"
+    ],
+    "confidence_warning": false
+  }
+}

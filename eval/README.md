@@ -237,7 +237,7 @@ place. `track_a_quality_spotcheck.csv`'s Mbappé row was updated with the correc
 a note explaining the change; the `surprising` flag itself was deliberately left as the
 labeler's own call to revisit, not silently flipped.
 
-## Track C — Fit-signal consistency (3 cases run — a bigger finding than instability)
+## Track C — Fit-signal consistency (complete — see TRACK_C_REPORT.md)
 
 B4 in `TESTS.md`: same inputs, 3-5 reruns, check whether the Fit score itself flips (not just
 prose wording drifting, which `temperature=0.3` makes expected).
@@ -258,36 +258,10 @@ run. Each run saves to `track_c_samples/<player>__<philosophy>__run<N>.json`; `s
 groups runs by player+philosophy and reports whether `fit_score` stayed identical across them
 (pure aggregation, covered by `tests/test_score_track_c.py`).
 
-**Within-case stability confirmed, 3 cases (2026-09-16):** Haaland/vertical+high-line,
-De Bruyne/possession+mid-block, Wan-Bissaka/possession+low-block, 3 runs each (9 total). Every
-single run's `fit_score` matched every other run in its own case, while the `fit_read` prose
-visibly reworded itself run to run (Haaland: "give a mixed and largely incomplete picture" /
-"give only a partial read" / "give only partial purchase" — same stats cited, same conclusion,
-different phrasing). Exactly the pattern the design predicted: `temperature=0.3` drifts the
-wording, not the score.
-
-**But there's a bigger pattern across cases than within any one of them: every single one
-landed on `fit_score: 3`.** Not boilerplate reasoning either — each `fit_read` cites genuinely
-different real stats (Haaland: interceptions/tackles; De Bruyne: key passes/crosses;
-Wan-Bissaka: interceptions/tackles in a defensive context) and reaches 3 through a different
-path each time. That rules out "the model just always writes the same paragraph."
-
-**Tested the obvious follow-up rather than just proposing it:** a 4th case picked specifically
-to be an on-paper mismatch — Trent Alexander-Arnold (known for going forward, not for recovery
-pace/defensive positioning) against `vertical, fast transitions / high line, counter-press` — a
-philosophy that specifically punishes exactly that profile. **Still landed on 3, all 3 runs.**
-The reasoning names the reason directly: *"There is no pace or sprint data listed, so the
-speed-dependent transition fit central to this club's philosophy cannot be assessed at all."*
-
-**4 cases, 4 different player profiles, 12 total runs, zero scores other than 3.** This is no
-longer just suggestive. ScoutLite's actual data sources (FBref counting stats, Understat xG)
-never include pace, sprint, or pressing-volume numbers — which is precisely what philosophy fit
-hinges on. `build_prompt()` correctly instructs the model to say so rather than guess, so every
-one of these 3s is the honest, correct output given the inputs. But the practical consequence is
-real: **as currently scoped, the Fit signal may not be capable of ever discriminating between
-players for ANY club philosophy**, not because the model is broken, but because the data it's
-handed can't speak to the question being asked. That's a scope limitation worth stating as
-plainly as the position-grouping and averaging-dilution findings above, not a "needs more
-testing" footnote — the fix isn't more reruns, it's either sourcing pace/pressing data from
-somewhere, or being explicit in the product itself that Fit is close to structurally unable to
-move off neutral with today's inputs.
+**Result, in one line: 7 cases, all 6 philosophy combinations, 21 total runs — every single
+one landed on `fit_score: 3`.** Within-case stability is confirmed (the point B4 originally
+asked about), but the bigger finding is across cases: this looks like a genuine scope
+limitation, not a bug — ScoutLite has no pace/sprint/pressing data in any source, and that's
+what philosophy fit actually depends on. Full writeup, the complete 7-case results table, the
+supporting judge-findings evidence, and the interpretation/recommendation:
+**[`TRACK_C_REPORT.md`](TRACK_C_REPORT.md)**.

@@ -1,5 +1,28 @@
 # ScoutLite — Build Notes
 
+## Track C complete: 7 cases, all 6 philosophy combinations, a formal report (2026-09-16, later still)
+
+Rounded Track C out to full coverage: added Casemiro (vertical/low-block), Rodri
+(vertical/mid-block), and Virgil van Dijk (possession/high-line) -- the 3 philosophy
+combinations the previous 4 cases hadn't touched, so every one of the 6 possible
+(2 in-possession × 3 out-of-possession) combos has now been tested at least once. 7 cases, 3
+runs each, 21 runs total. Result unchanged and now fully confirmed across the whole
+combination space: every single run landed on `fit_score: 3`.
+
+Van Dijk's first run is worth a specific mention: scored exactly 80% (the pass threshold, not
+a clean 100%) and surfaced real findings before shipping -- a FOCUS gate (name missing from
+the draft), a misleading headline reframe, comments wrongly attributed to a manager who
+doesn't manage this club in the supplied data, and an unsupported stat inference. None of it
+touched `fit_score`. Useful evidence for the writeup: the judge loop is doing real work in
+these same captures, it's specifically the Fit number that never moves.
+
+Wrote the whole thing up as a standalone document rather than another NOTES.md entry --
+**`eval/TRACK_C_REPORT.md`** -- since this is a complete, citable finding now (methodology,
+full 7-case results table, the cross-case evidence, the judge-findings supporting evidence,
+interpretation, and a "what would actually change this" section), not something still in
+progress. `eval/README.md`'s Track C section trimmed down to point at it instead of
+duplicating the writeup inline.
+
 ## Track C: a real scope limitation, not just run-to-run instability (2026-09-16, later still)
 
 Expanded Track C from 1 case (Haaland, 3 runs, previous entry) to 4 cases, 12 runs total:

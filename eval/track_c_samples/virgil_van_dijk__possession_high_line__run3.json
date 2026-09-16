@@ -1,0 +1,282 @@
+{
+  "player": "Virgil van Dijk",
+  "fbref_url": "https://fbref.com/en/players/e06683ca/Virgil-van-Dijk",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "",
+    "position": "DF (CB)",
+    "footed": "Right",
+    "height_weight": "193cm, 92kg",
+    "birth_date": "1991-07-08",
+    "birthplace": "Breda, Netherlands",
+    "national_team": "Netherlands",
+    "club": "Liverpool",
+    "contract_expires": "June 2027"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "32",
+    "squad": "Liverpool",
+    "competition": "1. Premier League",
+    "matches_played": "36",
+    "starts": "36",
+    "minutes": "3,177",
+    "goals": "2",
+    "assists": "2",
+    "goals_plus_assists": "4",
+    "non_penalty_goals": "2",
+    "yellow_cards": "3",
+    "red_cards": "1"
+  },
+  "misc": {
+    "fouls_committed": "23",
+    "fouls_drawn": "13",
+    "offsides": "1",
+    "crosses": "0",
+    "interceptions": "35",
+    "tackles_won": "23",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Virgil van Dijk",
+    "understat_url": "https://understat.com/player/833",
+    "understat_team": "Liverpool",
+    "games": "36",
+    "minutes": "3177",
+    "goals": "2",
+    "xG": 3.3,
+    "assists": "2",
+    "xA": 1.86,
+    "npxG": 3.3,
+    "shots": "45",
+    "key_passes": "11"
+  },
+  "quality": {
+    "score": 2,
+    "position_group": "defense",
+    "components": {
+      "defensive_actions_per90": 21.678321678321677
+    },
+    "avg_percentile": 21.7,
+    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "The Football Faithful"
+      },
+      "author": "The Football Faithful",
+      "title": "Liverpool vs Tottenham Hotspur \u2013 Predicted lineup and team news",
+      "description": "Liverpool host Tottenham Hotspur in the Carabao Cup third round on Tuesday, with Andoni Iraola looking for his first domestic cup victory since taking charge at Anfield this summer. Victory would move...",
+      "url": "https://thefootballfaithful.com/liverpool-vs-tottenham-hotspur-predicted-lineup-and-team-news-2/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/23d97ea01a091c1ad078c2009a56de24eca2639294618a3a736dd63d6238c949/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_football_faithful_articles_458%2F8e1caf4cf87b0dbf900ef2600bcdb89b.jpg",
+      "publishedAt": "2026-09-15T04:25:00Z",
+      "content": "Liverpool host Tottenham Hotspur in the Carabao Cup third round on Tuesday, with Andoni Iraola looking for his first domestic cup victory since taking charge at Anfield this summer.\r\nVictory would mo\u2026 [+1510 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "SB Nation"
+      },
+      "author": "Mari Murphy",
+      "title": "Liverpool\u00a0vs.\u00a0Tottenham: League Cup\u00a02026-27 Preview & Team News",
+      "description": "A challenging League Cup draw asks the Reds to gain consistency at the top level despite the change in competition",
+      "url": "https://liverpooloffside.sbnation.com/league-capital-one-cup/83665/liverpool-vs-tottenham-league-cup-2026-27-preview-team-news",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/c21114e40094276eebc9c4d96663a7112edddb027fa272246b10a22793ac7f1c/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fsb_nation_articles_115%2F5bf843673d448dda9a33c42715ebb129.jpg",
+      "publishedAt": "2026-09-14T21:22:38Z",
+      "content": "| Tuesday, September 15th |League Cup | Anfield8PM BST/3PM EST\r\nTottenham are in a strange, strange place. They've fought relegation over the past two seasons, but did win a trophy in the mix of it a\u2026 [+7647 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Empire of The Kop"
+      },
+      "author": "Empire of the Kop",
+      "title": "Iraola will be beaming as Liverpool handed significant 2027 boost over \u2018commanding\u2019 defender",
+      "description": "Liverpool defender Ifeanyi Ndukwe will now be eligible to play for the Reds, having gone out on loan in order to obtain a UK work permit.The 18-year-old was a revelation in pre-season as he seized the...",
+      "url": "https://www.empireofthekop.com/2026/09/14/liverpool-handed-significant-january-boost-over-commanding-defender/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/fe0054633a460ec6fced57e6cc55e4660eb5ebd945eb893c3998d758699936c0/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fempire_of_the_kop_articles_379%2F8c75878ce2e14f6dd3640985d674392a.jpg",
+      "publishedAt": "2026-09-14T17:35:00Z",
+      "content": "Liverpool defender Ifeanyi Ndukwe will now be eligible to play for the Reds, having gone out on loan in order to obtain a UK work permit.\r\nThe 18-year-old was a revelation in pre-season as he seized \u2026 [+2311 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldindex.com"
+      },
+      "author": "Anfield Index",
+      "title": "Fabrizio Romano confirms Liverpool can wrap up \u00a347m signing",
+      "description": "Ronald Araujo buy option hands Liverpool a major transfer opportunityLiverpool have been given a very clear decision point on Ronald Araujo, with confirmation that the Reds hold a buy option worth \u20ac...",
+      "url": "https://anfieldindex.com/100116/fabrizio-romano-confirms-liverpool-can-wrap-up-47m-signing.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/b142f53269f37d6711091db85fa96543490a0605d2892b9d408a37e4b190b30b/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_index_166%2Fd065ff2e8125131542a3e7caa4f37e41.jpg",
+      "publishedAt": "2026-09-14T15:55:00Z",
+      "content": "Liverpool have been given a very clear decision point on Ronald Araujo, with confirmation that the Reds hold a buy option worth 55m, \u00a347m, for the Barcelona defender currently on loan at Anfield. Cre\u2026 [+4696 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Footballmuse.com"
+      },
+      "author": "Football Muse",
+      "title": "Six summer signings who already look like Premier League hits",
+      "description": "Premier League teams always hope new signings settle quickly, and several of this summer's arrivals have made an instant impact at their new clubs.From record-breaking arrivals with big expectations t...",
+      "url": "https://www.footballmuse.com/features/six-summer-signings-who-already-look-like-premier-league-hits",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/db70e7a2a0bc781e951bb63023a11fe9ee9fbb1a64c9a5495b779ff039400169/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Ffootball_muse_articles_776%2Fbe52f75735a4863981ff03db19c34448.jpg",
+      "publishedAt": "2026-09-14T15:50:00Z",
+      "content": "Premier League teams always hope new signings settle quickly, and several of this summer's arrivals have made an instant impact at their new clubs.\r\nFrom record-breaking arrivals with big expectation\u2026 [+2988 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "BBC News"
+      },
+      "author": "Flora Snelson - BBC Sport journalist",
+      "title": "Iraola on Mamardashvili starting, squad rotation and the 'collective' effort",
+      "description": "Liverpool boss Andoni Iraola has been speaking to the media before Tuesday's Carabao Cup game against Tottenham at Anfield (kick-off 20:00 BST). Giorgi Mamardashvili will start in goal against Spurs. Defender Joe Gomez, who has been out with injury since July\u2026",
+      "url": "https://www.bbc.com/sport/football/articles/cqp93kk93887o?xtor=AL-72-%5Bpartner%5D-%5Byahoo.north.america%5D-%5Bheadline%5D-%5Bsport%5D-%5Bbizdev%5D-%5Bisapi%5D",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/99bed0ed154c113e948c856162d3da7376e461d1f15b06df96bb015ca7b43e87/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fbbc_us_articles_995%2Ffcf77cfb9265f5e38b4a99dd4b4304ba.jpg",
+      "publishedAt": "2026-09-14T14:14:21Z",
+      "content": "Liverpool boss Andoni Iraola has been speaking to the media before Tuesday's Carabao Cup game against Tottenham at Anfield (kick-off 20:00 BST).<li>Giorgi Mamardashvili will start in goal against Spu\u2026 [+2419 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Empire of The Kop"
+      },
+      "author": "Empire of the Kop",
+      "title": "\u2018Available for tomorrow\u2019 \u2013 Andoni Iraola reveals Liverpool team news boost ahead of Spurs clash",
+      "description": "Andoni Iraola has shared one piece of good news for Liverpool fans ahead of the Carabao Cup fixture against Tottenham Hotspur on Tuesday.The Reds will hope to make amends for the drab goalless draw at...",
+      "url": "https://www.empireofthekop.com/2026/09/14/iraola-reveals-liverpool-team-news-boost-ahead-of-spurs-clash/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/b1adf66461d78ba9b44f1247044904215aa67998f6b146601d405186d4f68704/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fempire_of_the_kop_articles_379%2Fc79217fca54a537358809870c3bb38e9.jpg",
+      "publishedAt": "2026-09-14T13:20:00Z",
+      "content": "Andoni Iraola has shared one piece of good news for Liverpool fans ahead of the Carabao Cup fixture against Tottenham Hotspur on Tuesday.\r\nThe Reds will hope to make amends for the drab goalless draw\u2026 [+2113 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "CNA"
+      },
+      "author": null,
+      "title": "Iraola weighing player workloads as Liverpool prepare for Spurs clash",
+      "description": "Sept 14 : Liverpool boss Andoni Iraola said he is still learning which players can cope with the demands of playing every three days as his side prepare to host Tottenham Hotspur in the League Cup third round on Tuesday.Liverpool have made an inconsistent sta\u2026",
+      "url": "https://www.channelnewsasia.com/sport/iraola-weighing-player-workloads-liverpool-prepare-spurs-clash-6383536",
+      "urlToImage": "https://dam.mediacorp.sg/image/upload/s--HAURD9Ne--/c_fill,g_auto,h_676,w_1200/fl_relative,g_south_east,l_mediacorp:cna:watermark:2024-04:reuters_1,w_0.1/f_auto,q_auto/v1/one-cms/core/2026-09-14T122743Z_1_LYNXMPEM8D109_RTROPTP_3_SOCCER-ENGLAND-LIV-FUL.JPG?itok=MVBqH-Gn",
+      "publishedAt": "2026-09-14T12:27:43Z",
+      "content": "Sept 14 : Liverpool boss Andoni Iraola said he is still learning which players can cope with the demands of playing every three days as his side prepare to host Tottenham Hotspur in the League Cup th\u2026 [+1852 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Empire of The Kop"
+      },
+      "author": "Empire of the Kop",
+      "title": "Fabrizio Romano confirms Liverpool can complete bargain \u00a347m deal for \u00a385.5m monster",
+      "description": "Liverpool have a buy option worth \u20ac55m [\u00a347m], which they could activate for loan signing Ronald Araujo.Fabrizio Romano corrected his prior update on the matter, having previously informed his foll...",
+      "url": "https://www.empireofthekop.com/2026/09/14/fabrizio-romano-confirms-liverpool-can-complete-bargain-47m-deal-for-85-5m-monster/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/b00b46c5fa626362f1859b1864112a2ee2debaa7a2762981616ff9538d84e7ce/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fempire_of_the_kop_articles_379%2Fed778ab97ba63fb74f97dd80af5fbc8f.jpg",
+      "publishedAt": "2026-09-14T11:15:00Z",
+      "content": "Liverpool have a buy option worth 55m [\u00a347m], which they could activate for loan signing Ronald Araujo.\r\nFabrizio Romano corrected his prior update on the matter, having previously informed his follo\u2026 [+3675 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "English Premier League Index - Opta Stats"
+      },
+      "author": "EPL Index",
+      "title": "Journalist confirms \u20ac55m option available for Liverpool",
+      "description": "Ronald Araujo to Liverpool: Why the \u20ac55m Buy Option Matters for Liverpool\u2019s DefenceLiverpool did not spend the summer shouting about Ronald Araujo. They simply got on with it. For a club that has ...",
+      "url": "https://eplindex.com/150447/journalist-confirms-e55m-option-available-for-liverpool.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/413dc8f5f917ec07a6f8ba64a99d93d4e21c249a86a9ff1d73f67c1c4e429ff7/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fepl_index_articles_253%2F461ab425782c0d3c600974f6b0f5cecd.jpg",
+      "publishedAt": "2026-09-14T08:50:00Z",
+      "content": "Liverpool did not spend the summer shouting about Ronald Araujo. They simply got on with it. For a club that has had to rethink its back line after Ibrahima Konate's exit, that looks like smart busin\u2026 [+2490 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Empire of The Kop"
+      },
+      "author": "Empire of the Kop",
+      "title": "Could Liverpool win the Champions League 50 years after first European Cup win?",
+      "description": "Could it really be written in the stars for Liverpool?\u00a0The Reds have made the perfect start to their 2026/27 Champions League campaign, coming from behind to beat Atl\u00e9tico Madrid 2-1 at Anfield.\u00a0Ma...",
+      "url": "https://www.empireofthekop.com/2026/09/14/could-liverpool-win-the-champions-league-50-years-after-first-european-cup-win/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/0d7e3ebeb936a3e3225e19cf0fc5f347d11ff677e841c0031328ce149cec73a3/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fempire_of_the_kop_articles_379%2F8b79f02813a6f40c3e5e49fa1d06d495.jpg",
+      "publishedAt": "2026-09-14T07:55:00Z",
+      "content": "Could it really be written in the stars for Liverpool?\r\nThe Reds have made the perfect start to their 2026/27 Champions League campaign, coming from behind to beat Atl\u00e9tico Madrid 2-1 at Anfield. Mar\u2026 [+6638 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldwatch.co.uk"
+      },
+      "author": "Anfield Watch",
+      "title": "Prove you're worth a contract Liverpool tell \u00a3400k per week superstar",
+      "description": "Liverpool last summer cleared off several top earners from the wage bill. \u00a3400k per week forward Mohamed Salah left on a free transfer with Andy Robertson and Ibrahima Konate also among the big wage ...",
+      "url": "https://www.anfieldwatch.co.uk/liverpool-fc/news/liverpool-fc-news-virgil-van-dijk-prove-youre-worth-a-contract-liverpool-tell-ps400k-per-week-superstar/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/667f5e12a3d0638ed94fe61f239a56ba97674c2214c123be6c742687bd2f8315/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_watch_articles_625%2F61d64bce2f26081537e04df4bd2d1492.jpg",
+      "publishedAt": "2026-09-14T06:05:00Z",
+      "content": "Liverpool last summer cleared off several top earners from the wage bill.\r\n\u00a3400k per week forward Mohamed Salah left on a free transfer with Andy Robertson and Ibrahima Konate also among the big wage\u2026 [+2165 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Playmakerstats.com"
+      },
+      "author": "Playmakerstats",
+      "title": "PREVIEW | Liverpool vs Tottenham: team news, lineups, predictions (League Cup 15/09)",
+      "description": "Liverpool and Tottenham clash this Tuesday at the Anfield of the League Cup. Liverpool, who have already won this tournament 10 times, mark their 61st participation in the competition, whilst Tottenha...",
+      "url": "https://www.playmakerstats.com/news/preview-liverpool-vs-tottenham-team-news-lineups-predictions-league-cup-15-09/1201703",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/ddcf78ed9b505c70dae2d149f5b5d973c26225e10c2574ee8a4ca409cd11ad51/lightyear_networkapi/resizefill_w620_h413%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fplaymakerstats_articles_264%2F2cb8d5ed0ff46c1aaa3b5945ae94c897.jpg",
+      "publishedAt": "2026-09-14T00:25:00Z",
+      "content": "Liverpool and Tottenham clash this Tuesday at the Anfield of the League Cup. Liverpool, who have already won this tournament 10 times, mark their 61st participation in the competition, whilst Tottenh\u2026 [+763 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldwatch.co.uk"
+      },
+      "author": "Anfield Watch",
+      "title": "Jackpot! Liverpool secure incredible \u00a360m bargain deal",
+      "description": "Liverpool have spent plenty of money over the past few transfer windows attempting to future-proof the centre of defence. We\u2019ve seen big-money deals completed for Giovanni Leoni and Jeremy Jacquet -...",
+      "url": "https://www.anfieldwatch.co.uk/liverpool-fc/news/liverpool-transfer-news-jeremy-jacquet-secure-incredible-ps60m-bargain-deal/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/b9fcff358160e8dbbb8746f5267068eea2d46cef64e7b1e39c37ba883b7a609a/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_watch_articles_625%2F2ab6ef71791a53eefb92af8db7c16d92.jpg",
+      "publishedAt": "2026-09-13T18:35:00Z",
+      "content": "Liverpool have spent plenty of money over the past few transfer windows attempting to future-proof the centre of defence.\r\nWe've seen big-money deals completed for Giovanni Leoni and Jeremy Jacquet -\u2026 [+2011 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Anfieldindex.com"
+      },
+      "author": "Anfield Index",
+      "title": "Fulham Frustrate Liverpool as Iraola\u2019s Reds Produce Flat Anfield Display",
+      "description": "Liverpool 0\u20130 Fulham \u2013 Premier League Post-Match ReportBy Steven SmithAfter Liverpool\u2019s return to Champions League action ended with a hard-fought 2\u20131 victory over Atletico Madrid, Andoni Irao...",
+      "url": "https://anfieldindex.com/100013/fulham-frustrate-liverpool-as-iraolas-reds-produce-flat-anfield-display.html",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/ab74462fd5978ebe86be5e52c385247da07a97b58fa2426bed6d9538193d3190/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fanfield_index_166%2F09279393b0f9f1f1e3877c6c8bd95cf4.jpg",
+      "publishedAt": "2026-09-13T12:55:00Z",
+      "content": "By Steven Smith\r\nAfter Liverpool's return to Champions League action ended with a hard-fought 21 victory over Atletico Madrid, Andoni Iraola's side returned to Premier League action at Anfield lookin\u2026 [+5683 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "slow, methodical possession",
+    "out_of_possession": "high line, counter-press"
+  },
+  "news_synthesis": "The recent news cycle (last 28 days) is not about this player. The listed headlines concern Liverpool team news, predicted lineups, Iraola's press comments, Mamardashvili, and transfer items; none of them report on Virgil van Dijk specifically. There is no relevant recent coverage of this player in the material provided.",
+  "fit_read": "The listed stats give only partial purchase on this club's stated philosophy. On the possession side, 11 key passes and 1.86 xA over 3,177 minutes are chance-creation numbers rather than measures of ball progression or playing out from the back, so they do not directly establish fit with methodical possession play. The 45 shots and 3.3 xG indicate involvement in attacking phases, but again not the build-up or distribution role the philosophy implies. On the defensive side, 35 interceptions and 23 tackles won are raw counts that do not by themselves establish pressing behavior or scheme compatibility, so they cannot be read as confirming or contradicting a counter-press or high-line fit. No pace or sprint data is listed, so speed-dependent transition fit cannot be assessed here. No role notes from the scout were provided, so there is no attributed observation to weigh. With the available stats insufficient to judge the pressing and progression aspects that matter most for this philosophy, the signal sits at neutral rather than either extreme.",
+  "fit_score": 3,
+  "judge": {
+    "source_accuracy": 100.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 2,
+    "findings": [
+      "This asserts a definitive absence of coverage, but the headline 'Iraola will be beaming as Liverpool handed significant 2027 boost over commanding defender' plausibly concerns a defender and could relate to this player, so the blanket claim is stronger than a neutral reading supports. (in: \"The recent news cycle (last 28 days) is not about this player.\")",
+      "The 'commanding defender' headline is ambiguous and could plausibly refer to van Dijk, so stating none report on him specifically overstates what the headline list establishes. (in: \"none of them report on Virgil van Dijk specifically\")"
+    ],
+    "confidence_warning": false
+  }
+}

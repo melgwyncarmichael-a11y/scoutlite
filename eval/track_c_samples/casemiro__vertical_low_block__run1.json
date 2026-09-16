@@ -1,0 +1,285 @@
+{
+  "player": "Casemiro",
+  "fbref_url": "https://fbref.com/en/players/4d224fe8/Casemiro",
+  "season": "2023-2024",
+  "bio": {
+    "full_name": "Carlos Henrique Casimiro",
+    "position": "MF (CM-DM)",
+    "footed": "Right",
+    "height_weight": "184cm, 83kg",
+    "birth_date": "1992-02-23",
+    "birthplace": "S\u00e3o Jos\u00e9 dos Campos, Brazil",
+    "national_team": "Brazil",
+    "club": "Inter Miami",
+    "contract_expires": "June 2027"
+  },
+  "stats": {
+    "season": "2023-2024",
+    "age": "31",
+    "squad": "Manchester Utd",
+    "competition": "1. Premier League",
+    "matches_played": "25",
+    "starts": "24",
+    "minutes": "1,982",
+    "goals": "1",
+    "assists": "2",
+    "goals_plus_assists": "3",
+    "non_penalty_goals": "1",
+    "yellow_cards": "7",
+    "red_cards": "0"
+  },
+  "misc": {
+    "fouls_committed": "30",
+    "fouls_drawn": "10",
+    "offsides": "6",
+    "crosses": "13",
+    "interceptions": "18",
+    "tackles_won": "54",
+    "penalties_won": "",
+    "penalties_conceded": "",
+    "own_goals": "0"
+  },
+  "keeper": null,
+  "xg": {
+    "understat_matched_name": "Casemiro",
+    "understat_url": "https://understat.com/player/2248",
+    "understat_team": "Manchester United",
+    "games": "25",
+    "minutes": "2006",
+    "goals": "1",
+    "xG": 3.12,
+    "assists": "2",
+    "xA": 1.39,
+    "npxG": 3.12,
+    "shots": "38",
+    "key_passes": "16"
+  },
+  "quality": {
+    "score": 3,
+    "position_group": "midfield",
+    "components": {
+      "key_passes_per90": 25.37313432835821,
+      "xA_per90": 20.895522388059703,
+      "defensive_actions_per90": 92.61363636363636
+    },
+    "avg_percentile": 46.3,
+    "explanation": "Evaluated as a midfielder: key passes and xA per 90 (creativity) plus interceptions + tackles won per 90 (defensive work), ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+  },
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "The Peoples Person"
+      },
+      "author": "The Peoples Person",
+      "title": "The simple fix to one big Man United concern raised by Rooney and Berbatov after derby defeat",
+      "description": "2 After the Manchester Derby, Dimitar Berbatov, on punditry duties for the Premier League matchday, admitted:\u201cUnited lost the game, which automatically means they did not do enough.\u201cThey hit the p...",
+      "url": "https://thepeoplesperson.com/2026/09/14/the-simple-fix-to-one-big-man-united-concern-raised-by-rooney-and-berbatov-after-derby-defeat-315995/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/111508cbf54af28d2deac93f5e3c6d8618b111ca0427e1860da2939d702e5be8/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_peoples_person_articles_356%2Fcf752d7a51ca5d1edf748d6aea43264f.jpg",
+      "publishedAt": "2026-09-14T15:35:00Z",
+      "content": "2\r\nAfter the Manchester Derby, Dimitar Berbatov, on punditry duties for the Premier League matchday, admitted:\r\n\"United lost the game, which automatically means they did not do enough.\r\n\"They hit the\u2026 [+3708 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Dpa-international.com"
+      },
+      "author": "DPA",
+      "title": "Sam Surridge denies Lionel Messi winning goal with late equaliser",
+      "description": "A late goal from Sam Surridge denied Lionel Messi the decisive strike as the top-of-the-table MLS clash between Inter Miami and Nashville SC ended 2-2. Surridge grabbed his second of the game in stoppage-time to claim a point and maintain Nashville\u2019s nine-poi\u2026",
+      "url": "https://dpa-international.com/sports/urn:newsml:dpa.com:20090101:260913-930-676920/",
+      "urlToImage": null,
+      "publishedAt": "2026-09-13T05:33:37Z",
+      "content": "A late goal from Sam Surridge denied Lionel Messi the decisive strike as the top-of-the-table MLS clash between Inter Miami and Nashville SC ended 2-2.\r\nSurridge grabbed his second of the game in sto\u2026 [+963 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Heavy.com"
+      },
+      "author": "Edward Perovic",
+      "title": "Inter Miami vs Nashville SC: Team News, Lineups and How to Watch",
+      "description": "Inter Miami welcome Eastern Conference leaders Nashville SC to Nu Stadium on Saturday in a crucial MLS regular-season matchup. Kickoff is set for 7:30 p.m. ET, with the game available worldwide on Apple TV through MLS Season Pass. Nashville enter the contest \u2026",
+      "url": "https://heavy.com/sports/soccer/inter-miami-vs-nashville-sc-how-to-watch-lineups/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/1eb88e79616b28ad73534769775d507d9105e6efad624e6ab2e63a643b3d5c5e/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fheavy_214%2F0a1796d6a87f3e87c120c60f20e05192.jpg",
+      "publishedAt": "2026-09-12T22:09:23Z",
+      "content": "TORONTO, ON - SEPTEMBER 09: Josh Sargent #9 of Toronto FC is pulled back by Maxwell Woledzi #3 of Nashville SC during the second half of the game at BMO Field on September 9, 2026 in Toronto, Ontario\u2026 [+3625 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Worldsoccertalk.com"
+      },
+      "author": "Gianni Taina",
+      "title": "Is Lionel Messi playing today? Projected lineups for Inter Miami vs Nashville SC in 2026 MLS season",
+      "description": "Lionel Messi is set to start as Inter Miami host Nashville SC in a crucial Eastern Conference clash. \nLionel Messi is expected to be in the starting lineup as Inter Miami host Nashville SC on Saturday at Nu Stadium, with interim head coach Guillermo Hoyos sti\u2026",
+      "url": "https://worldsoccertalk.com/news/is-lionel-messi-playing-today-projected-lineups-for-inter-miami-vs-nashville-sc-in-2026-mls-season/",
+      "urlToImage": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/08/26164708/leo-messi-4-1200x740.webp",
+      "publishedAt": "2026-09-12T15:24:59Z",
+      "content": "Lionel Messi is expected to be in the starting lineup as Inter Miami host NashvilleSC on Saturday at Nu Stadium, with interim head coach Guillermo Hoyos still in charge of the side while incoming coa\u2026 [+1990 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Utdreport.co.uk"
+      },
+      "author": "Stretty News",
+      "title": "Romano: Carrick \u2018super appreciated\u2019 at Man Utd after preventing INEOS from committing major transfer blunder",
+      "description": "Manchester United officials are grateful to Michael Carrick, who kept Kobbie Mainoo at the club.The 21-year-old made his big breakthrough as a teenager under Erik ten Hag, but faded from the scene whe...",
+      "url": "https://utdreport.co.uk/2026/09/12/romano-man-united-michael-carrick-kobbie-mainoo/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/9ba7007d056bd9783a5030563a8589ec271bd9388627f969ea5b926b7146d27a/lightyear_networkapi/resizefill_w1121_h675%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fstretty_news_articles_240%2F6479ef9dcfc7fa7eb73cf4fe2aee3b88.jpg",
+      "publishedAt": "2026-09-12T14:00:00Z",
+      "content": "Manchester United officials are grateful to Michael Carrick, who kept Kobbie Mainoo at the club.\r\nThe 21-year-old made his big breakthrough as a teenager under Erik ten Hag, but faded from the scene \u2026 [+2358 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The Peoples Person"
+      },
+      "author": "The Peoples Person",
+      "title": "\u201cPolite, humble, hard-working\u201d: United star earns praise from City boss Enzo Maresca",
+      "description": "1Manchester United secured the services of Andrey Santos this summer from Chelsea as part of their midfield revamp. Having missed out on priority targets Elliot Anderson and Mateus Fernandes, the Red ...",
+      "url": "https://thepeoplesperson.com/2026/09/12/polite-humble-hard-working-united-star-earns-praise-from-city-boss-enzo-maresca-315718/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/508c6160950ecef0bd2bbb4a9bc214b7149ff6282a87468af7ec3c5bb28af494/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_peoples_person_articles_356%2Fee13df0149ebc993f1c51411d7b2b26e.jpg",
+      "publishedAt": "2026-09-12T12:05:00Z",
+      "content": "1\r\nManchester United secured the services of Andrey Santos this summer from Chelsea as part of their midfield revamp. Having missed out on priority targets Elliot Anderson and Mateus Fernandes, the R\u2026 [+2573 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The Peoples Person"
+      },
+      "author": "The Peoples Person",
+      "title": "Matheus Cunha backs \u201camazing\u201d Man United teammate to be the season\u2019s biggest surprise",
+      "description": "2 Bolstering the engine room topped Old Trafford\u2019s agenda for summer 2026.With Casemiro leaving, and Manuel Ugarte having failed to kick on at M16 across two seasons, the 20-time English champions h...",
+      "url": "https://thepeoplesperson.com/2026/09/12/matheus-cunha-backs-amazing-man-united-teammate-to-be-the-seasons-biggest-surprise-315702/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/2536734ffdc53958192bd3f62388b77439671a5fbe13f834ac5c1259d175961f/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_peoples_person_articles_356%2Fbb572be1547404389464a893d2eac4d8.jpg",
+      "publishedAt": "2026-09-12T09:35:00Z",
+      "content": "2\r\nBolstering the engine room topped Old Trafford's agenda for summer 2026.\r\nWith Casemiro leaving, and Manuel Ugarte having failed to kick on at M16 across two seasons, the 20-time English champions\u2026 [+1738 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "101 Great Goals"
+      },
+      "author": "Mitch Fretton",
+      "title": "Inter Miami v Nashville: Preview, expected line-ups, stats",
+      "description": "Preview as second-placed Miami attempt to reduce the gap on Nashville to six points at the top of the Eastern Conference.",
+      "url": "https://www.101greatgoals.com/match-previews/mls-matches/inter-miami-v-nashville-lionel-messi-preview-team-news-line-ups-stats-where-to-watch-tv-channel-live-online-stream-prediction/",
+      "urlToImage": "https://www.101greatgoals.com/wp-content/uploads/2026/05/3EG4R4F-2-2.jpg",
+      "publishedAt": "2026-09-11T17:55:21Z",
+      "content": "Inter Miami can cut Nashville SC\u2019s lead at the top of the Eastern Conference when the two sides meet at Nu Stadium on Saturday evening.\r\nThe Herons were held to a 1-1 draw by Chicago Fire in midweek,\u2026 [+4446 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "MLSsoccer.com"
+      },
+      "author": "Major League Soccer",
+      "title": "Matchday 26: Miami-Nashville rivalry, Lewandowski's impact & Cavan's rise",
+      "description": "By Ben SteinerBig-time players and marquee showdowns highlight another action-packed slate of MLS weekend action.These are the must-see games from Matchday 26.Download Polymarket:\u00a0$50 Bonus with code...",
+      "url": "https://www.mlssoccer.com/news/matchday-26-miami-nashville-rivalry-lewandowski-impact-cavan-s-rise",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/91a9b48cf8c6f5cc21a9ed67f681a8c532f565835291a20b701b82a00d203944/lightyear_networkapi/resizefill_w1024_h576%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmajor_league_soccer_188%2F434f870ece086359dad624e79387e2f3.png",
+      "publishedAt": "2026-09-11T15:18:00Z",
+      "content": "By Ben Steiner\r\nBig-time players and marquee showdowns highlight another action-packed slate of MLS weekend action.\r\nThese are the must-see games from Matchday 26.\r\nDownload Polymarket:\u00a0$50 Bonus wit\u2026 [+4623 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The Peoples Person"
+      },
+      "author": "The Peoples Person",
+      "title": "Chelsea threaten to derail Man United\u2019s pursuit of Sergio Busquets",
+      "description": "1Manchester United spent over \u00a3150 million to refurbish their midfield this summer after securing qualification for the Champions League. The Red Devils parted ways with Casemiro over the summer and ...",
+      "url": "https://thepeoplesperson.com/2026/09/11/chelsea-threaten-to-derail-man-uniteds-pursuit-of-sergio-busquets-315606/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/e63212aa47cd34e86722f43d260014f6f35cda4903ff063d8d051650e5d350e5/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_peoples_person_articles_356%2F879c288f5304968e5e5fa5f285911871.jpg",
+      "publishedAt": "2026-09-11T08:05:00Z",
+      "content": "1\r\nManchester United spent over \u00a3150 million to refurbish their midfield this summer after securing qualification for the Champions League. The Red Devils parted ways with Casemiro over the summer an\u2026 [+3092 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Worldsoccertalk.com"
+      },
+      "author": "Dante Gonzalez",
+      "title": "Neymar helps bring Brazil teammate Coutinho to Santos as NR Sports reportedly facilitates three-month deal",
+      "description": "With the operation started by his agency NR Sports, Neymar is reportedly set to reunite with his Brazil teammate Philippe Coutinho at Santos in a three-month deal. \nNeymar has served as one of Santos\u2018 key pillars in recent months, leading on the pitch while l\u2026",
+      "url": "https://worldsoccertalk.com/news/neymar-helps-bring-brazil-teammate-coutinho-to-santos-as-nr-sports-reportedly-facilitates-three-month-deal/",
+      "urlToImage": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/09/10170339/neymar-santos-philippe-coutinho-vasco-da-gama-1200x740.webp",
+      "publishedAt": "2026-09-10T22:00:21Z",
+      "content": "Neymar has served as one of Santos key pillars in recent months, leading on the pitch while leveraging his influence within front-office operations. Now, the star forward has pulled strings alongside\u2026 [+2689 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Getfootballnewsspain.com"
+      },
+      "author": "Get Spanish Football News",
+      "title": "Former La Liga rivals clash in MLS: Rodrigo De Paul\u2019s harsh message to Robert Lewandowski",
+      "description": "Two former La Liga stars were at the heart of a heated exchange during a meeting between the Chicago Fire and Inter Miami in Major League Soccer this week.The two players in question? Robert Lewandows...",
+      "url": "https://getfootballnewsspain.com/former-la-liga-rivals-clash-in-mls-rodrigo-de-pauls-harsh-message-to-robert-lewandowski/",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/fad0fd2e68294111eaa54d0be3d0436d7a709c62ab56b1cc628e87a3221a7ec9/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fget_spanish_football_news_articles_403%2Fbfd8b92ad922209d43af8a1f13a4c8d2.jpg",
+      "publishedAt": "2026-09-10T20:55:00Z",
+      "content": "Two former La Liga stars were at the heart of a heated exchange during a meeting between the Chicago Fire and Inter Miami in Major League Soccer this week.\r\nThe two players in question? Robert Lewand\u2026 [+717 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "MLSsoccer.com"
+      },
+      "author": "Major League Soccer",
+      "title": "Rivals reunited: Lionel Messi & Inter Miami host Nashville SC",
+      "description": "By Jaime UribarriThe Eastern Conference's top two teams renew their growing rivalry when\u00a0Inter Miami CF welcome\u00a0Supporters' Shield leaders Nashville SC for Matchday 26's Walmart Saturday Showdown.Ho...",
+      "url": "https://www.mlssoccer.com/news/rivals-reunited-lionel-messi-inter-miami-host-nashville-sc",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/7a6a42e6fbe5c1e9e3ca68c989431ba3916e8333abefe1656b4625d68ee2b829/lightyear_networkapi/resizefill_w1024_h576%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmajor_league_soccer_188%2Fed0591101df42ac653bf39598a5d715c.png",
+      "publishedAt": "2026-09-10T19:21:00Z",
+      "content": "By Jaime Uribarri\r\nThe Eastern Conference's top two teams renew their growing rivalry when\u00a0Inter Miami CF welcome\u00a0Supporters' Shield leaders Nashville SC for Matchday 26's Walmart Saturday Showdown.\r\u2026 [+3300 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "MLSsoccer.com"
+      },
+      "author": "Major League Soccer",
+      "title": "Team of the Matchday: Cavan Sullivan, Antoine Griezmann again prove heroic",
+      "description": "By Jonathan SigalHomegrown stars and global icons delivered during Matchday 25, earning them spots on the latest Team of the Matchday presented by Audi.Full team (3-4-3, left to right)Starters: Chris ...",
+      "url": "https://www.mlssoccer.com/news/team-of-the-matchday-cavan-sullivan-antoine-griezmann-again-prove-heroic",
+      "urlToImage": "https://s.yimg.com/lo/mysterio/api/f1e2aad8c07c406ba4667fc4ce707995d287e05cd4ea96fcb15078e271a0eb71/lightyear_networkapi/resizefill_w1024_h576%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmajor_league_soccer_188%2F1938b520e5b6b1c895eb99d88b74f71c.png",
+      "publishedAt": "2026-09-10T17:55:00Z",
+      "content": "By Jonathan Sigal\r\nHomegrown stars and global icons delivered during Matchday 25, earning them spots on the latest Team of the Matchday presented by Audi.\r\nStarters:Chris Brady (CHI) - Andrew Gutman \u2026 [+2670 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Worldsoccertalk.com"
+      },
+      "author": "Gianni Taina",
+      "title": "Lionel Messi\u2019s Inter Miami misses Supporters\u2019 Shield chance after draw with Chicago Fire",
+      "description": "Lionel Messi's Inter Miami had a golden opportunity to make up ground in the Supporters' Shield race on Wednesday, with Nashville SC having fallen to a late defeat against Toronto FC earlier that same day. Instead, the Herons let the chance slip in a 1-1 draw\u2026",
+      "url": "https://worldsoccertalk.com/news/lionel-messis-inter-miami-misses-supporters-shield-chance-after-draw-with-chicago-fire/",
+      "urlToImage": "https://media.worldsoccertalk.com/wp-content/uploads/sites/6/2026/09/10112009/messi-23-1200x740.webp",
+      "publishedAt": "2026-09-10T15:30:11Z",
+      "content": "Lionel MessisInter Miami had a golden opportunity to make up ground in the Supporters Shield race on Wednesday, with Nashville SC having fallen to a late defeat against Toronto FC earlier that same d\u2026 [+2435 chars]"
+    }
+  ],
+  "scout_notes": null,
+  "philosophy": {
+    "in_possession": "vertical, fast transitions",
+    "out_of_possession": "low block, counter"
+  },
+  "news_synthesis": "The recent news cycle (last 28 days) contains no directly relevant reporting on Casemiro. The listed headlines are dominated by Manchester United derby reaction, Inter Miami/Nashville SC coverage, and general club commentary \u2014 none of which provide specific, current information about this player's form, role, or situation. There is no meaningful recent news signal to report here.",
+  "fit_read": "The available stats give a mixed and incomplete picture for a vertical, fast-transition / low-block, counter-oriented club. On the defensive side, 54 tackles won and 18 interceptions across 1,982 minutes suggest a player engaged in ball-winning and disruption, which aligns with the pressing and recovery demands of a low-block/counter setup. However, 30 fouls committed against 10 drawn indicates a relatively high foul rate, which can be a liability in a system that relies on disciplined positioning and clean turnovers rather than frequent stoppages. Offensively, 16 key passes and 13 crosses point to some distribution involvement, but these are modest volumes and lean more toward a possession-based or build-up role than the direct, vertical progression a counter-attacking side typically prioritizes. The xG (3.12) against 1 goal, and xA (1.39) against 2 assists, are finishing/creation efficiency notes rather than fit indicators per se. Critically, there is no pace, sprint, or distance-covered data listed here, so the speed-dependent aspect of transition fit \u2014 arguably the most important dimension for this club philosophy \u2014 cannot be assessed from these stats. No scout role notes were provided. Given the mixed defensive signal, the modest creative output, and the absence of transition-specific athletic data, this scores as a neutral/insufficient-data signal rather than a confident fit or misfit.",
+  "fit_score": 3,
+  "judge": {
+    "source_accuracy": 100.0,
+    "threshold": 80,
+    "passed": true,
+    "iterations": 1,
+    "findings": [
+      "The stats show raw totals, not rates or context, so asserting they 'suggest' alignment with pressing/recovery demands is an interpretive leap the data doesn't fairly support. (in: \"54 tackles won and 18 interceptions across 1,982 minutes suggest a player engaged in ball-winning and disruption, which aligns with the pressing and recovery demands of a low-block/counter setup\")",
+      "Calling 30 fouls a 'relatively high foul rate' is an unsupported comparative claim since no benchmark or per-90 rate is provided in the data. (in: \"30 fouls committed against 10 drawn indicates a relatively high foul rate, which can be a liability in a system that relies on disciplined positioning and clean turnovers rather than frequent stoppages\")",
+      "Characterizing 16 key passes and 13 crosses as leaning toward a possession/build-up role is an overreach; these raw totals don't establish a stylistic role. (in: \"16 key passes and 13 crosses point to some distribution involvement, but these are modest volumes and lean more toward a possession-based or build-up role than the direct, vertical progression a counter-attacking side typically prioritizes\")"
+    ],
+    "confidence_warning": false
+  }
+}
