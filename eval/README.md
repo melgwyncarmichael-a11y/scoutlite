@@ -74,6 +74,38 @@ judgment call no regex can make, which is exactly what Track B is for.
 
 70 sentences across 14 captures, ready to label.
 
+### Labeled and scored (2026-09-16) — the real result
+
+```
+Judge recall on "overstated": 50%   (1 of 2 -- caught the Fit Read overreach, missed the news-summary hype)
+False-positive rate on grounded: 7%  (5 of 68 -- honest hedging the judge over-flagged as a problem)
+```
+
+Small sample (2 real `overstated` cases so far), so this is a first data point, not a verified
+rate -- but it lands exactly on the hypothesis this eval was designed to test: the rule-based
+judge is decent at catching factual overreach (misreading a stat with too much confidence) and
+weaker at catching plain narrative hype dressed as an ordinary summary sentence, since the
+latter is tonal, not something a grounding regex can see.
+
+Two labeling-process things worth recording alongside the number itself:
+
+**A scorer bug, found from real labeling.** The first label pass came back as full sentences
+("Yes, same role, I think it's correct") rather than bare y/n -- `score_track_a.py`'s and
+`score_track_b.py`'s truthy checks were exact-string matches, so every one of those was
+silently read as false, and `human_label` needed the same fix (a keyword-based
+`_normalize_label()`, since the five categories are free text now too, not an enum). Both
+fixed; see the `judge_rules.py` section below for the parallel pattern -- this project keeps
+finding real bugs by actually running the eval, not by imagining edge cases in advance.
+
+**A genuine judge-vs-human disagreement, resolved by tracing it to the exact sentence.**
+Haaland's philosophy-set brief has 3 sentences in "What People Say"; the labeler's first pick
+for the one exaggeration and the judge's own LLM-supplement findings pointed at *different*
+sentences entirely. Traced each finding's quoted text back to its exact source sentence to
+make the disagreement concrete instead of guessing: the labeler's final call was that the
+judge over-flagged two fine, honestly-hedged sentences (2 of the 5 false-positive cases) and
+missed the real one. That's the eval doing exactly its job -- surfacing a specific, checkable
+disagreement rather than a vague "seems fine" impression either way.
+
 ### Two real bugs the first capture run found (2026-09-12)
 
 Running the batch immediately paid for itself: Virgil van Dijk and Declan Rice both came back

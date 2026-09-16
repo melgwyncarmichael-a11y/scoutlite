@@ -1,5 +1,54 @@
 # ScoutLite — Build Notes
 
+## Track B labeled and scored for real (2026-09-16)
+
+First full labeling pass on `track_b_labels.csv` (all 70 sentences), plus the A2 quality
+spotcheck (all 13). Two things came out of checking the results, before trusting the numbers:
+
+**Scorer bug, same shape as the earlier judge_rules bug: found by actually running real data
+through it.** The labeler filled in y/n columns as full sentences ("Yes, same role, I think
+it's correct" / "No, I think Rodri should fall on the Casemiro line..."), not bare "y". Both
+`score_track_a.py` and `score_track_b.py` did an exact-string match, so every thoughtful answer
+was silently read as false -- reported 0% defensible on Track A when the real number was 87%,
+and (once `human_label` also turned out to be free text, not an enum) a mechanically-forced
+100% false-positive rate on Track B, since `caught_by_judge` had been uniformly "Y" across all
+70 rows. Fixed: `_truthy()` reads intent off the first word now; `score_track_b.py` gained a
+keyword-based `_normalize_label()` for the five human_label categories. Regression tests added
+directly from the real labeled data in both test files (111 tests total across the suite).
+
+**The real Track B result, once the numbers could be trusted:**
+```
+Judge recall on "overstated": 50% (1 of 2)
+False-positive rate on grounded: 7% (5 of 68)
+```
+Lands on the hypothesis this eval was built to test: the rule-based judge catches factual
+overreach reasonably well, misses plain narrative hype dressed as an ordinary sentence. Small
+sample so far (2 real overstated cases) -- a first data point, not a verified rate.
+
+Getting there required actually tracing a disagreement to the sentence level rather than
+trusting either side: the labeler's first pick for Haaland's one real exaggeration and the
+judge's own LLM-supplement findings pointed at three different sentences in the same brief.
+Quoted each finding's exact text back to its source sentence to make it concrete -- final
+call: the judge over-flagged two fine, honestly-hedged sentences (2 of the 5 total false
+positives) and missed the real one (a genuine recall miss, not caught anywhere). Also relabeled
+one Declan Rice sentence from "overstated" to "grounded" on the same principle used earlier in
+this project (Haaland/Trent honestly disclosing an unrelated headline is correct behavior, not
+hype) -- mentioning a Ballon d'Or nomination for an unrelated player, while explicitly noting
+it isn't about Rice, isn't hallucination or exaggeration.
+
+Mechanically corrected 62 more grounded rows where `caught_by_judge` said "Y" but no judge
+finding's quoted text corresponded to that specific sentence at all (verified by literal text
+overlap, not a judgment call) -- left the remaining 5 rows, where a finding's quoted text is a
+100% verbatim match to the sentence, for the labeler's own confirmation, since that's a real
+judgment call about whether the judge's flag was fair. Confirmed as fair (all 5 are judge
+over-flagging fine hedging, i.e. real false positives) rather than relabeled.
+
+`eval/track_a_quality_spotcheck.csv` also fully labeled (13/13) -- see the separate writeup
+above/below for the three distinct findings that came out of it (averaging dilutes a
+specialist's peak trait; position misclassification directly breaks the signal for
+Rodri/Trent; an empty reference population early in a season silently produces a fake-looking
+neutral score for Mbappé -- the last one still open, pending a decision on the fix).
+
 ## Track C scaffolded ahead of order, on request (2026-09-15)
 
 Project owner asked to see Track C built before finishing B's/A's labeling, despite the
