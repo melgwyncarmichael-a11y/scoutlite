@@ -5,6 +5,54 @@ the next time you generate a brief — not the full investigation. For the detai
 narrative behind each entry, see `NOTES.md`; for the evaluation findings that drove this round
 of fixes, see `EVAL_REPORT.md`.
 
+## 2026-09-17 — v3: both Signals are now fully deterministic
+
+The biggest change yet, and it changes what the top of every brief looks like.
+
+### Quality and Fit no longer show a bare 1–5 number — they show a label
+
+**Quality** now reads "World Class," "Strong Starter," "Solid Starter," "Depth Option," or
+"Below Rotation" — same underlying percentile math as before, just a word instead of a number
+that implied more precision than the data actually has.
+
+**Fit** is a bigger change: it's no longer a number the AI decided by reading a description of
+your club's style. It's now computed the same way Quality always has been — deterministically,
+by comparing this player's actual statistical profile against **a real club's current squad**
+in the same position:
+
+| Your philosophy | Compared against |
+|---|---|
+| Vertical, high line, counter-press | Borussia Dortmund |
+| Vertical, mid block | Real Madrid |
+| Vertical, low block | Atlético Madrid |
+| Possession, high line | Manchester City |
+| Possession, mid block | Bayern Munich |
+| Possession, low block | Brighton |
+
+You'll see a label — **Hand-in-Glove Fit**, **Somewhat Fits**, or **Completely Different** —
+plus the exact numbers behind it (e.g. "this player's key passes rank 70 vs. Dortmund's 57").
+The AI still writes a paragraph explaining *why*, but it no longer decides the result itself.
+This directly answers something testing turned up: asking the AI for a 1–5 Fit score landed on
+exactly 3/5 in every single test run, across every possible club style — the AI was correctly
+refusing to guess at things (pace, pressing intensity) no data source ScoutLite uses actually
+measures, but the number never moved either way. Making it deterministic fixes that.
+
+### Quality now corrects for a real fairness problem
+
+A defender at a team that dominates possession (like Manchester City) naturally records fewer
+tackles and interceptions than an equally good defender at a team that spends more time
+defending — not because they're worse, just because their team leaves them less to do. Quality
+now shows **both** numbers: the raw one, and one adjusted for how much possession the player's
+team actually has. On a real test case, this moved a defensive-actions reading from the 57th
+percentile to the 88th once the adjustment was applied.
+
+### Every brief now ends with a plain-English explanation of both signals
+
+A new "Understanding the Signals" section at the bottom of every brief — the same on every
+run — explains what Quality and Fit actually measure, the label scale, which club your Fit
+result was compared against, and what neither signal can see (pace, sprint speed, pressing
+intensity — no source available to ScoutLite tracks these).
+
 ## 2026-09-17 — Post-eval fixes (4 changes)
 
 Four fixes made directly in response to the evaluation findings in `EVAL_REPORT.md`. All are

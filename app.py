@@ -32,7 +32,7 @@ from scoutlite import (
     list_available_seasons,
     search_player,
 )
-from scoring import compute_quality_signal
+from scoring import compute_fit_signal, compute_quality_signal
 from scoutlite_combined import ROLE_NOTES_MAX_CHARS, summarize_combined
 from understat_xg import get_player_xg
 
@@ -128,16 +128,24 @@ if data:
         help="Short, adjective-style notes on ROLE -- how they're actually used on the pitch, which stats alone don't show. Included as your observation, not treated as verified data.",
     )
 
+    # v3 (2026-09-17): options are keyed by the same short strings scoring.REFERENCE_CLUBS uses
+    # (the CLI's --in-possession/--out-of-possession choices), not the descriptive phrase --
+    # compute_fit_signal() needs the key to look up the reference club, not the display text.
+    IN_POSSESSION_OPTIONS = {"": "Not specified", "vertical": "Vertical, fast transitions", "possession": "Slow, methodical possession"}
+    OUT_OF_POSSESSION_OPTIONS = {
+        "": "Not specified", "high_line": "High line, counter-press",
+        "low_block": "Low block, counter", "mid_block": "Mid block, hybrid",
+    }
     col1, col2 = st.columns(2)
     with col1:
-        in_possession_choice = st.selectbox(
+        in_possession_key = st.selectbox(
             "Club philosophy — in possession (optional)",
-            ["Not specified", "Vertical, fast transitions", "Slow, methodical possession"],
+            list(IN_POSSESSION_OPTIONS), format_func=lambda k: IN_POSSESSION_OPTIONS[k],
         )
     with col2:
-        out_of_possession_choice = st.selectbox(
+        out_of_possession_key = st.selectbox(
             "Club philosophy — out of possession (optional)",
-            ["Not specified", "High line, counter-press", "Low block, counter", "Mid block, hybrid"],
+            list(OUT_OF_POSSESSION_OPTIONS), format_func=lambda k: OUT_OF_POSSESSION_OPTIONS[k],
         )
 
     generate = st.button("Generate research brief", type="primary")
@@ -168,7 +176,24 @@ if data:
                     bio["position"], stats["competition"], stats["season"], player_name, stats, misc, keeper, xg,
                     force_refresh=fresh_mode,
                 )
-                st.write(f"Quality: {quality['score']}/5" if quality else "Quality signal not available (league/position not covered)")
+                if quality:
+                    st.write(f"Quality: {quality['label']}" + (
+                        f" (raw: {quality['raw_label']})" if quality["raw_label"] != quality["label"] else ""
+                    ))
+                else:
+                    st.write("Quality signal not available (league/position not covered)")
+
+                status.update(label="Computing Fit signal (non-AI, reference-club comparison)...")
+                fit_signal = compute_fit_signal(
+                    bio["position"], stats["competition"], stats["season"], misc, xg,
+                    quality["components"] if quality else {},
+                    in_possession=in_possession_key, out_of_possession=out_of_possession_key,
+                    force_refresh=fresh_mode,
+                ) if quality else None
+                if fit_signal:
+                    st.write(f"Fit: {fit_signal['label']} vs. {fit_signal['reference_club']}")
+                elif in_possession_key and out_of_possession_key:
+                    st.write("Fit not available (league/position not covered by the reference-club comparison)")
 
                 articles = []
                 newsapi_key = os.environ.get("NEWSAPI_KEY")
@@ -184,19 +209,20 @@ if data:
 
                 philosophy = {
                     "in_possession": {
-                        "Vertical, fast transitions": "vertical, fast transitions",
-                        "Slow, methodical possession": "slow, methodical possession",
-                    }.get(in_possession_choice, ""),
+                        "vertical": "vertical, fast transitions",
+                        "possession": "slow, methodical possession",
+                    }.get(in_possession_key, ""),
                     "out_of_possession": {
-                        "High line, counter-press": "high line, counter-press",
-                        "Low block, counter": "low block, counter",
-                        "Mid block, hybrid": "mid block, hybrid",
-                    }.get(out_of_possession_choice, ""),
+                        "high_line": "high line, counter-press",
+                        "low_block": "low block, counter",
+                        "mid_block": "mid block, hybrid",
+                    }.get(out_of_possession_key, ""),
                 }
 
                 status.update(label="Calling DeepSeek-V3 for the research brief (with judge loop)...")
                 synthesis = summarize_combined(
-                    player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy
+                    player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy,
+                    fit_signal=fit_signal,
                 )
 
                 status.update(label="Building Word document...")
@@ -205,7 +231,7 @@ if data:
                     player_name, bio, stats, xg, articles, misc, keeper,
                     synthesis["news_synthesis"], synthesis["fit_read"],
                     scout_notes, philosophy, buffer,
-                    quality=quality, fit_score=synthesis["fit_score"], judge=synthesis["judge"],
+                    quality=quality, fit_signal=synthesis["fit_signal"], judge=synthesis["judge"],
                     player_url=data["url"],
                 )
                 buffer.seek(0)
@@ -221,16 +247,12 @@ if data:
                     f"against these flags:\n\n" + "\n".join(f"- {f}" for f in j["findings"])
                 )
 
-            combined = (
-                f"{quality['score'] + synthesis['fit_score']}/10"
-                if quality and synthesis["fit_score"]
-                else "—/10"
-            )
+            quality_text = quality["label"] if quality else "N/A"
+            if quality and quality["raw_label"] != quality["label"]:
+                quality_text += f" (raw: {quality['raw_label']})"
+            fit_text = f"{fit_signal['label']} vs. {fit_signal['reference_club']}" if fit_signal else "N/A"
             st.subheader("Signals")
-            st.markdown(
-                f"**Quality: {quality['score'] if quality else 'N/A'}/5** · "
-                f"**Fit: {synthesis['fit_score'] or 'N/A'}/5** · **Combined: {combined}**"
-            )
+            st.markdown(f"**Quality: {quality_text}** · **Fit: {fit_text}**")
             st.caption(
                 "Signals for the scout to weigh, never a conclusion the tool reaches on the "
                 "scout's behalf. Quality is a non-AI, percentile-based baseline against real "
@@ -241,6 +263,21 @@ if data:
                 st.caption(
                     f"Exact breakdown ({quality['avg_percentile']} percentile average): " + ", ".join(
                         f"{k.replace('_', ' ')} = {v:.0f} pct" for k, v in quality["components"].items()
+                    )
+                )
+                if quality["raw_avg_percentile"] != quality["avg_percentile"]:
+                    st.caption(
+                        f"Without the possession adjustment: {quality['raw_avg_percentile']} "
+                        f"percentile average ({quality['raw_label']})."
+                    )
+                if quality.get("specialist_caveat"):
+                    st.caption(quality["specialist_caveat"])
+            if fit_signal:
+                st.caption(
+                    f"Compared to {fit_signal['reference_club']}'s current squad: " + ", ".join(
+                        f"{k.replace('_', ' ')} = this player {v:.0f} vs. "
+                        f"{fit_signal['reference_components'][k]:.0f}"
+                        for k, v in fit_signal["target_components"].items()
                     )
                 )
             st.caption(

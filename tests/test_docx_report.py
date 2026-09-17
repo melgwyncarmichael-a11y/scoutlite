@@ -14,19 +14,32 @@ ARTICLES = [
      "source": {"name": "BBC Sport"}, "publishedAt": "2026-09-01T10:00:00Z"},
     {"title": "No-link wire report", "url": "", "source": {}, "publishedAt": ""},
 ]
+# Matches the real shape scoring.compute_quality_signal() returns (v3, 2026-09-17) -- label +
+# raw/adjusted pair, not just a bare score.
+QUALITY = {
+    "score": 5, "label": "World Class", "position_group": "attack",
+    "components": {"goals_per90": 91.0}, "raw_components": {"goals_per90": 91.0},
+    "avg_percentile": 91.0, "raw_avg_percentile": 91.0, "raw_label": "World Class",
+    "explanation": "Evaluated as an attacker...", "specialist_caveat": None,
+}
+FIT_SIGNAL = {
+    "reference_club": "Manchester City", "position_group": "attack",
+    "target_components": {"goals_per90": 91.0}, "reference_components": {"goals_per90": 80.0},
+    "avg_abs_diff": 11.0, "label": "Hand-in-Glove Fit",
+}
 
 
 def _build(tmp_path, **overrides):
     kwargs = dict(
         player_name="Erling Haaland", bio={"full_name": "Erling Braut Haaland"}, stats=STATS,
         xg=XG, articles=ARTICLES, misc=None, keeper=None,
-        news_synthesis="No relevant news this window.", fit_read="Fit: 4/5 strong output.",
+        news_synthesis="No relevant news this window.", fit_read="Strong final-third output.",
         scout_notes="tall, direct runner", philosophy={"in_possession": "vertical", "out_of_possession": ""},
         output_path=tmp_path / "brief.docx",
-        quality={"score": 5, "position_group": "attack", "components": {"goals_per90": 91.0},
-                 "avg_percentile": 91.0, "explanation": "Evaluated as an attacker..."},
-        fit_score=4, judge={"source_accuracy": 95, "passed": True, "iterations": 1, "findings": [],
-                             "confidence_warning": False, "threshold": 80},
+        quality=QUALITY,
+        fit_signal=FIT_SIGNAL,
+        judge={"source_accuracy": 95, "passed": True, "iterations": 1, "findings": [],
+               "confidence_warning": False, "threshold": 80},
         player_url="https://fbref.com/en/players/1f44ac21/Erling-Haaland",
     )
     kwargs.update(overrides)
@@ -80,22 +93,86 @@ def test_fit_scope_caveat_shown_when_philosophy_given(tmp_path):
     assert FIT_SCOPE_CAVEAT in text
 
 
-def test_fit_scope_caveat_absent_when_no_philosophy_given(tmp_path):
-    text = _all_text(_build(tmp_path, philosophy={"in_possession": "", "out_of_possession": ""}, fit_score=None))
-    assert FIT_SCOPE_CAVEAT not in text
+def test_fit_scope_caveat_absent_from_section_4_when_no_philosophy_given(tmp_path):
+    # Section 6's standing glossary always explains the caveat as general reference material --
+    # this checks it's specifically absent from section 4, where it would wrongly imply Fit was
+    # actually assessed on THIS brief.
+    text = _all_text(_build(
+        tmp_path, philosophy={"in_possession": "", "out_of_possession": ""}, fit_signal=None,
+    ))
+    section_4 = text.split("5. Sources")[0]
+    assert FIT_SCOPE_CAVEAT not in section_4
 
 
 def test_specialist_caveat_rendered_when_present(tmp_path):
-    quality = {"score": 4, "position_group": "attack",
-               "components": {"goals_per90": 100.0, "assists_per90": 53.0},
-               "avg_percentile": 76.5, "explanation": "Evaluated as an attacker...",
-               "specialist_caveat": "This player's individual metrics vary widely..."}
+    quality = dict(QUALITY, components={"goals_per90": 100.0, "assists_per90": 53.0},
+                   avg_percentile=76.5, specialist_caveat="This player's individual metrics vary widely...")
     text = _all_text(_build(tmp_path, quality=quality))
     assert "vary widely" in text
 
 
 def test_specialist_caveat_absent_when_not_flagged(tmp_path):
-    # the default fixture's quality dict has no specialist_caveat key at all -- must not crash
-    # on .get() and must not print anything about it
+    # the default fixture's quality dict has specialist_caveat=None -- must not print anything
     text = _all_text(_build(tmp_path))
     assert "vary widely" not in text
+
+
+# --- v3: Quality label/raw-vs-adjusted rendering --------------------------------------------
+
+def test_quality_shows_label_not_bare_number(tmp_path):
+    text = _all_text(_build(tmp_path))
+    assert "World Class" in text
+    assert "Quality: World Class" in text
+
+
+def test_quality_shows_raw_label_only_when_it_differs_from_adjusted(tmp_path):
+    same = _all_text(_build(tmp_path))  # raw_label == label in the default fixture
+    assert "(raw:" not in same
+
+    quality = dict(QUALITY, label="Strong Starter", avg_percentile=73.3, raw_label="Solid Starter", raw_avg_percentile=63.1)
+    differing = _all_text(_build(tmp_path, quality=quality))
+    assert "(raw: Solid Starter)" in differing
+    assert "Without the possession adjustment" in differing
+
+
+def test_quality_not_available_when_none(tmp_path):
+    text = _all_text(_build(tmp_path, quality=None))
+    assert "Quality: not available" in text
+    assert "Quality signal not available" in text
+
+
+# --- v3: Fit label/reference-club rendering ------------------------------------------------
+
+def test_fit_shows_label_and_reference_club(tmp_path):
+    text = _all_text(_build(tmp_path))
+    assert "Fit: Hand-in-Glove Fit vs. Manchester City" in text
+    assert "Exact comparison (Manchester City's current squad" in text
+
+
+def test_fit_not_available_when_philosophy_given_but_signal_is_none(tmp_path):
+    text = _all_text(_build(tmp_path, fit_signal=None))
+    assert "Fit: not available" in text
+    assert "Fit couldn't be computed for this player" in text
+
+
+def test_fit_not_assessed_when_no_philosophy(tmp_path):
+    text = _all_text(_build(
+        tmp_path, philosophy={"in_possession": "", "out_of_possession": ""}, fit_signal=None,
+    ))
+    assert "Fit: not available" in text  # top Signals line always shows a state
+    assert "Club philosophy assessed against" not in text  # section 4 skips the block entirely
+
+
+# --- v3: Section 6 glossary ------------------------------------------------------------------
+
+def test_understanding_the_signals_section_present(tmp_path):
+    text = _all_text(_build(tmp_path))
+    assert "6. Understanding the Signals" in text
+    assert "World Class" in text  # the label scale table renders
+    assert "Manchester City" in text  # this brief's actual reference club is named
+
+
+def test_understanding_the_signals_generic_when_no_fit_signal(tmp_path):
+    text = _all_text(_build(tmp_path, fit_signal=None))
+    assert "6. Understanding the Signals" in text
+    assert "depends on which club philosophy is selected" in text

@@ -6,6 +6,14 @@ STATS = {"season": "2023-2024", "squad": "Manchester City", "goals": "27", "assi
 XG = {"xG": 28.8, "xA": 5.51, "key_passes": 25}
 ARTICLES = [{"title": "Haaland closing in on scoring record"},
             {"title": "City rotate ahead of midweek"}]
+FIT_SIGNAL = {
+    "reference_club": "Borussia Dortmund",
+    "position_group": "attack",
+    "target_components": {"goals_per90": 91.0, "xG_per90": 88.0},
+    "reference_components": {"goals_per90": 70.0, "xG_per90": 65.0},
+    "avg_abs_diff": 22.0,
+    "label": "Somewhat Fits",
+}
 
 
 def test_prompt_has_both_section_markers():
@@ -27,16 +35,31 @@ def test_prompt_without_articles_says_none_found():
     assert "none found" in p
 
 
-def test_prompt_with_philosophy_demands_fit_score_line():
-    phil = {"in_possession": "possession", "out_of_possession": "high_line"}
-    p = sc.build_prompt("Erling Haaland", STATS, XG, ARTICLES, philosophy=phil)
-    assert 'Fit: X/5' in p
-    assert "possession" in p and "high_line" in p
+def test_prompt_with_fit_signal_gives_the_llm_the_precomputed_label_and_comparison():
+    # v3: Fit is computed BEFORE the LLM call -- the prompt hands it the label and the exact
+    # percentile comparison to explain, rather than asking it to invent a score.
+    phil = {"in_possession": "slow, methodical possession", "out_of_possession": "high line, counter-press"}
+    p = sc.build_prompt("Erling Haaland", STATS, XG, ARTICLES, philosophy=phil, fit_signal=FIT_SIGNAL)
+    assert "already been computed" in p.lower()
+    assert "Somewhat Fits" in p
+    assert "Borussia Dortmund" in p
+    assert "91" in p  # target component value surfaced
+    assert "Do NOT invent a different score" in p
 
 
-def test_prompt_without_philosophy_demands_not_assessed_line():
+def test_prompt_with_philosophy_but_no_fit_signal_says_could_not_be_computed():
+    # philosophy given, but Fit unavailable (e.g. league/position not covered) -- must not ask
+    # the LLM to guess a score in its place.
+    phil = {"in_possession": "vertical", "out_of_possession": "high_line"}
+    p = sc.build_prompt("Erling Haaland", STATS, XG, ARTICLES, philosophy=phil, fit_signal=None)
+    assert "could not be computed" in p
+    assert "Do NOT invent a different score" not in p  # that instruction only applies when a signal IS given
+
+
+def test_prompt_without_philosophy_says_not_assessed():
     p = sc.build_prompt("Erling Haaland", STATS, XG, ARTICLES)
-    assert "Fit: not assessed" in p
+    assert "not assessed" in p.lower()
+    assert "Fit: X/5" not in p  # no more asking the LLM to invent a numeric line
 
 
 def test_prompt_includes_scout_notes_capped():
@@ -68,24 +91,17 @@ def test_prompt_no_prior_findings_no_rewrite_block():
 # ---- parse_synthesis ----
 
 def test_parse_synthesis_splits_on_markers():
+    # v3: fit_read is now purely the model's prose -- no "Fit: X/5" line to strip out, since
+    # the score is computed deterministically before the LLM ever runs.
     raw = (f"{sc.NEWS_MARKER}\nNo relevant news this window.\n\n"
-           f"{sc.FIT_MARKER}\nFit: 4/5\nStrong final-third output against the pressing demand.")
+           f"{sc.FIT_MARKER}\nStrong final-third output against the pressing demand.")
     out = sc.parse_synthesis(raw)
     assert out["news_synthesis"] == "No relevant news this window."
-    assert out["fit_score"] == 4
-    assert out["fit_read"].startswith("Strong final-third")
-
-
-def test_parse_synthesis_not_assessed():
-    raw = (f"{sc.NEWS_MARKER}\nQuiet week.\n\n"
-           f"{sc.FIT_MARKER}\nFit: not assessed\nScout notes only, no philosophy given.")
-    out = sc.parse_synthesis(raw)
-    assert out["fit_score"] is None
-    assert out["fit_read"].startswith("Scout notes only")
+    assert out["fit_read"] == "Strong final-third output against the pressing demand."
+    assert "fit_score" not in out
 
 
 def test_parse_synthesis_missing_markers_keeps_whole_text():
     out = sc.parse_synthesis("The model ignored the format entirely.")
     assert out["news_synthesis"] == "The model ignored the format entirely."
     assert out["fit_read"] == ""
-    assert out["fit_score"] is None

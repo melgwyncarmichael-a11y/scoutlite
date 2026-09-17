@@ -26,10 +26,17 @@ def review(
     xg: dict | None,
     philosophy: dict | None,
     articles: list[dict] | None = None,
+    fit_signal: dict | None = None,
 ) -> dict:
     """Returns {findings: [{claim, issue, severity}], has_major: bool}. Fails soft: on any
     error (parse failure, API error) returns an empty finding list rather than blocking the
-    pipeline -- the rule checker is the hard gate, this is the supplement."""
+    pipeline -- the rule checker is the hard gate, this is the supplement.
+
+    fit_signal (v3, 2026-09-17): the deterministic Fit result (scoring.compute_fit_signal) the
+    LLM was asked to explain. MUST be included in the data this fact-checker sees, or it has no
+    way to know the fit_read's percentile-comparison numbers are legitimate, already-computed
+    figures rather than invented ones -- found via a real generated brief where every number in
+    a correct, well-grounded fit_read got flagged "fabricated" for exactly this reason."""
     inputs = {"season stats": stats}
     if misc:
         inputs["defensive/discipline stats"] = misc
@@ -39,6 +46,15 @@ def review(
         inputs["advanced stats (Understat)"] = xg
     if philosophy and (philosophy.get("in_possession") or philosophy.get("out_of_possession")):
         inputs["club philosophy"] = " / ".join(v for v in philosophy.values() if v)
+    if fit_signal:
+        comparison = ", ".join(
+            f"{k.replace('_', ' ')}: this player {v:.0f} vs. {fit_signal['reference_club']} "
+            f"{fit_signal['reference_components'][k]:.0f}"
+            for k, v in fit_signal["target_components"].items()
+        )
+        inputs["Fit signal (already computed, not written by the model)"] = (
+            f"{fit_signal['label']} vs. {fit_signal['reference_club']} -- percentile comparison: {comparison}"
+        )
 
     input_block = "\n".join(f"- {k}: {v}" for k, v in inputs.items())
     if articles:
@@ -60,7 +76,10 @@ def review(
         "Do NOT flag: cautious/hedged statements, explicit 'insufficient data' notes, correct "
         "arithmetic (e.g. per-game rates derived from the totals shown), a direct restatement of "
         "the data, or which source a correct number came from (mixing an Understat figure and an "
-        "FBref figure in one sentence is fine as long as both numbers are right).\n\n"
+        "FBref figure in one sentence is fine as long as both numbers are right). If a 'Fit "
+        "signal' entry is present in the available data, its percentile-comparison numbers were "
+        "computed by the tool BEFORE paragraph 2 was written, not invented by the model writing "
+        "it -- citing them accurately is a correct restatement, not a fabrication.\n\n"
         "Reserve \"major\" for a factual claim that is wrong or an event asserted that isn't in "
         "the data. Style/emphasis nitpicks are \"minor\".\n\n"
         "Respond with ONLY a JSON array, no prose. Each item: "

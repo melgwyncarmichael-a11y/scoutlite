@@ -12,11 +12,16 @@ ARTICLES = [{"title": "Haaland closing in on Premier League scoring record"},
 PHIL = {"in_possession": "possession-based", "out_of_possession": ""}
 
 _UNSET = object()  # so a test can pass xg=None explicitly and mean it
+FIT_SIGNAL = {
+    "reference_club": "Manchester City", "position_group": "attack",
+    "target_components": {"goals_per90": 91.0}, "reference_components": {"goals_per90": 80.0},
+    "avg_abs_diff": 11.0, "label": "Hand-in-Glove Fit",
+}
 
 
-def _check(news, fit, fit_score=4, stats=None, misc=None, keeper=None, xg=_UNSET, articles=None,
+def _check(news, fit, fit_signal=None, stats=None, misc=None, keeper=None, xg=_UNSET, articles=None,
            notes=None, phil=None):
-    return jr.check("Erling Haaland", news, fit, fit_score, stats or STATS, misc, keeper,
+    return jr.check("Erling Haaland", news, fit, fit_signal, stats or STATS, misc, keeper,
                     XG if xg is _UNSET else xg,
                     articles if articles is not None else ARTICLES,
                     notes, phil if phil is not None else PHIL)
@@ -39,15 +44,19 @@ def test_empty_section_is_hard_fail():
     assert _check("", "some fit text long enough to pass length")["hard_fail"] is True
 
 
-def test_philosophy_given_but_no_fit_score_is_hard_fail():
-    r = _check("news text long enough", "fit read text also long enough here", fit_score=None)
-    assert r["hard_fail"] is True
+def test_fit_signal_given_but_not_mentioned_in_fit_read_is_flagged():
+    # v3: Fit is computed deterministically and handed to the LLM to explain -- if the fit read
+    # never mentions the reference club, it likely isn't actually grounded in that comparison.
+    r = _check("news text long enough here", "This player has strong output in the final third.",
+               fit_signal=FIT_SIGNAL)
+    assert any("HONESTY" in f and "Manchester City" in f for f in r["findings"])
 
 
-def test_no_philosophy_but_fit_score_produced_penalised():
-    r = _check("news text long enough", "fit read text long enough here", fit_score=3,
-               phil={"in_possession": "", "out_of_possession": ""})
-    assert any("no philosophy given but a fit score" in f for f in r["findings"])
+def test_fit_signal_mentioned_in_fit_read_not_flagged():
+    r = _check("news text long enough here",
+               "Compared to Manchester City's forwards, this player's output is very close.",
+               fit_signal=FIT_SIGNAL)
+    assert not any("Manchester City" in f and "HONESTY" in f for f in r["findings"])
 
 
 def test_ungrounded_number_flagged_not_hard_failed():
@@ -129,7 +138,7 @@ def test_xg_cited_when_none_available_is_flagged():
 
 
 def test_missing_not_assessed_when_no_philosophy():
-    r = _check("news text long enough here", "He has good numbers overall.", fit_score=None,
+    r = _check("news text long enough here", "He has good numbers overall.",
                phil={"in_possession": "", "out_of_possession": ""})
     assert any("not assessed" in f for f in r["findings"])
 
@@ -179,7 +188,7 @@ def test_hype_regex_does_not_flag_a_plain_factual_sentence():
 def test_wrong_player_focus_flagged():
     r = jr.check("Kevin De Bruyne", "This is all about some other footballer entirely.",
                  "And this fit read never names the target at all, discussing tactics abstractly.",
-                 3, STATS, None, None, XG, ARTICLES, None, PHIL)
+                 FIT_SIGNAL, STATS, None, None, XG, ARTICLES, None, PHIL)
     assert any("FOCUS" in f for f in r["findings"])
 
 
@@ -188,7 +197,7 @@ def test_dirty_brief_scores_near_zero():
         'Reports say Haaland "set for £120 million move to Real Madrid".',
         "With 45 goals and xG of 60.0 he has the potential to become the greatest. City should "
         "sign a replacement. His xA of 12.0 shows elite creativity.",
-        fit_score=5, xg=None, notes="great finisher",
+        xg=None, notes="great finisher",
         phil={"in_possession": "", "out_of_possession": ""},
     )
     assert r["source_accuracy"] < 20

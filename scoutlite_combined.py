@@ -35,7 +35,7 @@ from scoutlite import (
     get_player_page,
     search_player,
 )
-from scoring import compute_quality_signal
+from scoring import compute_fit_signal, compute_quality_signal
 from understat_xg import get_player_xg
 
 ROOT = Path(__file__).resolve().parent
@@ -58,6 +58,7 @@ def build_prompt(
     scout_notes: str | None = None,
     philosophy: dict | None = None,
     prior_findings: list[str] | None = None,
+    fit_signal: dict | None = None,
 ) -> str:
     """Bio and stats are rendered as tables directly from data elsewhere -- no LLM restatement,
     no transcription risk. This prompt only asks for the two things that genuinely need
@@ -114,25 +115,49 @@ def build_prompt(
         f"{FIT_MARKER}\n"
     ]
 
-    if has_philosophy:
+    # v3 (2026-09-17): Fit is no longer something the LLM scores -- it's computed
+    # deterministically beforehand (scoring.compute_fit_signal), the same architecture Quality
+    # already uses. Found via the Track C eval (2026-09-16): asking the LLM for a 1-5 number
+    # landed on exactly 3/5 in 21 of 21 test runs across every philosophy combination, because
+    # it correctly refused to guess at pace/pressing data no ScoutLite source has -- honest,
+    # but a signal that never actually moved. The LLM's job now is narrower and better suited
+    # to what it's good at: explaining an ALREADY-COMPUTED label in prose, grounded in the
+    # exact percentile comparison behind it, not deciding the label itself.
+    if fit_signal:
+        comp_lines = "\n".join(
+            f"- {k.replace('_', ' ')}: this player ranks {v:.0f} out of 100 among peers, vs. "
+            f"{fit_signal['reference_components'][k]:.0f} out of 100 for "
+            f"{fit_signal['reference_club']}'s players in this position"
+            for k, v in fit_signal["target_components"].items()
+        )
         instructions.append(
-            f"First line MUST be exactly \"Fit: X/5\" where X is your integer 1-5 fit signal for a "
-            f"club playing {style_desc}, based ONLY on the stats already listed above (1 = poor fit, "
-            f"3 = neutral/insufficient data to tell, 5 = excellent fit). Then, on a new paragraph, "
-            f"explain that score using ONLY those stats (e.g. defensive actions relate to pressing "
-            f"demands, key passes/crosses relate to possession play). Explicitly say when the "
-            f"available stats aren't sufficient to judge a given aspect (e.g. no pace/sprint data "
-            f"here, so speed-dependent transition fit can't be assessed) rather than guessing -- "
-            f"when in doubt, score closer to 3, not a confident extreme. If the scout's role notes "
-            f"are present, weave them into the explanation as the scout's own observation, clearly "
-            f"attributed, not verified fact. This is a fit SIGNAL for the scout to weigh, never a "
-            f"verdict."
+            f"The Fit signal has ALREADY been computed deterministically (not by you): "
+            f"\"{fit_signal['label']}\" against {fit_signal['reference_club']}'s current squad, "
+            f"the reference club for a {style_desc} philosophy. Here is the exact percentile "
+            f"comparison behind that label:\n{comp_lines}\n\n"
+            f"Write ONE paragraph explaining this result using ONLY these numbers -- which "
+            f"specific metrics are closest to {fit_signal['reference_club']}'s typical profile "
+            f"in this position, which are furthest apart, and what that means in plain terms. "
+            f"Refer to {player_name} by name at least once rather than only 'the player' or "
+            f"'this player' throughout. Do NOT invent a different score, and do NOT contradict "
+            f"the given label -- your job is to explain it, not re-judge it. If the scout's "
+            f"role notes are present, weave them into the explanation as the scout's own "
+            f"observation, clearly attributed, not verified fact. This is a fit SIGNAL for the "
+            f"scout to weigh, never a verdict."
+        )
+    elif has_philosophy:
+        instructions.append(
+            f"A club philosophy ({style_desc}) was specified, but the Fit signal could not be "
+            f"computed for this player (their league or position isn't covered by the "
+            f"reference-club comparison). Say so plainly in one sentence rather than guessing a "
+            f"score or a read. If the scout's role notes are present, note them as the scout's "
+            f"own observation, clearly attributed, not verified fact."
         )
     else:
         instructions.append(
-            "First line MUST be exactly \"Fit: not assessed\" (no club philosophy was specified). "
-            "Then, on a new paragraph, note the scout's role notes if present, clearly attributed "
-            "as the scout's own observation, not verified fact."
+            "No club philosophy was specified, so Fit is not assessed. Note the scout's role "
+            "notes if present, clearly attributed as the scout's own observation, not verified "
+            "fact."
         )
 
     instructions.append(
@@ -157,8 +182,13 @@ MAX_JUDGE_ITERATIONS = 2
 
 
 def parse_synthesis(text: str) -> dict:
-    """Split a raw synthesis response into {news_synthesis, fit_read, fit_score}. Pure -- no
-    API call -- so it's unit-testable and reused by the tests."""
+    """Split a raw synthesis response into {news_synthesis, fit_read}. Pure -- no API call --
+    so it's unit-testable and reused by the tests.
+
+    v3 (2026-09-17): no fit_score parsing anymore -- Fit is computed deterministically before
+    the LLM ever runs (scoring.compute_fit_signal), passed into build_prompt() as context, not
+    produced by the model. fit_read is now purely the model's prose explaining that
+    already-decided label, nothing to extract a number out of."""
     text = text.strip()
     news_synthesis, fit_read = "", ""
     if NEWS_MARKER in text and FIT_MARKER in text:
@@ -167,23 +197,16 @@ def parse_synthesis(text: str) -> dict:
     else:
         news_synthesis = text  # model ignored the markers -- surface it rather than lose it
 
-    fit_score = None
-    fit_score_match = re.match(r"Fit:\s*(\d)/5", fit_read)
-    if fit_score_match:
-        fit_score = int(fit_score_match.group(1))
-        fit_read = fit_read[fit_score_match.end():].strip()
-    elif fit_read.lower().startswith("fit: not assessed"):
-        fit_read = fit_read[len("Fit: not assessed"):].strip()
-
-    return {"news_synthesis": news_synthesis, "fit_read": fit_read, "fit_score": fit_score}
+    return {"news_synthesis": news_synthesis, "fit_read": fit_read}
 
 
 def _synthesize_once(
-    player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings
+    player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings, fit_signal
 ) -> dict:
     client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
     prompt = build_prompt(
-        player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings
+        player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings,
+        fit_signal=fit_signal,
     )
     response = client.chat.completions.create(
         model="deepseek-chat",
@@ -202,6 +225,7 @@ def summarize_combined(
     keeper: dict | None = None,
     scout_notes: str | None = None,
     philosophy: dict | None = None,
+    fit_signal: dict | None = None,
 ) -> dict:
     """Synthesize the two LLM-authored sections, then run the judge (deterministic rules +
     a narrow LLM check). If the draft doesn't clear SOURCE_ACCURACY_THRESHOLD, revise with the
@@ -209,7 +233,11 @@ def summarize_combined(
     with judge['confidence_warning'] set and the outstanding findings attached, rather than
     hard-failing and handing the scout nothing.
 
-    Returns {news_synthesis, fit_read, fit_score, judge: {source_accuracy, passed, iterations,
+    fit_signal (v3, 2026-09-17): the deterministic Fit result from scoring.compute_fit_signal,
+    computed by the caller BEFORE this call -- Fit is no longer something the LLM decides, only
+    something it explains. Passed straight through into every synthesis attempt and the judge.
+
+    Returns {news_synthesis, fit_read, fit_signal, judge: {source_accuracy, passed, iterations,
     findings, confidence_warning}}.
     """
     prior_findings: list[str] = []
@@ -219,10 +247,11 @@ def summarize_combined(
 
     for iteration in range(1, MAX_JUDGE_ITERATIONS + 1):
         result = _synthesize_once(
-            player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings
+            player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy,
+            prior_findings, fit_signal,
         )
         rule_report = judge_rules.check(
-            player_name, result["news_synthesis"], result["fit_read"], result["fit_score"],
+            player_name, result["news_synthesis"], result["fit_read"], fit_signal,
             stats, misc, keeper, xg, articles, scout_notes, philosophy,
         )
 
@@ -230,7 +259,8 @@ def summarize_combined(
             llm_report = {"findings": [], "has_major": False}  # skip LLM tokens on a broken draft
         else:
             llm_report = judge_llm.review(
-                result["news_synthesis"], result["fit_read"], stats, misc, keeper, xg, philosophy, articles
+                result["news_synthesis"], result["fit_read"], stats, misc, keeper, xg, philosophy, articles,
+                fit_signal=fit_signal,
             )
 
         passed = (
@@ -250,6 +280,7 @@ def summarize_combined(
     findings = rule_report["findings"] + [
         f"{f.get('issue', '')} (in: \"{f.get('claim', '')}\")" for f in llm_report["findings"]
     ]
+    result["fit_signal"] = fit_signal
     result["judge"] = {
         "source_accuracy": rule_report["source_accuracy"],
         "threshold": SOURCE_ACCURACY_THRESHOLD,
@@ -342,7 +373,17 @@ def run(args):
         bio["position"], stats["competition"], stats["season"], args.player, stats, misc, keeper, xg,
         force_refresh=args.fresh,
     )
-    print(f"Quality: {quality['score'] if quality else 'not available for this league/position'}")
+    print(f"Quality: {quality['label'] if quality else 'not available for this league/position'}"
+          + (f" (raw: {quality['raw_label']})" if quality and quality["raw_label"] != quality["label"] else ""))
+
+    print("Computing Fit signal (non-AI, reference-club comparison)...")
+    fit_signal = compute_fit_signal(
+        bio["position"], stats["competition"], stats["season"], misc, xg,
+        quality["components"] if quality else {},
+        in_possession=args.in_possession or "", out_of_possession=args.out_of_possession or "",
+        force_refresh=args.fresh,
+    ) if quality else None
+    print(f"Fit: {fit_signal['label'] + ' vs ' + fit_signal['reference_club'] if fit_signal else 'not available'}")
 
     articles = []
     newsapi_key = os.environ.get("NEWSAPI_KEY")
@@ -358,7 +399,8 @@ def run(args):
 
     print("Calling DeepSeek-V3 for the research brief (with judge loop)...")
     synthesis = summarize_combined(
-        args.player, stats, xg, articles, misc, keeper, args.scout_notes, philosophy
+        args.player, stats, xg, articles, misc, keeper, args.scout_notes, philosophy,
+        fit_signal=fit_signal,
     )
     j = synthesis["judge"]
     print(
@@ -376,10 +418,11 @@ def run(args):
         args.player, bio, stats, xg, articles, misc, keeper,
         synthesis["news_synthesis"], synthesis["fit_read"],
         args.scout_notes, philosophy, out_path,
-        quality=quality, fit_score=synthesis["fit_score"], judge=synthesis["judge"], player_url=url,
+        quality=quality, fit_signal=synthesis["fit_signal"], judge=synthesis["judge"], player_url=url,
     )
 
-    print(f"\nQuality: {quality['score'] if quality else 'N/A'}/5  ·  Fit: {synthesis['fit_score'] or 'N/A'}/5")
+    print(f"\nQuality: {quality['label'] if quality else 'N/A'}  ·  "
+          f"Fit: {fit_signal['label'] if fit_signal else 'N/A'}")
     print("\n--- What People Say ---")
     print(synthesis["news_synthesis"])
     print("\n--- Signals & Fit Read ---")

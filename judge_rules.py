@@ -99,7 +99,7 @@ def check(
     player_name: str,
     news_synthesis: str,
     fit_read: str,
-    fit_score: int | None,
+    fit_signal: dict | None,
     stats: dict,
     misc: dict | None,
     keeper: dict | None,
@@ -131,16 +131,18 @@ def check(
         elif n > 2500:
             findings.append(f"STRUCTURE: {label} is very long ({n} chars) -- likely rambling.")
             score -= 10
-    if has_philosophy and fit_score not in (1, 2, 3, 4, 5):
-        findings.append(f"STRUCTURE: philosophy was given but fit score is {fit_score!r}, not an int 1-5.")
-        hard_fail = True
-    if not has_philosophy and fit_score is not None:
-        findings.append(f"STRUCTURE: no philosophy given but a fit score ({fit_score}) was produced.")
-        score -= 15
 
     # --- B. Numeric grounding --------------------------------------------------------------
     known = _known_numbers(stats, misc, keeper, xg)
-    known.add(str(fit_score) if fit_score is not None else "")
+    # v3 (2026-09-17): fit_signal's percentile comparison numbers are legitimate to cite (the
+    # LLM is explicitly given them to write about) -- Fit is no longer a number the LLM
+    # invents, so there's no "is it a valid 1-5 int" structural check anymore either; see the
+    # new HONESTY check below instead, which verifies the fit_read is actually grounded to the
+    # computed reference-club comparison rather than just structurally well-formed.
+    if fit_signal:
+        for v in list(fit_signal.get("target_components", {}).values()) + list(fit_signal.get("reference_components", {}).values()):
+            known.add(_normalize_number(f"{v:.0f}"))
+            known.add(_normalize_number(f"{v:.1f}"))
     known.add("28")  # the news-lookback window ("last 28 days"), a fixed part of the prompt
     for a in articles[:8]:  # numbers in headlines the news read may legitimately cite
         for tok in _NUMBER.findall(a.get("title", "")):
@@ -189,6 +191,14 @@ def check(
     if not has_philosophy and "not assessed" not in fit_read.lower():
         findings.append("HONESTY: no philosophy given, but the fit read doesn't say 'not assessed'.")
         score -= 10
+    if fit_signal and fit_signal.get("reference_club"):
+        ref_tokens = _tokens(fit_signal["reference_club"])
+        if ref_tokens and not (ref_tokens & _tokens(fit_read)):
+            findings.append(
+                f"HONESTY: Fit was computed against {fit_signal['reference_club']}, but the fit "
+                "read never mentions them -- may not actually be grounded in the given comparison."
+            )
+            score -= 10
     if scout_notes and scout_notes.strip() and "scout" not in fit_read.lower():
         findings.append(
             "HONESTY: scout notes were provided but the fit read never attributes them "

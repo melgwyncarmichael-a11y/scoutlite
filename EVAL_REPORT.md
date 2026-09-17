@@ -143,6 +143,16 @@ unable to move off neutral for any player against any philosophy**, given today'
 fix isn't more reruns — it's either sourcing that data from somewhere, or being explicit in the
 product that Fit is close to fixed-neutral until it does.
 
+**Resolved, 2026-09-17 (v3 — see `NOTES.md`, "v3: both Signals fully deterministic").** Fit is
+no longer an LLM-judged number at all. `compute_fit_signal()` computes it deterministically —
+comparing the player's own percentile profile against a real reference club's current squad in
+the same position group — the same architecture Quality already used. This doesn't source the
+missing pace/pressing data (that gap is real and stays disclosed in every brief), but it does
+fix the actual symptom this track found: the signal now varies meaningfully with real
+statistical differences instead of defaulting to a fixed 3/5 regardless of input. The remaining
+open question is whether profile-similarity is the *right* thing to measure, not whether the
+number moves — that's a separate, ongoing judgment call, not a re-run of this track.
+
 ---
 
 ## Cross-cutting themes
@@ -212,6 +222,20 @@ assumption that the fixes worked):**
    Rodri were deliberately left for the labeler to reconsider given the metric set genuinely
    changed, not silently flipped — see `NOTES.md` for the full writeup.
 
+**Also done, v3 (2026-09-17 — see `NOTES.md`, "v3: both Signals fully deterministic"):**
+
+6. ~~Should Fit stay numeric~~ — resolved differently than either option originally posed: not
+   a caveat on an LLM-judged number, and not dropping the number, but making the number itself
+   deterministic. Fit is now a 3-tier label (Hand-in-Glove Fit / Somewhat Fits / Completely
+   Different) computed by comparing the player's percentile profile against a real reference
+   club's current squad — see the Track C section above for the full resolution.
+8. ~~A genuinely different Quality scoring approach~~ — possession-adjustment (PAdj), not a
+   standout-metric redesign, but addresses the same underlying complaint (a single blended
+   number hiding real context): Quality now shows both a raw and a possession-adjusted
+   percentile, correcting for a dominant-possession team's players facing fewer defensive
+   opportunities. Verified live: Rodri's defensive-actions percentile moved 57 (raw) → 88
+   (adjusted).
+
 **Still open, left for the project owner's call:**
 
 4. **Grow the Track B sample.** 2 real "overstated" cases is enough to match the hypothesis
@@ -219,13 +243,13 @@ assumption that the fixes worked):**
    captures would tighten it. A small hype-keyword detector was added to `judge_rules.py`
    alongside the Tier-1 fixes to raise the floor on the most blatant cases, but it doesn't
    replace growing the sample to actually measure recall with confidence.
-6. **Should Fit stay a numeric 1–5 score at all**, given Track C's evidence it may be
-   structurally incapable of discriminating? The caveat (item 3) is the smaller move; dropping
-   the number in favor of the qualitative `fit_read` alone would be the bigger one.
 7. **Is sourcing pace/pressing data worth pursuing** at all, given ScoutLite's free/scraping-
-   only sources? Likely a dead end, worth a quick access-check rather than an assumption.
-8. **A genuinely different Quality scoring approach** (e.g. reporting a player's standout
-   metric instead of one blended number) — bigger scope change, filed as a "v3 idea."
+   only sources? Likely a dead end, worth a quick access-check rather than an assumption. Both
+   Quality's PAdj and Fit's reference-club redesign still can't see this data — it's the one
+   gap no amount of restructuring the existing sources closes.
+10. **Fit's 3-tier thresholds (15 / 35 percentile-point average difference) are a first pass,
+    not eval-validated** — no labeled sample exists yet for this new mechanism, the same
+    position Fit itself was in before Track C. A natural next eval track, not urgent.
 9. **Keep the "run real cases, read real output" habit going.** Every bug in this report — and
    the position-classification fix above — was found that way, not by imagining edge cases up
    front. Cheap relative to what it catches.

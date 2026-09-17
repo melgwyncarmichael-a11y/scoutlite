@@ -1,5 +1,92 @@
 # ScoutLite — Build Notes
 
+## v3: both Signals fully deterministic, reference-club Fit, a standing glossary (2026-09-17, later still)
+
+The Tier 3 product redesign discussed after the v2 fixes -- Quality and Fit both now
+deterministic, no LLM deciding either number. Design was worked out in conversation before any
+code: possession-adjustment for Quality's team-context bias, a real reference club per
+philosophy for Fit (replacing the LLM-judged number Track C found stuck at 3/5), qualitative
+labels instead of bare 1-5s for both, and a standing "Understanding the Signals" glossary on
+every brief.
+
+**Quality (`scoring.py`):**
+- **Possession-adjustment (PAdj)**, the standard sports-analytics fix for exactly the concern
+  raised: a dominant-possession team's players face fewer defensive opportunities per match
+  than an equal player at a team that defends more, so their raw defensive-action counts are
+  naturally lower for reasons that have nothing to do with individual quality. New
+  `_team_possession_map()` (team possession%, from a soccerdata call not previously used in
+  this codebase -- verified live before writing any code) and `_possession_adjust()`. Applied
+  only to `defensive_actions_per90` (attack output isn't adjusted -- PAdj is specifically an
+  established correction for defensive volume, not a general one). Deliberately a simpler
+  application than a full industry PAdj: only the individual value is adjusted, not the whole
+  comparison population -- disclosed as a known simplification, not presented as fully
+  rigorous. `compute_quality_signal()` now returns both `avg_percentile`/`label` (adjusted) and
+  `raw_avg_percentile`/`raw_label` (unadjusted) side by side.
+- **Verified live on the exact case that motivated this**: Rodri's defensive-actions percentile
+  moved 57 (raw) -> 88 (PAdj) once corrected for how little Manchester City's dominant
+  possession actually requires him to defend.
+- **Labels replace the bare 1-5**: `percentile_to_label()`, same cutoffs as `percentile_to_1_5`
+  -- Below Rotation / Depth Option / Solid Starter / Strong Starter / World Class.
+
+**Fit (`scoring.py`, `scoutlite_combined.py`, `judge_rules.py`, `judge_llm.py`):**
+- **`compute_fit_signal()`**: deterministic, not LLM-judged. Reuses Quality's own percentile
+  components for the target player (no recomputation), builds a reference profile by
+  percentile-ranking a real club's current squad (same position group, same metrics) against
+  their own league's population, then compares. Output is a 3-tier label -- Hand-in-Glove Fit /
+  Somewhat Fits / Completely Different -- from the average absolute percentile-point difference
+  across shared metrics (first-pass thresholds, not eval-validated yet -- no labeled sample
+  exists for this new mechanism).
+- **`REFERENCE_CLUBS`**: one real club per philosophy combination, picked in conversation, not
+  an abstract statistical template -- Borussia Dortmund (vertical/high-line), Real Madrid
+  (vertical/mid-block), Atlético Madrid (vertical/low-block), Manchester City
+  (possession/high-line), Bayern Munich (possession/mid-block), Brighton
+  (possession/low-block). FBref and Understat don't always agree on a club's name (confirmed
+  empirically) -- Dortmund is "Dortmund" on FBref, "Borussia Dortmund" on Understat; Atlético is
+  accented on FBref, not on Understat -- so each entry carries both spellings.
+- **The LLM's job narrows to explaining an already-decided label**, not producing one.
+  `build_prompt()`'s Fit section now hands the model the exact percentile comparison and asks
+  for one paragraph explaining it -- explicitly forbidden from inventing a different score or
+  contradicting the given label. `parse_synthesis()` no longer parses a "Fit: X/5" line out of
+  the response at all (there's nothing to parse -- the number never comes from the model).
+  `judge_rules.check()`'s fit-score structural checks (was it a valid 1-5 int, was one produced
+  without philosophy) are gone, since there's no LLM-invented number left to validate that way
+  -- replaced with a new check verifying the fit_read actually names the reference club it was
+  computed against.
+
+**Two real bugs found via live smoke-testing** (not caught by the unit test suite, since
+neither exercises the full pipeline end-to-end):
+1. Forgot to import `compute_fit_signal` in `scoutlite_combined.py` -- caught on the very first
+   live CLI run.
+2. `judge_llm.review()` wasn't given the new `fit_signal` data at all, so its fact-checking call
+   correctly-from-its-own-limited-view flagged a completely accurate, well-grounded fit_read's
+   percentile comparisons as "fabricated" -- it had never been shown the numbers it was judging
+   against. Fixed by passing `fit_signal` into `review()` and including its comparison in the
+   fact-checker's own view of "the available data," with an explicit note that these numbers
+   were computed by the tool, not invented by the model being checked.
+3. A third, smaller issue from the same live runs: the new Fit instructions never told the
+   model to actually name the player, and a generated brief came back with neither paragraph
+   naming Haaland at all (triggering a real FOCUS finding). Fixed by explicitly requiring the
+   player be named at least once in the Fit explanation.
+
+None of these three were hypothetical edge cases -- all three surfaced from generating one real
+brief and reading the output, the same "run it and look" pattern that found every other real
+bug across this whole eval-and-fix arc.
+
+**`docx_report.py`**: Signals block drops the old "Combined X/10" line entirely (doesn't mean
+anything once Fit is categorical) in favor of "Quality: <label> · Fit: <label> vs. <club>".
+Quality's raw vs. adjusted percentile shown side by side when they differ. Section 4 now shows
+the exact reference-club comparison table alongside the LLM's prose. New **"6. Understanding
+the Signals"** section -- static, identical on every brief, explaining what each signal
+measures, the label scale, and the same pace/pressing caveat, with the actual reference club
+for THIS brief's philosophy named where relevant. `FIT_SCOPE_CAVEAT`'s wording updated -- the
+original (written for the old LLM-judged 3/5) no longer made sense once Fit could vary; the
+underlying gap (no pace/pressing data, ever) is still fully real and still disclosed.
+
+`app.py` mirrors every pipeline change (computes `fit_signal` before calling
+`summarize_combined`, same Signals/comparison display as the docx). 168 tests total across the
+suite (up from 132), covering the new scoring functions, prompt assembly, judge_rules'
+replaced fit checks, and docx rendering of both new signal formats.
+
 ## Re-ran the eval set against v2, verified the fixes actually moved real data (2026-09-17, later same day)
 
 Tier 2 item from EVAL_REPORT.md's recommendations, done immediately rather than left open. Not

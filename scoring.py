@@ -98,21 +98,52 @@ def percentile_to_1_5(pct: float) -> int:
     return 5
 
 
-def _understat_population_per90(players: list[dict], position_group: str, field: str) -> list[float]:
+# Same cutoffs as percentile_to_1_5 -- a label reads more honestly than a number that implies
+# precision the underlying data doesn't have ("3.4 rounds to a 3"), per user feedback
+# (2026-09-17). Word choice matters here: these are what a scout actually reads and reacts to.
+QUALITY_LABELS = [
+    (20, "Below Rotation"),
+    (40, "Depth Option"),
+    (60, "Solid Starter"),
+    (80, "Strong Starter"),
+    (101, "World Class"),
+]
+
+
+def percentile_to_label(pct: float) -> str:
+    for cutoff, label in QUALITY_LABELS:
+        if pct < cutoff:
+            return label
+    return QUALITY_LABELS[-1][1]
+
+
+def _understat_population_per90(
+    players: list[dict], position_group: str, field: str, team_title: str | None = None
+) -> list[float]:
     """Understat's 'position' field is a space-separated set of every position a player
     appeared in this season (e.g. 'F M S'), not a single primary tag -- match by containment,
-    not equality, or most players get excluded entirely."""
+    not equality, or most players get excluded entirely.
+
+    team_title (optional): restrict to one squad's players instead of the whole league -- used
+    by compute_fit_signal to pull a reference club's own raw values out of the same league pull
+    already used to build the population, rather than a second fetch."""
     group_code = {"attack": "F", "midfield": "M", "defense": "D", "goalkeeper": "GK"}[position_group]
     return [
         per90(float(p[field]), float(p["time"]))
         for p in players
-        if group_code in p.get("position", "").split() and float(p["time"]) >= MIN_MINUTES_FOR_POPULATION
+        if group_code in p.get("position", "").split()
+        and float(p["time"]) >= MIN_MINUTES_FOR_POPULATION
+        and (team_title is None or p.get("team_title") == team_title)
     ]
 
 
-def _fbref_misc_population_per90(misc_df, position_group: str) -> list[float]:
+def _fbref_misc_population_per90(misc_df, position_group: str, squad: str | None = None) -> list[float]:
+    """squad (optional): restrict to one team's rows -- see _understat_population_per90's
+    docstring for why (same reuse pattern, Fit reference-club pull instead of a second fetch)."""
     pos_prefix = {"midfield": "MF", "defense": "DF"}[position_group]
     rows = misc_df[misc_df[("pos", "")].astype(str).str.startswith(pos_prefix)]
+    if squad is not None:
+        rows = rows[rows.index.get_level_values("team") == squad]
     out = []
     min_nineties = MIN_MINUTES_FOR_POPULATION / 90
     for _, row in rows.iterrows():
@@ -125,10 +156,46 @@ def _fbref_misc_population_per90(misc_df, position_group: str) -> list[float]:
     return out
 
 
-def _fbref_keeper_population(keeper_df) -> list[float]:
+def _fbref_keeper_population(keeper_df, squad: str | None = None) -> list[float]:
     min_nineties = MIN_MINUTES_FOR_POPULATION / 90
     rows = keeper_df[keeper_df[("Playing Time", "90s")] >= min_nineties]
+    if squad is not None:
+        rows = rows[rows.index.get_level_values("team") == squad]
     return [float(v) for v in rows[("Performance", "Save%")].dropna().tolist()]
+
+
+def _team_possession_map(soccerdata_league: str, season: str, force_refresh: bool = False) -> dict[str, float]:
+    """squad name -> that team's own-ball possession % for the season, plus a
+    '__league_avg__' key for the league-wide average. Backing data for _possession_adjust()."""
+    sd_reader = sd.FBref(leagues=soccerdata_league, seasons=season, no_cache=force_refresh)
+    team_df = sd_reader.read_team_season_stats(stat_type="standard")
+    poss = team_df[("Poss", "")]
+    result = {team: float(v) for team, v in zip(team_df.index.get_level_values("team"), poss)}
+    result["__league_avg__"] = float(poss.mean())
+    return result
+
+
+def _possession_adjust(value: float, team_possession_pct: float, league_avg_possession_pct: float) -> float:
+    """Possession-adjusted (PAdj) defensive volume -- the standard sports-analytics correction
+    for a real confound: a dominant-possession team's players face fewer defensive
+    opportunities per match than an equal player at a team that spends more time without the
+    ball, so their raw defensive counts are naturally lower for reasons that have nothing to do
+    with individual quality (found via user feedback on the Quality signal, 2026-09-17).
+    Scales by the ratio of league-average opponent-possession to this team's own actual
+    opponent-possession (100 - the team's own possession%): a team that dominates the ball
+    faces a low-possession opponent, so its players' raw counts scale UP to correct for having
+    fewer chances to make a defensive play; a team with little of the ball faces a
+    high-possession opponent and scales DOWN, since its raw counts are inflated by sheer
+    opportunity volume rather than necessarily individual quality.
+
+    Deliberately a simpler application than a full industry PAdj: only the individual value
+    being evaluated is adjusted here, not the whole comparison population -- see
+    compute_quality_signal's and compute_fit_signal's docstrings for why that's disclosed as a
+    known simplification rather than presented as fully rigorous."""
+    opponent_possession = 100.0 - team_possession_pct
+    if opponent_possession <= 0:
+        return value
+    return value * (league_avg_possession_pct / opponent_possession)
 
 
 GROUP_METRIC_DESCRIPTIONS = {
@@ -206,6 +273,7 @@ def compute_quality_signal(
     understat_league = fbref_comp_to_understat_league(comp_level)
     soccerdata_league = fbref_comp_to_soccerdata_league(comp_level)
     components = {}
+    raw_components = {}  # identical to components except defensive_actions_per90, pre-PAdj
 
     # A component is only added when its reference population is non-empty. percentile_rank()
     # returns 50.0 ("neutral") for an empty population -- fine as a fallback for THAT function,
@@ -224,6 +292,7 @@ def compute_quality_signal(
         keeper_pop = _fbref_keeper_population(sd_reader.read_player_season_stats(stat_type="keeper"))
         if keeper_pop:
             components["save_pct"] = percentile_rank(float(keeper["save_pct"]), keeper_pop)
+            raw_components["save_pct"] = components["save_pct"]  # save% isn't possession-volume-driven, no PAdj
 
     else:
         minutes = float(str(stats.get("minutes", "0")).replace(",", "") or 0)
@@ -242,13 +311,16 @@ def compute_quality_signal(
                         pop = _understat_population_per90(players, group, field)
                         if pop:
                             components[key] = percentile_rank(per90(float(xg[field]), float(xg["minutes"])), pop)
+                            raw_components[key] = components[key]  # attacking output isn't PAdj'd -- see _possession_adjust
                 elif group == "midfield":
                     kp_pop = _understat_population_per90(players, group, "key_passes")
                     xa_pop = _understat_population_per90(players, group, "xA")
                     if kp_pop:
                         components["key_passes_per90"] = percentile_rank(per90(float(xg["key_passes"]), float(xg["minutes"])), kp_pop)
+                        raw_components["key_passes_per90"] = components["key_passes_per90"]
                     if xa_pop:
                         components["xA_per90"] = percentile_rank(per90(float(xg["xA"]), float(xg["minutes"])), xa_pop)
+                        raw_components["xA_per90"] = components["xA_per90"]
 
         if group in ("midfield", "defense") and soccerdata_league and misc:
             sd_reader = sd.FBref(leagues=soccerdata_league, seasons=season, no_cache=force_refresh)
@@ -258,17 +330,201 @@ def compute_quality_signal(
                 def_value = per90(
                     float(misc.get("interceptions", 0) or 0) + float(misc.get("tackles_won", 0) or 0), minutes
                 )
-                components["defensive_actions_per90"] = percentile_rank(def_value, def_pop)
+                raw_components["defensive_actions_per90"] = percentile_rank(def_value, def_pop)
+                # PAdj (possession-adjusted): scale this player's own raw value by their team's
+                # own-ball possession share before ranking it against the (unadjusted)
+                # population -- see _possession_adjust()'s docstring for the mechanism and the
+                # disclosed simplification (only the individual value is adjusted, not the
+                # whole population). Falls back to the raw percentile if team possession data
+                # isn't available for any reason, rather than failing the whole signal over it.
+                try:
+                    poss_map = _team_possession_map(soccerdata_league, season, force_refresh=force_refresh)
+                    team_poss = poss_map.get(stats.get("squad", ""))
+                    if team_poss is not None:
+                        adjusted_value = _possession_adjust(def_value, team_poss, poss_map["__league_avg__"])
+                        components["defensive_actions_per90"] = percentile_rank(adjusted_value, def_pop)
+                    else:
+                        components["defensive_actions_per90"] = raw_components["defensive_actions_per90"]
+                except Exception:
+                    components["defensive_actions_per90"] = raw_components["defensive_actions_per90"]
 
     if not components:
         return None
 
     avg_pct = sum(components.values()) / len(components)
+    raw_avg_pct = sum(raw_components.values()) / len(raw_components) if raw_components else avg_pct
     return {
         "score": percentile_to_1_5(avg_pct),
+        "label": percentile_to_label(avg_pct),
         "position_group": group,
         "components": components,
+        "raw_components": raw_components,
         "avg_percentile": round(avg_pct, 1),
+        "raw_avg_percentile": round(raw_avg_pct, 1),
+        "raw_label": percentile_to_label(raw_avg_pct),
         "explanation": describe_quality(group, comp_level),
         "specialist_caveat": _specialist_caveat(components),
+    }
+
+
+# ============================================================================================
+# Fit signal (v3, 2026-09-17) -- deterministic, not LLM-judged. Previously the LLM produced a
+# numeric "Fit: X/5" by reasoning from a text description of the club philosophy; the Track C
+# eval (2026-09-16) found this landed on exactly 3/5 in 21 of 21 test runs across every
+# possible philosophy combination -- the model correctly refusing to guess at pace/pressing
+# data no ScoutLite source has, but the consequence was a signal that never actually moved.
+#
+# Redesigned around a different question: not "is this player good" (that's Quality's job),
+# but "does this player's statistical SHAPE resemble the players who already play this club's
+# system" -- a real club's current squad, in the same position group, as the reference point.
+# Close resemblance -> Hand-in-Glove Fit; distant -> Completely Different. The LLM's job
+# narrows to explaining the comparison in prose, not deciding the number.
+# ============================================================================================
+
+# One real, named club per philosophy combination -- a deliberate choice over an abstract
+# statistical template, so the brief can say "compared to Dortmund's attackers" instead of
+# "compared to a vertical/high-line archetype." fbref_squad and understat_team differ because
+# the two sites don't always agree on a club's name (confirmed empirically, 2026-09-17):
+# FBref's team-season tables say "Dortmund" and "Atlético Madrid" (accented); Understat's
+# player data says "Borussia Dortmund" and "Atletico Madrid" (unaccented). comp_level is in
+# the same "N. League Name" format used everywhere else in this codebase, reusing
+# fbref_comp_to_understat_league/fbref_comp_to_soccerdata_league rather than a new mapping.
+REFERENCE_CLUBS = {
+    ("vertical", "high_line"): {
+        "display_name": "Borussia Dortmund", "fbref_squad": "Dortmund",
+        "understat_team": "Borussia Dortmund", "comp_level": "1. Bundesliga",
+    },
+    ("vertical", "mid_block"): {
+        "display_name": "Real Madrid", "fbref_squad": "Real Madrid",
+        "understat_team": "Real Madrid", "comp_level": "1. La Liga",
+    },
+    ("vertical", "low_block"): {
+        "display_name": "Atlético Madrid", "fbref_squad": "Atlético Madrid",
+        "understat_team": "Atletico Madrid", "comp_level": "1. La Liga",
+    },
+    ("possession", "high_line"): {
+        "display_name": "Manchester City", "fbref_squad": "Manchester City",
+        "understat_team": "Manchester City", "comp_level": "1. Premier League",
+    },
+    ("possession", "mid_block"): {
+        "display_name": "Bayern Munich", "fbref_squad": "Bayern Munich",
+        "understat_team": "Bayern Munich", "comp_level": "1. Bundesliga",
+    },
+    ("possession", "low_block"): {
+        "display_name": "Brighton", "fbref_squad": "Brighton",
+        "understat_team": "Brighton", "comp_level": "1. Premier League",
+    },
+}
+
+# Average absolute percentile-point difference between the target's profile and the reference
+# club's average profile, per shared component. First-pass thresholds -- not eval-validated
+# yet (no labeled Fit-signal sample exists for this new mechanism), documented as such rather
+# than presented as tuned.
+FIT_LABELS = [
+    (15, "Hand-in-Glove Fit"),
+    (35, "Somewhat Fits"),
+]
+
+
+def _fit_label(avg_abs_diff: float) -> str:
+    for cutoff, label in FIT_LABELS:
+        if avg_abs_diff < cutoff:
+            return label
+    return "Completely Different"
+
+
+def compute_fit_signal(
+    position: str,
+    comp_level: str,
+    season: str,
+    misc: dict | None,
+    xg: dict | None,
+    target_components: dict,
+    in_possession: str,
+    out_of_possession: str,
+    force_refresh: bool = False,
+) -> dict | None:
+    """Deterministic Fit signal. target_components is compute_quality_signal's own 'components'
+    dict for this same player -- Fit reuses it rather than recomputing, since it's already the
+    player's percentile profile. Returns None if no philosophy was given, the position/league
+    isn't covered, or there's no shared metric to compare on -- 'fail visibly' rather than
+    fabricate, same convention as compute_quality_signal."""
+    group = classify_position_group(position)
+    if group is None or not target_components or not (in_possession and out_of_possession):
+        return None
+    ref = REFERENCE_CLUBS.get((in_possession, out_of_possession))
+    if ref is None:
+        return None
+
+    ref_components: dict[str, float] = {}
+
+    if group == "goalkeeper":
+        ref_league = fbref_comp_to_soccerdata_league(ref["comp_level"])
+        if ref_league is None:
+            return None
+        sd_reader = sd.FBref(leagues=ref_league, seasons=season, no_cache=force_refresh)
+        keeper_df = sd_reader.read_player_season_stats(stat_type="keeper")
+        population = _fbref_keeper_population(keeper_df)
+        ref_values = _fbref_keeper_population(keeper_df, squad=ref["fbref_squad"])
+        if population and ref_values:
+            ref_components["save_pct"] = sum(percentile_rank(v, population) for v in ref_values) / len(ref_values)
+
+    else:
+        ref_understat_league = fbref_comp_to_understat_league(ref["comp_level"])
+        ref_soccerdata_league = fbref_comp_to_soccerdata_league(ref["comp_level"])
+        ref_year = fbref_season_to_understat_year(season)
+
+        if group in ("attack", "midfield") and ref_understat_league:
+            try:
+                players = fetch_league_players_safe(ref_understat_league, ref_year, force_refresh=force_refresh)
+            except UnderstatUnavailable:
+                players = None
+            if players is not None:
+                fields = (
+                    [("goals", "goals_per90"), ("assists", "assists_per90"), ("xG", "xG_per90"), ("xA", "xA_per90")]
+                    if group == "attack" else
+                    [("key_passes", "key_passes_per90"), ("xA", "xA_per90")]
+                )
+                for field, key in fields:
+                    population = _understat_population_per90(players, group, field)
+                    ref_values = _understat_population_per90(players, group, field, team_title=ref["understat_team"])
+                    if population and ref_values:
+                        ref_components[key] = sum(percentile_rank(v, population) for v in ref_values) / len(ref_values)
+
+        if group in ("midfield", "defense") and ref_soccerdata_league:
+            sd_reader = sd.FBref(leagues=ref_soccerdata_league, seasons=season, no_cache=force_refresh)
+            misc_df = sd_reader.read_player_season_stats(stat_type="misc")
+            population = _fbref_misc_population_per90(misc_df, group)
+            ref_values = _fbref_misc_population_per90(misc_df, group, squad=ref["fbref_squad"])
+            if population and ref_values:
+                # Same PAdj treatment as compute_quality_signal's defensive component: adjust
+                # each reference player's raw value by the reference CLUB's own possession
+                # share (one factor, since they all play for the same team) before ranking
+                # against the (unadjusted) population.
+                try:
+                    poss_map = _team_possession_map(ref_soccerdata_league, season, force_refresh=force_refresh)
+                    team_poss = poss_map.get(ref["fbref_squad"])
+                    if team_poss is not None:
+                        ref_values = [
+                            _possession_adjust(v, team_poss, poss_map["__league_avg__"]) for v in ref_values
+                        ]
+                except Exception:
+                    pass  # fall back to unadjusted reference values rather than fail the whole signal
+                ref_components["defensive_actions_per90"] = sum(percentile_rank(v, population) for v in ref_values) / len(ref_values)
+
+    if not ref_components:
+        return None
+
+    shared_keys = set(target_components) & set(ref_components)
+    if not shared_keys:
+        return None
+    avg_abs_diff = sum(abs(target_components[k] - ref_components[k]) for k in shared_keys) / len(shared_keys)
+
+    return {
+        "reference_club": ref["display_name"],
+        "position_group": group,
+        "target_components": {k: target_components[k] for k in shared_keys},
+        "reference_components": {k: round(ref_components[k], 1) for k in shared_keys},
+        "avg_abs_diff": round(avg_abs_diff, 1),
+        "label": _fit_label(avg_abs_diff),
     }
