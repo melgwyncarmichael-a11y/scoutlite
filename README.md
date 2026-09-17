@@ -131,4 +131,6 @@ See `NOTES.md` for the full build log, including bugs found and fixed, and every
 with its reasoning. See **[`EVAL_REPORT.md`](EVAL_REPORT.md)** for the evaluation results —
 does the Quality signal mean what it claims, does the LLM hallucinate or hype, is the Fit
 signal consistent — with the real numbers, bugs the eval process found and fixed, and what
-would actually move each result further (full detail and raw data under `eval/`).
+would actually move each result further (full detail and raw data under `eval/`). See
+**[`CHANGELOG.md`](CHANGELOG.md)** for a practical, non-technical summary of what changed and
+what you'll actually notice in a generated brief, release by release.
