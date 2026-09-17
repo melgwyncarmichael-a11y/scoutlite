@@ -1,5 +1,45 @@
 # ScoutLite — Build Notes
 
+## Post-eval v2: all 4 Tier 1 fixes from EVAL_REPORT.md (2026-09-17)
+
+Planned as three tiers (Tier 1 = clear-cut, no design debate; Tier 2 = needs more eval data;
+Tier 3 = bigger product calls, left for the project owner). Built all 4 Tier 1 items:
+
+**1. Fixed `classify_position_group()`'s DF-MF ambiguity.** `DF-MF` with a `CM`/`DM` secondary
+tag (Rodri, Declan Rice) now classifies Midfield instead of Defense; `DF-MF` with `FB`/`CB`/
+`WB` (Wan-Bissaka, Trent Alexander-Arnold) is unaffected. Verified against all 15 real Track A
+captures: exact-match rate against the labeler's own `expected_group` improved **67% → 80%**
+(10/15 → 12/15). The 3 remaining mismatches (Bruno Fernandes, De Bruyne, Ødegaard -- all
+`FW-MF` attacking mids) are exactly the ones already judged "defensible" during A1 labeling,
+left untouched on purpose -- that's a coarse-but-honest simplification, not the bug this fix
+targets. Left `eval/track_a_position_survey.csv` as the historical record of the eval that
+found the bug rather than rewriting it post-fix.
+
+**2. Added a "specialist" caveat to the Quality signal.** New pure function
+`scoring._specialist_caveat(components)`: when a player's component percentiles spread more
+than 40 points (Haaland's real case: 100th/99th on goals/xG vs. 56th/53rd on assists/xA), the
+brief now says so explicitly instead of silently flattening a specialist's peak trait into an
+average. Rendered in `docx_report.py` right after the existing component breakdown line.
+
+**3. Added a permanent Fit-signal scope caveat.** Given Track C's evidence (21/21 runs across
+all 6 philosophy combinations landed on 3/5), every brief with a philosophy assessed now
+carries a fixed disclosure that Fit can't see pace/sprint/pressing data -- so a score at or
+near 3 means "insufficient data," not "neutral fit." `docx_report.FIT_SCOPE_CAVEAT`.
+
+**4. Added a hype-keyword detector to `judge_rules.py`.** New `_FORBIDDEN_HYPE` regex
+(electric, generational, world-class, sensational, phenomenal, unstoppable, and similar)
+joins the existing forbidden-content checks. Directly targets Track B's 50%-recall gap on
+"overstated" -- won't solve tonal detection in general (nothing regex-based will), but raises
+the floor on the most blatant, unambiguous cases the same way the existing checks catch their
+own categories.
+
+All 4 covered by new tests (`tests/test_scoring.py`, `tests/test_docx_report.py`,
+`tests/test_judge_rules.py`) -- **132 tests total** across the suite, up from 113.
+
+Tier 2 (grow Track B's sample before trusting its rates; re-run A1/A2 labeling after this fix
+to get fresh numbers) and Tier 3 (should Fit stay numeric at all; is sourcing pace data worth
+pursuing; a non-averaging Quality redesign) are still open, left for the project owner's call.
+
 ## Track C complete: 7 cases, all 6 philosophy combinations, a formal report (2026-09-16, later still)
 
 Rounded Track C out to full coverage: added Casemiro (vertical/low-block), Rodri

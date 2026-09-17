@@ -1,5 +1,7 @@
 """The rule-based judge is the bulk of the judge and is fully pure -- this is the richest
 test target in the project."""
+import pytest
+
 import judge_rules as jr
 
 STATS = {"season": "2023-2024", "squad": "Manchester City", "goals": "27", "assists": "5",
@@ -151,6 +153,27 @@ def test_future_speculation_flagged():
 def test_verdict_language_flagged():
     r = _check("news text long enough here", "The club should sign a replacement immediately.")
     assert any("verdict language" in f for f in r["findings"])
+
+
+@pytest.mark.parametrize("phrase", [
+    "He was simply electric in the final third this season.",
+    "This is a truly generational talent at his position.",
+    "A world-class performer week in, week out.",
+    "Sensational numbers from a phenomenal season.",
+    "Genuinely the best in the world at what he does.",
+])
+def test_hype_language_flagged(phrase):
+    r = _check("news text long enough here", phrase)
+    assert any("hype/superlative language" in f for f in r["findings"])
+
+
+def test_hype_regex_does_not_flag_a_plain_factual_sentence():
+    # false-positive guard -- ordinary stat-grounded language must not trip the hype check
+    r = _check(
+        "news text long enough here",
+        "27 goals from 122 shots against an xG of 28.8, a strong finishing return this season.",
+    )
+    assert not any("hype/superlative language" in f for f in r["findings"])
 
 
 def test_wrong_player_focus_flagged():

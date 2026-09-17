@@ -49,10 +49,25 @@ def fbref_comp_to_soccerdata_league(comp_level: str) -> str | None:
 
 def classify_position_group(position: str) -> str | None:
     """FBref position strings look like 'FW-MF', 'DF (CB)', 'GK', 'MF'. Takes the first
-    (primary) position code FBref lists."""
+    (primary) position code FBref lists -- with one documented exception, found via the
+    Track A eval (2026-09-16): 'DF-MF' with a central/defensive-mid secondary tag (CM/DM) is
+    treated as midfield, not defense. Rodri and Declan Rice, both genuine defensive
+    midfielders tagged 'DF-MF (CM-DM)', were landing in Defense purely because FBref lists DF
+    first -- while Casemiro, the same role tagged plain 'MF (CM-DM)', correctly landed in
+    Midfield. A genuine fullback tagged 'DF-MF (FB, right)' (Wan-Bissaka, Trent
+    Alexander-Arnold) is unaffected -- the secondary tag is what actually distinguishes the
+    two roles, not just which code FBref lists first."""
     if not position:
         return None
-    code = re.split(r"[-\s(]", position.strip())[0].upper()
+    match = re.match(r"([A-Z-]+)(?:\s*\(([^)]*)\))?", position.strip().upper())
+    if not match:
+        return None
+    primary, detail = match.group(1), match.group(2) or ""
+
+    if primary == "DF-MF" and set(re.split(r"[^A-Z]+", detail)) & {"CM", "DM"}:
+        return "midfield"
+
+    code = re.split(r"[-\s]", primary)[0]
     return {"GK": "goalkeeper", "DF": "defense", "MF": "midfield", "FW": "attack"}.get(code)
 
 
@@ -127,6 +142,31 @@ CONTEXT_CAVEAT = (
     "Doesn't account for team style or opposition quality -- a low score can reflect a "
     "team's system as much as individual quality."
 )
+
+# Percentile-point spread beyond which averaging is judged to be hiding more than it reveals.
+# Found via the Track A2 eval (2026-09-16): Haaland's components were 100th/99th percentile on
+# goals/xG but only 56th/53rd on assists/xA -- averaged to 77, just under the cutoff for 5/5,
+# understating the one thing (finishing) that actually makes him elite. A single blended number
+# can't distinguish "genuinely average all-round" from "a specialist whose off-trait drags the
+# average down" -- this doesn't fix the math, it just says so when the gap is wide enough to
+# matter.
+SPECIALIST_SPREAD_THRESHOLD = 40
+
+
+def _specialist_caveat(components: dict) -> str | None:
+    """Pure function: given the computed percentile components, decide whether their spread is
+    wide enough to warrant flagging that the composite score may be masking a specialist's
+    peak trait. None below the threshold or with fewer than 2 components (nothing to spread)."""
+    if len(components) < 2:
+        return None
+    spread = max(components.values()) - min(components.values())
+    if spread <= SPECIALIST_SPREAD_THRESHOLD:
+        return None
+    return (
+        f"This player's individual metrics vary widely (a {spread:.0f}-percentile-point "
+        "spread) -- the composite score above may understate whichever specific trait they're "
+        "actually best known for."
+    )
 
 
 def describe_quality(group: str, comp_level: str) -> str:
@@ -230,4 +270,5 @@ def compute_quality_signal(
         "components": components,
         "avg_percentile": round(avg_pct, 1),
         "explanation": describe_quality(group, comp_level),
+        "specialist_caveat": _specialist_caveat(components),
     }

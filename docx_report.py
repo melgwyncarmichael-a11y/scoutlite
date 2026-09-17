@@ -29,6 +29,19 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Pt
 
+# Shown whenever a club philosophy was actually assessed. Added after the Track C eval
+# (2026-09-16): 7 players, all 6 possible philosophy combinations, 21 runs -- every single one
+# landed on Fit: 3/5. Not a bug in any one case -- ScoutLite has no pace, sprint, or
+# pressing-volume data in any source, and that's exactly what philosophy fit depends on. The
+# model is doing the right thing by refusing to guess rather than fabricate confidence, but a
+# scout reading "Fit: 3/5" without this caveat could easily mistake a real data ceiling for a
+# considered middle judgment. See eval/TRACK_C_REPORT.md for the full evidence.
+FIT_SCOPE_CAVEAT = (
+    "Fit cannot assess pace, sprint, or pressing intensity -- no ScoutLite data source "
+    "measures these, and they're central to what a club philosophy actually demands. A score "
+    "at or near 3 likely means \"insufficient data,\" not \"neutral fit.\""
+)
+
 
 def _add_hyperlink(paragraph, url: str, text: str):
     """python-docx has no built-in hyperlink support -- this is the standard low-level recipe:
@@ -133,6 +146,8 @@ def build_docx(
                 f"{k.replace('_', ' ')} = {v:.0f} percentile" for k, v in quality["components"].items()
             )
         ).italic = True
+        if quality.get("specialist_caveat"):
+            doc.add_paragraph().add_run(quality["specialist_caveat"]).italic = True
     elif quality_score is None:
         doc.add_paragraph().add_run(
             "Quality signal not available -- either this player's league isn't one of the 5 "
@@ -201,6 +216,7 @@ def build_docx(
         doc.add_paragraph().add_run(
             f"Club philosophy assessed against: {style_desc}  ·  Fit signal: {fit_score if fit_score else 'not available'}/5"
         ).bold = True
+        doc.add_paragraph().add_run(FIT_SCOPE_CAVEAT).italic = True
     if scout_notes and scout_notes.strip():
         doc.add_paragraph().add_run(f"Scout's role notes: \"{scout_notes.strip()}\"").italic = True
     doc.add_paragraph(fit_read or "No fit signal available.")

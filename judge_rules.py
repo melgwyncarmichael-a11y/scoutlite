@@ -28,6 +28,20 @@ _FORBIDDEN_VERDICT = re.compile(
     r"\bclearly the best\b",
     re.IGNORECASE,
 )
+# Hype/superlative adjectives not tied to a specific stat -- added after the Track B eval
+# (2026-09-16, labeled recall 50% on "overstated"): the numeric/quote grounding checks above
+# are strong at catching an invented FACT, but structurally can't see tonal hype layered onto
+# a true one -- a real 27 goals described as "electric" or "generational" is still 27 real
+# goals, so nothing here is technically ungrounded. This won't catch everything (hype is
+# tonal, not a fixed vocabulary -- the LLM supplement is the real defense against subtler
+# cases), but it raises the floor on the most blatant, unambiguous language the same way the
+# other FORBIDDEN checks catch their own categories.
+_FORBIDDEN_HYPE = re.compile(
+    r"\belectric\b|\bgenerational\b|\bworld[- ]class\b|\bsensational\b|\bphenomenal\b|"
+    r"\bunstoppable\b|\bmesmeric\b|\bsupreme\b|\bunrivalled\b|\bunrivaled\b|"
+    r"\bbest in the world\b|\bbest in the league\b",
+    re.IGNORECASE,
+)
 
 _NUMBER = re.compile(r"\d[\d,]*(?:\.\d+)?")
 # Only straight/curly DOUBLE quotes delimit a quote -- deliberately not a bare "'"/"'". Real
@@ -183,7 +197,10 @@ def check(
         score -= 10
 
     # --- E. Forbidden content ----------------------------------------------------------
-    for label, pat in (("transfer value", _FORBIDDEN_VALUE), ("future speculation", _FORBIDDEN_FUTURE), ("verdict language", _FORBIDDEN_VERDICT)):
+    for label, pat in (
+        ("transfer value", _FORBIDDEN_VALUE), ("future speculation", _FORBIDDEN_FUTURE),
+        ("verdict language", _FORBIDDEN_VERDICT), ("hype/superlative language", _FORBIDDEN_HYPE),
+    ):
         m = pat.search(combined)
         if m:
             findings.append(f"FORBIDDEN: {label} detected ('{m.group(0).strip()}').")

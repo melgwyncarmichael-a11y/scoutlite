@@ -8,7 +8,11 @@ import scoring
     ("FW-MF", "attack"),
     ("FW", "attack"),
     ("DF (CB)", "defense"),
-    ("DF-MF (CM-DM)", "defense"),   # documented quirk: first-listed code wins
+    ("DF-MF (CM-DM)", "midfield"),   # Rodri/Rice -- fixed 2026-09-17, see docstring
+    ("DF-MF (FB, right)", "defense"),  # Wan-Bissaka/Trent -- genuine fullback, unaffected
+    ("DF-MF (DM)", "midfield"),        # a single DM tag, not just the CM-DM pair
+    ("MF (CM-DM)", "midfield"),        # Casemiro -- unchanged, the case the fix aligns to
+    ("FW-MF (AM-CM-DM)", "attack"),    # Bruno Fernandes -- FW-MF stays first-code-wins
     ("MF", "midfield"),
     ("GK", "goalkeeper"),
     ("", None),
@@ -55,6 +59,23 @@ def test_describe_quality_is_mechanical_and_has_caveat():
     assert scoring.CONTEXT_CAVEAT in text  # the "doesn't account for team style" disclosure
     # must NOT name a specific team's tactics -- that's the whole point of option 1
     assert "possession football" not in text.lower()
+
+
+@pytest.mark.parametrize("components,expect_caveat", [
+    ({"goals_per90": 100.0, "xG_per90": 99.0, "assists_per90": 56.0, "xA_per90": 53.0}, True),  # Haaland's real spread (47pts)
+    ({"goals_per90": 60.0, "xG_per90": 55.0, "assists_per90": 50.0, "xA_per90": 45.0}, False),  # tight spread (15pts)
+    ({"goals_per90": 91.0, "xG_per90": 50.0}, True),  # 41pt spread -- just over the threshold
+    ({"defensive_actions_per90": 48.0}, False),  # single component -- nothing to spread
+])
+def test_specialist_caveat(components, expect_caveat):
+    result = scoring._specialist_caveat(components)
+    assert (result is not None) == expect_caveat
+
+
+def test_specialist_caveat_boundary_is_strictly_greater_than():
+    # exactly at the threshold should NOT trigger -- only a spread strictly wider than it
+    assert scoring._specialist_caveat({"a": 70.0, "b": 30.0}) is None  # spread == 40
+    assert scoring._specialist_caveat({"a": 70.1, "b": 30.0}) is not None  # spread > 40
 
 
 def test_understat_population_filters_by_position_and_minutes():

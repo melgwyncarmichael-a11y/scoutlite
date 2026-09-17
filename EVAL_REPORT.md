@@ -179,20 +179,37 @@ than either alone:
 
 ## Recommendations
 
-1. **Revisit `classify_position_group()`** for the `DF-MF (CM-DM)` / `MF (CM-DM)` inconsistency
-   — Rodri and Rice landing differently from Casemiro on the same underlying role is a
-   statable, fixable rule gap, not just a documented quirk.
-2. **Reconsider straight percentile-averaging for the Quality signal**, or at minimum caveat it
-   more specifically — a true specialist (Haaland's finishing, Trent's creativity) currently
-   gets diluted toward the middle by metrics that aren't their defining trait.
-3. **Be explicit in the product about the Fit signal's ceiling.** Given the Track C evidence,
-   consider whether `Fit: 3/5` should carry a visible caveat ("insufficient data to assess pace/
-   pressing fit") rather than reading like a considered middle judgment.
+**Done (2026-09-17 — see `NOTES.md`, "Post-eval v2"):**
+
+1. ~~Revisit `classify_position_group()`~~ — fixed. `DF-MF` with a `CM`/`DM` secondary tag now
+   classifies Midfield; genuine fullbacks (`FB`/`CB`/`WB`) are unaffected. Verified against all
+   15 real Track A captures: exact-match rate **67% → 80%**.
+2. ~~Caveat the Quality signal's averaging~~ — done. A new `specialist_caveat` fires when a
+   player's components spread more than 40 percentile points, naming the risk explicitly
+   instead of silently flattening a specialist's peak trait.
+3. ~~Be explicit about the Fit signal's ceiling~~ — done. Every brief with a philosophy
+   assessed now carries a fixed disclosure (`docx_report.FIT_SCOPE_CAVEAT`) that Fit can't see
+   pace/sprint/pressing data.
+
+**Still open, left for the project owner's call:**
+
 4. **Grow the Track B sample.** 2 real "overstated" cases is enough to match the hypothesis
    directionally, not enough to trust the 50% recall number as a stable rate — more labeled
-   captures would tighten it.
-5. **Keep the "run real cases, read real output" habit going.** Every bug in this report was
-   found that way — it's cheap relative to what it catches.
+   captures would tighten it. A small hype-keyword detector was added to `judge_rules.py`
+   alongside the Tier-1 fixes to raise the floor on the most blatant cases, but it doesn't
+   replace growing the sample to actually measure recall with confidence.
+5. **Re-run A1/A2 labeling** now that fix #1 has landed, to get fresh defensible/surprising
+   numbers rather than relying on the pre-fix figures in this report.
+6. **Should Fit stay a numeric 1–5 score at all**, given Track C's evidence it may be
+   structurally incapable of discriminating? The caveat (item 3) is the smaller move; dropping
+   the number in favor of the qualitative `fit_read` alone would be the bigger one.
+7. **Is sourcing pace/pressing data worth pursuing** at all, given ScoutLite's free/scraping-
+   only sources? Likely a dead end, worth a quick access-check rather than an assumption.
+8. **A genuinely different Quality scoring approach** (e.g. reporting a player's standout
+   metric instead of one blended number) — bigger scope change, filed as a "v3 idea."
+9. **Keep the "run real cases, read real output" habit going.** Every bug in this report — and
+   the position-classification fix above — was found that way, not by imagining edge cases up
+   front. Cheap relative to what it catches.
 
 ## Supporting documents
 

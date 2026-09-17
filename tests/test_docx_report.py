@@ -3,7 +3,7 @@ the classic failure mode: XML that python-docx writes but Word can't open. Deter
 no network/LLM, so it belongs alongside the rest of the pure-layer suite."""
 from docx import Document
 
-from docx_report import build_docx
+from docx_report import FIT_SCOPE_CAVEAT, build_docx
 
 STATS = {"season": "2023-2024", "squad": "Manchester City", "competition": "1. Premier League",
          "goals": "27", "minutes": "2,552"}
@@ -71,3 +71,31 @@ def test_understat_url_excluded_from_raw_stats_table(tmp_path):
     # the url gets its own hyperlinked "Source:" line, not a raw "Understat Url" table row
     table_cell_texts = [c.text for t in doc.tables for r in t.rows for c in r.cells]
     assert "Understat Url" not in table_cell_texts
+
+
+def test_fit_scope_caveat_shown_when_philosophy_given(tmp_path):
+    # default fixture already sets a philosophy -- the caveat added after the Track C eval
+    # (2026-09-16: 21/21 runs landed on Fit 3/5) must appear whenever Fit was actually assessed
+    text = _all_text(_build(tmp_path))
+    assert FIT_SCOPE_CAVEAT in text
+
+
+def test_fit_scope_caveat_absent_when_no_philosophy_given(tmp_path):
+    text = _all_text(_build(tmp_path, philosophy={"in_possession": "", "out_of_possession": ""}, fit_score=None))
+    assert FIT_SCOPE_CAVEAT not in text
+
+
+def test_specialist_caveat_rendered_when_present(tmp_path):
+    quality = {"score": 4, "position_group": "attack",
+               "components": {"goals_per90": 100.0, "assists_per90": 53.0},
+               "avg_percentile": 76.5, "explanation": "Evaluated as an attacker...",
+               "specialist_caveat": "This player's individual metrics vary widely..."}
+    text = _all_text(_build(tmp_path, quality=quality))
+    assert "vary widely" in text
+
+
+def test_specialist_caveat_absent_when_not_flagged(tmp_path):
+    # the default fixture's quality dict has no specialist_caveat key at all -- must not crash
+    # on .get() and must not print anything about it
+    text = _all_text(_build(tmp_path))
+    assert "vary widely" not in text
