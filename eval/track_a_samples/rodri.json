@@ -55,12 +55,15 @@
     "key_passes": "50"
   },
   "quality": {
-    "score": 3,
-    "position_group": "defense",
+    "score": 4,
+    "position_group": "midfield",
     "components": {
-      "defensive_actions_per90": 48.25174825174825
+      "key_passes_per90": 70.14925373134328,
+      "xA_per90": 61.691542288557216,
+      "defensive_actions_per90": 57.38636363636363
     },
-    "avg_percentile": 48.3,
-    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality."
+    "avg_percentile": 63.1,
+    "explanation": "Evaluated as a midfielder: key passes and xA per 90 (creativity) plus interceptions + tackles won per 90 (defensive work), ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality.",
+    "specialist_caveat": null
   }
 }

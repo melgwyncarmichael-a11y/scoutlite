@@ -14,7 +14,7 @@ evals**, not from writing more unit tests in the abstract:
 
 | Track | Question | Headline result |
 |---|---|---|
-| **A** — Quality signal validity | Does the 1–5 number mean what it claims? | 67% exact match / **87% defensible** on position grouping; **9 → 8 of 13** flagged surprising on face-validity, one resolved by a real bug fix |
+| **A** — Quality signal validity | Does the 1–5 number mean what it claims? | 67% → **80% exact match** on position grouping after a fix, verified against real data; 9 → 8 of 13 flagged surprising on face-validity, one resolved by a bug fix, two more (Rice, Rodri) now backed by a genuinely broader metric set |
 | **B** — Hallucination / hype | Does the LLM invent facts or oversell real ones? | **50% recall** on hype, **7% false-positive** rate — small sample, matches the design hypothesis |
 | **C** — Fit-signal consistency | Does the same input ever give a different Fit score? | Stable within every case — but **21 of 21 runs landed on the same score (3/5)**, exposing a scope limitation, not just confirming stability |
 
@@ -191,6 +191,27 @@ than either alone:
    assessed now carries a fixed disclosure (`docx_report.FIT_SCOPE_CAVEAT`) that Fit can't see
    pace/sprint/pressing data.
 
+**Also done (2026-09-17, same day — re-ran the eval set against v2 rather than leave it as an
+assumption that the fixes worked):**
+
+5. ~~Re-run A1/A2 after fix #1~~ — done, selectively. Re-checked Track B's 14 existing captures
+   against the new hype regex (no new API calls needed, since the fix changes what the judge
+   flags, not the brief text) — zero rule-based findings changed; the one real "overstated"
+   miss from labeling doesn't contain any of the new keywords, so this fix wouldn't have caught
+   it specifically (honest result, not a failure — confirms hype detection still needs the LLM
+   supplement for subtler cases). Refreshed Track A1's `assigned_group` for all 15 captures:
+   **exact-match rate 67% → 80%**, Rice and Rodri no longer mismatches. Re-captured Rice and
+   Rodri for Track A2 (the only two whose position group actually changed, so their Quality
+   score is now a genuinely different computation, not just a relabel): **Rodri 3/5 → 4/5**
+   (avg percentile 48.3 → 63.1, now including his 70th-percentile key-passing output — directly
+   answering the labeler's own note, "defense isn't the only thing... city do have a lot of the
+   ball"); Rice stayed 4/5 but now backed by three dimensions of his game instead of one.
+   Track C's full 21-run sweep was deliberately *not* re-run — none of the 4 fixes touch the
+   LLM synthesis prompt or the Fit-score computation, so re-running would spend real API cost
+   to almost certainly reproduce the same result. `reputation_tier`/`surprising` for Rice and
+   Rodri were deliberately left for the labeler to reconsider given the metric set genuinely
+   changed, not silently flipped — see `NOTES.md` for the full writeup.
+
 **Still open, left for the project owner's call:**
 
 4. **Grow the Track B sample.** 2 real "overstated" cases is enough to match the hypothesis
@@ -198,8 +219,6 @@ than either alone:
    captures would tighten it. A small hype-keyword detector was added to `judge_rules.py`
    alongside the Tier-1 fixes to raise the floor on the most blatant cases, but it doesn't
    replace growing the sample to actually measure recall with confidence.
-5. **Re-run A1/A2 labeling** now that fix #1 has landed, to get fresh defensible/surprising
-   numbers rather than relying on the pre-fix figures in this report.
 6. **Should Fit stay a numeric 1–5 score at all**, given Track C's evidence it may be
    structurally incapable of discriminating? The caveat (item 3) is the smaller move; dropping
    the number in favor of the qualitative `fit_read` alone would be the bigger one.

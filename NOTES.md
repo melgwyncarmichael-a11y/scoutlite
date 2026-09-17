@@ -1,5 +1,43 @@
 # ScoutLite — Build Notes
 
+## Re-ran the eval set against v2, verified the fixes actually moved real data (2026-09-17, later same day)
+
+Tier 2 item from EVAL_REPORT.md's recommendations, done immediately rather than left open. Not
+a blind re-run of everything -- checked which of the 4 fixes actually touch a layer worth
+re-testing, and skipped the rest rather than spend API calls for no new information:
+
+- **Track B**: fix #4 (hype regex) changes what the judge FLAGS, not the brief TEXT itself, so
+  re-ran `judge_rules.check()` against all 14 existing captures' already-saved text -- zero
+  network calls needed. Result: no rule-based findings changed on any of the 14. The one real
+  "overstated" miss from labeling (Haaland's "Headlines touch on his rivalry...") doesn't
+  contain any of the new hype keywords, so this specific fix wouldn't have caught it -- honest
+  finding, not the fix failing, just confirms hype detection needs the LLM supplement for
+  subtler cases as already documented. (First comparison attempt was flawed -- compared the
+  stored MERGED rule+LLM findings against a rule-only recheck, which made everything look
+  different for the wrong reason; redone by filtering both sides to only rule-based findings
+  by their category prefix before comparing.)
+- **Track C**: none of the 4 fixes touch the LLM synthesis prompt or the Fit-score computation
+  itself (only docx rendering and a separate judge check) -- re-running the full 21-run sweep
+  would almost certainly reproduce `fit_score: 3` at real API cost for no new information.
+  Skipped; the FIT_SCOPE_CAVEAT's rendering was already smoke-tested against real data when it
+  was built.
+- **Track A1**: refreshed `assigned_group` for all 15 real captures against the fixed
+  `classify_position_group()`, keeping every human-judgment column (`expected_group`,
+  `defensible`, `notes`) untouched and noting the mechanical change inline. **Exact-match rate:
+  67% -> 80%** (10/15 -> 12/15) -- Rice and Rodri no longer mismatches; the remaining 3
+  (Bruno Fernandes, De Bruyne, Ødegaard) are the attacking-mid cases already judged
+  "defensible," unaffected by design.
+- **Track A2**: re-captured Rice and Rodri (the only two players whose position group actually
+  changed) via `track_a_capture.py` -- a real, substantively different Quality computation,
+  not just a relabel, since they're now scored against midfield metrics (key passes + xA +
+  defensive actions) instead of defense-only (defensive actions alone). Rodri: **3/5 -> 4/5**
+  (avg percentile 48.3 -> 63.1), now including his 70th-percentile key-passing output --
+  directly answers what the labeler flagged at the time ("defense isn't the only thing... city
+  do have a lot of the ball"). Rice: stayed 4/5 but the number is now backed by three
+  dimensions of his game instead of one. Updated `track_a_quality_spotcheck.csv` with the new
+  numbers and a note; deliberately left `reputation_tier`/`surprising` for the labeler to
+  reconsider given the metric set genuinely changed, not silently flipped.
+
 ## Post-eval v2: all 4 Tier 1 fixes from EVAL_REPORT.md (2026-09-17)
 
 Planned as three tiers (Tier 1 = clear-cut, no design debate; Tier 2 = needs more eval data;

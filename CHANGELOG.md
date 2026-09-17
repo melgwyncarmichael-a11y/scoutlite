@@ -22,6 +22,11 @@ defensive-work metrics, instead of being reduced to one defensive-actions percen
 they were centre-backs. Verified against all 15 real Track A captures: the tool's position
 call now matches the labeler's own judgment **80% of the time, up from 67%**.
 
+**Confirmed with real numbers, not just the classification change:** Rodri's Quality score
+moved **3/5 → 4/5** once his 70th-percentile key-passing output was actually counted — his
+score used to reflect defensive actions alone. Declan Rice stayed at 4/5, but the number is
+now backed by three dimensions of his game (key passes, xA, defensive actions) instead of one.
+
 **Unaffected:** Wan-Bissaka, Trent Alexander-Arnold, and every attacking-midfielder case
 (De Bruyne, Ødegaard, Bruno Fernandes) — only the specific ambiguity this targeted changed.
 
