@@ -271,7 +271,7 @@ def summarize_combined(
         else:
             llm_report = judge_llm.review(
                 result["news_synthesis"], result["fit_read"], stats, misc, keeper, xg, philosophy, articles,
-                fit_signal=fit_signal,
+                fit_signal=fit_signal, scout_notes=scout_notes,
             )
 
         passed = (

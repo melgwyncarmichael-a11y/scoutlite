@@ -1,5 +1,37 @@
 # ScoutLite — Build Notes
 
+## Two judge_llm.py false positives, found by reading a sample brief's judge output (2026-09-18, later still)
+
+Generated a fresh sample brief (Erling Haaland vs. Man City, post the threshold fix above) to
+send as a demo. The judge's own LLM-fact-checker findings looked wrong on read-through, not
+just noisy -- worth digging into rather than shrugging off as normal model caution.
+
+**Bug 1: the fact-checker's own rendering of `fit_signal` disagreed with what the synthesis
+model was given.** `build_prompt()` tells the writer each number is "vs. {club}'s players in
+this position" (accurate -- `compute_fit_signal` always filters the reference squad to the same
+position group). But `judge_llm.review()`'s comparison string just said "vs. {club} {number}",
+dropping the qualifier -- so from the fact-checker's own vantage the comparison looked
+team-wide, and it flagged the fit_read's correct, more specific phrasing as an unsupported
+inference. Two renderings of the same data disagreeing with each other, not the model being
+oversensitive. Fixed by making `judge_llm.py`'s string match `build_prompt()`'s wording exactly.
+
+**Bug 2, found immediately after re-testing bug 1's fix: `judge_llm.review()` never received
+`scout_notes` at all.** Same failure shape as the fit_signal bug from the v3 build (see above,
+2026-09-17) -- the fact-checker flagged an accurate "the scout's own role notes describe
+Haaland as..." sentence as inventing a source, because it was never shown the notes it was
+supposed to be checking the attribution against. `review()`'s signature was simply missing the
+parameter; the call site in `summarize_combined()` never passed it either. Fixed by adding
+`scout_notes` to both the function signature and the `inputs` dict (mirroring how `fit_signal`
+is already handled), and passing it through at the call site.
+
+Re-ran the identical live case after both fixes: the two false-positive findings are gone from
+the judge output, confirmed by reading the raw findings list, not just a score moving. One
+finding remains (a NUMBERS check flagging derived per-90 figures for manual review) -- that one
+looks legitimate, not a bug, and is working as designed ("may be legitimately derived; review
+each," not a hard block). 176 tests still passing; no test coverage exists for `judge_llm.py`
+directly since it needs a live API call, consistent with `judge_rules.py` carrying the
+unit-tested hard gate and this module staying a soft, best-effort supplement.
+
 ## Track C2: does the 15/35 Fit label threshold mean anything? (2026-09-18, later still)
 
 Reworking Track C (below) fixed its tooling and its question, but left the actual open item

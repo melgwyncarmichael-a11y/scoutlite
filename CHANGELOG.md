@@ -5,6 +5,21 @@ the next time you generate a brief — not the full investigation. For the detai
 narrative behind each entry, see `NOTES.md`; for the evaluation findings that drove this round
 of fixes, see `EVAL_REPORT.md`.
 
+## 2026-09-18 — Two false "fabrication" flags fixed in the automated judge
+
+**What changed:** the automated fact-checker could incorrectly flag two kinds of accurate text
+as invented: (1) a Fit explanation correctly saying a comparison was against "Manchester City's
+players in this position" — the fact-checker's own copy of that data had dropped the "in this
+position" detail, so it looked over-specific even though it was accurate; (2) a Fit explanation
+correctly quoting the scout's own typed-in notes — the fact-checker was never shown those notes
+in the first place, so it looked like the model invented a source. Found by reading a real
+generated brief's judge output line by line, not by assuming the score was fine because it
+shipped.
+
+**What you'll notice:** a brief with a club philosophy and/or your own scout notes is less
+likely to get an unnecessary confidence warning or an extra revision pass for text that was
+actually correct.
+
 ## 2026-09-18 — Fit's "Hand-in-Glove" threshold loosened, based on real testing
 
 **What changed:** the cutoff for the best Fit label, "Hand-in-Glove Fit," moved from a 15 to a

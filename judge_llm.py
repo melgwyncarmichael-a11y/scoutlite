@@ -27,6 +27,7 @@ def review(
     philosophy: dict | None,
     articles: list[dict] | None = None,
     fit_signal: dict | None = None,
+    scout_notes: str | None = None,
 ) -> dict:
     """Returns {findings: [{claim, issue, severity}], has_major: bool}. Fails soft: on any
     error (parse failure, API error) returns an empty finding list rather than blocking the
@@ -36,7 +37,12 @@ def review(
     LLM was asked to explain. MUST be included in the data this fact-checker sees, or it has no
     way to know the fit_read's percentile-comparison numbers are legitimate, already-computed
     figures rather than invented ones -- found via a real generated brief where every number in
-    a correct, well-grounded fit_read got flagged "fabricated" for exactly this reason."""
+    a correct, well-grounded fit_read got flagged "fabricated" for exactly this reason.
+
+    scout_notes (2026-09-18): same failure mode as fit_signal above, found the same way -- a
+    fit_read that correctly attributed the scout's own notes got flagged as inventing a source
+    that "never existed," because this fact-checker was never shown the notes it was checking
+    the attribution against."""
     inputs = {"season stats": stats}
     if misc:
         inputs["defensive/discipline stats"] = misc
@@ -46,14 +52,17 @@ def review(
         inputs["advanced stats (Understat)"] = xg
     if philosophy and (philosophy.get("in_possession") or philosophy.get("out_of_possession")):
         inputs["club philosophy"] = " / ".join(v for v in philosophy.values() if v)
+    if scout_notes and scout_notes.strip():
+        inputs["scout's own role notes (subjective, not verified data, provided by a human scout)"] = scout_notes.strip()
     if fit_signal:
         comparison = ", ".join(
-            f"{k.replace('_', ' ')}: this player {v:.0f} vs. {fit_signal['reference_club']} "
-            f"{fit_signal['reference_components'][k]:.0f}"
+            f"{k.replace('_', ' ')}: this player {v:.0f} vs. {fit_signal['reference_components'][k]:.0f} "
+            f"for {fit_signal['reference_club']}'s players in this position"
             for k, v in fit_signal["target_components"].items()
         )
         inputs["Fit signal (already computed, not written by the model)"] = (
-            f"{fit_signal['label']} vs. {fit_signal['reference_club']} -- percentile comparison: {comparison}"
+            f"{fit_signal['label']} vs. {fit_signal['reference_club']}'s players in this position "
+            f"-- percentile comparison: {comparison}"
         )
 
     input_block = "\n".join(f"- {k}: {v}" for k, v in inputs.items())
