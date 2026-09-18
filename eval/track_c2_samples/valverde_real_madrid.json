@@ -1,0 +1,24 @@
+{
+  "slug": "valverde_real_madrid",
+  "player": "Federico Valverde",
+  "fbref_url": "https://fbref.com/en/players/0959c2a2/Federico-Valverde",
+  "season": "2023-2024",
+  "category": "self_reference",
+  "note": "Real Madrid midfielder tested against Real Madrid's own philosophy.",
+  "expected_label": "Hand-in-Glove Fit",
+  "quality_position_group": "defense",
+  "fit_signal": {
+    "reference_club": "Real Madrid",
+    "position_group": "defense",
+    "target_components": {
+      "defensive_actions_per90": 91.02564102564102
+    },
+    "reference_components": {
+      "defensive_actions_per90": 55.8
+    },
+    "avg_abs_diff": 35.2,
+    "label": "Completely Different"
+  },
+  "actual_label": "Completely Different",
+  "match": false
+}

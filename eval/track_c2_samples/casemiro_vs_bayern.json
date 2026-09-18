@@ -1,0 +1,28 @@
+{
+  "slug": "casemiro_vs_bayern",
+  "player": "Casemiro",
+  "fbref_url": "https://fbref.com/en/players/4d224fe8/Casemiro",
+  "season": "2023-2024",
+  "category": "mismatch",
+  "note": "Destroyer-type defensive midfielder, weak creative output, vs. Bayern's possession/creative midfield profile in the same position group.",
+  "expected_label": "Completely Different",
+  "quality_position_group": "midfield",
+  "fit_signal": {
+    "reference_club": "Bayern Munich",
+    "position_group": "midfield",
+    "target_components": {
+      "xA_per90": 20.895522388059703,
+      "defensive_actions_per90": 93.75,
+      "key_passes_per90": 25.37313432835821
+    },
+    "reference_components": {
+      "xA_per90": 81.1,
+      "defensive_actions_per90": 60.4,
+      "key_passes_per90": 75.6
+    },
+    "avg_abs_diff": 47.9,
+    "label": "Completely Different"
+  },
+  "actual_label": "Completely Different",
+  "match": true
+}

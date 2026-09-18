@@ -149,6 +149,14 @@ def test_scout_notes_not_attributed_is_flagged():
     assert any("scout notes were provided" in f for f in r["findings"])
 
 
+def test_fabricated_scout_notes_is_flagged():
+    # No notes were actually given (notes=None) -- the model inventing "the scout's own role
+    # notes" anyway is a real hallucination found via live Track C testing, 2026-09-18.
+    r = _check("news text long enough here",
+               "The scout's own role notes frame this as a stylistic question worth weighing.")
+    assert any("no scout notes were given" in f for f in r["findings"])
+
+
 def test_transfer_value_language_flagged():
     r = _check("news text long enough here", 'He is valued at £120 million on the market.')
     assert any("FORBIDDEN" in f and "transfer value" in f for f in r["findings"])

@@ -1,0 +1,28 @@
+{
+  "slug": "kimmich_bayern",
+  "player": "Joshua Kimmich",
+  "fbref_url": "https://fbref.com/en/players/49296448/Joshua-Kimmich",
+  "season": "2023-2024",
+  "category": "self_reference",
+  "note": "Bayern Munich midfielder tested against Bayern's own philosophy.",
+  "expected_label": "Hand-in-Glove Fit",
+  "quality_position_group": "midfield",
+  "fit_signal": {
+    "reference_club": "Bayern Munich",
+    "position_group": "midfield",
+    "target_components": {
+      "xA_per90": 91.74757281553399,
+      "defensive_actions_per90": 76.7741935483871,
+      "key_passes_per90": 96.60194174757281
+    },
+    "reference_components": {
+      "xA_per90": 81.1,
+      "defensive_actions_per90": 60.4,
+      "key_passes_per90": 75.6
+    },
+    "avg_abs_diff": 16.0,
+    "label": "Hand-in-Glove Fit"
+  },
+  "actual_label": "Hand-in-Glove Fit",
+  "match": true
+}

@@ -205,6 +205,12 @@ def check(
             "('the scout notes...') -- they may have been dropped or stated as fact."
         )
         score -= 10
+    if not (scout_notes and scout_notes.strip()) and re.search(r"scout('s)?\s+(own\s+)?(role\s+)?notes?", fit_read, re.IGNORECASE):
+        findings.append(
+            "HONESTY: no scout notes were given, but the fit read references 'the scout's "
+            "notes' anyway -- fabricated attribution to a source that isn't present."
+        )
+        score -= 20
 
     # --- E. Forbidden content ----------------------------------------------------------
     for label, pat in (

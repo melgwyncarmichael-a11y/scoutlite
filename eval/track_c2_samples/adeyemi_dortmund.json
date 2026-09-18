@@ -1,0 +1,30 @@
+{
+  "slug": "adeyemi_dortmund",
+  "player": "Karim Adeyemi",
+  "fbref_url": "https://fbref.com/en/players/501055d8/Karim-Adeyemi",
+  "season": "2023-2024",
+  "category": "self_reference",
+  "note": "Dortmund attacker tested against Dortmund's own philosophy.",
+  "expected_label": "Hand-in-Glove Fit",
+  "quality_position_group": "attack",
+  "fit_signal": {
+    "reference_club": "Borussia Dortmund",
+    "position_group": "attack",
+    "target_components": {
+      "assists_per90": 35.714285714285715,
+      "goals_per90": 57.142857142857146,
+      "xG_per90": 59.183673469387756,
+      "xA_per90": 64.28571428571429
+    },
+    "reference_components": {
+      "assists_per90": 56.6,
+      "goals_per90": 56.6,
+      "xG_per90": 49.3,
+      "xA_per90": 69.9
+    },
+    "avg_abs_diff": 9.2,
+    "label": "Hand-in-Glove Fit"
+  },
+  "actual_label": "Hand-in-Glove Fit",
+  "match": true
+}

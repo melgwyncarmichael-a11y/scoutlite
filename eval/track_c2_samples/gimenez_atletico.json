@@ -1,0 +1,24 @@
+{
+  "slug": "gimenez_atletico",
+  "player": "Jose Maria Gimenez",
+  "fbref_url": "https://fbref.com/en/players/f0da930c/Jose-Maria-Gimenez",
+  "season": "2023-2024",
+  "category": "self_reference",
+  "note": "Atletico Madrid defender tested against Atletico's own philosophy.",
+  "expected_label": "Hand-in-Glove Fit",
+  "quality_position_group": "defense",
+  "fit_signal": {
+    "reference_club": "Atl\u00e9tico Madrid",
+    "position_group": "defense",
+    "target_components": {
+      "defensive_actions_per90": 12.179487179487179
+    },
+    "reference_components": {
+      "defensive_actions_per90": 50.7
+    },
+    "avg_abs_diff": 38.6,
+    "label": "Completely Different"
+  },
+  "actual_label": "Completely Different",
+  "match": false
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "dias_vs_dortmund",
+  "player": "Ruben Dias",
+  "fbref_url": "https://fbref.com/en/players/31c69ef1/Ruben-Dias",
+  "season": "2023-2024",
+  "category": "mismatch",
+  "note": "Possession-dominant City defender (fewer raw defensive actions, reactive rather than proactive) vs. Dortmund's aggressive high-pressing profile -- also tests whether the PAdj possession-adjustment washes out a real stylistic difference, not just a possession-share difference.",
+  "expected_label": "Completely Different",
+  "quality_position_group": "defense",
+  "fit_signal": {
+    "reference_club": "Borussia Dortmund",
+    "position_group": "defense",
+    "target_components": {
+      "defensive_actions_per90": 77.62237762237763
+    },
+    "reference_components": {
+      "defensive_actions_per90": 61.6
+    },
+    "avg_abs_diff": 16.0,
+    "label": "Hand-in-Glove Fit"
+  },
+  "actual_label": "Hand-in-Glove Fit",
+  "match": false
+}

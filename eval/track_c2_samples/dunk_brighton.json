@@ -1,0 +1,24 @@
+{
+  "slug": "dunk_brighton",
+  "player": "Lewis Dunk",
+  "fbref_url": "https://fbref.com/en/players/282f75f3/Lewis-Dunk",
+  "season": "2023-2024",
+  "category": "self_reference",
+  "note": "Brighton defender tested against Brighton's own philosophy.",
+  "expected_label": "Hand-in-Glove Fit",
+  "quality_position_group": "defense",
+  "fit_signal": {
+    "reference_club": "Brighton",
+    "position_group": "defense",
+    "target_components": {
+      "defensive_actions_per90": 31.46853146853147
+    },
+    "reference_components": {
+      "defensive_actions_per90": 73.3
+    },
+    "avg_abs_diff": 41.9,
+    "label": "Completely Different"
+  },
+  "actual_label": "Completely Different",
+  "match": false
+}

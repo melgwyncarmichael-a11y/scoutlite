@@ -91,7 +91,8 @@ def build_prompt(
     else:
         sections.append(f"\nRecent news (last {LOOKBACK_DAYS} days): none found.")
 
-    if scout_notes and scout_notes.strip():
+    has_scout_notes = bool(scout_notes and scout_notes.strip())
+    if has_scout_notes:
         notes = scout_notes.strip()[:ROLE_NOTES_MAX_CHARS]
         sections.append(
             "\nScout's own short role notes (subjective, capped free text from a human scout who "
@@ -140,24 +141,34 @@ def build_prompt(
             f"in this position, which are furthest apart, and what that means in plain terms. "
             f"Refer to {player_name} by name at least once rather than only 'the player' or "
             f"'this player' throughout. Do NOT invent a different score, and do NOT contradict "
-            f"the given label -- your job is to explain it, not re-judge it. If the scout's "
-            f"role notes are present, weave them into the explanation as the scout's own "
-            f"observation, clearly attributed, not verified fact. This is a fit SIGNAL for the "
-            f"scout to weigh, never a verdict."
+            f"the given label -- your job is to explain it, not re-judge it. This is a fit "
+            f"SIGNAL for the scout to weigh, never a verdict."
+            + (
+                " Also weave in the scout's role notes given above as the scout's own "
+                "observation, clearly attributed, not verified fact."
+                if has_scout_notes else ""
+            )
         )
     elif has_philosophy:
         instructions.append(
             f"A club philosophy ({style_desc}) was specified, but the Fit signal could not be "
             f"computed for this player (their league or position isn't covered by the "
             f"reference-club comparison). Say so plainly in one sentence rather than guessing a "
-            f"score or a read. If the scout's role notes are present, note them as the scout's "
-            f"own observation, clearly attributed, not verified fact."
+            f"score or a read."
+            + (
+                " Also note the scout's role notes given above as the scout's own observation, "
+                "clearly attributed, not verified fact."
+                if has_scout_notes else ""
+            )
         )
     else:
         instructions.append(
-            "No club philosophy was specified, so Fit is not assessed. Note the scout's role "
-            "notes if present, clearly attributed as the scout's own observation, not verified "
-            "fact."
+            "No club philosophy was specified, so Fit is not assessed."
+            + (
+                " Note the scout's role notes given above, clearly attributed as the scout's "
+                "own observation, not verified fact."
+                if has_scout_notes else ""
+            )
         )
 
     instructions.append(

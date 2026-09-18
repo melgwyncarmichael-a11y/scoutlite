@@ -164,8 +164,8 @@ def test_possession_adjust_guards_against_100_percent_possession():
 
 
 @pytest.mark.parametrize("diff,label", [
-    (0, "Hand-in-Glove Fit"), (14.9, "Hand-in-Glove Fit"),
-    (15, "Somewhat Fits"), (34.9, "Somewhat Fits"),
+    (0, "Hand-in-Glove Fit"), (19.9, "Hand-in-Glove Fit"),
+    (20, "Somewhat Fits"), (34.9, "Somewhat Fits"),
     (35, "Completely Different"), (80, "Completely Different"),
 ])
 def test_fit_label(diff, label):

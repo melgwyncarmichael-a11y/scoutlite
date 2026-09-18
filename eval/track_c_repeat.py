@@ -1,8 +1,20 @@
 #!/usr/bin/env python3
 """
-Track C eval — Fit-signal consistency (TESTS.md's B4). Runs the exact same inputs (player,
-season, philosophy, scout notes) through the pipeline N times and saves each run separately,
-so score_track_c.py can check whether fit_score itself ever flips.
+Track C eval — Fit signal prose consistency (TESTS.md's B4, reworked for v3).
+
+As of v3, the Fit LABEL is computed by scoring.compute_fit_signal() -- pure math over cached
+stats, no LLM involved. Given identical inputs, it is guaranteed identical every run BY
+CONSTRUCTION -- there's nothing left to empirically test there (that was the pre-v3 question,
+when an LLM picked a 1-5 fit_score and it never moved off 3; see TRACK_C_REPORT.md for that
+finding and why it drove this rework).
+
+What CAN still vary run to run is the one part still touching an LLM at temperature=0.3: the
+prose (fit_read) explaining that fixed label. This script now checks THAT -- does the write-up
+ever drift from, or misrepresent, the same underlying fit_signal across repeated identical
+requests. Runs the exact same inputs through the pipeline N times and saves each run separately,
+so score_track_c.py can check both (a) the label really is identical every run (a sanity check
+on the "by construction" claim, not a real risk) and (b) whether the prose ever fails to name
+the reference club it was actually compared against.
 
 Reuses track_b_capture.capture() directly rather than duplicating the pipeline -- the only
 difference from a normal Track B capture is where the file lands (track_c_samples/, one file
@@ -41,7 +53,7 @@ def repeat(
     phil_parts = [p for p in (in_possession, out_of_possession) if p]
     group_id = f"{base_slug}__{'_'.join(phil_parts)}" if phil_parts else base_slug
 
-    fit_scores = []
+    labels = []
     for i in range(1, runs + 1):
         print(f"--- run {i}/{runs} ---")
         # Only the first run needs force_refresh awareness -- every run after reuses whatever
@@ -54,13 +66,17 @@ def repeat(
             force_refresh=False, out_dir=OUT_DIR, out_name=f"{group_id}__run{i}",
         )
         record = json.loads(path.read_text())
-        fit_scores.append(record.get("fit_score"))
+        fit_signal = record.get("fit_signal")
+        labels.append(fit_signal["label"] if fit_signal else None)
 
-    print(f"\nfit_score across {runs} runs: {fit_scores}")
-    if len(set(fit_scores)) == 1:
-        print("Stable -- identical fit_score every run.")
+    print(f"\nfit_signal label across {runs} runs: {labels}")
+    if len(set(labels)) == 1:
+        print("Label stable, as expected -- it's computed, not written by the model.")
     else:
-        print("NOT stable -- fit_score varied across runs. See score_track_c.py for detail.")
+        print(
+            "Label NOT stable -- this would mean a bug in compute_fit_signal() or its cached "
+            "inputs, since the label has no LLM/randomness in its path. See score_track_c.py."
+        )
     return group_id
 
 

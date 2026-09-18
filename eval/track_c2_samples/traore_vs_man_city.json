@@ -1,0 +1,30 @@
+{
+  "slug": "traore_vs_man_city",
+  "player": "Adama Traore",
+  "fbref_url": "https://fbref.com/en/players/9a28eba4/Adama-Traore",
+  "season": "2023-2024",
+  "category": "mismatch",
+  "note": "Winger known for weak end product (low goals/assists/xG/xA relative to his profile) vs. Man City's elite attacking output in this position.",
+  "expected_label": "Completely Different",
+  "quality_position_group": "attack",
+  "fit_signal": {
+    "reference_club": "Manchester City",
+    "position_group": "attack",
+    "target_components": {
+      "assists_per90": 100.0,
+      "goals_per90": 86.91588785046729,
+      "xG_per90": 66.35514018691589,
+      "xA_per90": 64.48598130841121
+    },
+    "reference_components": {
+      "assists_per90": 70.1,
+      "goals_per90": 81.9,
+      "xG_per90": 76.0,
+      "xA_per90": 66.4
+    },
+    "avg_abs_diff": 11.6,
+    "label": "Hand-in-Glove Fit"
+  },
+  "actual_label": "Hand-in-Glove Fit",
+  "match": false
+}

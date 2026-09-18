@@ -1,5 +1,117 @@
 # ScoutLite — Build Notes
 
+## Track C2: does the 15/35 Fit label threshold mean anything? (2026-09-18, later still)
+
+Reworking Track C (below) fixed its tooling and its question, but left the actual open item
+from the v3 build untouched: `scoring.FIT_LABELS`' 15/35 percentile-point cutoffs were a
+first-pass guess, explicitly flagged as "not eval-validated yet" in `scoring.py`'s own comment,
+never checked against anything. Built as its own track (Track C2) rather than folded into
+Track C, since it's a genuinely different question (is the threshold right, not does the number
+move) -- discussed and agreed with the project owner before building.
+
+No LLM/NewsAPI needed -- `eval/track_c2_capture.py` calls `compute_quality_signal` +
+`compute_fit_signal` directly, same pattern as `track_a_capture.py`. 9 hand-picked cases, chosen
+so the "right answer" doesn't need subjective human labeling: 6 self-reference cases (a player
+vs. the actual club he plays for, expecting Hand-in-Glove Fit almost by definition) and 3
+deliberate-mismatch cases (a player whose real style opposes a philosophy, expecting Completely
+Different). Season 2023-2024 throughout, matching every other track.
+
+Result: **2 of 9 matched their expected label.** Investigated why rather than treating this as
+a flat "thresholds are wrong":
+
+1. **Every defense-group case swung hard** (Valverde 35.2, Giménez 38.6, Dunk 41.9, Dias 16.0)
+   vs. a much tighter spread for attack/midfield. Root cause is structural: `avg_abs_diff`
+   averages the percentile gap across every *shared* component, and defense has exactly one
+   (`defensive_actions_per90`) where attack has 4 and midfield has 2-3 -- so defense gets none
+   of the smoothing averaging multiple metrics gives the other groups for free. Not a threshold
+   problem; would need a second defensive metric to actually fix.
+2. **Haaland vs. Man City and Kimmich vs. Bayern both landed "Somewhat Fits," not "Hand-in-
+   Glove"** (17.1 and 16.0 -- both just past the 15 cutoff) despite being unambiguous standouts
+   at their own clubs. This is the mechanism correctly measuring something real: a player who
+   is *better* than his position's squad average -- which is exactly what makes him a standout
+   -- will show a genuine gap from that average. The eval's own a-priori assumption
+   ("self-reference should read Hand-in-Glove") was too strong for exactly the players most
+   worth testing it on. Two multi-metric cases landing 1-2 points past the cutoff is a specific,
+   actionable signal that 15 is probably too tight, not that the mechanism is broken.
+3. **Casemiro vs. Bayern (`avg_abs_diff` 47.9, correctly "Completely Different")** shows the
+   mechanism works as intended when a real, large, multi-dimensional gap exists across every
+   shared metric -- the label response isn't broken, the boundary is just calibrated too
+   aggressively at the low end.
+4. **Adama Traoré vs. Man City landed "Hand-in-Glove," not the expected "Completely
+   Different"** -- traced to a mistake in this eval's own case design, not the signal: the case
+   was picked from his reputation as a weak-end-product winger rather than checked against his
+   actual 2023-2024 numbers first, which turned out to show 100th-percentile assists and strong
+   goals/xG that season. Disclosed plainly in the report rather than quietly swapped for a
+   different player -- the same "verify against real data" principle this project applies
+   everywhere else, turned on its own eval design this time.
+
+Proposed in `eval/TRACK_C2_REPORT.md`, then applied the same day once flagged and confirmed:
+raised the Hand-in-Glove cutoff from 15 to 20 in `scoring.FIT_LABELS`. Left the defense-group
+volatility alone rather than special-casing its thresholds, since a second defensive metric
+would be the real fix and that's a data-availability question, not a number to retune.
+
+Re-ran all 9 Track C2 cases against the new threshold: **4/9 now match, up from 2/9** (Adeyemi,
+Casemiro already matched; Haaland and Kimmich now join them). One case got worse in the
+predicted direction: Rúben Dias vs. Dortmund moved from "Somewhat Fits" to "Hand-in-Glove Fit"
+(his 16.0 diff now falls under the raised cutoff too), further from its expected "Completely
+Different" -- the same structural defense-volatility issue (Finding 1) catching a case in that
+same 16-17 band, exactly the tradeoff the report called out rather than a surprise. Test suite
+updated (`tests/test_scoring.py`'s `_fit_label` boundary cases moved from 15/34.9 to 20/34.9),
+176 tests passing.
+
+## Track C reworked for the v3 architecture, and a real fabrication bug found by re-running it (2026-09-18)
+
+The v3 rework (below) made Fit deterministic but never touched Track C's own tooling --
+`eval/track_b_capture.py` still built its output record around a `fit_score` key that
+`summarize_combined()` no longer returns at all (it returns `fit_signal` now). Caught before
+any code changed: running `track_b_capture.py` with a philosophy set would have hard-crashed
+with `KeyError: 'fit_score'`, and `track_c_repeat.py`/`score_track_c.py` layered on top of it
+would have silently reported an always-`None` field, not stale data but no data.
+
+Fixed the mechanical break: `track_b_capture.py` now calls `compute_fit_signal()` itself (same
+call shape `scoutlite_combined.run()` uses) and records `fit_signal` in its JSON output.
+`track_c_repeat.py`/`score_track_c.py` reworked around `fit_signal["label"]` instead of
+`fit_score`, plus `tests/test_score_track_c.py` rewritten for the new record shape (168 -> 173
+tests once the judge fix below is counted).
+
+The bigger question was conceptual, not mechanical: Track C originally asked "does the LLM's
+`fit_score` ever flip across identical reruns" -- a question that only makes sense when an LLM
+picks the number. Fit is now pure math (`compute_fit_signal`, no LLM in its path at all), so
+that question is resolved by construction, not by testing -- identical inputs are guaranteed
+identical output every time. Reworked Track C to check the one thing that *can* still vary at
+`temperature=0.3`: whether the LLM's prose explanation of the fixed label ever misrepresents it
+(e.g. failing to name the actual reference club it was compared against).
+
+Live-verified the reworked tooling with a 2-run smoke test (Erling Haaland, possession / high
+line, vs. Manchester City) rather than trusting the unit tests alone -- consistent with how
+every other v3 bug this project has found was caught by running the real pipeline, not by
+imagining edge cases. Label came back stable both runs (expected) and the reference club was
+named in the prose both times (expected) -- but the smoke test also surfaced a genuine live
+bug: run 1's `fit_read` said *"The scout's own role notes frame this as a stylistic
+question..."* despite no `--scout-notes` being passed at all. A real fabrication, not a
+borderline judgment call.
+
+Root cause: `build_prompt()`'s Fit instructions said "if the scout's role notes are present,
+weave them into the explanation" -- phrased as a conditional for the *model* to evaluate,
+rather than a fact the code already knows. The model apparently latched onto the genre
+convention of scouting write-ups referencing role notes and invented some. Fixed by computing
+`has_scout_notes` in code (the same boolean guard that already decides whether to include the
+notes section in the prompt at all) and only including the "weave them in" sentence when notes
+were actually given -- across all three Fit-instruction branches (signal computed, philosophy
+given but signal unavailable, no philosophy). Also added a new deterministic
+`judge_rules.py` HONESTY check (mirroring the existing "scout notes given but not attributed"
+check, just inverted) that flags `fit_read` if it mentions "the scout's ... notes" when
+`scout_notes` was never supplied -- defense in depth, in case this recurs in a different
+phrasing the prompt fix doesn't happen to cover. Re-ran the same live case after the fix:
+source_accuracy moved 64.3%/52.9% -> 73.3%/82.6%, and the fabricated sentence was gone from
+both runs' `fit_read` text, confirmed by reading the raw JSON, not just by the judge score
+moving.
+
+`eval/TRACK_C_REPORT.md` got a 2026-09-18 addendum marking the original report as a historical
+record of the pre-v3 mechanism (its finding -- 21/21 runs landed on `fit_score: 3` -- is
+exactly what drove the v3 redesign) rather than rewriting it to pretend it was always about the
+new architecture.
+
 ## v3: both Signals fully deterministic, reference-club Fit, a standing glossary (2026-09-17, later still)
 
 The Tier 3 product redesign discussed after the v2 fixes -- Quality and Fit both now

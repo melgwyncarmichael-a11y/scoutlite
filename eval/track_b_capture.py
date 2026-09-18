@@ -26,7 +26,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from news_fetch import fetch_articles  # noqa: E402
-from scoring import compute_quality_signal  # noqa: E402
+from scoring import compute_fit_signal, compute_quality_signal  # noqa: E402
 from scoutlite import (  # noqa: E402
     extract_keeper_stats,
     extract_latest_season,
@@ -91,6 +91,13 @@ def capture(
         force_refresh=force_refresh,
     )
 
+    fit_signal = compute_fit_signal(
+        bio["position"], stats["competition"], stats["season"], misc, xg,
+        quality["components"] if quality else {},
+        in_possession=in_possession, out_of_possession=out_of_possession,
+        force_refresh=force_refresh,
+    ) if quality else None
+
     articles = []
     newsapi_key = os.environ.get("NEWSAPI_KEY")
     if newsapi_key:
@@ -99,7 +106,9 @@ def capture(
         except requests.RequestException as e:
             print(f"NewsAPI request failed ({e}) -- continuing with no articles", file=sys.stderr)
 
-    synthesis = summarize_combined(player, stats, xg, articles, misc, keeper, scout_notes, philosophy)
+    synthesis = summarize_combined(
+        player, stats, xg, articles, misc, keeper, scout_notes, philosophy, fit_signal=fit_signal,
+    )
 
     record = {
         "player": player,
@@ -116,7 +125,7 @@ def capture(
         "philosophy": philosophy,
         "news_synthesis": synthesis["news_synthesis"],
         "fit_read": synthesis["fit_read"],
-        "fit_score": synthesis["fit_score"],
+        "fit_signal": synthesis["fit_signal"],
         "judge": synthesis["judge"],
     }
 

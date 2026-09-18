@@ -153,6 +153,38 @@ statistical differences instead of defaulting to a fixed 3/5 regardless of input
 open question is whether profile-similarity is the *right* thing to measure, not whether the
 number moves — that's a separate, ongoing judgment call, not a re-run of this track.
 
+**Track C's own tooling reworked, 2026-09-18 (see `NOTES.md`).** The v3 change above never
+touched `eval/track_b_capture.py`/`track_c_repeat.py`/`score_track_c.py` themselves — they
+still built around the now-nonexistent `fit_score` key and would have crashed on any
+philosophy-set capture. Fixed mechanically (they now read/report `fit_signal`), and reframed
+conceptually: a deterministic label's cross-run consistency is guaranteed by construction, so
+Track C now instead checks whether the LLM's *prose* ever misrepresents the fixed label across
+reruns — closer to a Track-B-style hallucination check than the original question. A live
+2-run smoke test of the reworked tooling caught bug #6 below.
+
+**New: Track C2 — Fit label calibration, 2026-09-18 (full report: `eval/TRACK_C2_REPORT.md`).**
+Neither Track C's original nor reworked version ever checked whether the 15/35 percentile-point
+cutoffs behind the Fit labels (`scoring.FIT_LABELS`) actually mean anything — they were a
+first-pass guess, disclosed as such in `scoring.py`'s own comment. 9 hand-picked cases (6
+players tested against the reference club they actually play for, expecting Hand-in-Glove; 3
+players tested against a deliberately mismatched philosophy, expecting Completely Different)
+came back only 2/9 matching that a-priori expectation — but the *why* is more useful than the
+score: (1) the defense position group has only one shared metric, so its `avg_abs_diff` gets
+none of the smoothing multi-metric groups (attack, midfield) get from averaging, making it
+structurally more volatile, not mistuned; (2) a genuine standout player (Haaland, Kimmich)
+reliably shows a real, correctly-computed gap from his own squad's *positional average* —
+because that average includes weaker rotation players — which means "self-reference should
+read Hand-in-Glove" was too strong an assumption for exactly the players most worth testing it
+on, and the 15-point cutoff (two multi-metric self-reference cases landed at 16.0 and 17.1,
+just past it) was plausibly set too tight. One case (Casemiro vs. Bayern, `avg_abs_diff` 47.9)
+confirms the mechanism does work correctly when a real, large, multi-dimensional stylistic gap
+exists. **Applied, 2026-09-18:** the Hand-in-Glove cutoff was raised from 15 to 20 in
+`scoring.FIT_LABELS`. Re-running the same 9 cases against the new threshold: 4/9 now match
+their expected label, up from 2/9 — at the cost of one case (Rúben Dias vs. Dortmund) moving
+further from its expected label, the predicted tradeoff of a defense-group case sitting in the
+same 16-17 band the fix was raised to catch. Defense's own volatility (Finding 1) was
+deliberately left untouched, since it needs a second metric, not a different cutoff.
+
 ---
 
 ## Cross-cutting themes
@@ -186,6 +218,7 @@ than either alone:
 | 3 | Empty reference population silently fabricates a neutral score | Track A2, real capture (Kylian Mbappé) | `scoring.py` |
 | 4 | Full-sentence labels silently read as false by an exact-match check | Track A/B, real labeling | `score_track_a.py`, `score_track_b.py` |
 | 5 | Free-text `human_label` values not matched to their category | Track B, real labeling | `score_track_b.py` |
+| 6 | Fit explanation fabricated "the scout's own role notes" when none were given | Track C, reworked tooling smoke test (Erling Haaland) | `scoutlite_combined.py`, `judge_rules.py` |
 
 ## Recommendations
 

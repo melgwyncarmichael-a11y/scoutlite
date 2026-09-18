@@ -1,0 +1,30 @@
+{
+  "slug": "haaland_man_city",
+  "player": "Erling Haaland",
+  "fbref_url": "https://fbref.com/en/players/1f44ac21/Erling-Haaland",
+  "season": "2023-2024",
+  "category": "self_reference",
+  "note": "Man City attacker tested against Man City's own philosophy -- but he's a goal-scoring outlier even among City's own attackers, so this case doubles as a check on whether an elite individual can diverge from his own squad average.",
+  "expected_label": "Hand-in-Glove Fit",
+  "quality_position_group": "attack",
+  "fit_signal": {
+    "reference_club": "Manchester City",
+    "position_group": "attack",
+    "target_components": {
+      "assists_per90": 56.074766355140184,
+      "goals_per90": 100.0,
+      "xG_per90": 99.06542056074767,
+      "xA_per90": 53.271028037383175
+    },
+    "reference_components": {
+      "assists_per90": 70.1,
+      "goals_per90": 81.9,
+      "xG_per90": 76.0,
+      "xA_per90": 66.4
+    },
+    "avg_abs_diff": 17.1,
+    "label": "Hand-in-Glove Fit"
+  },
+  "actual_label": "Hand-in-Glove Fit",
+  "match": true
+}

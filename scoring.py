@@ -417,11 +417,15 @@ REFERENCE_CLUBS = {
 }
 
 # Average absolute percentile-point difference between the target's profile and the reference
-# club's average profile, per shared component. First-pass thresholds -- not eval-validated
-# yet (no labeled Fit-signal sample exists for this new mechanism), documented as such rather
-# than presented as tuned.
+# club's average profile, per shared component. Hand-in-Glove cutoff raised 15 -> 20 after
+# Track C2 (eval/TRACK_C2_REPORT.md, 2026-09-18): two genuine standout players (Haaland vs.
+# Man City, Kimmich vs. Bayern) landed just past the old 15 cutoff at 16.0-17.1, even though
+# comparing a standout against his own squad's positional average -- which includes weaker
+# depth -- will always show some real gap. 35 is left alone; Track C2 found the volatility on
+# the low side, not evidence either way about the high cutoff. Still a first pass past this
+# point, not a fully tuned scale.
 FIT_LABELS = [
-    (15, "Hand-in-Glove Fit"),
+    (20, "Hand-in-Glove Fit"),
     (35, "Somewhat Fits"),
 ]
 

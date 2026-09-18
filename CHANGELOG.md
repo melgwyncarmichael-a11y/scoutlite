@@ -5,6 +5,34 @@ the next time you generate a brief — not the full investigation. For the detai
 narrative behind each entry, see `NOTES.md`; for the evaluation findings that drove this round
 of fixes, see `EVAL_REPORT.md`.
 
+## 2026-09-18 — Fit's "Hand-in-Glove" threshold loosened, based on real testing
+
+**What changed:** the cutoff for the best Fit label, "Hand-in-Glove Fit," moved from a 15 to a
+20 percentile-point average gap. Testing this against 9 real cases (`EVAL_REPORT.md`, Track C2)
+found that genuinely elite players — the ones a scout would call an obvious match for their
+own club's style — were landing on "Somewhat Fits" instead, simply because they outperform
+their own teammates in the same position. The old cutoff was set tighter than real players
+actually cluster.
+
+**What you'll notice:** a player who's a clear standout at a stylistically similar club is now
+somewhat more likely to read "Hand-in-Glove Fit" instead of "Somewhat Fits." This doesn't fix
+every case — defensive-position Fit results are still more volatile than attack/midfield ones
+(only one shared stat to compare on, disclosed in `EVAL_REPORT.md` as a separate, still-open
+limitation) — but it's a real, tested improvement for the common case.
+
+## 2026-09-18 — Fixed a fabricated "scout notes" reference in the Fit explanation
+
+**What changed:** if you generate a brief with a club philosophy set but *no* scout notes
+typed in, the Fit paragraph could occasionally invent a line like "the scout's own role notes
+frame this as..." — even though no notes were given. Found by re-running the eval tooling
+after the v3 signal changes and reading the raw output, not by guessing at edge cases. The
+instruction telling the model to "weave in scout notes if present" left it to decide for
+itself whether notes existed; it's now a fact the code decides, so the model is never even
+handed the option to bring it up when there's nothing there.
+
+**What you'll notice:** a Fit explanation with no scout notes given now never mentions them.
+The automated judge also now catches this specific fabrication on its own if it ever recurs.
+
 ## 2026-09-17 — v3: both Signals are now fully deterministic
 
 The biggest change yet, and it changes what the top of every brief looks like.

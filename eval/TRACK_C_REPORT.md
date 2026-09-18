@@ -2,7 +2,42 @@
 
 **ScoutLite eval, Technical Vision doc §6, item B4.** Compiled 2026-09-16.
 
-## What this checks
+## Addendum, 2026-09-18 — this report is now a historical record, not current methodology
+
+Everything below this line describes the **pre-v3** Fit mechanism, where an LLM picked a 1-5
+`fit_score` by reading a prompt. That's exactly what this report's finding (21/21 runs landed
+on `3/5`, see "Result 2" below) drove `EVAL_REPORT.md` and `CHANGELOG.md` to fix: as of v3,
+Fit is computed deterministically (`scoring.compute_fit_signal`), the same way Quality always
+has been — no LLM involved in the number at all.
+
+That makes this report's original question moot, not unresolved: a deterministic function has
+no run-to-run variance to test, by construction — running `compute_fit_signal` twice on
+identical inputs is guaranteed to return the identical label and numbers every time, the same
+way `2 + 2` doesn't need re-testing. There was nothing left in the *label's* path for Track C
+to keep checking.
+
+**What Track C checks now instead:** `eval/track_c_repeat.py` and `eval/score_track_c.py` were
+reworked to test the one thing that *does* still touch an LLM at `temperature=0.3` — whether
+the model's prose explanation of the fixed Fit label ever drifts from or misrepresents it
+across identical reruns (does it still name the correct reference club every time, etc.),
+which is closer in kind to a narrow Track-B-style hallucination check than to the original
+consistency question. A 2-run smoke test of the reworked tooling on Erling Haaland vs.
+Manchester City (possession / high line) came back label-stable both times, with the reference
+club correctly named in the prose both times — as expected, since the label can no longer
+vary. That same smoke test caught a real, live bug: the fit-read prose fabricated a reference
+to "the scout's own role notes" on a run where no scout notes were actually given. Root cause
+was an ambiguous prompt instruction ("if the scout's role notes are present, weave them in")
+that let the model decide for itself whether notes existed rather than being told directly;
+fixed in `build_prompt()` by gating that sentence on `has_scout_notes` computed in code, and a
+new deterministic `judge_rules.py` HONESTY check now catches this specific fabrication if it
+ever recurs. See `NOTES.md` (2026-09-18 entry) for the full writeup.
+
+The 21 archived runs in `eval/track_c_samples/*.json` and the table below are kept as-is: they
+are accurate records of the old mechanism's real behavior, and the reasoning in "Interpretation"
+below is exactly why Fit was redesigned. Nothing below has been changed to match the new
+architecture.
+
+## What this checks (pre-v3, historical)
 
 The Fit signal (`Fit: X/5`) is the one number in a ScoutLite brief that comes from the LLM
 rather than deterministic math. B4 asks a narrow question: **given identical inputs — same
