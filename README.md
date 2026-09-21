@@ -83,6 +83,10 @@ cp .env.example .env
 
 Or just double-click **`Launch ScoutLite.command`** (macOS) — it bootstraps the venv on first run.
 
+`requirements.txt` pins every direct dependency to the exact version this project is built and
+tested against. For a byte-for-byte reproducible install (including every transitive
+dependency), use `requirements-lock.txt` instead: `.venv/bin/pip install -r requirements-lock.txt`.
+
 ## Usage
 
 **Streamlit app** (recommended — season picker, role notes, club philosophy dropdowns, live signals):
@@ -102,6 +106,17 @@ If a name matches more than one player (common names like "Danny Ward"), the CLI
 it prints every candidate with enough info to tell them apart and asks you to re-run with
 `--player-url` pointing at the one you mean. The Streamlit app shows the same choice as a
 selection step instead of failing.
+
+**Comparing candidates** (2+ players for the same role, one brief instead of several):
+```bash
+python3 scoutlite_compare.py "Erling Haaland" "Alexander Isak" "Ollie Watkins" \
+  --season "2023-2024" --in-possession possession --out-of-possession high_line \
+  --scout-notes "need a mobile penalty-box striker who can press from the front"
+```
+Runs the exact same pipeline (Quality, Fit, news, judge loop) once per candidate, then lays out
+a summary table plus each candidate's full detail in one document. An ambiguous name is skipped
+with a clear message rather than guessed — resolve it individually via `scoutlite_combined.py
+--player-url` first, then compare the rest. CLI only for now; not yet in the Streamlit app.
 
 ## Caching — Quick vs. Fresh
 

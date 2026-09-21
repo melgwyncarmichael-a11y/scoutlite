@@ -87,3 +87,21 @@ the judge's numeric-grounding + headline-grounding checks, not only spot-checked
 - Position-grouped scoring's own eval harness beyond the spot checks above
 - Model tiering (Vision doc Section 5) — would let `judge_llm.py` use a cheaper model and
   unblock eval B7
+- **A second defensive metric for the "defense" position group** (2026-09-21) — Track C2
+  (`eval/TRACK_C2_REPORT.md`) found defense's Fit/Quality volatility comes from having only one
+  shared stat (`defensive_actions_per90`), unlike attack/midfield's 3-4. Checked directly:
+  `soccerdata`'s FBref reader only exposes 5 player-season stat types (`standard`, `shooting`,
+  `playing_time`, `keeper`, `misc`) — no separate "Defensive Actions" table (blocks, clearances,
+  tackles-by-third), and `misc`'s own columns (`CrdY/CrdR/Fls/Fld/Off/Crs/Int/TklW/PKwon/PKcon/OG`)
+  have nothing else clean to add. Fixing this for real would mean scraping a league-wide
+  defensive-actions HTML table directly (population-wide, not just the target player) — a new
+  data-source integration, not a column addition. Deferred as out of scope for now.
+- **Multi-season trend view** — show whether a player's Quality/Fit is trending up or down over
+  the last 2-3 seasons, instead of a single-season snapshot. FBref already exposes season
+  history on the same page fetched today, so the data access isn't the blocker — deferred to
+  keep this round's scope to the comparison feature (below) and the Fit threshold work.
+- **User-typed custom reference club for Fit** — generalize past the current 6 hardcoded
+  philosophy combinations (`scoring.REFERENCE_CLUBS`) to any real club the scout names. Bigger
+  lift than the fixed table: needs a name-resolution step against FBref/Understat squads
+  instead of a lookup, and no eval coverage yet for arbitrary clubs the way the 6 fixed ones
+  have from Track C2. Deferred for the same reason as the trend view.

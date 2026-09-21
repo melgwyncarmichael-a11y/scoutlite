@@ -21,11 +21,11 @@ from pathlib import Path
 
 import requests
 from dotenv import load_dotenv
-from openai import OpenAI
 
 import judge_llm
 import judge_rules
 from docx_report import build_docx
+from llm_client import get_deepseek_client
 from news_fetch import LOOKBACK_DAYS, fetch_articles
 from scoutlite import (
     extract_keeper_stats,
@@ -214,7 +214,7 @@ def parse_synthesis(text: str) -> dict:
 def _synthesize_once(
     player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings, fit_signal
 ) -> dict:
-    client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
+    client = get_deepseek_client()
     prompt = build_prompt(
         player_name, stats, xg, articles, misc, keeper, scout_notes, philosophy, prior_findings,
         fit_signal=fit_signal,
@@ -333,25 +333,41 @@ def main():
         sys.exit(f"Error: {e}")
 
 
-def run(args):
-    philosophy = {
+def philosophy_from_keys(in_possession: str | None, out_of_possession: str | None) -> dict:
+    return {
         "in_possession": {
             "vertical": "vertical, fast transitions",
             "possession": "slow, methodical possession",
-        }.get(args.in_possession, ""),
+        }.get(in_possession, ""),
         "out_of_possession": {
             "high_line": "high line, counter-press",
             "low_block": "low block, counter",
             "mid_block": "mid block, hybrid",
-        }.get(args.out_of_possession, ""),
+        }.get(out_of_possession, ""),
     }
 
-    if args.player_url:
-        print(f"Fetching FBref page directly: {args.player_url}")
-        url, html = get_player_page(args.player_url, requested_season=args.season, force_refresh=args.fresh)
+
+def research_player(
+    player: str,
+    player_url: str | None,
+    season: str | None,
+    fresh: bool,
+    scout_notes: str | None,
+    in_possession: str,
+    out_of_possession: str,
+    philosophy: dict,
+) -> dict:
+    """Runs the full research pipeline for one player: resolve -> stats/bio -> Quality + Fit
+    signals -> news -> synthesis + judge. Everything build_docx() needs, as one dict. Extracted
+    from run() (2026-09-21) so the single-player CLI and the multi-candidate --compare CLI
+    (scoutlite_compare.py) share the exact same pipeline instead of a parallel, easier-to-drift
+    reimplementation."""
+    if player_url:
+        print(f"Fetching FBref page directly: {player_url}")
+        url, html = get_player_page(player_url, requested_season=season, force_refresh=fresh)
     else:
-        print(f"Searching FBref for '{args.player}'...")
-        candidates = search_player(args.player, force_refresh=args.fresh)
+        print(f"Searching FBref for '{player}'...")
+        candidates = search_player(player, force_refresh=fresh)
         if len(candidates) > 1:
             listing = "\n".join(
                 f"  {i+1}. {c['name']}" + (f" ({c['alt_name']})" if c["alt_name"] else "")
@@ -360,29 +376,27 @@ def run(args):
                 for i, c in enumerate(candidates)
             )
             raise RuntimeError(
-                f"{len(candidates)} players matched '{args.player}' -- won't guess which one. "
+                f"{len(candidates)} players matched '{player}' -- won't guess which one. "
                 f"Re-run with --player-url pointing at the one you mean:\n{listing}"
             )
-        url, html = get_player_page(candidates[0]["url"], requested_season=args.season, force_refresh=args.fresh)
+        url, html = get_player_page(candidates[0]["url"], requested_season=season, force_refresh=fresh)
     print(f"Resolved to: {url}")
 
-    stats = extract_latest_season(html, args.season)
+    stats = extract_latest_season(html, season)
     bio = extract_player_bio(html)
-    misc = extract_misc_stats(html, args.season)
-    keeper = extract_keeper_stats(html, args.season)
+    misc = extract_misc_stats(html, season)
+    keeper = extract_keeper_stats(html, season)
     print(f"Season: {stats['season']} ({stats['squad']}, {stats['competition']})")
     print(f"Goalkeeping stats: {'found' if keeper else 'not applicable'}")
 
     print("Looking up Understat xG/xA...")
-    xg = get_player_xg(
-        args.player, stats["competition"], stats["season"], stats["squad"], force_refresh=args.fresh
-    )
+    xg = get_player_xg(player, stats["competition"], stats["season"], stats["squad"], force_refresh=fresh)
     print(f"xG/xA: {'found' if xg else 'not available (league not covered, no name match, or Understat unreachable)'}")
 
     print("Computing Quality signal (non-AI, percentile-based)...")
     quality = compute_quality_signal(
-        bio["position"], stats["competition"], stats["season"], args.player, stats, misc, keeper, xg,
-        force_refresh=args.fresh,
+        bio["position"], stats["competition"], stats["season"], player, stats, misc, keeper, xg,
+        force_refresh=fresh,
     )
     print(f"Quality: {quality['label'] if quality else 'not available for this league/position'}"
           + (f" (raw: {quality['raw_label']})" if quality and quality["raw_label"] != quality["label"] else ""))
@@ -391,8 +405,8 @@ def run(args):
     fit_signal = compute_fit_signal(
         bio["position"], stats["competition"], stats["season"], misc, xg,
         quality["components"] if quality else {},
-        in_possession=args.in_possession or "", out_of_possession=args.out_of_possession or "",
-        force_refresh=args.fresh,
+        in_possession=in_possession or "", out_of_possession=out_of_possession or "",
+        force_refresh=fresh,
     ) if quality else None
     print(f"Fit: {fit_signal['label'] + ' vs ' + fit_signal['reference_club'] if fit_signal else 'not available'}")
 
@@ -401,7 +415,7 @@ def run(args):
     if newsapi_key:
         print(f"Fetching recent news (last {LOOKBACK_DAYS} days)...")
         try:
-            articles = fetch_articles(args.player, newsapi_key)
+            articles = fetch_articles(player, newsapi_key)
             print(f"Found {len(articles)} articles")
         except requests.RequestException as e:
             print(f"NewsAPI request failed ({e}) -- continuing without news")
@@ -410,7 +424,7 @@ def run(args):
 
     print("Calling DeepSeek-V3 for the research brief (with judge loop)...")
     synthesis = summarize_combined(
-        args.player, stats, xg, articles, misc, keeper, args.scout_notes, philosophy,
+        player, stats, xg, articles, misc, keeper, scout_notes, philosophy,
         fit_signal=fit_signal,
     )
     j = synthesis["judge"]
@@ -421,23 +435,34 @@ def run(args):
     for finding in j["findings"]:
         print(f"  - {finding}")
 
+    return {
+        "player_name": player, "player_url": url, "bio": bio, "stats": stats, "xg": xg,
+        "articles": articles, "misc": misc, "keeper": keeper, "scout_notes": scout_notes,
+        "philosophy": philosophy,
+        "news_synthesis": synthesis["news_synthesis"], "fit_read": synthesis["fit_read"],
+        "quality": quality, "fit_signal": synthesis["fit_signal"], "judge": synthesis["judge"],
+    }
+
+
+def run(args):
+    philosophy = philosophy_from_keys(args.in_possession, args.out_of_possession)
+    data = research_player(
+        args.player, args.player_url, args.season, args.fresh, args.scout_notes,
+        args.in_possession or "", args.out_of_possession or "", philosophy,
+    )
+
     output_dir = ROOT / "output"
     output_dir.mkdir(exist_ok=True)
     slug = re.sub(r"[^a-z0-9]+", "_", args.player.lower()).strip("_")
     out_path = output_dir / f"{slug}_brief.docx"
-    build_docx(
-        args.player, bio, stats, xg, articles, misc, keeper,
-        synthesis["news_synthesis"], synthesis["fit_read"],
-        args.scout_notes, philosophy, out_path,
-        quality=quality, fit_signal=synthesis["fit_signal"], judge=synthesis["judge"], player_url=url,
-    )
+    build_docx(data, out_path)
 
-    print(f"\nQuality: {quality['label'] if quality else 'N/A'}  ·  "
-          f"Fit: {fit_signal['label'] if fit_signal else 'N/A'}")
+    print(f"\nQuality: {data['quality']['label'] if data['quality'] else 'N/A'}  ·  "
+          f"Fit: {data['fit_signal']['label'] if data['fit_signal'] else 'N/A'}")
     print("\n--- What People Say ---")
-    print(synthesis["news_synthesis"])
+    print(data["news_synthesis"])
     print("\n--- Signals & Fit Read ---")
-    print(synthesis["fit_read"])
+    print(data["fit_read"])
     print(f"\nSaved to {out_path}")
 
 

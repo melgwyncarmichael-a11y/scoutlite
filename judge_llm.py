@@ -9,10 +9,9 @@ lands (Vision doc Section 5), swap MODEL below for a cheaper/faster one; this is
 first place for it.
 """
 import json
-import os
 import re
 
-from openai import OpenAI
+from llm_client import get_deepseek_client
 
 MODEL = "deepseek-chat"
 
@@ -98,7 +97,7 @@ def review(
     )
 
     try:
-        client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
+        client = get_deepseek_client()
         response = client.chat.completions.create(
             model=MODEL,
             messages=[{"role": "user", "content": prompt}],

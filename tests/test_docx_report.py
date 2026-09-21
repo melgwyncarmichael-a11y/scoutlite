@@ -3,7 +3,7 @@ the classic failure mode: XML that python-docx writes but Word can't open. Deter
 no network/LLM, so it belongs alongside the rest of the pure-layer suite."""
 from docx import Document
 
-from docx_report import FIT_SCOPE_CAVEAT, build_docx
+from docx_report import FIT_SCOPE_CAVEAT, build_comparison_docx, build_docx
 
 STATS = {"season": "2023-2024", "squad": "Manchester City", "competition": "1. Premier League",
          "goals": "27", "minutes": "2,552"}
@@ -30,20 +30,20 @@ FIT_SIGNAL = {
 
 
 def _build(tmp_path, **overrides):
-    kwargs = dict(
+    output_path = overrides.pop("output_path", tmp_path / "brief.docx")
+    data = dict(
         player_name="Erling Haaland", bio={"full_name": "Erling Braut Haaland"}, stats=STATS,
         xg=XG, articles=ARTICLES, misc=None, keeper=None,
         news_synthesis="No relevant news this window.", fit_read="Strong final-third output.",
         scout_notes="tall, direct runner", philosophy={"in_possession": "vertical", "out_of_possession": ""},
-        output_path=tmp_path / "brief.docx",
         quality=QUALITY,
         fit_signal=FIT_SIGNAL,
         judge={"source_accuracy": 95, "passed": True, "iterations": 1, "findings": [],
                "confidence_warning": False, "threshold": 80},
         player_url="https://fbref.com/en/players/1f44ac21/Erling-Haaland",
     )
-    kwargs.update(overrides)
-    path = build_docx(**kwargs)
+    data.update(overrides)
+    path = build_docx(data, output_path)
     return Document(path)
 
 
@@ -176,3 +176,75 @@ def test_understanding_the_signals_generic_when_no_fit_signal(tmp_path):
     text = _all_text(_build(tmp_path, fit_signal=None))
     assert "6. Understanding the Signals" in text
     assert "depends on which club philosophy is selected" in text
+
+
+# --- Comparison brief (2026-09-21) --------------------------------------------------------
+
+def _candidate(name="Erling Haaland", **overrides):
+    c = dict(
+        player_name=name, player_url="https://fbref.com/en/players/1f44ac21/Erling-Haaland",
+        bio={"full_name": name, "position": "FW"}, stats=STATS, xg=XG, articles=ARTICLES,
+        misc=None, keeper=None, news_synthesis="No relevant news this window.",
+        fit_read="Strong final-third output.", quality=QUALITY, fit_signal=FIT_SIGNAL,
+        judge={"source_accuracy": 95, "passed": True, "iterations": 1, "findings": [],
+               "confidence_warning": False, "threshold": 80},
+    )
+    c.update(overrides)
+    return c
+
+
+def _build_comparison(tmp_path, candidates=None, **overrides):
+    kwargs = dict(
+        candidates=candidates or [_candidate("Erling Haaland"), _candidate("Ollie Watkins")],
+        philosophy={"in_possession": "possession", "out_of_possession": "high_line"},
+        scout_notes="need a mobile penalty-box striker",
+        output_path=tmp_path / "comparison.docx",
+    )
+    kwargs.update(overrides)
+    path = build_comparison_docx(**kwargs)
+    return Document(path)
+
+
+def test_comparison_builds_and_reopens_without_error(tmp_path):
+    doc = _build_comparison(tmp_path)
+    assert doc.paragraphs
+
+
+def test_comparison_title_names_every_candidate(tmp_path):
+    text = _all_text(_build_comparison(tmp_path))
+    assert "Erling Haaland" in text
+    assert "Ollie Watkins" in text
+
+
+def test_comparison_has_one_section_per_candidate(tmp_path):
+    text = _all_text(_build_comparison(tmp_path))
+    assert "Candidate 1: Erling Haaland" in text
+    assert "Candidate 2: Ollie Watkins" in text
+
+
+def test_comparison_shows_shared_scout_notes_once(tmp_path):
+    text = _all_text(_build_comparison(tmp_path))
+    assert text.count("need a mobile penalty-box striker") == 1
+
+
+def test_comparison_confidence_warning_shown_for_flagged_candidate_only(tmp_path):
+    flagged = _candidate(
+        "Ollie Watkins",
+        judge={"source_accuracy": 60, "passed": False, "iterations": 2,
+               "findings": ["NUMBERS: something didn't check out"],
+               "confidence_warning": True, "threshold": 80},
+    )
+    text = _all_text(_build_comparison(tmp_path, candidates=[_candidate("Erling Haaland"), flagged]))
+    assert "CONFIDENCE WARNING" in text
+    assert "something didn't check out" in text
+
+
+def test_comparison_handles_missing_quality_and_fit_gracefully(tmp_path):
+    bare = _candidate("Danny Ward", quality=None, fit_signal=None)
+    text = _all_text(_build_comparison(tmp_path, candidates=[_candidate("Erling Haaland"), bare]))
+    assert "not available" in text  # Danny Ward's row/section, not a crash
+
+
+def test_comparison_shares_one_understanding_signals_section(tmp_path):
+    text = _all_text(_build_comparison(tmp_path))
+    assert text.count("Understanding the Signals") == 1

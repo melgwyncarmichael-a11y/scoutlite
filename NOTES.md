@@ -1,5 +1,128 @@
 # ScoutLite — Build Notes
 
+## Yellow-tier architecture/dependency fixes from the same audit (2026-09-21, later still)
+
+Worked through the remaining, lower-severity findings from the same diagnostic pass (the two
+Red/critical ones are the entry above). All four were genuinely fixed, not just noted:
+
+**1. Unpinned dependencies.** `requirements.txt` had zero version pins across all 12 packages,
+no lockfile. Pinned every direct dependency to its exact currently-installed, tested version
+(`pip show` per package, not guessed), and added `requirements-lock.txt` (`pip freeze`'s full
+transitive closure, 105 packages) for byte-for-byte reproducible installs. `pip check` still
+clean after pinning.
+
+**2. `build_docx()`'s 16-parameter signature.** Collapsed to `build_docx(data: dict,
+output_path)`, where `data` is the exact same dict shape `research_player()` already returns --
+removes the risk of two adjacent same-typed params (`misc`/`keeper`, both `dict | None`) being
+silently transposed at a call site, which the old signature had no way to catch. Added
+`philosophy` to `research_player()`'s returned dict so it's fully self-contained. Updated both
+call sites (`scoutlite_combined.run()`, `app.py`) -- app.py's inline philosophy-dict
+construction was also just a duplicate of `philosophy_from_keys()` (extracted from the earlier
+refactor), so replaced it with the shared helper instead of leaving two copies of the same
+mapping. `build_comparison_docx()` already took `list[dict]` from the start; `build_docx()` now
+matches its own newer sibling's pattern instead of being the odd one out.
+
+**3. Two `except Exception` blocks in `scoring.py`'s PAdj fallback that failed silently.**
+Deliberately did NOT just narrow the exception types -- the actual failure modes come from a
+live `soccerdata`/FBref fetch (`_team_possession_map`), and guessing at every possible library-
+internal exception risked either missing a real one (crashing the whole signal) or being too
+narrow to matter. Instead made the existing broad catch *visible*: both sites now
+`warnings.warn(...)` with the actual exception before falling back, so a genuine bug can no
+longer look identical to "no possession data this season" the way a bare fallback did. Confirmed
+this actually surfaces something real: one existing test's incomplete mock (missing
+`read_team_season_stats`) now visibly triggers the warning in test output, exactly the kind of
+thing this fix is meant to catch, where it used to be entirely invisible.
+
+**4. Three separate `OpenAI(...)` client instantiations** (`scoutlite.py` -- removed with the
+dead code above, `scoutlite_combined.py`, `judge_llm.py`), each built fresh per call. New
+`llm_client.py` -- a single lazy module-level singleton (`get_deepseek_client()`) both modules
+now import instead of constructing their own. Lazy on purpose: importing either module still
+doesn't require `DEEPSEEK_API_KEY` to be set, only actually calling the function does, so tests
+that only exercise parsing/prompt-building are unaffected. Verified the singleton is real (same
+object across calls) and re-ran the full CLI live afterward to confirm the synthesis + judge
+loop still work end to end through the shared client, not just that imports resolve.
+
+183 tests still passing throughout (the one new warning above is expected, not a failure).
+Deliberately left the "split `scoring.py`/`scoutlite_combined.py` by responsibility" item alone
+-- both are still comfortably-sized (553 and 470 lines) and this round's fixes didn't grow
+either meaningfully; a bigger structural split stays a "when it actually gets bloated" call, not
+a "why not now" one.
+
+## Architecture/dependency audit: one confirmed crash, one confirmed latent race (2026-09-21, later still)
+
+Ran a full dependency + architecture diagnostic across the codebase (import graph, exception
+handling, parameter shapes, HTTP timeout coverage, secrets/git-history scan, file sizes). Two
+findings were real, verified bugs rather than style opinions -- fixed both immediately:
+
+**1. `scoutlite.py`'s legacy CLI called a function that no longer exists.** `main()` (the
+project's original pre-v1 "MVP slice" -- one player name, one FBref fetch, one LLM paragraph,
+long since superseded by `scoutlite_combined.py`) called `fetch_player_page_html()`, which was
+renamed/replaced at some point (see the "Lookup confirmation step" entry below) without this
+dead call site being updated. Confirmed via `grep` that the function is defined nowhere in the
+codebase -- `python3 scoutlite.py "<name>"` would crash immediately with `NameError`. Zero test
+coverage existed for this path, which is exactly why it was never caught. Fixed by deleting the
+entire dead `summarize_with_llm()`/`main()`/`__main__` block rather than repairing it -- it
+duplicated (worse) what `scoutlite_combined.py` already does properly, so fixing it forward
+would just resurrect a redundant, unmaintained second pipeline. Removed the `argparse`, `sys`,
+`os`, and `OpenAI` imports that were only used by the deleted code, and rewrote the module
+docstring, which still described the file as the "MVP slice" rather than what it actually is
+now: the shared FBref scraping/parsing layer both `scoutlite_combined.py` and `app.py` depend
+on. `scoutlite.py` now only exports the real, actively-used functions.
+
+**2. `cache.py`'s module-level SQLite connection had no thread-safety guard.** `get_conn()`
+caches one `sqlite3.Connection` for the process's whole life, created with Python's default
+`check_same_thread=True`. Streamlit's ScriptRunner can execute a session's script reruns on
+different worker threads within the same process -- under concurrent access (two tabs, two
+users) the first cross-thread cache hit would raise `sqlite3.ProgrammingError: SQLite objects
+created in a thread can only be used in that same thread.` Verified this wasn't hypothetical:
+reproduced the exact error with a minimal script using the old default, then confirmed
+`check_same_thread=False` (safe here since WAL mode already serializes actual access) resolves
+it with a real cross-thread read/write test, not just "tests still pass." Never hit in practice
+so far since usage has been single-user/single-tab, but was a live crash waiting for concurrent
+access -- plausible even in a course-demo setting.
+
+183 tests still passing after both fixes (no test coverage change needed -- neither fix altered
+any tested behavior, only removed dead code and hardened an untested concurrency path).
+
+## Multi-candidate comparison feature; second defensive metric checked and deferred (2026-09-21)
+
+Two feature ideas discussed after the judge fixes above: (1) a second defensive metric to fix
+the Track C2-diagnosed defense-group Fit/Quality volatility, (2) a multi-candidate comparison
+brief (a scout's actual workflow is usually "compare 2-3 targets for a role," not one player at
+a time). Investigated #1 before committing to build it, per this project's own standard of
+checking feasibility against real data before writing code:
+
+**#1 checked, not buildable as scoped, deferred.** `soccerdata`'s FBref reader only exposes 5
+player-season stat types (`standard`, `shooting`, `playing_time`, `keeper`, `misc`) -- no
+separate "Defensive Actions" endpoint with blocks/clearances. Pulled `misc`'s actual columns
+live to check: `CrdY, CrdR, 2CrdY, Fls, Fld, Off, Crs, Int, TklW, PKwon, PKcon, OG` -- nothing
+else in there is a clean defensive-engagement metric (`Fls`, fouls, is the closest candidate and
+a bad one -- conflates aggression with quality, and it's a discipline stat as much as a
+defensive one). A real fix needs scraping a league-wide defensive-actions HTML table directly,
+population-wide, which is closer to a new data-source integration than a column addition.
+Flagged to the project owner with this exact finding rather than silently downgrading scope;
+deferred into `TESTS.md`'s "Not yet built" alongside two other explicitly-deferred ideas
+(multi-season trend view, user-typed custom reference club).
+
+**#2 built.** Refactored `scoutlite_combined.py`'s `run()`: extracted `research_player()` (and
+a small `philosophy_from_keys()` helper) so the single-player pipeline is callable as a
+function, not just inline CLI logic -- `run()` itself is now a thin wrapper, behavior unchanged
+(176 -> 183 tests after this + the new comparison tests, plus a live re-run of the single-player
+CLI to confirm the refactor changed nothing observable). New `scoutlite_compare.py` calls
+`research_player()` once per candidate (an ambiguous name is skipped with a message, not
+guessed or aborting the whole run) and hands the results to a new
+`docx_report.build_comparison_docx()` -- deliberately a separate function from `build_docx()`
+rather than a shared refactor, to keep zero risk to the existing, tested single-player output.
+Renders a summary table (Player / Position / Quality / Fit / Confidence) up top, then each
+candidate's full bio/stats/news/fit-read/sources, then one shared "Understanding the Signals"
+glossary at the end rather than repeating it per candidate.
+
+Live-tested end to end with a real 2-player comparison (Haaland vs. Watkins, both vs. Man
+City's possession/high-line philosophy, one shared scout note) -- confirmed the summary table,
+per-candidate confidence warnings, and shared glossary all render correctly by reading the
+saved .docx back, not just by the script exiting cleanly. CLI only for this round; not wired
+into the Streamlit app yet.
+
 ## Two judge_llm.py false positives, found by reading a sample brief's judge output (2026-09-18, later still)
 
 Generated a fresh sample brief (Erling Haaland vs. Man City, post the threshold fix above) to

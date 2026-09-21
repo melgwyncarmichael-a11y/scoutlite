@@ -5,6 +5,26 @@ the next time you generate a brief — not the full investigation. For the detai
 narrative behind each entry, see `NOTES.md`; for the evaluation findings that drove this round
 of fixes, see `EVAL_REPORT.md`.
 
+## 2026-09-21 — New: compare 2+ players in one brief
+
+**What changed:** a new command, `scoutlite_compare.py`, takes 2 or more player names and runs
+the full pipeline (Quality, Fit, news, judge loop) on each, then produces one document instead
+of several: a summary table up top (Player / Position / Quality / Fit / Confidence), followed
+by each candidate's full detail, with one shared "Understanding the Signals" glossary at the
+end instead of repeating it per player.
+
+**What you'll notice:** if you're actually choosing between a shortlist of candidates for the
+same role, you no longer have to generate separate briefs and compare them by hand. CLI only
+for now (`python3 scoutlite_compare.py "Player A" "Player B" --season ... --in-possession ...`)
+— not yet in the Streamlit app.
+
+**Also considered, checked, and deferred:** a second defensive-actions metric to fix Fit/Quality
+being noisier for defenders than other positions (`EVAL_REPORT.md`, Track C2). Checked what
+FBref data is actually reachable first — nothing usable exists in the stat types this project's
+data library exposes, so this would need a new scraper for a league-wide stats table, not a
+quick addition. Documented in `TESTS.md` as a real, scoped-out limitation rather than quietly
+dropped.
+
 ## 2026-09-18 — Two false "fabrication" flags fixed in the automated judge
 
 **What changed:** the automated fact-checker could incorrectly flag two kinds of accurate text

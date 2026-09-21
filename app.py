@@ -33,7 +33,7 @@ from scoutlite import (
     search_player,
 )
 from scoring import compute_fit_signal, compute_quality_signal
-from scoutlite_combined import ROLE_NOTES_MAX_CHARS, summarize_combined
+from scoutlite_combined import ROLE_NOTES_MAX_CHARS, philosophy_from_keys, summarize_combined
 from understat_xg import get_player_xg
 
 st.set_page_config(page_title="ScoutLite", page_icon="⚽")
@@ -207,17 +207,7 @@ if data:
                 else:
                     st.write("NEWSAPI_KEY not set — skipping news")
 
-                philosophy = {
-                    "in_possession": {
-                        "vertical": "vertical, fast transitions",
-                        "possession": "slow, methodical possession",
-                    }.get(in_possession_key, ""),
-                    "out_of_possession": {
-                        "high_line": "high line, counter-press",
-                        "low_block": "low block, counter",
-                        "mid_block": "mid block, hybrid",
-                    }.get(out_of_possession_key, ""),
-                }
+                philosophy = philosophy_from_keys(in_possession_key, out_of_possession_key)
 
                 status.update(label="Calling DeepSeek-V3 for the research brief (with judge loop)...")
                 synthesis = summarize_combined(
@@ -227,13 +217,13 @@ if data:
 
                 status.update(label="Building Word document...")
                 buffer = io.BytesIO()
-                build_docx(
-                    player_name, bio, stats, xg, articles, misc, keeper,
-                    synthesis["news_synthesis"], synthesis["fit_read"],
-                    scout_notes, philosophy, buffer,
-                    quality=quality, fit_signal=synthesis["fit_signal"], judge=synthesis["judge"],
-                    player_url=data["url"],
-                )
+                build_docx({
+                    "player_name": player_name, "player_url": data["url"], "bio": bio,
+                    "stats": stats, "xg": xg, "articles": articles, "misc": misc, "keeper": keeper,
+                    "scout_notes": scout_notes, "philosophy": philosophy,
+                    "news_synthesis": synthesis["news_synthesis"], "fit_read": synthesis["fit_read"],
+                    "quality": quality, "fit_signal": synthesis["fit_signal"], "judge": synthesis["judge"],
+                }, buffer)
                 buffer.seek(0)
                 status.update(label="Done", state="complete")
 

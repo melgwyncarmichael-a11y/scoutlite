@@ -38,7 +38,13 @@ _conn = None
 def get_conn() -> sqlite3.Connection:
     global _conn
     if _conn is None:
-        _conn = sqlite3.connect(DB_PATH)
+        # check_same_thread=False: this module-level connection is shared for the life of the
+        # process, but Streamlit's ScriptRunner can execute a session's reruns on different
+        # worker threads (especially under concurrent multi-tab/multi-user access) -- the
+        # sqlite3 default (True) would raise "SQLite objects created in a thread can only be
+        # used in that same thread" the first time that happens. Safe under WAL mode (below):
+        # SQLite itself serializes access, this flag only lifts Python's same-thread check.
+        _conn = sqlite3.connect(DB_PATH, check_same_thread=False)
         _conn.execute("PRAGMA journal_mode=WAL")  # more graceful under concurrent CLI+UI access
         _init_schema(_conn)
     return _conn

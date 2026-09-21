@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """
-ScoutLite MVP slice: one player name -> FBref season stats -> one LLM call -> one paragraph.
+ScoutLite's FBref layer: search/resolve a player, fetch their page, and parse season stats,
+bio, defensive/discipline stats, and goalkeeping stats out of the raw HTML. No LLM or judge
+logic lives here -- scoutlite_combined.py (and app.py) are the actual pipeline entrypoints;
+this module is the scraping/parsing foundation both of them are built on.
 
 Data source: FBref only. Scraping is permitted but rate-limited to <10 requests/min
 (violations risk a block of up to 24h), so every request is paced at ~6.5-8s with jitter.
@@ -8,18 +11,14 @@ FBref sits behind Cloudflare's bot challenge, which blocks plain HTTP (requests/
 standard headless automation (Playwright/Selenium) alike -- only an undetected browser
 driver (seleniumbase's uc=True mode) gets through, so that's what this script uses.
 """
-import argparse
-import os
 import random
 import re
-import sys
 import time
 from pathlib import Path
 from urllib.parse import quote
 
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-from openai import OpenAI
 from seleniumbase import Driver
 
 import cache
@@ -315,56 +314,3 @@ def extract_player_bio(html: str) -> dict:
         "club": club_match.group(1).strip() if club_match else "",
         "contract_expires": contract_match.group(1) if contract_match else "",
     }
-
-
-def summarize_with_llm(player_name: str, stats: dict) -> str:
-    client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
-    stats_lines = "\n".join(f"- {k.replace('_', ' ')}: {v}" for k, v in stats.items())
-    prompt = (
-        f"You are a football scouting assistant. Using ONLY the stats listed below, write a "
-        f"short paragraph (3-5 sentences) summarizing {player_name}'s most recent season. Cite "
-        f"specific numbers from the stats. Do not invent or infer any stat that is not listed. "
-        f"Do not speculate about transfer value, potential, or future performance.\n\n"
-        f"Player: {player_name}\nStats:\n{stats_lines}"
-    )
-    response = client.chat.completions.create(
-        model="deepseek-chat",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.3,
-    )
-    return response.choices[0].message.content.strip()
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="ScoutLite MVP slice: player name -> FBref stats -> LLM paragraph"
-    )
-    parser.add_argument("player", help="Player name, e.g. 'Erling Haaland'")
-    args = parser.parse_args()
-
-    if not os.environ.get("DEEPSEEK_API_KEY"):
-        sys.exit("DEEPSEEK_API_KEY is not set. Add it to .env in this project folder.")
-
-    print(f"Fetching FBref data for '{args.player}'...")
-    url, html = fetch_player_page_html(args.player)
-    print(f"Resolved to: {url}")
-
-    stats = extract_latest_season(html)
-    print(f"Latest season found: {stats['season']} ({stats['squad']}, {stats['competition']})")
-
-    print("Calling DeepSeek-V3 for the summary paragraph...")
-    paragraph = summarize_with_llm(args.player, stats)
-
-    output_dir = ROOT / "output"
-    output_dir.mkdir(exist_ok=True)
-    slug = re.sub(r"[^a-z0-9]+", "_", args.player.lower()).strip("_")
-    out_path = output_dir / f"{slug}.txt"
-    out_path.write_text(paragraph + "\n")
-
-    print("\n--- Summary ---")
-    print(paragraph)
-    print(f"\nSaved to {out_path}")
-
-
-if __name__ == "__main__":
-    main()

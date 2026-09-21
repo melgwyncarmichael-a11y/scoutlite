@@ -21,6 +21,7 @@ every player in a 400+ player league population where a few mismatches would be 
 noise anyway).
 """
 import re
+import warnings
 
 import soccerdata as sd
 
@@ -345,7 +346,18 @@ def compute_quality_signal(
                         components["defensive_actions_per90"] = percentile_rank(adjusted_value, def_pop)
                     else:
                         components["defensive_actions_per90"] = raw_components["defensive_actions_per90"]
-                except Exception:
+                except Exception as e:
+                    # Deliberately still a broad catch (team-possession data comes from a live
+                    # soccerdata/FBref fetch, whose failure modes aren't fully enumerable from
+                    # here) -- but always surfaced via warnings.warn rather than swallowed
+                    # silently, so a genuine bug doesn't look identical to "no possession data
+                    # this season" the way a bare `except: pass` would (found in a dependency/
+                    # architecture audit, 2026-09-21).
+                    warnings.warn(
+                        f"Possession adjustment unavailable for {stats.get('squad', 'unknown squad')} "
+                        f"({e!r}) -- falling back to the unadjusted defensive percentile.",
+                        RuntimeWarning, stacklevel=2,
+                    )
                     components["defensive_actions_per90"] = raw_components["defensive_actions_per90"]
 
     if not components:
@@ -512,8 +524,15 @@ def compute_fit_signal(
                         ref_values = [
                             _possession_adjust(v, team_poss, poss_map["__league_avg__"]) for v in ref_values
                         ]
-                except Exception:
-                    pass  # fall back to unadjusted reference values rather than fail the whole signal
+                except Exception as e:
+                    # Same deliberate-but-visible tradeoff as compute_quality_signal's PAdj
+                    # fallback above -- fall back to unadjusted reference values rather than
+                    # fail the whole Fit signal, but never silently (2026-09-21 audit).
+                    warnings.warn(
+                        f"Possession adjustment unavailable for reference club {ref['fbref_squad']!r} "
+                        f"({e!r}) -- falling back to unadjusted reference values.",
+                        RuntimeWarning, stacklevel=2,
+                    )
                 ref_components["defensive_actions_per90"] = sum(percentile_rank(v, population) for v in ref_values) / len(ref_values)
 
     if not ref_components:
