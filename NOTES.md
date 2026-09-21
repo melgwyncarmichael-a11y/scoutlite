@@ -98,8 +98,19 @@ separate "Defensive Actions" endpoint with blocks/clearances. Pulled `misc`'s ac
 live to check: `CrdY, CrdR, 2CrdY, Fls, Fld, Off, Crs, Int, TklW, PKwon, PKcon, OG` -- nothing
 else in there is a clean defensive-engagement metric (`Fls`, fouls, is the closest candidate and
 a bad one -- conflates aggression with quality, and it's a discipline stat as much as a
-defensive one). A real fix needs scraping a league-wide defensive-actions HTML table directly,
-population-wide, which is closer to a new data-source integration than a column addition.
+defensive one).
+
+**Initially only checked FBref -- caught later (2026-09-21, prompted by a direct question) that
+Understat was never actually checked.** Fetched its live per-player data to confirm rather than
+assume: full field set is `assists, games, goals, id, key_passes, npg, npxG, player_name,
+position, red_cards, shots, team_title, time, xA, xG, xGBuildup, xGChain, yellow_cards` -- zero
+defensive-action tracking, consistent with Understat being an xG/shots provider by design, not
+an event-data source. `yellow_cards`/`red_cards` are the same bad discipline-not-quality proxy
+as FBref's `Fls`; `xGChain`/`xGBuildup` measure attacking buildup involvement, not defending, so
+neither helps here either. Conclusion unchanged, but now actually checked against both of the
+project's real data sources instead of one. A real fix needs scraping a league-wide
+defensive-actions HTML table directly, population-wide, which is closer to a new data-source
+integration than a column addition.
 Flagged to the project owner with this exact finding rather than silently downgrading scope;
 deferred into `TESTS.md`'s "Not yet built" alongside two other explicitly-deferred ideas
 (multi-season trend view, user-typed custom reference club).

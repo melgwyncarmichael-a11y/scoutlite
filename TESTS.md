@@ -89,13 +89,20 @@ the judge's numeric-grounding + headline-grounding checks, not only spot-checked
   unblock eval B7
 - **A second defensive metric for the "defense" position group** (2026-09-21) — Track C2
   (`eval/TRACK_C2_REPORT.md`) found defense's Fit/Quality volatility comes from having only one
-  shared stat (`defensive_actions_per90`), unlike attack/midfield's 3-4. Checked directly:
-  `soccerdata`'s FBref reader only exposes 5 player-season stat types (`standard`, `shooting`,
-  `playing_time`, `keeper`, `misc`) — no separate "Defensive Actions" table (blocks, clearances,
-  tackles-by-third), and `misc`'s own columns (`CrdY/CrdR/Fls/Fld/Off/Crs/Int/TklW/PKwon/PKcon/OG`)
-  have nothing else clean to add. Fixing this for real would mean scraping a league-wide
-  defensive-actions HTML table directly (population-wide, not just the target player) — a new
-  data-source integration, not a column addition. Deferred as out of scope for now.
+  shared stat (`defensive_actions_per90`), unlike attack/midfield's 3-4. Checked directly against
+  both of the project's actual data sources, not just one: `soccerdata`'s FBref reader only
+  exposes 5 player-season stat types (`standard`, `shooting`, `playing_time`, `keeper`, `misc`) —
+  no separate "Defensive Actions" table (blocks, clearances, tackles-by-third), and `misc`'s own
+  columns (`CrdY/CrdR/Fls/Fld/Off/Crs/Int/TklW/PKwon/PKcon/OG`) have nothing else clean to add.
+  Understat checked too (live fetch, 2026-09-21): its full per-player field set is `assists,
+  games, goals, id, key_passes, npg, npxG, player_name, position, red_cards, shots, team_title,
+  time, xA, xG, xGBuildup, xGChain, yellow_cards` — no defensive-action tracking at all (it's an
+  xG/shots provider by design). `yellow_cards`/`red_cards` are the closest thing and the same bad
+  proxy as FBref's `Fls` (discipline, not defensive quality); `xGChain`/`xGBuildup` measure
+  attacking buildup involvement, the wrong axis entirely. Fixing this for real would mean
+  scraping a league-wide defensive-actions HTML table directly (population-wide, not just the
+  target player) — a new data-source integration, not a column addition. Deferred as out of
+  scope for now.
 - **Multi-season trend view** — show whether a player's Quality/Fit is trending up or down over
   the last 2-3 seasons, instead of a single-season snapshot. FBref already exposes season
   history on the same page fetched today, so the data access isn't the blocker — deferred to
