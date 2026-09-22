@@ -31,6 +31,11 @@ DB_PATH = Path(__file__).resolve().parent / "scoutlite_cache.db"
 PLAYER_PAGE_TTL_HOURS = 24
 UNDERSTAT_POPULATION_TTL_HOURS = 24
 SEARCH_RESULTS_TTL_HOURS = 24 * 7  # new players get indexed by FBref far less often than stats update
+# Short on purpose (2026-09-22): NewsAPI's free Developer tier caps at 100 requests/day, and
+# scoutlite_compare.py multiplies calls (one per candidate per run). A 28-day lookback window
+# doesn't meaningfully change minute to minute, so this protects the daily cap across repeated/
+# overlapping lookups in one scouting session without serving noticeably stale headlines.
+NEWS_TTL_HOURS = 4
 
 _conn = None
 
@@ -69,6 +74,13 @@ def _init_schema(conn: sqlite3.Connection):
         CREATE TABLE IF NOT EXISTS search_results (
             query_key TEXT PRIMARY KEY,
             candidates_json TEXT NOT NULL,
+            fetched_at REAL NOT NULL
+        )
+    """)
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS news_articles (
+            cache_key TEXT PRIMARY KEY,
+            articles_json TEXT NOT NULL,
             fetched_at REAL NOT NULL
         )
     """)
@@ -133,5 +145,25 @@ def set_cached_search(query_key: str, candidates: list):
     conn.execute(
         "INSERT OR REPLACE INTO search_results (query_key, candidates_json, fetched_at) VALUES (?, ?, ?)",
         (query_key, json.dumps(candidates), time.time()),
+    )
+    conn.commit()
+
+
+# --- news_articles --------------------------------------------------------------------------
+
+def get_cached_news(cache_key: str) -> tuple[list, float] | None:
+    row = get_conn().execute(
+        "SELECT articles_json, fetched_at FROM news_articles WHERE cache_key = ?", (cache_key,)
+    ).fetchone()
+    if not row:
+        return None
+    return json.loads(row[0]), row[1]
+
+
+def set_cached_news(cache_key: str, articles: list):
+    conn = get_conn()
+    conn.execute(
+        "INSERT OR REPLACE INTO news_articles (cache_key, articles_json, fetched_at) VALUES (?, ?, ?)",
+        (cache_key, json.dumps(articles), time.time()),
     )
     conn.commit()

@@ -1,5 +1,45 @@
 # ScoutLite — Build Notes
 
+## NewsAPI caching + compare-mode dedup, prompted by a direct question about repeat pulls (2026-09-22)
+
+Asked directly whether pulling the same players repeatedly (across compare runs, or an
+accidental duplicate within one) could cause a real problem. Traced the actual pipeline rather
+than answering from general caching-hygiene instinct: FBref pages and Understat populations are
+both already well-cached (24h TTL, or indefinite for a past season's page) -- but `news_fetch.py`
+never touched `cache.py` at all. Every `research_player()` call re-fetched NewsAPI fresh, no
+matter how recently the same player was already looked up, against a free tier capped at 100
+requests/day. `scoutlite_compare.py` (built two days ago) makes this worse by construction --
+one NewsAPI call per candidate per run, with no dedup on the input list, so a literal repeated
+name would silently burn quota (and DeepSeek synthesis+judge calls) twice for identical output.
+
+**Fixed both, not just one, since they compound:**
+
+1. **NewsAPI results are now cached** (`cache.py`'s new `news_articles` table,
+   `NEWS_TTL_HOURS = 4` -- short on purpose: long enough to absorb repeated/overlapping lookups
+   in one scouting session, short enough that a 28-day lookback window never looks stale within
+   a session). `fetch_articles()` gained a `force_refresh` param threaded through from all three
+   real call sites (`scoutlite_combined.research_player()`, `app.py`, `eval/track_b_capture.py`)
+   the same way FBref/Understat's `force_refresh` already works. Cache key is
+   `f"{query.strip().lower()}::{limit}"` -- includes `limit` since a future caller requesting a
+   different article count shouldn't silently get served a smaller/larger cached batch.
+2. **`scoutlite_compare.py` now dedupes its candidate list** (`dedupe_players()`, extracted as
+   a pure function so it's actually unit-testable, unlike the rest of that file's live-only
+   orchestration) -- case/whitespace-insensitive, keeps first-seen casing and order, prints
+   which name got skipped rather than silently dropping it.
+
+Verified both live, not just via mocked tests: fetched Haaland's news once (0.57s, live), then
+again immediately (0.000s, cache hit, confirmed identical result) -- and ran
+`scoutlite_compare.py` with a real accidental duplicate ("Erling Haaland" / "erling haaland"),
+confirming it printed the skip message, correctly ran only 2 candidates (not 3), and the
+second candidate's Haaland-adjacent news reused the cache entry just warmed a moment earlier.
+
+13 new tests (`tests/test_news_fetch.py`'s caching-decision logic with a mocked HTTP call plus
+the existing temp-DB fixture pattern from `test_cache.py`; `tests/test_scoutlite_compare.py`
+for `dedupe_players()`; two new roundtrip tests added to `test_cache.py` itself). 196 tests
+passing overall. Noticed but didn't fix, out of scope for this task: `news_fetch.py`'s
+`datetime.utcnow()` is deprecated in current Python and only now surfaced because this was the
+first time that code path got unit-tested at all.
+
 ## Yellow-tier architecture/dependency fixes from the same audit (2026-09-21, later still)
 
 Worked through the remaining, lower-severity findings from the same diagnostic pass (the two

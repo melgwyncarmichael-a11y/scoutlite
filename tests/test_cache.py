@@ -58,3 +58,20 @@ def test_search_roundtrip():
 def test_fresh_db_initialises_schema_on_first_use():
     # temp_db reset _conn to None; first call must create tables without error
     assert cache.get_cached_player_page("http://never-seen") is None
+
+
+def test_news_roundtrip():
+    assert cache.get_cached_news("erling haaland::15") is None
+    cache.set_cached_news("erling haaland::15", [{"title": "A headline"}])
+    articles, _ = cache.get_cached_news("erling haaland::15")
+    assert articles == [{"title": "A headline"}]
+
+
+def test_news_replace_updates_timestamp():
+    cache.set_cached_news("k", [{"title": "old"}])
+    old_ts = cache.get_cached_news("k")[1]
+    time.sleep(0.02)
+    cache.set_cached_news("k", [{"title": "new"}])
+    articles, new_ts = cache.get_cached_news("k")
+    assert articles == [{"title": "new"}]
+    assert new_ts > old_ts

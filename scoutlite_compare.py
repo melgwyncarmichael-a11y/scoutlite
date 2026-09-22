@@ -36,6 +36,23 @@ ROOT = Path(__file__).resolve().parent
 load_dotenv(ROOT / ".env")
 
 
+def dedupe_players(players: list[str]) -> list[str]:
+    """Case/whitespace-insensitive dedupe, preserving first-seen order and original casing.
+    An accidental repeated name would otherwise re-run the entire pipeline for it -- FBref/
+    Understat usually cache-hit, but NewsAPI and the DeepSeek synthesis+judge calls don't, so a
+    literal duplicate wastes both for identical value (2026-09-22)."""
+    seen = set()
+    deduped = []
+    for p in players:
+        key = p.strip().lower()
+        if key in seen:
+            print(f"Skipping duplicate candidate: '{p}' (already in this comparison)")
+            continue
+        seen.add(key)
+        deduped.append(p)
+    return deduped
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("players", nargs="+", help="2 or more player names to compare, e.g. \"Erling Haaland\" \"Ollie Watkins\"")
@@ -45,9 +62,10 @@ def main():
     parser.add_argument("--in-possession", choices=["vertical", "possession"], help="Club philosophy: in-possession axis")
     parser.add_argument("--out-of-possession", choices=["high_line", "low_block", "mid_block"], help="Club philosophy: out-of-possession axis")
     args = parser.parse_args()
+    args.players = dedupe_players(args.players)
 
     if len(args.players) < 2:
-        sys.exit("Need at least 2 players to compare -- for one player, use scoutlite_combined.py instead.")
+        sys.exit("Need at least 2 distinct players to compare -- for one player, use scoutlite_combined.py instead.")
     if not os.environ.get("DEEPSEEK_API_KEY"):
         sys.exit("DEEPSEEK_API_KEY is not set. Add it to .env in this project folder.")
 

@@ -102,7 +102,7 @@ def capture(
     newsapi_key = os.environ.get("NEWSAPI_KEY")
     if newsapi_key:
         try:
-            articles = fetch_articles(player, newsapi_key)
+            articles = fetch_articles(player, newsapi_key, force_refresh=force_refresh)
         except requests.RequestException as e:
             print(f"NewsAPI request failed ({e}) -- continuing with no articles", file=sys.stderr)
 

@@ -415,7 +415,7 @@ def research_player(
     if newsapi_key:
         print(f"Fetching recent news (last {LOOKBACK_DAYS} days)...")
         try:
-            articles = fetch_articles(player, newsapi_key)
+            articles = fetch_articles(player, newsapi_key, force_refresh=fresh)
             print(f"Found {len(articles)} articles")
         except requests.RequestException as e:
             print(f"NewsAPI request failed ({e}) -- continuing without news")

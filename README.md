@@ -116,13 +116,18 @@ python3 scoutlite_compare.py "Erling Haaland" "Alexander Isak" "Ollie Watkins" \
 Runs the exact same pipeline (Quality, Fit, news, judge loop) once per candidate, then lays out
 a summary table plus each candidate's full detail in one document. An ambiguous name is skipped
 with a clear message rather than guessed — resolve it individually via `scoutlite_combined.py
---player-url` first, then compare the rest. CLI only for now; not yet in the Streamlit app.
+--player-url` first, then compare the rest. A repeated name (typo or otherwise) is deduplicated
+automatically rather than run twice. CLI only for now; not yet in the Streamlit app.
 
 ## Caching — Quick vs. Fresh
 
 Lookups are cached locally (SQLite, `cache.py`) so a repeat lookup for the same player is
 near-instant instead of paying FBref's ~7-9s pacing cost again. Past-season data is cached
-indefinitely (it can't change); the current season gets a 24h freshness window.
+indefinitely (it can't change); the current season gets a 24h freshness window. Recent news
+(NewsAPI) is cached too, on a much shorter 4h window — long enough that comparing overlapping
+shortlists in one sitting doesn't burn through NewsAPI's 100-requests/day free-tier cap on
+players you already just looked up, short enough that a 28-day lookback window never goes
+noticeably stale within a session.
 
 - **Quick mode (default):** serve cached data when it's fresh enough
 - **Fresh mode (opt-in):** always pull live — a checkbox in the app, `--fresh` on the CLI —

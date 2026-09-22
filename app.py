@@ -200,7 +200,7 @@ if data:
                 if newsapi_key:
                     status.update(label=f"Fetching recent news (last {LOOKBACK_DAYS} days)...")
                     try:
-                        articles = fetch_articles(player_name, newsapi_key)
+                        articles = fetch_articles(player_name, newsapi_key, force_refresh=fresh_mode)
                         st.write(f"Found {len(articles)} recent news articles")
                     except requests.RequestException as e:
                         st.write(f"NewsAPI request failed ({e}) — continuing without news")

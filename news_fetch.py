@@ -18,6 +18,8 @@ import requests
 from dotenv import load_dotenv
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
+import cache
+
 ROOT = Path(__file__).resolve().parent
 load_dotenv(ROOT / ".env")
 
@@ -26,7 +28,22 @@ LOOKBACK_DAYS = 28  # stay safely inside the Developer tier's 1-month limit
 ARTICLE_LIMIT = 15
 
 
-def fetch_articles(query: str, api_key: str, limit: int = ARTICLE_LIMIT) -> list[dict]:
+def fetch_articles(
+    query: str, api_key: str, limit: int = ARTICLE_LIMIT, force_refresh: bool = False
+) -> list[dict]:
+    """Cached (2026-09-22): NewsAPI's free tier caps at 100 requests/day, and nothing was
+    caching this before -- every research_player() call re-fetched the same player's headlines
+    from scratch, even seconds apart. cache.NEWS_TTL_HOURS (4h) is short on purpose: long enough
+    to stop repeated/overlapping lookups in one scouting session from burning the daily cap,
+    short enough that a 28-day lookback window never looks stale within a session."""
+    cache_key = f"{query.strip().lower()}::{limit}"
+    if not force_refresh:
+        cached = cache.get_cached_news(cache_key)
+        if cached:
+            articles, fetched_at = cached
+            if not cache.is_stale(fetched_at, cache.NEWS_TTL_HOURS):
+                return articles
+
     from_date = (datetime.utcnow() - timedelta(days=LOOKBACK_DAYS)).strftime("%Y-%m-%d")
     response = requests.get(
         API_URL,
@@ -41,7 +58,9 @@ def fetch_articles(query: str, api_key: str, limit: int = ARTICLE_LIMIT) -> list
         timeout=15,
     )
     response.raise_for_status()
-    return response.json().get("articles", [])
+    articles = response.json().get("articles", [])
+    cache.set_cached_news(cache_key, articles)
+    return articles
 
 
 def main():
