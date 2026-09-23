@@ -1,5 +1,35 @@
 # ScoutLite — Build Notes
 
+## "Fit: N/A" made to say why, after another real screenshot (2026-09-24, later still)
+
+Prompted by a follow-up screenshot: a midfielder brief showed "Quality: World Class · Fit:
+N/A" with no philosophy dropdown visible in the crop. Traced the actual condition rather than
+assuming: `compute_fit_signal()` returns `None` for two genuinely different reasons -- no
+philosophy given at all (`not (in_possession and out_of_possession)`), or a philosophy given
+but the league/position isn't covered by the reference-club comparison -- and both `app.py`'s
+top Signals line and `docx_report.py`'s equivalent (`build_docx` and `build_comparison_docx`)
+collapsed both into one identical "N/A"/"not available", making "you didn't ask for this" look
+exactly like "this genuinely failed."
+
+The generation-time status log (`app.py`) and Section 4 of the single-player docx already made
+this distinction correctly -- only the top-line summary and the comparison-doc's summary
+table/per-candidate line didn't. Fixed all four sites (`app.py`'s top line,
+`build_docx`'s top line, `build_comparison_docx`'s summary-table Fit column, and its
+per-candidate Fit line) to the same 3-state logic: signal present / philosophy given but
+unavailable / no philosophy given. `has_philosophy` was already computed later in `build_docx`
+(Section 4) -- hoisted the computation earlier so the top Signals block can use it too, rather
+than duplicating the check.
+
+One existing test (`test_fit_not_assessed_when_no_philosophy`) was actually asserting the OLD,
+ambiguous behavior ("Fit: not available" for the no-philosophy case) -- updated to expect the
+new, distinguishing text instead of just relaxing it to keep passing. Live-verified in the
+browser: searched Erling Haaland, left the philosophy dropdown on "Not specified," generated a
+real brief, confirmed the Signals line reads "Fit: N/A (no club philosophy selected)" --
+matching the "No club philosophy was specified, so Fit is not assessed" text already in the Fit
+Read section below it, so the two no longer contradict each other in tone.
+
+210 tests passing.
+
 ## Candidate disambiguation table + reference-club-visible philosophy dropdown (2026-09-24, later still)
 
 Prompted by a real user report with a screenshot: searching "Bruno Fernandes" in the app and

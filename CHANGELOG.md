@@ -5,6 +5,16 @@ the next time you generate a brief — not the full investigation. For the detai
 narrative behind each entry, see `NOTES.md`; for the evaluation findings that drove this round
 of fixes, see `EVAL_REPORT.md`.
 
+## 2026-09-24 — "Fit: N/A" now says why
+
+**What changed:** the top "Signals" line used to show a blanket "Fit: N/A" whenever Fit wasn't
+computed, whether that was because you hadn't picked a club philosophy or because Fit genuinely
+couldn't be assessed for that player's league or position. Now it says which: "N/A (no club
+philosophy selected)" or "not available (league/position not covered)."
+
+**What you'll notice:** a brief that looks like Fit "failed" at a glance is now much rarer — in
+most cases it's simply telling you a philosophy wasn't chosen, not that something went wrong.
+
 ## 2026-09-24 — Player disambiguation is now a real table, and Fit's reference club is visible upfront
 
 **What changed:** two things a real search surfaced. First, when a name matches several

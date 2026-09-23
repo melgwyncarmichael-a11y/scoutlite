@@ -305,7 +305,16 @@ if data:
             quality_text = quality["label"] if quality else "N/A"
             if quality and quality["raw_label"] != quality["label"]:
                 quality_text += f" (raw: {quality['raw_label']})"
-            fit_text = f"{fit_signal['label']} vs. {fit_signal['reference_club']}" if fit_signal else "N/A"
+            if fit_signal:
+                fit_text = f"{fit_signal['label']} vs. {fit_signal['reference_club']}"
+            elif in_possession_key and out_of_possession_key:
+                # A philosophy was chosen but the signal still came back None -- genuinely
+                # uncovered, not the scout's own choice not to assess it. Distinguished
+                # (2026-09-24) after a real user report: a blanket "N/A" for both made "I
+                # didn't pick a philosophy" indistinguishable from "can't be assessed."
+                fit_text = "N/A (league/position not covered)"
+            else:
+                fit_text = "N/A (no club philosophy selected)"
             st.subheader("Signals")
             st.markdown(f"**Quality: {quality_text}** · **Fit: {fit_text}**")
             st.caption(

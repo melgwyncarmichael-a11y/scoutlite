@@ -155,7 +155,17 @@ def build_docx(data: dict, output_path: Path) -> Path:
     quality_text = quality_label or "not available"
     if quality and quality["raw_label"] != quality["label"]:
         quality_text += f" (raw: {quality['raw_label']})"
-    fit_text = f"{fit_label} vs. {fit_signal['reference_club']}" if fit_signal else "not available"
+    has_philosophy = philosophy and (philosophy.get("in_possession") or philosophy.get("out_of_possession"))
+    if fit_signal:
+        fit_text = f"{fit_label} vs. {fit_signal['reference_club']}"
+    elif has_philosophy:
+        # A philosophy was given but the signal still came back None -- genuinely uncovered
+        # (league/position), not the scout's own choice not to assess it. Distinguished here
+        # (2026-09-24) after a real user report: a blanket "not available" for both cases made
+        # "I didn't pick a philosophy" indistinguishable from "this player can't be assessed."
+        fit_text = "not available (league/position not covered)"
+    else:
+        fit_text = "not assessed (no club philosophy selected)"
     p = doc.add_paragraph()
     p.add_run(f"Quality: {quality_text}  ·  Fit: {fit_text}").bold = True
     doc.add_paragraph().add_run(
@@ -387,7 +397,12 @@ def build_comparison_docx(
         quality = c.get("quality")
         row[2].text = quality["label"] if quality else "not available"
         fit_signal = c.get("fit_signal")
-        row[3].text = f"{fit_signal['label']} vs. {fit_signal['reference_club']}" if fit_signal else "not available"
+        if fit_signal:
+            row[3].text = f"{fit_signal['label']} vs. {fit_signal['reference_club']}"
+        elif has_philosophy:
+            row[3].text = "not available (league/position not covered)"
+        else:
+            row[3].text = "not assessed (no philosophy selected)"
         judge = c.get("judge") or {}
         row[4].text = (
             f"{judge['source_accuracy']}%" + (" ⚠" if judge.get("confidence_warning") else "")
@@ -417,7 +432,12 @@ def build_comparison_docx(
         quality = c.get("quality")
         fit_signal = c.get("fit_signal")
         quality_text = quality["label"] if quality else "not available"
-        fit_text = f"{fit_signal['label']} vs. {fit_signal['reference_club']}" if fit_signal else "not available"
+        if fit_signal:
+            fit_text = f"{fit_signal['label']} vs. {fit_signal['reference_club']}"
+        elif has_philosophy:
+            fit_text = "not available (league/position not covered)"
+        else:
+            fit_text = "not assessed (no philosophy selected)"
         doc.add_paragraph().add_run(f"Quality: {quality_text}  ·  Fit: {fit_text}").bold = True
 
         doc.add_heading("Who He Is", level=2)

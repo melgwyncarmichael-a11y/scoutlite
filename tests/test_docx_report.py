@@ -156,10 +156,13 @@ def test_fit_not_available_when_philosophy_given_but_signal_is_none(tmp_path):
 
 
 def test_fit_not_assessed_when_no_philosophy(tmp_path):
+    # Distinguished from "not available" (2026-09-24) -- a real user report showed a blanket
+    # "N/A" made "I didn't pick a philosophy" indistinguishable from "can't be assessed for
+    # this player," which looked like the tool had failed when it was working as designed.
     text = _all_text(_build(
         tmp_path, philosophy={"in_possession": "", "out_of_possession": ""}, fit_signal=None,
     ))
-    assert "Fit: not available" in text  # top Signals line always shows a state
+    assert "Fit: not assessed (no club philosophy selected)" in text  # top Signals line always shows a state
     assert "Club philosophy assessed against" not in text  # section 4 skips the block entirely
 
 
