@@ -1,5 +1,44 @@
 # ScoutLite — Build Notes
 
+## Unclear-labels audit: raw dict keys in the app, a pre-existing mangling bug in the docx (2026-09-24, later still)
+
+Asked directly to check the Streamlit app for unclear labels. Read through every user-facing
+string in `app.py` rather than skimming, and live-tested to confirm rather than trusting the
+source alone. The clear, high-value finding: `st.table(bio)`, `st.table(stats)`,
+`st.table(keeper)`, `st.table(misc)`, and `st.table(xg)` all passed raw dicts straight to
+Streamlit, which uses dict keys as row labels verbatim -- so a scout saw `full_name`,
+`matches_played`, `understat_matched_name`, `goals_plus_assists` etc. exactly as written in the
+code, not a formatted label.
+
+Checked `docx_report.py` before assuming the fix was app-only, since `_add_dict_table()` already
+does *some* key formatting (`key.replace("_", " ").title()`) for the generated Word document --
+and found that formatter has its own real, already-shipping bug: `"xG".title()` produces "Xg",
+`"npxG".title()` produces "Npxg", `"gk_saves".replace("_"," ").title()` produces "Gk Saves" --
+`str.title()` doesn't preserve internal capitals, so every football-stat abbreviation in every
+brief generated so far has been silently mangled. Confirmed this live in Python before touching
+any code, not assumed.
+
+Fixed both with one shared formatter instead of two independent ones that could drift:
+`format_label()` in `docx_report.py` maps snake_case keys to readable labels via a small
+override table (`xg`->`xG`, `xa`->`xA`, `npxg`->`npxG`, `npxa`->`npxA`, `url`->`URL`, `gk`->`GK`,
+`pct`->`%`) for known abbreviations, falling back to ordinary `.capitalize()` per word otherwise.
+`format_dict_for_display()` wraps it for callers (app.py) that hand a whole dict to a different
+rendering surface (`st.table`) instead of building a docx table cell by cell, and also absorbs
+the same empty-value filtering `_add_dict_table()` already did. `_add_dict_table()` itself now
+calls `format_label()` instead of the old raw `.title()`.
+
+Live-verified in the browser: generated a real Haaland brief, confirmed every table now shows
+"Full Name," "Matches Played," "Goals Plus Assists," "Understat Matched Name," "Understat URL,"
+while "xG," "xA," and "npxG" render correctly unmangled -- not just that the code looked right,
+but that the actual rendered page shows it. 215 tests passing (5 new, covering the abbreviation
+preservation, ordinary title-casing, the url/pct overrides, and empty-value filtering).
+
+Other labels reviewed and left alone as already clear: button/input labels, help text, status-
+log lines during generation, the confidence-warning message, and section headers. One minor,
+lower-priority item noted but not changed: "claim-grounding" (used in the automated-judge
+caption) is fact-checking jargon a scout may not immediately parse -- flagged for a future pass,
+not fixed now since it's a wording polish, not a functional-clarity gap like the raw keys were.
+
 ## "Fit: N/A" made to say why, after another real screenshot (2026-09-24, later still)
 
 Prompted by a follow-up screenshot: a midfielder brief showed "Quality: World Class · Fit:

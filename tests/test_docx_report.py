@@ -3,7 +3,7 @@ the classic failure mode: XML that python-docx writes but Word can't open. Deter
 no network/LLM, so it belongs alongside the rest of the pure-layer suite."""
 from docx import Document
 
-from docx_report import FIT_SCOPE_CAVEAT, build_comparison_docx, build_docx
+from docx_report import FIT_SCOPE_CAVEAT, build_comparison_docx, build_docx, format_dict_for_display, format_label
 
 STATS = {"season": "2023-2024", "squad": "Manchester City", "competition": "1. Premier League",
          "goals": "27", "minutes": "2,552"}
@@ -251,3 +251,36 @@ def test_comparison_handles_missing_quality_and_fit_gracefully(tmp_path):
 def test_comparison_shares_one_understanding_signals_section(tmp_path):
     text = _all_text(_build_comparison(tmp_path))
     assert text.count("Understanding the Signals") == 1
+
+
+# --- format_label / format_dict_for_display (2026-09-24) ---------------------------------
+
+def test_format_label_preserves_football_abbreviations():
+    # A plain str.title() mangles these into "Xg"/"Npxg"/"Gk Saves" -- unrecognizable to a
+    # scout. Found in a label-clarity review after being asked to check the app for unclear
+    # labels.
+    assert format_label("xG") == "xG"
+    assert format_label("xA") == "xA"
+    assert format_label("npxG") == "npxG"
+    assert format_label("gk_saves") == "GK Saves"
+
+
+def test_format_label_title_cases_ordinary_words():
+    assert format_label("full_name") == "Full Name"
+    assert format_label("goals_plus_assists") == "Goals Plus Assists"
+    assert format_label("height_weight") == "Height Weight"
+
+
+def test_format_label_maps_url_and_pct():
+    assert format_label("understat_url") == "Understat URL"
+    assert format_label("save_pct") == "Save %"
+
+
+def test_format_dict_for_display_formats_every_key():
+    result = format_dict_for_display({"full_name": "Erling Haaland", "xG": "28.8"})
+    assert result == {"Full Name": "Erling Haaland", "xG": "28.8"}
+
+
+def test_format_dict_for_display_drops_empty_values():
+    result = format_dict_for_display({"full_name": "Erling Haaland", "footed": "", "club": None})
+    assert result == {"Full Name": "Erling Haaland"}

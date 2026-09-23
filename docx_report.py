@@ -90,6 +90,30 @@ def _add_hyperlink(paragraph, url: str, text: str):
     return hyperlink
 
 
+# A plain str.title() mangles known football-stat abbreviations -- "xG" -> "Xg", "npxG" ->
+# "Npxg", "gk_saves" -> "Gk Saves" -- into something a scout wouldn't recognize. Found in a
+# label-clarity review (2026-09-24): this bug was already live in every generated .docx before
+# app.py even started showing raw dict keys directly (a separate, worse instance of the same
+# underlying issue -- see format_dict_for_display() below).
+_LABEL_WORD_OVERRIDES = {
+    "xg": "xG", "xa": "xA", "npxg": "npxG", "npxa": "npxA",
+    "url": "URL", "gk": "GK", "pct": "%",
+}
+
+
+def format_label(key: str) -> str:
+    """Snake_case dict key -> readable label, e.g. 'goals_plus_assists' -> 'Goals Plus
+    Assists', while preserving known abbreviations str.title() would otherwise mangle."""
+    return " ".join(_LABEL_WORD_OVERRIDES.get(word.lower(), word.capitalize()) for word in key.split("_"))
+
+
+def format_dict_for_display(data: dict) -> dict:
+    """Same key formatting and empty-value filtering as _add_dict_table(), for callers (app.py)
+    that hand a dict straight to a different rendering surface (st.table) instead of building a
+    docx table cell by cell -- one formatter shared by both instead of two that could drift."""
+    return {format_label(k): v for k, v in data.items() if v not in (None, "")}
+
+
 def _add_dict_table(doc: Document, data: dict, skip: tuple[str, ...] = ()):
     table = doc.add_table(rows=0, cols=2)
     table.style = "Light Grid Accent 1"
@@ -97,7 +121,7 @@ def _add_dict_table(doc: Document, data: dict, skip: tuple[str, ...] = ()):
         if value in (None, "") or key in skip:
             continue
         row = table.add_row().cells
-        row[0].text = key.replace("_", " ").title()
+        row[0].text = format_label(key)
         row[1].text = str(value)
 
 

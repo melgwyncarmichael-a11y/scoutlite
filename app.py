@@ -22,7 +22,7 @@ import time
 import requests
 import streamlit as st
 
-from docx_report import build_docx
+from docx_report import build_docx, format_dict_for_display
 from news_fetch import LOOKBACK_DAYS, fetch_articles
 from scoutlite import (
     extract_keeper_stats,
@@ -351,18 +351,18 @@ if data:
             )
 
             st.subheader("Background")
-            st.table({k: v for k, v in bio.items() if v})
+            st.table(format_dict_for_display(bio))
 
             st.subheader(f"Season stats ({stats['season']})")
-            st.table(stats)
+            st.table(format_dict_for_display(stats))
 
             if keeper:
                 st.subheader("Goalkeeping stats")
-                st.table(keeper)
+                st.table(format_dict_for_display(keeper))
 
             if misc:
                 st.subheader("Defensive/discipline stats")
-                st.table(misc)
+                st.table(format_dict_for_display(misc))
 
             if xg:
                 st.subheader("Advanced stats (Understat)")
@@ -373,7 +373,7 @@ if data:
                     f"this can occasionally match the wrong player or miss a real one. Check the "
                     f"matched name above against who you actually mean before trusting these numbers."
                 )
-                st.table(xg)
+                st.table(format_dict_for_display(xg))
 
             if articles:
                 st.subheader(f"Recent news (last {LOOKBACK_DAYS} days)")

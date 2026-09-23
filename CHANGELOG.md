@@ -5,6 +5,19 @@ the next time you generate a brief — not the full investigation. For the detai
 narrative behind each entry, see `NOTES.md`; for the evaluation findings that drove this round
 of fixes, see `EVAL_REPORT.md`.
 
+## 2026-09-24 — Every data table now shows readable labels
+
+**What changed:** the Background, Season stats, Goalkeeping, Defensive/discipline, and Advanced
+stats tables in the Streamlit app used to show raw internal field names -- `full_name`,
+`matches_played`, `understat_matched_name`, `goals_plus_assists` -- straight from the code.
+They now show proper labels: "Full Name," "Matches Played," "Understat Matched Name," "Goals
+Plus Assists." Football-specific terms are preserved correctly too -- "xG," "xA," and "npxG"
+no longer risk turning into "Xg"/"Npxg" the way a naive fix would (this exact mangling was
+already happening in the generated Word document, fixed there too, not just in the app).
+
+**What you'll notice:** every stats table is easier to read at a glance, in both the app and
+the downloaded .docx.
+
 ## 2026-09-24 — "Fit: N/A" now says why
 
 **What changed:** the top "Signals" line used to show a blanket "Fit: N/A" whenever Fit wasn't
