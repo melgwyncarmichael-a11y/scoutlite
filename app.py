@@ -17,9 +17,12 @@ scouting verdict. It accelerates research, it doesn't replace judgment.
 """
 import io
 import os
+import time
 
+import openai
 import requests
 import streamlit as st
+from selenium.common.exceptions import WebDriverException
 
 from docx_report import build_docx
 from news_fetch import LOOKBACK_DAYS, fetch_articles
@@ -38,6 +41,28 @@ from understat_xg import get_player_xg
 
 st.set_page_config(page_title="ScoutLite", page_icon="⚽")
 
+# One-time splash on first open (2026-09-23) -- session_state persists across reruns within a
+# browser tab's session but not across a fresh tab/session, so this shows exactly once per
+# session rather than flashing on every button click. The deliberate sleep is what makes it
+# visible at all; without it the script runs faster than a human can perceive.
+if "app_initialized" not in st.session_state:
+    splash = st.empty()
+    with splash.container():
+        st.markdown(
+            """
+            <div style="display:flex; flex-direction:column; align-items:center;
+                        justify-content:center; padding:5rem 0; text-align:center;">
+                <div style="font-size:56px; line-height:1;">⚽</div>
+                <div style="font-size:28px; font-weight:600; margin-top:0.75rem;">ScoutLite</div>
+                <div style="color:#888; margin-top:0.35rem;">Loading player research tools…</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    time.sleep(1.0)
+    splash.empty()
+    st.session_state.app_initialized = True
+
 st.title("ScoutLite")
 st.caption("A player research brief for a scout to weigh — not a scouting verdict. Accelerates research, doesn't replace judgment.")
 
@@ -49,6 +74,43 @@ if "player_data" not in st.session_state:
     st.session_state.player_data = None
 if "search_candidates" not in st.session_state:
     st.session_state.search_candidates = None
+
+
+def _show_error(e: Exception, context: str):
+    """Friendly, actionable message for the user, with the raw exception tucked into an
+    expander for anyone who wants the technical detail (2026-09-23) -- replaces a bare
+    f"Something went wrong: {e}" that dumped whatever raw exception text seleniumbase/requests/
+    openai happened to raise, often meaningless to a scout using the tool (e.g. a
+    WebDriverException stack line, or "Error code: 401"). Categorized by actual exception type,
+    not string-matching the message, so it stays correct if a library's wording changes."""
+    if isinstance(e, RuntimeError):
+        # search_player()/get_player_page() already raise clear, user-facing messages for
+        # expected, actionable situations (no match found, ambiguous name) -- not a system
+        # failure, so a less alarming warning (and no technical-details dump of a message
+        # that's already the full, user-facing picture) reads more honestly than a red error.
+        # Confirmed live (2026-09-23): searching a nonexistent name raises exactly this.
+        st.warning(str(e))
+        return
+    elif isinstance(e, openai.AuthenticationError):
+        headline = "DeepSeek rejected the API key -- check DEEPSEEK_API_KEY in .env."
+    elif isinstance(e, openai.RateLimitError):
+        headline = "DeepSeek's rate limit or quota was hit -- wait a bit and try again."
+    elif isinstance(e, (openai.APIConnectionError, openai.APITimeoutError)):
+        headline = "Couldn't reach DeepSeek's API -- check your internet connection and try again."
+    elif isinstance(e, openai.OpenAIError):
+        headline = f"The DeepSeek API request failed while {context}."
+    elif isinstance(e, WebDriverException):
+        headline = (
+            f"FBref's page couldn't be loaded while {context} -- this can happen if FBref is "
+            "rate-limiting or blocking automated access right now. Wait a bit and try again."
+        )
+    elif isinstance(e, requests.RequestException):
+        headline = f"A network request failed while {context} -- check your internet connection and try again."
+    else:
+        headline = f"Something went wrong while {context}."
+    st.error(headline)
+    with st.expander("Technical details"):
+        st.code(f"{type(e).__name__}: {e}")
 
 
 def _resolve_candidate(candidate: dict, player_name: str, fresh: bool):
@@ -94,7 +156,7 @@ if search:
         else:
             st.session_state.search_candidates = (candidates, player_name, fresh_mode)
     except Exception as e:
-        st.error(f"Something went wrong: {e}")
+        _show_error(e, f"searching for \"{player_name}\"")
 
 if st.session_state.search_candidates:
     candidates, searched_name, fresh_mode = st.session_state.search_candidates
@@ -114,7 +176,7 @@ if st.session_state.search_candidates:
             _resolve_candidate(candidates[chosen_idx], searched_name, fresh_mode)
             st.success(f"Confirmed: {st.session_state.player_data['url']}")
         except Exception as e:
-            st.error(f"Something went wrong: {e}")
+            _show_error(e, f"fetching {candidates[chosen_idx]['name']}'s page")
 
 data = st.session_state.player_data
 if data:
@@ -319,4 +381,4 @@ if data:
                 mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
             )
         except Exception as e:
-            st.error(f"Something went wrong: {e}")
+            _show_error(e, "generating the research brief")

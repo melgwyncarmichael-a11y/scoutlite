@@ -1,5 +1,58 @@
 # ScoutLite — Build Notes
 
+## Streamlit app: first-open splash + categorized error handling (2026-09-23)
+
+Requested directly: "bake in error handling for the user" and "a loading screen for the UI
+when it loads." Asked which specifically was meant for the loading screen (a first-open splash
+vs. tightening loading feedback throughout the existing flow) rather than guessing and building
+the wrong scope -- answer was the first-open splash.
+
+**Splash**: `st.session_state`-gated block right after `st.set_page_config()` -- shows a
+centered "Loading ScoutLite..." screen via `st.empty()` + a deliberate `time.sleep(1.0)` (without
+it the script runs faster than a human perceives, so the splash wouldn't actually be visible),
+then clears itself and never reappears for the rest of that browser session (any button click
+reruns the script, but `app_initialized` is already set by then). Verified live via the browser
+preview: splash renders correctly in dark mode, transitions cleanly to the real form after ~1s.
+
+**Error handling**: found and fixed a real bug while investigating, not just cosmetic --
+`app.py`'s three `except Exception as e: st.error(f"Something went wrong: {e}")` blocks dumped
+raw exception text regardless of type. Replaced with `_show_error(e, context)`, which
+categorizes by actual exception type (not string-matching, which breaks silently if a library's
+wording changes): `openai.AuthenticationError` / `RateLimitError` / `APIConnectionError` get
+DeepSeek-specific guidance, `selenium.common.exceptions.WebDriverException` gets an
+FBref-rate-limit-aware message, generic `requests.RequestException` gets a network-check
+message, and anything else falls back to a plain "something went wrong while X" with the raw
+exception tucked into a `st.expander("Technical details")` rather than either hidden or dumped
+as the headline.
+
+**A `RuntimeError` special case, found only by testing live, not by reading the code.** Assumed
+`search_player()` returning an empty list was the zero-match case and added an
+`elif len(candidates) == 0` branch in `app.py` for it -- wrong. Live-tested searching a
+nonsense name in the actual running app (browser preview, not just unit tests) and got an
+unstyled `st.error` instead. Traced it: `scoutlite.py:110` already raises
+`RuntimeError(f"No FBref match found for '{player_name}'")` itself -- `search_player()` never
+returns an empty list at all, so the branch I'd just written was dead code, silently
+unreachable. Deleted it, and instead special-cased `RuntimeError` in `_show_error()` to render
+as `st.warning` with no technical-details expander (it's an expected, actionable, user-facing
+message `scoutlite.py` already wrote for exactly this situation, not a system failure) rather
+than `st.error`. Re-verified live: the same nonsense-name search now shows a calm yellow
+warning, not a red error box. A concrete reminder that reading the source is necessary but not
+sufficient -- the live app itself is the only thing that told the truth about which branch
+actually runs.
+
+Also created `.claude/launch.json`... briefly. Discovered mid-task that a global
+`~/.claude/launch.json` (from an earlier session, pointed at system Python rather than this
+project's `.venv`) already defines a `scoutlite` preview config on port 8510 -- deleted the
+redundant project-local one rather than leaving two configs to drift out of sync. Worth fixing
+later: that global config's system-Python environment doesn't match `requirements.txt`'s pinned
+versions at all, which is exactly the kind of environment drift the dependency audit flagged
+as a risk in principle -- now confirmed as a real, existing instance of it, just not this
+session's task to fix.
+
+196 tests still passing (no test changes needed -- `app.py` has never had unit coverage, by
+design, since it's a Streamlit script with top-level side effects; verified live in the browser
+instead, consistent with how every other `app.py` change in this project has been checked).
+
 ## NewsAPI caching + compare-mode dedup, prompted by a direct question about repeat pulls (2026-09-22)
 
 Asked directly whether pulling the same players repeatedly (across compare runs, or an

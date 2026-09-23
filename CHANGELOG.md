@@ -5,6 +5,20 @@ the next time you generate a brief — not the full investigation. For the detai
 narrative behind each entry, see `NOTES.md`; for the evaluation findings that drove this round
 of fixes, see `EVAL_REPORT.md`.
 
+## 2026-09-23 — Friendlier errors, and a proper loading screen on first open
+
+**What changed:** the Streamlit app now shows a branded "Loading ScoutLite..." screen for a
+moment when you first open it, before the search form appears. Error messages throughout the
+app were rewritten to say what actually happened and what to do about it, instead of dumping
+raw technical text — e.g. "DeepSeek rejected the API key -- check DEEPSEEK_API_KEY in .env"
+instead of a bare exception string. Searching for a name FBref has no record of now shows a
+plain, calm heads-up ("No FBref match found for...") instead of what used to be a confusing
+blank selection screen.
+
+**What you'll notice:** a cleaner first impression, and when something does go wrong, a message
+that tells you what to actually do next. The full technical detail is still available (click
+"Technical details") for anything that isn't one of the plain-language cases.
+
 ## 2026-09-21 — New: compare 2+ players in one brief
 
 **What changed:** a new command, `scoutlite_compare.py`, takes 2 or more player names and runs
