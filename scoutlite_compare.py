@@ -30,7 +30,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from docx_report import build_comparison_docx
-from scoutlite_combined import philosophy_from_keys, research_player
+from scoutlite_combined import friendly_error_message, philosophy_from_keys, research_player
 
 ROOT = Path(__file__).resolve().parent
 load_dotenv(ROOT / ".env")
@@ -80,7 +80,7 @@ def main():
                 args.in_possession or "", args.out_of_possession or "", philosophy,
             )
         except Exception as e:
-            print(f"  SKIPPED -- {e}")
+            print(f"  SKIPPED -- {friendly_error_message(e, f'processing {player}')}")
             continue
         results.append(data)
 
@@ -107,4 +107,4 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        sys.exit(f"Error: {e}")
+        sys.exit(friendly_error_message(e, "running the comparison"))

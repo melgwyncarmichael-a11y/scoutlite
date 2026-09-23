@@ -19,10 +19,8 @@ import io
 import os
 import time
 
-import openai
 import requests
 import streamlit as st
-from selenium.common.exceptions import WebDriverException
 
 from docx_report import build_docx
 from news_fetch import LOOKBACK_DAYS, fetch_articles
@@ -35,8 +33,8 @@ from scoutlite import (
     list_available_seasons,
     search_player,
 )
-from scoring import compute_fit_signal, compute_quality_signal
-from scoutlite_combined import ROLE_NOTES_MAX_CHARS, philosophy_from_keys, summarize_combined
+from scoring import REFERENCE_CLUBS, compute_fit_signal, compute_quality_signal
+from scoutlite_combined import ROLE_NOTES_MAX_CHARS, friendly_error_message, philosophy_from_keys, summarize_combined
 from understat_xg import get_player_xg
 
 st.set_page_config(page_title="ScoutLite", page_icon="⚽")
@@ -78,11 +76,10 @@ if "search_candidates" not in st.session_state:
 
 def _show_error(e: Exception, context: str):
     """Friendly, actionable message for the user, with the raw exception tucked into an
-    expander for anyone who wants the technical detail (2026-09-23) -- replaces a bare
-    f"Something went wrong: {e}" that dumped whatever raw exception text seleniumbase/requests/
-    openai happened to raise, often meaningless to a scout using the tool (e.g. a
-    WebDriverException stack line, or "Error code: 401"). Categorized by actual exception type,
-    not string-matching the message, so it stays correct if a library's wording changes."""
+    expander for anyone who wants the technical detail (2026-09-23). Categorization itself
+    lives in scoutlite_combined.friendly_error_message() (2026-09-24) -- shared with both CLI
+    entrypoints so all three surfaces give the same guidance for the same failure, rather than
+    three copies that could drift out of sync."""
     if isinstance(e, RuntimeError):
         # search_player()/get_player_page() already raise clear, user-facing messages for
         # expected, actionable situations (no match found, ambiguous name) -- not a system
@@ -91,24 +88,7 @@ def _show_error(e: Exception, context: str):
         # Confirmed live (2026-09-23): searching a nonexistent name raises exactly this.
         st.warning(str(e))
         return
-    elif isinstance(e, openai.AuthenticationError):
-        headline = "DeepSeek rejected the API key -- check DEEPSEEK_API_KEY in .env."
-    elif isinstance(e, openai.RateLimitError):
-        headline = "DeepSeek's rate limit or quota was hit -- wait a bit and try again."
-    elif isinstance(e, (openai.APIConnectionError, openai.APITimeoutError)):
-        headline = "Couldn't reach DeepSeek's API -- check your internet connection and try again."
-    elif isinstance(e, openai.OpenAIError):
-        headline = f"The DeepSeek API request failed while {context}."
-    elif isinstance(e, WebDriverException):
-        headline = (
-            f"FBref's page couldn't be loaded while {context} -- this can happen if FBref is "
-            "rate-limiting or blocking automated access right now. Wait a bit and try again."
-        )
-    elif isinstance(e, requests.RequestException):
-        headline = f"A network request failed while {context} -- check your internet connection and try again."
-    else:
-        headline = f"Something went wrong while {context}."
-    st.error(headline)
+    st.error(friendly_error_message(e, context))
     with st.expander("Technical details"):
         st.code(f"{type(e).__name__}: {e}")
 
@@ -161,22 +141,39 @@ if search:
 if st.session_state.search_candidates:
     candidates, searched_name, fresh_mode = st.session_state.search_candidates
     st.warning(
-        f"{len(candidates)} players matched \"{searched_name}\" — confirm which one before "
-        "continuing, rather than guessing for you."
+        f"{len(candidates)} players matched \"{searched_name}\" — click a row below to select "
+        "the correct one before continuing, rather than guessing for you. A common name (e.g. "
+        "\"Bruno Fernandes\") can match several unrelated real players -- check Clubs/Active "
+        "before confirming, not just the name."
     )
-    labels = [
-        f"{c['name']}"
-        + (f" ({c['alt_name']})" if c["alt_name"] else "")
-        + f" — {c['nationality'] or '?'}, active {c['years_active'] or '?'}, {c['clubs'] or 'clubs unknown'}"
+    table_rows = [
+        {
+            "Name": c["name"],
+            "Also known as": c["alt_name"] or "—",
+            "Nationality": c["nationality"] or "?",
+            "Active": c["years_active"] or "?",
+            "Clubs": c["clubs"] or "clubs unknown",
+        }
         for c in candidates
     ]
-    chosen_idx = st.radio("Which player did you mean?", range(len(candidates)), format_func=lambda i: labels[i])
-    if st.button("Confirm selection", type="primary"):
-        try:
-            _resolve_candidate(candidates[chosen_idx], searched_name, fresh_mode)
-            st.success(f"Confirmed: {st.session_state.player_data['url']}")
-        except Exception as e:
-            _show_error(e, f"fetching {candidates[chosen_idx]['name']}'s page")
+    selection = st.dataframe(
+        table_rows,
+        hide_index=True,
+        on_select="rerun",
+        selection_mode="single-row",
+        key="candidate_table",
+    )
+    selected_rows = selection.selection.rows
+    if not selected_rows:
+        st.caption("Click a row above to select a player.")
+    else:
+        chosen_idx = selected_rows[0]
+        if st.button(f"Confirm: {candidates[chosen_idx]['name']}", type="primary"):
+            try:
+                _resolve_candidate(candidates[chosen_idx], searched_name, fresh_mode)
+                st.success(f"Confirmed: {st.session_state.player_data['url']}")
+            except Exception as e:
+                _show_error(e, f"fetching {candidates[chosen_idx]['name']}'s page")
 
 data = st.session_state.player_data
 if data:
@@ -190,25 +187,31 @@ if data:
         help="Short, adjective-style notes on ROLE -- how they're actually used on the pitch, which stats alone don't show. Included as your observation, not treated as verified data.",
     )
 
-    # v3 (2026-09-17): options are keyed by the same short strings scoring.REFERENCE_CLUBS uses
-    # (the CLI's --in-possession/--out-of-possession choices), not the descriptive phrase --
-    # compute_fit_signal() needs the key to look up the reference club, not the display text.
-    IN_POSSESSION_OPTIONS = {"": "Not specified", "vertical": "Vertical, fast transitions", "possession": "Slow, methodical possession"}
-    OUT_OF_POSSESSION_OPTIONS = {
-        "": "Not specified", "high_line": "High line, counter-press",
-        "low_block": "Low block, counter", "mid_block": "Mid block, hybrid",
+    # v3 (2026-09-17): keyed by the same short strings scoring.REFERENCE_CLUBS uses -- the CLI's
+    # --in-possession/--out-of-possession choices, not the descriptive phrase. One combined
+    # dropdown (2026-09-24, was two separate in/out-of-possession selectboxes) so the reference
+    # club a combination compares against is visible at selection time, not just after
+    # generating the whole brief -- built directly from scoring.REFERENCE_CLUBS so the club
+    # names here can never drift out of sync with what compute_fit_signal() actually uses.
+    _IN_POSSESSION_LABELS = {"vertical": "Vertical, fast transitions", "possession": "Slow, methodical possession"}
+    _OUT_OF_POSSESSION_LABELS = {
+        "high_line": "High line, counter-press", "low_block": "Low block, counter", "mid_block": "Mid block, hybrid",
     }
-    col1, col2 = st.columns(2)
-    with col1:
-        in_possession_key = st.selectbox(
-            "Club philosophy — in possession (optional)",
-            list(IN_POSSESSION_OPTIONS), format_func=lambda k: IN_POSSESSION_OPTIONS[k],
+    PHILOSOPHY_OPTIONS = {("", ""): "Not specified — Fit not assessed"}
+    for (_in_key, _out_key), _ref in REFERENCE_CLUBS.items():
+        PHILOSOPHY_OPTIONS[(_in_key, _out_key)] = (
+            f"{_IN_POSSESSION_LABELS[_in_key]} + {_OUT_OF_POSSESSION_LABELS[_out_key]} "
+            f"— compared to {_ref['display_name']}"
         )
-    with col2:
-        out_of_possession_key = st.selectbox(
-            "Club philosophy — out of possession (optional)",
-            list(OUT_OF_POSSESSION_OPTIONS), format_func=lambda k: OUT_OF_POSSESSION_OPTIONS[k],
-        )
+    philosophy_choice = st.selectbox(
+        "Club philosophy to assess Fit against (optional)",
+        list(PHILOSOPHY_OPTIONS),
+        format_func=lambda k: PHILOSOPHY_OPTIONS[k],
+        help="Fit compares this player's statistical profile against the real club shown for "
+        "each combination -- e.g. possession + high line compares against Manchester City's "
+        "current squad, regardless of which club this player actually plays for.",
+    )
+    in_possession_key, out_of_possession_key = philosophy_choice
 
     generate = st.button("Generate research brief", type="primary")
 

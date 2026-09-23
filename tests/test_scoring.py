@@ -90,9 +90,12 @@ def test_understat_population_filters_by_position_and_minutes():
 
 
 class _DummyFBrefReader:
-    """Stands in for sd.FBref(...) so a test never touches soccerdata/network."""
+    """Stands in for sd.FBref(...) so a test never touches soccerdata/network. Returns a
+    non-None placeholder (real soccerdata never returns None on success -- only
+    _safe_read_player_season_stats's except-branch does) since the test that uses this also
+    monkeypatches _fbref_misc_population_per90 to ignore whatever DataFrame it's handed."""
     def read_player_season_stats(self, stat_type=None):
-        return None
+        return object()
 
 
 def test_compute_quality_signal_returns_none_when_understat_population_is_empty(monkeypatch):
@@ -127,6 +130,57 @@ def test_compute_quality_signal_drops_only_the_empty_component_not_the_whole_sig
     )
     assert result is not None
     assert set(result["components"]) == {"defensive_actions_per90"}  # key_passes/xA dropped, not faked
+
+
+def test_safe_read_player_season_stats_returns_dataframe_on_success(monkeypatch):
+    monkeypatch.setattr(scoring.sd, "FBref", lambda **k: _DummyFBrefReader())
+    result = scoring._safe_read_player_season_stats("ENG-Premier League", "2023-2024", "misc", False)
+    assert result is not None
+
+
+def test_safe_read_player_season_stats_returns_none_and_warns_on_fetch_failure(monkeypatch):
+    class _BrokenReader:
+        def read_player_season_stats(self, stat_type=None):
+            raise ConnectionError("FBref unreachable")
+
+    monkeypatch.setattr(scoring.sd, "FBref", lambda **k: _BrokenReader())
+    with pytest.warns(RuntimeWarning, match="Couldn't fetch"):
+        result = scoring._safe_read_player_season_stats("ENG-Premier League", "2023-2024", "misc", False)
+    assert result is None
+
+
+def test_compute_quality_signal_degrades_gracefully_when_fbref_population_fetch_fails(monkeypatch):
+    # Found in a follow-up error-handling review (2026-09-24): before this fix, a live fetch
+    # failure here (network blip, FBref rate-limiting) raised uncaught, crashing the entire
+    # Quality signal instead of degrading the way every other "can't compute this" path does.
+    class _BrokenReader:
+        def read_player_season_stats(self, stat_type=None):
+            raise ConnectionError("FBref unreachable")
+
+    monkeypatch.setattr(scoring, "fetch_league_players_safe", lambda *a, **k: [])
+    monkeypatch.setattr(scoring.sd, "FBref", lambda **k: _BrokenReader())
+    stats = {"minutes": "900", "competition": "1. Premier League", "season": "2023-2024", "squad": "Arsenal"}
+    misc = {"interceptions": "10", "tackles_won": "8"}
+    with pytest.warns(RuntimeWarning, match="Couldn't fetch"):
+        result = scoring.compute_quality_signal(
+            "DF", "1. Premier League", "2023-2024", "Some Defender", stats, misc, None, None,
+        )
+    assert result is None  # degrades to "not available", does not raise
+
+
+def test_compute_fit_signal_degrades_gracefully_when_fbref_population_fetch_fails(monkeypatch):
+    class _BrokenReader:
+        def read_player_season_stats(self, stat_type=None):
+            raise ConnectionError("FBref unreachable")
+
+    monkeypatch.setattr(scoring.sd, "FBref", lambda **k: _BrokenReader())
+    misc = {"interceptions": "10", "tackles_won": "8"}
+    with pytest.warns(RuntimeWarning, match="Couldn't fetch"):
+        result = scoring.compute_fit_signal(
+            "DF", "1. Premier League", "2023-2024", misc, None, {"defensive_actions_per90": 60.0},
+            in_possession="vertical", out_of_possession="high_line",
+        )
+    assert result is None  # degrades to "not available", does not raise
 
 
 @pytest.mark.parametrize("pct,label", [

@@ -165,6 +165,28 @@ def _fbref_keeper_population(keeper_df, squad: str | None = None) -> list[float]
     return [float(v) for v in rows[("Performance", "Save%")].dropna().tolist()]
 
 
+def _safe_read_player_season_stats(soccerdata_league: str, season: str, stat_type: str, force_refresh: bool):
+    """Wraps a live soccerdata/FBref population fetch -- returns None (this module's existing
+    'signal not available' convention) rather than crashing the whole Quality/Fit computation
+    if the fetch itself fails (network blip, FBref rate-limiting, a soccerdata-internal error).
+    Every OTHER 'can't compute this' path in compute_quality_signal/compute_fit_signal already
+    degrades gracefully (uncovered league, missing minutes, empty population) -- this brings the
+    population fetch itself in line with that, instead of being the one place a transient
+    failure took the whole brief down with it (found in a follow-up error-handling review,
+    2026-09-24). Always visible via warnings.warn(), same as the PAdj fallback below -- never
+    silent the way a bare `except: return None` would be."""
+    try:
+        sd_reader = sd.FBref(leagues=soccerdata_league, seasons=season, no_cache=force_refresh)
+        return sd_reader.read_player_season_stats(stat_type=stat_type)
+    except Exception as e:
+        warnings.warn(
+            f"Couldn't fetch {stat_type!r} population data for {soccerdata_league} {season} "
+            f"({e!r}) -- treating this component as unavailable rather than failing the whole signal.",
+            RuntimeWarning, stacklevel=2,
+        )
+        return None
+
+
 def _team_possession_map(soccerdata_league: str, season: str, force_refresh: bool = False) -> dict[str, float]:
     """squad name -> that team's own-ball possession % for the season, plus a
     '__league_avg__' key for the league-wide average. Backing data for _possession_adjust()."""
@@ -289,11 +311,12 @@ def compute_quality_signal(
     if group == "goalkeeper":
         if soccerdata_league is None or keeper is None or not keeper.get("save_pct"):
             return None
-        sd_reader = sd.FBref(leagues=soccerdata_league, seasons=season, no_cache=force_refresh)
-        keeper_pop = _fbref_keeper_population(sd_reader.read_player_season_stats(stat_type="keeper"))
-        if keeper_pop:
-            components["save_pct"] = percentile_rank(float(keeper["save_pct"]), keeper_pop)
-            raw_components["save_pct"] = components["save_pct"]  # save% isn't possession-volume-driven, no PAdj
+        keeper_df = _safe_read_player_season_stats(soccerdata_league, season, "keeper", force_refresh)
+        if keeper_df is not None:
+            keeper_pop = _fbref_keeper_population(keeper_df)
+            if keeper_pop:
+                components["save_pct"] = percentile_rank(float(keeper["save_pct"]), keeper_pop)
+                raw_components["save_pct"] = components["save_pct"]  # save% isn't possession-volume-driven, no PAdj
 
     else:
         minutes = float(str(stats.get("minutes", "0")).replace(",", "") or 0)
@@ -324,9 +347,8 @@ def compute_quality_signal(
                         raw_components["xA_per90"] = components["xA_per90"]
 
         if group in ("midfield", "defense") and soccerdata_league and misc:
-            sd_reader = sd.FBref(leagues=soccerdata_league, seasons=season, no_cache=force_refresh)
-            misc_df = sd_reader.read_player_season_stats(stat_type="misc")
-            def_pop = _fbref_misc_population_per90(misc_df, group)
+            misc_df = _safe_read_player_season_stats(soccerdata_league, season, "misc", force_refresh)
+            def_pop = _fbref_misc_population_per90(misc_df, group) if misc_df is not None else []
             if def_pop:
                 def_value = per90(
                     float(misc.get("interceptions", 0) or 0) + float(misc.get("tackles_won", 0) or 0), minutes
@@ -478,12 +500,12 @@ def compute_fit_signal(
         ref_league = fbref_comp_to_soccerdata_league(ref["comp_level"])
         if ref_league is None:
             return None
-        sd_reader = sd.FBref(leagues=ref_league, seasons=season, no_cache=force_refresh)
-        keeper_df = sd_reader.read_player_season_stats(stat_type="keeper")
-        population = _fbref_keeper_population(keeper_df)
-        ref_values = _fbref_keeper_population(keeper_df, squad=ref["fbref_squad"])
-        if population and ref_values:
-            ref_components["save_pct"] = sum(percentile_rank(v, population) for v in ref_values) / len(ref_values)
+        keeper_df = _safe_read_player_season_stats(ref_league, season, "keeper", force_refresh)
+        if keeper_df is not None:
+            population = _fbref_keeper_population(keeper_df)
+            ref_values = _fbref_keeper_population(keeper_df, squad=ref["fbref_squad"])
+            if population and ref_values:
+                ref_components["save_pct"] = sum(percentile_rank(v, population) for v in ref_values) / len(ref_values)
 
     else:
         ref_understat_league = fbref_comp_to_understat_league(ref["comp_level"])
@@ -508,10 +530,9 @@ def compute_fit_signal(
                         ref_components[key] = sum(percentile_rank(v, population) for v in ref_values) / len(ref_values)
 
         if group in ("midfield", "defense") and ref_soccerdata_league:
-            sd_reader = sd.FBref(leagues=ref_soccerdata_league, seasons=season, no_cache=force_refresh)
-            misc_df = sd_reader.read_player_season_stats(stat_type="misc")
-            population = _fbref_misc_population_per90(misc_df, group)
-            ref_values = _fbref_misc_population_per90(misc_df, group, squad=ref["fbref_squad"])
+            misc_df = _safe_read_player_season_stats(ref_soccerdata_league, season, "misc", force_refresh)
+            population = _fbref_misc_population_per90(misc_df, group) if misc_df is not None else []
+            ref_values = _fbref_misc_population_per90(misc_df, group, squad=ref["fbref_squad"]) if misc_df is not None else []
             if population and ref_values:
                 # Same PAdj treatment as compute_quality_signal's defensive component: adjust
                 # each reference player's raw value by the reference CLUB's own possession

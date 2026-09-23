@@ -10,6 +10,7 @@ first place for it.
 """
 import json
 import re
+import warnings
 
 from llm_client import get_deepseek_client
 
@@ -30,7 +31,11 @@ def review(
 ) -> dict:
     """Returns {findings: [{claim, issue, severity}], has_major: bool}. Fails soft: on any
     error (parse failure, API error) returns an empty finding list rather than blocking the
-    pipeline -- the rule checker is the hard gate, this is the supplement.
+    pipeline -- the rule checker is the hard gate, this is the supplement. Always visible via
+    warnings.warn() when it does (2026-09-24 error-handling review) -- a bare
+    `except Exception: return {...}` made a genuinely broken fact-checker (a real bug, not just
+    an API hiccup) indistinguishable from a normal, working pass with nothing to flag, since
+    both return the exact same empty result.
 
     fit_signal (v3, 2026-09-17): the deterministic Fit result (scoring.compute_fit_signal) the
     LLM was asked to explain. MUST be included in the data this fact-checker sees, or it has no
@@ -110,5 +115,11 @@ def review(
             return {"findings": [], "has_major": False}
         has_major = any(str(f.get("severity", "")).lower() == "major" for f in findings)
         return {"findings": findings, "has_major": has_major}
-    except Exception:
+    except Exception as e:
+        warnings.warn(
+            f"judge_llm.review() failed ({type(e).__name__}: {e}) -- shipping this pass "
+            "without the LLM fact-check. judge_rules.py's deterministic checks still ran and "
+            "are unaffected; this only means the narrower LLM supplement didn't.",
+            RuntimeWarning, stacklevel=2,
+        )
         return {"findings": [], "has_major": False}

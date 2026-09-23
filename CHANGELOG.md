@@ -5,6 +5,22 @@ the next time you generate a brief — not the full investigation. For the detai
 narrative behind each entry, see `NOTES.md`; for the evaluation findings that drove this round
 of fixes, see `EVAL_REPORT.md`.
 
+## 2026-09-24 — Player disambiguation is now a real table, and Fit's reference club is visible upfront
+
+**What changed:** two things a real search surfaced. First, when a name matches several
+players (very common — "Bruno Fernandes" alone matches 11 different real people on FBref,
+most of them obscure), the app now shows a proper sortable table (Name, Also known as,
+Nationality, Active, Clubs) with click-to-select rows, instead of a cramped single-line radio
+list that made it easy to pick the wrong person. Second, the two separate "club philosophy"
+dropdowns are now one combined dropdown that names the actual reference club for each
+combination up front — e.g. "Slow, methodical possession + High line, counter-press —
+compared to Manchester City" — instead of only finding out which club Fit compared against
+after generating the whole brief.
+
+**What you'll notice:** picking the right player among several same-named ones is much easier
+to get right the first time, and choosing a club philosophy now tells you exactly which real
+club your player will be compared against before you commit to generating a brief.
+
 ## 2026-09-23 — Friendlier errors, and a proper loading screen on first open
 
 **What changed:** the Streamlit app now shows a branded "Loading ScoutLite..." screen for a

@@ -5,7 +5,7 @@ the league is covered) + NewsAPI (recent headlines, last 28 days) -> one DeepSee
 one player research brief (a data/research layer for a scout, not a scouting verdict).
 
 Reuses each source's already-proven functions rather than duplicating logic:
-- scoutlite.py: fetch_player_page_html, extract_latest_season, extract_player_bio
+- scoutlite.py: search_player, get_player_page, extract_latest_season, extract_player_bio
 - understat_xg.py: get_player_xg (returns None if the league isn't one Understat tracks)
 - news_fetch.py: fetch_articles (returns [] if none found; genuinely recent only, not
   season-long -- NewsAPI's free tier caps lookback at ~1 month)
@@ -19,8 +19,10 @@ import re
 import sys
 from pathlib import Path
 
+import openai
 import requests
 from dotenv import load_dotenv
+from selenium.common.exceptions import WebDriverException
 
 import judge_llm
 import judge_rules
@@ -330,7 +332,38 @@ def main():
     try:
         run(args)
     except Exception as e:
-        sys.exit(f"Error: {e}")
+        sys.exit(friendly_error_message(e, f"processing '{args.player}'"))
+
+
+def friendly_error_message(e: Exception, context: str) -> str:
+    """Categorizes an exception into a clear, actionable one-line message instead of raw
+    exception text, by actual type (not string-matching, which breaks silently if a library's
+    wording changes). Shared (2026-09-24) between app.py's error display and both CLI entry-
+    points (this module's own main() and scoutlite_compare.py) so all three surfaces give the
+    same guidance for the same underlying failure, instead of three copies that could drift.
+
+    RuntimeError is deliberately returned as-is, not further categorized: scoutlite.py's own
+    search_player()/get_player_page() already raise clear, complete, user-facing messages for
+    expected situations (no match found, ambiguous name) -- these aren't system failures, so
+    callers should generally present them less alarmingly (a warning, not an error)."""
+    if isinstance(e, RuntimeError):
+        return str(e)
+    if isinstance(e, openai.AuthenticationError):
+        return "DeepSeek rejected the API key -- check DEEPSEEK_API_KEY in .env."
+    if isinstance(e, openai.RateLimitError):
+        return "DeepSeek's rate limit or quota was hit -- wait a bit and try again."
+    if isinstance(e, (openai.APIConnectionError, openai.APITimeoutError)):
+        return "Couldn't reach DeepSeek's API -- check your internet connection and try again."
+    if isinstance(e, openai.OpenAIError):
+        return f"The DeepSeek API request failed while {context}."
+    if isinstance(e, WebDriverException):
+        return (
+            f"FBref's page couldn't be loaded while {context} -- this can happen if FBref is "
+            "rate-limiting or blocking automated access right now. Wait a bit and try again."
+        )
+    if isinstance(e, requests.RequestException):
+        return f"A network request failed while {context} -- check your internet connection and try again."
+    return f"Something went wrong while {context}."
 
 
 def philosophy_from_keys(in_possession: str | None, out_of_possession: str | None) -> dict:

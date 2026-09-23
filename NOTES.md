@@ -1,5 +1,101 @@
 # ScoutLite — Build Notes
 
+## Candidate disambiguation table + reference-club-visible philosophy dropdown (2026-09-24, later still)
+
+Prompted by a real user report with a screenshot: searching "Bruno Fernandes" in the app and
+generating a brief showed "Fit: Completely Different vs. Manchester City" with suspicious
+exact-0/100 percentiles everywhere, and the user (reasonably) asked why a Man United player was
+being compared to Man City at all.
+
+Investigated live rather than assuming either "bug" or "not a bug": ran the CLI's own search
+for "Bruno Fernandes" and found FBref has **11 different real people** with that name --
+several obscure, decades-inactive players alongside the real Manchester United one. Ran the
+correct player directly by URL with the same philosophy and got smooth, sane percentiles
+(69, 94, 43, 50), confirming the "Manchester City" comparison itself was correct (Fit compares
+against the reference club for the chosen *philosophy*, not the player's own club -- working as
+designed) but the exact-0/100 numbers in the screenshot pointed at the wrong candidate having
+been picked from the app's ambiguous-match list, or an unusually thin data sample.
+
+Built two fixes on request:
+
+**1. Candidate selection is now a real table, not a cramped radio list.** The old UI crammed
+name + alt name + nationality + years active + clubs into one long string per radio option --
+with 11 near-identical-looking "Bruno Fernandes" entries, easy to misread which one has
+"Manchester United" in its Clubs field. Replaced with `st.dataframe(..., on_select="rerun",
+selection_mode="single-row")` -- a real sortable table with separate columns, click a row to
+select it, confirm button shows the selected player's name. Verified the exact Streamlit
+selection-state API live (`event.selection.rows`) by reading Streamlit 1.62's own source
+(`elements/arrow.py`) rather than guessing, then confirmed it end-to-end in the browser:
+searched "Bruno Fernandes," saw all 11 candidates in the table, correctly identified and
+selected the row with "Manchester United" in Clubs, and it resolved to the right FBref URL.
+
+**2. The two separate philosophy dropdowns became one, naming the reference club up front.**
+Previously "club philosophy -- in possession" and "-- out of possession" were independent
+selectboxes; you only discovered which real club Fit was comparing against after generating the
+whole brief. Merged into a single dropdown built directly from `scoring.REFERENCE_CLUBS` (not a
+hardcoded parallel list, so it can't drift out of sync with what `compute_fit_signal()` actually
+uses) -- e.g. "Slow, methodical possession + High line, counter-press — compared to Manchester
+City" is now one selectable option, all 6 combinations plus "Not specified" spelled out the same
+way. Verified live: selected that exact option, generated a real brief, confirmed the Fit
+signal correctly used Manchester City throughout.
+
+Both required no changes to `scoring.py`/`scoutlite_combined.py`'s actual signal logic --
+purely presentation. 210 tests still passing (no test changes needed; `app.py` has no unit
+coverage by design, verified live in the browser as with every other change to this file).
+
+## Three more error-handling gaps, fixed one by one (2026-09-24)
+
+Follow-on from the app.py error-handling review below: asked "anything else I should be aware
+of," traced the rest of the pipeline (not just app.py) for the same class of issue, found three
+real gaps, fixed all three on request.
+
+**1. `scoring.py`'s core population fetches had zero protection against a live failure.** Four
+call sites (`sd.FBref(...).read_player_season_stats(...)` in both the goalkeeper and
+misc/defense branches of `compute_quality_signal` and `compute_fit_signal`) had no try/except
+at all -- a network blip or FBref rate-limiting mid-pull would crash the entire signal, and by
+extension the entire brief, instead of degrading to "signal not available" the way every OTHER
+"can't compute this" path in the same functions already does. New
+`_safe_read_player_season_stats()` wraps the fetch, returns `None` on failure (this module's
+existing "not available" convention) instead of raising, and always `warnings.warn()`s so the
+failure is visible rather than silently indistinguishable from "league not covered." All 4 call
+sites updated. `understat_xg.py` already did this correctly (narrow `except
+(RequestException, ValueError)`, wrapped in a clear `UnderstatUnavailable`) -- this brings
+FBref's population fetch in line with it. New tests confirm `compute_quality_signal`/
+`compute_fit_signal` return `None` (not raise) when the fetch fails, with a warning issued.
+One existing test's `_DummyFBrefReader` mock had to change (it returned `None` as its own
+placeholder "I don't care about this" value, which collided with the new function's real
+failure sentinel) -- fixed to return an opaque non-`None` object instead.
+
+**2. `judge_llm.py`'s fact-checker failed completely silently.** Its `except Exception: return
+{"findings": [], "has_major": False}` had zero visibility -- a real bug in this code (not just
+an API hiccup) would produce the exact same "nothing to flag" result as a genuinely clean pass,
+so a broken fact-checker and a working one were indistinguishable from the outside. Added
+`warnings.warn()` with the actual exception before returning, same pattern as fix 1. New
+`tests/test_judge_llm.py` (this module had no test coverage at all before) confirms the warning
+fires on both an API-level failure and a malformed-JSON response, and that the fail-soft
+contract (empty findings, not a raised exception) is unchanged either way.
+
+**3. Both CLI entrypoints still dumped raw exception text**, the exact thing just fixed in
+app.py three days ago but never extended to the CLI. Extracted the categorization logic out of
+app.py's `_show_error()` into a new shared `friendly_error_message(e, context)` in
+`scoutlite_combined.py` -- app.py, `scoutlite_combined.py`'s own `main()`, and
+`scoutlite_compare.py` (both its per-candidate skip and its top-level handler) all call the
+same function now, instead of three copies that could drift. `app.py`'s `openai`/
+`WebDriverException` imports became unused once the categorization logic moved out and were
+removed. New `tests/test_friendly_error_message.py` covers every category (RuntimeError,
+`openai.AuthenticationError`/`RateLimitError`/`APIConnectionError`/generic `OpenAIError`,
+`WebDriverException`, `requests.RequestException`, and the generic fallback). Live-verified via
+the actual CLI: searching a nonexistent name now prints a clean "No FBref match found for 'X'"
+with no "Error:" prefix clutter, and a real successful brief generation still works end to end
+through all three fixes combined.
+
+Also fixed in passing: `scoutlite_combined.py`'s own module docstring still listed
+`fetch_player_page_html` among the functions it reuses from `scoutlite.py` -- that function was
+deleted from `scoutlite.py` in the Red-tier crash fix days ago; the docstring just never got
+updated. Corrected to the real function names (`search_player`, `get_player_page`).
+
+210 tests passing (up from 202 before this entry).
+
 ## Streamlit app: first-open splash + categorized error handling (2026-09-23)
 
 Requested directly: "bake in error handling for the user" and "a loading screen for the UI
