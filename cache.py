@@ -21,9 +21,11 @@ Freshness policy differs by what's being cached:
     aren't tied to a specific season at all, so the historical/current distinction that matters
     for player_pages doesn't apply the same way here.
 """
+import functools
 import json
 import sqlite3
 import time
+import warnings
 from pathlib import Path
 
 DB_PATH = Path(__file__).resolve().parent / "scoutlite_cache.db"
@@ -91,8 +93,32 @@ def is_stale(fetched_at: float, ttl_hours: float) -> bool:
     return (time.time() - fetched_at) > ttl_hours * 3600
 
 
+def _fail_soft_on_db_error(fn):
+    """Any cache read/write failure (disk full, permissions, a corrupted DB file, a lock WAL
+    can't resolve) degrades to `None` instead of crashing the whole pipeline over what's
+    supposed to be a pure performance optimization, never load-bearing for correctness (found
+    in a follow-up error-handling review, 2026-09-25 -- this file had zero error handling at
+    all before). `None` is already every get_cached_*() function's own "not cached" return
+    value, so callers need no changes to already treat a DB failure the same as a cache miss
+    and fetch live; set_cached_*() callers never check the return value at all, so `None` there
+    just means "didn't persist this time." Always visible via warnings.warn(), never silent."""
+    @functools.wraps(fn)
+    def wrapper(*args, **kwargs):
+        try:
+            return fn(*args, **kwargs)
+        except Exception as e:
+            warnings.warn(
+                f"cache.{fn.__name__}() failed ({type(e).__name__}: {e}) -- continuing without "
+                "the cache for this call.",
+                RuntimeWarning, stacklevel=2,
+            )
+            return None
+    return wrapper
+
+
 # --- player_pages -------------------------------------------------------------------------
 
+@_fail_soft_on_db_error
 def get_cached_player_page(url: str) -> tuple[str, float] | None:
     row = get_conn().execute(
         "SELECT html, fetched_at FROM player_pages WHERE url = ?", (url,)
@@ -100,6 +126,7 @@ def get_cached_player_page(url: str) -> tuple[str, float] | None:
     return tuple(row) if row else None
 
 
+@_fail_soft_on_db_error
 def set_cached_player_page(url: str, html: str):
     conn = get_conn()
     conn.execute(
@@ -111,6 +138,7 @@ def set_cached_player_page(url: str, html: str):
 
 # --- understat_populations ------------------------------------------------------------------
 
+@_fail_soft_on_db_error
 def get_cached_understat_population(cache_key: str) -> tuple[list, float] | None:
     row = get_conn().execute(
         "SELECT json_blob, fetched_at FROM understat_populations WHERE cache_key = ?", (cache_key,)
@@ -120,6 +148,7 @@ def get_cached_understat_population(cache_key: str) -> tuple[list, float] | None
     return json.loads(row[0]), row[1]
 
 
+@_fail_soft_on_db_error
 def set_cached_understat_population(cache_key: str, players: list):
     conn = get_conn()
     conn.execute(
@@ -131,6 +160,7 @@ def set_cached_understat_population(cache_key: str, players: list):
 
 # --- search_results -----------------------------------------------------------------------
 
+@_fail_soft_on_db_error
 def get_cached_search(query_key: str) -> tuple[list, float] | None:
     row = get_conn().execute(
         "SELECT candidates_json, fetched_at FROM search_results WHERE query_key = ?", (query_key,)
@@ -140,6 +170,7 @@ def get_cached_search(query_key: str) -> tuple[list, float] | None:
     return json.loads(row[0]), row[1]
 
 
+@_fail_soft_on_db_error
 def set_cached_search(query_key: str, candidates: list):
     conn = get_conn()
     conn.execute(
@@ -151,6 +182,7 @@ def set_cached_search(query_key: str, candidates: list):
 
 # --- news_articles --------------------------------------------------------------------------
 
+@_fail_soft_on_db_error
 def get_cached_news(cache_key: str) -> tuple[list, float] | None:
     row = get_conn().execute(
         "SELECT articles_json, fetched_at FROM news_articles WHERE cache_key = ?", (cache_key,)
@@ -160,6 +192,7 @@ def get_cached_news(cache_key: str) -> tuple[list, float] | None:
     return json.loads(row[0]), row[1]
 
 
+@_fail_soft_on_db_error
 def set_cached_news(cache_key: str, articles: list):
     conn = get_conn()
     conn.execute(

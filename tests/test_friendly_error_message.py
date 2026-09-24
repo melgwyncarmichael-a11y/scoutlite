@@ -38,6 +38,14 @@ def test_api_connection_error_gives_network_guidance():
     assert "DeepSeek" in msg and "internet connection" in msg
 
 
+def test_internal_server_error_says_deepseeks_side_not_the_users(monkeypatch):
+    fake_response = _FakeResponse()
+    fake_response.status_code = 503
+    e = openai.InternalServerError("service unavailable", response=fake_response, body=None)
+    msg = sc.friendly_error_message(e, "generating the brief")
+    assert "DeepSeek" in msg and "servers" in msg
+
+
 def test_generic_openai_error_mentions_context():
     e = openai.OpenAIError("something else")
     msg = sc.friendly_error_message(e, "generating the brief")

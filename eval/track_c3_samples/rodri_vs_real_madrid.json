@@ -1,0 +1,51 @@
+{
+  "slug": "rodri_vs_real_madrid",
+  "player": "Rodri",
+  "fbref_url": "https://fbref.com/en/players/6434f10d/Rodri",
+  "season": "2023-2024",
+  "squad": "Manchester City",
+  "competition": "1. Premier League",
+  "expected_position_group": "midfield",
+  "actual_position_group": "midfield",
+  "fame_tier": "known",
+  "note": "Man City's deep-lying possession pivot tested against Real Madrid's more transition-heavy vertical/mid-block midfield demands.",
+  "in_possession": "vertical",
+  "out_of_possession": "mid_block",
+  "quality": {
+    "score": 4,
+    "label": "Strong Starter",
+    "position_group": "midfield",
+    "components": {
+      "key_passes_per90": 70.14925373134328,
+      "xA_per90": 61.691542288557216,
+      "defensive_actions_per90": 88.06818181818181
+    },
+    "raw_components": {
+      "key_passes_per90": 70.14925373134328,
+      "xA_per90": 61.691542288557216,
+      "defensive_actions_per90": 57.38636363636363
+    },
+    "avg_percentile": 73.3,
+    "raw_avg_percentile": 63.1,
+    "raw_label": "Strong Starter",
+    "explanation": "Evaluated as a midfielder: key passes and xA per 90 (creativity) plus interceptions + tackles won per 90 (defensive work), ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality.",
+    "specialist_caveat": null
+  },
+  "fit_signal": {
+    "reference_club": "Real Madrid",
+    "position_group": "midfield",
+    "target_components": {
+      "key_passes_per90": 70.14925373134328,
+      "xA_per90": 61.691542288557216,
+      "defensive_actions_per90": 88.06818181818181
+    },
+    "reference_components": {
+      "key_passes_per90": 74.0,
+      "xA_per90": 74.2,
+      "defensive_actions_per90": 67.2
+    },
+    "avg_abs_diff": 12.4,
+    "label": "Hand-in-Glove Fit"
+  },
+  "actual_label": "Hand-in-Glove Fit"
+}

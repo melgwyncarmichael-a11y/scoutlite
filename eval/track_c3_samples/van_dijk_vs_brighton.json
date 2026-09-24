@@ -1,0 +1,43 @@
+{
+  "slug": "van_dijk_vs_brighton",
+  "player": "Virgil van Dijk",
+  "fbref_url": "https://fbref.com/en/players/e06683ca/Virgil-van-Dijk",
+  "season": "2023-2024",
+  "squad": "Liverpool",
+  "competition": "1. Premier League",
+  "expected_position_group": "defense",
+  "actual_position_group": "defense",
+  "fame_tier": "known",
+  "note": "Liverpool's high-line possession CB tested against Brighton's more compact, low-block possession style.",
+  "in_possession": "possession",
+  "out_of_possession": "low_block",
+  "quality": {
+    "score": 3,
+    "label": "Solid Starter",
+    "position_group": "defense",
+    "components": {
+      "defensive_actions_per90": 51.04895104895105
+    },
+    "raw_components": {
+      "defensive_actions_per90": 21.678321678321677
+    },
+    "avg_percentile": 51.0,
+    "raw_avg_percentile": 21.7,
+    "raw_label": "Depth Option",
+    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality.",
+    "specialist_caveat": null
+  },
+  "fit_signal": {
+    "reference_club": "Brighton",
+    "position_group": "defense",
+    "target_components": {
+      "defensive_actions_per90": 51.04895104895105
+    },
+    "reference_components": {
+      "defensive_actions_per90": 73.3
+    },
+    "avg_abs_diff": 22.3,
+    "label": "Somewhat Fits"
+  },
+  "actual_label": "Somewhat Fits"
+}

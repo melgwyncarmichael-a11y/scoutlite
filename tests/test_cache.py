@@ -1,4 +1,5 @@
 """Cache TTL logic + roundtrips. Uses a temp DB file, no network."""
+import sqlite3
 import time
 
 import pytest
@@ -75,3 +76,52 @@ def test_news_replace_updates_timestamp():
     articles, new_ts = cache.get_cached_news("k")
     assert articles == [{"title": "new"}]
     assert new_ts > old_ts
+
+
+# --- fail-soft on DB errors (2026-09-25) --------------------------------------------------
+# Before this, cache.py had zero error handling at all -- a disk-full, permissions, or
+# corrupted-DB situation would crash the entire pipeline over what's supposed to be a pure
+# performance optimization, never load-bearing for correctness.
+
+def test_get_functions_return_none_and_warn_on_db_error(monkeypatch):
+    def _broken_get_conn():
+        raise sqlite3.OperationalError("disk I/O error")
+
+    monkeypatch.setattr(cache, "get_conn", _broken_get_conn)
+    for fn, args in [
+        (cache.get_cached_player_page, ("http://x",)),
+        (cache.get_cached_understat_population, ("EPL:2025",)),
+        (cache.get_cached_search, ("danny ward",)),
+        (cache.get_cached_news, ("haaland::15",)),
+    ]:
+        with pytest.warns(RuntimeWarning, match="failed"):
+            assert fn(*args) is None  # degrades to "not cached", does not raise
+
+
+def test_set_functions_do_not_raise_and_warn_on_db_error(monkeypatch):
+    def _broken_get_conn():
+        raise sqlite3.OperationalError("disk I/O error")
+
+    monkeypatch.setattr(cache, "get_conn", _broken_get_conn)
+    for fn, args in [
+        (cache.set_cached_player_page, ("http://x", "<html></html>")),
+        (cache.set_cached_understat_population, ("EPL:2025", [{"a": 1}])),
+        (cache.set_cached_search, ("danny ward", [{"name": "Danny Ward"}])),
+        (cache.set_cached_news, ("haaland::15", [{"title": "x"}])),
+    ]:
+        with pytest.warns(RuntimeWarning, match="failed"):
+            fn(*args)  # must not raise -- caching is optional, never load-bearing
+
+
+def test_db_error_does_not_poison_later_successful_calls(monkeypatch):
+    # A transient failure (temporary disk-full, a momentary lock) shouldn't permanently break
+    # the cache for the rest of the process -- the next call should just work normally again.
+    real_get_conn = cache.get_conn
+    monkeypatch.setattr(cache, "get_conn", lambda: (_ for _ in ()).throw(sqlite3.OperationalError("locked")))
+    with pytest.warns(RuntimeWarning):
+        assert cache.get_cached_search("danny ward") is None
+
+    monkeypatch.setattr(cache, "get_conn", real_get_conn)
+    cache.set_cached_search("danny ward", [{"name": "Danny Ward"}])
+    cands, _ = cache.get_cached_search("danny ward")
+    assert cands[0]["name"] == "Danny Ward"

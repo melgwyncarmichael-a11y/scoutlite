@@ -1,0 +1,55 @@
+{
+  "slug": "haaland_vs_dortmund",
+  "player": "Erling Haaland",
+  "fbref_url": "https://fbref.com/en/players/1f44ac21/Erling-Haaland",
+  "season": "2023-2024",
+  "squad": "Manchester City",
+  "competition": "1. Premier League",
+  "expected_position_group": "attack",
+  "actual_position_group": "attack",
+  "fame_tier": "known",
+  "note": "Man City's striker tested against his actual former club's philosophy -- deliberately fresh territory (only ever tested against Man City itself before).",
+  "in_possession": "vertical",
+  "out_of_possession": "high_line",
+  "quality": {
+    "score": 4,
+    "label": "Strong Starter",
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 100.0,
+      "assists_per90": 56.074766355140184,
+      "xG_per90": 99.06542056074767,
+      "xA_per90": 53.271028037383175
+    },
+    "raw_components": {
+      "goals_per90": 100.0,
+      "assists_per90": 56.074766355140184,
+      "xG_per90": 99.06542056074767,
+      "xA_per90": 53.271028037383175
+    },
+    "avg_percentile": 77.1,
+    "raw_avg_percentile": 77.1,
+    "raw_label": "Strong Starter",
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against Premier League players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality.",
+    "specialist_caveat": "This player's individual metrics vary widely (a 47-percentile-point spread) -- the composite score above may understate whichever specific trait they're actually best known for."
+  },
+  "fit_signal": {
+    "reference_club": "Borussia Dortmund",
+    "position_group": "attack",
+    "target_components": {
+      "xG_per90": 99.06542056074767,
+      "goals_per90": 100.0,
+      "assists_per90": 56.074766355140184,
+      "xA_per90": 53.271028037383175
+    },
+    "reference_components": {
+      "xG_per90": 49.3,
+      "goals_per90": 56.6,
+      "assists_per90": 56.6,
+      "xA_per90": 69.9
+    },
+    "avg_abs_diff": 27.6,
+    "label": "Somewhat Fits"
+  },
+  "actual_label": "Somewhat Fits"
+}

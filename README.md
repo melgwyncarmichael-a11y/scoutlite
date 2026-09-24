@@ -169,4 +169,6 @@ does the Quality signal mean what it claims, does the LLM hallucinate or hype, i
 signal consistent — with the real numbers, bugs the eval process found and fixed, and what
 would actually move each result further (full detail and raw data under `eval/`). See
 **[`CHANGELOG.md`](CHANGELOG.md)** for a practical, non-technical summary of what changed and
-what you'll actually notice in a generated brief, release by release.
+what you'll actually notice in a generated brief, release by release. See
+**[`FIT_SIGNAL_REFERENCE.md`](FIT_SIGNAL_REFERENCE.md)** for a quick-lookup of what each Fit
+label means, which cutoff is actually eval-validated, and the 6 reference clubs.

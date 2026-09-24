@@ -1,0 +1,55 @@
+{
+  "slug": "kean_vs_real_madrid",
+  "player": "Moise Kean",
+  "fbref_url": "https://fbref.com/en/players/3d50bcdb/Moise-Kean",
+  "season": "2023-2024",
+  "squad": "Juventus",
+  "competition": "1. Serie A",
+  "expected_position_group": "attack",
+  "actual_position_group": "attack",
+  "fame_tier": "unknown",
+  "note": "Fiorentina's direct, in-behind striker tested against Real Madrid's vertical/mid-block transition demands.",
+  "in_possession": "vertical",
+  "out_of_possession": "mid_block",
+  "quality": {
+    "score": 2,
+    "label": "Depth Option",
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 6.349206349206349,
+      "assists_per90": 20.634920634920636,
+      "xG_per90": 73.01587301587301,
+      "xA_per90": 21.428571428571427
+    },
+    "raw_components": {
+      "goals_per90": 6.349206349206349,
+      "assists_per90": 20.634920634920636,
+      "xG_per90": 73.01587301587301,
+      "xA_per90": 21.428571428571427
+    },
+    "avg_percentile": 30.4,
+    "raw_avg_percentile": 30.4,
+    "raw_label": "Depth Option",
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against Serie A players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality.",
+    "specialist_caveat": "This player's individual metrics vary widely (a 67-percentile-point spread) -- the composite score above may understate whichever specific trait they're actually best known for."
+  },
+  "fit_signal": {
+    "reference_club": "Real Madrid",
+    "position_group": "attack",
+    "target_components": {
+      "xG_per90": 73.01587301587301,
+      "goals_per90": 6.349206349206349,
+      "assists_per90": 20.634920634920636,
+      "xA_per90": 21.428571428571427
+    },
+    "reference_components": {
+      "xG_per90": 84.8,
+      "goals_per90": 87.1,
+      "assists_per90": 78.6,
+      "xA_per90": 72.7
+    },
+    "avg_abs_diff": 50.5,
+    "label": "Completely Different"
+  },
+  "actual_label": "Completely Different"
+}

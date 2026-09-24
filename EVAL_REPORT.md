@@ -185,6 +185,45 @@ further from its expected label, the predicted tradeoff of a defense-group case 
 same 16-17 band the fix was raised to catch. Defense's own volatility (Finding 1) was
 deliberately left untouched, since it needs a second metric, not a different cutoff.
 
+**Track C3 — Fit validation against blind human judgment, 2026-09-25 (full report:
+`eval/TRACK_C3_REPORT.md`).** Track C2's own "expected" labels were decided by construction, not
+independently judged — reasoned out by the same person who built the tool, which is weaker
+evidence than it looked. Track C3 used a genuinely blind labeler instead: 10 new cases (3
+defenders, 3 midfielders, 3 attackers, 1 goalkeeper; 5 relatively famous / 5 relatively unknown;
+spanning 4 of the 5 top-5 leagues), each judged from real football knowledge before ever seeing
+the tool's output.
+
+**Result: 4/10 matched — worse than Track C2's already-imperfect 4/9 — 3/5 on relatively
+unknown players, 1/5 on known ones.** Unlike C2, this isn't six unrelated disagreements: pulling
+the raw component breakdown behind every mismatch shows the same root cause every time. The
+metric measures whether a player's *statistical output rate* matches a squad's average; a
+blind labeler's "fit" judgment draws on *playing style and role* (pressing intensity, passing
+tempo, defensive engagement type) no ScoutLite metric can see. The clearest instance: Haaland
+vs. Dortmund reproduces the exact mechanism C2 already found with Haaland vs. Man City — an
+elite scorer shows a real percentile gap from *any* realistic squad average, including his own
+former club's, because the metric can't separate "elite output volume" from "fits the system's
+role." Kean vs. Real Madrid (the single biggest gap, 50.5) traced to one thin statistical
+season, not a reflection of the player generally. **Deliberately not proposing a threshold
+change from this** — retuning 20/35 wouldn't touch what caused the mismatches, since the gap is
+about what the metric can see at all, not where the cutoff sits. `FIT_SCOPE_CAVEAT` already
+discloses the missing pace/pressing data; this is the first concrete evidence that the gap is
+the dominant real source of disagreement, not a theoretical one.
+
+**Worth stating precisely: this does not mean stats-based Fit was the wrong design choice.**
+Fit used to *be* judgment-based — the pre-v3 LLM version — and had the identical blind spot:
+Track C's original eval found it landed on exactly 3/5 in 21 of 21 runs because the LLM,
+honestly, had no pace/pressing data either and refused to guess. Swapping computation method
+over the *same* underlying stats doesn't manufacture data that was never collected — both a
+percentile calculation and an LLM constrained to the same numbers are blind to pace and
+pressing for the same reason. What let the Track C3 labeler see more wasn't judgment over
+calculation; it was drawing on real accumulated knowledge of these specific players, something
+the pre-v3 LLM was deliberately never allowed to do (it was instructed to reason only from the
+data given, the same grounding rule every other part of ScoutLite still enforces to avoid
+hallucination). That's a disclosed, consistent tradeoff — reliability over tacit knowledge no
+source can verify — not an oversight this result exposes. The real fix, if pursued, is sourcing
+actual pace/pressing/positional data, not re-litigating stats vs. judgment over the same
+incomplete inputs. Full reasoning in `eval/TRACK_C3_REPORT.md`.
+
 ---
 
 ## Cross-cutting themes
@@ -219,6 +258,7 @@ than either alone:
 | 4 | Full-sentence labels silently read as false by an exact-match check | Track A/B, real labeling | `score_track_a.py`, `score_track_b.py` |
 | 5 | Free-text `human_label` values not matched to their category | Track B, real labeling | `score_track_b.py` |
 | 6 | Fit explanation fabricated "the scout's own role notes" when none were given | Track C, reworked tooling smoke test (Erling Haaland) | `scoutlite_combined.py`, `judge_rules.py` |
+| 7 | Human-typed labels ("Hand in glove fit") didn't exactly equal the tool's label strings, would have silently scored every case as a mismatch | Track C3, real filled-in blind labels | `eval/score_track_c3.py`'s `normalize_label()` |
 
 ## Recommendations
 

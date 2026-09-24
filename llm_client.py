@@ -16,9 +16,21 @@ from openai import OpenAI
 
 _client: OpenAI | None = None
 
+# The SDK's own default is a 600s read timeout (checked directly, 2026-09-25) -- if DeepSeek
+# ever genuinely hangs rather than erroring, a user would stare at a static spinner for up to
+# 10 minutes before anything happens, even though the error message once it fires is already
+# clear (friendly_error_message's APITimeoutError case). 90s is generous headroom over how long
+# a real synthesis+judge call actually takes (seconds, based on live testing this session) while
+# failing fast enough that a genuine hang surfaces in a reasonable time. The SDK still retries
+# transient errors (timeouts, connection errors, 5xx) twice by default before raising.
+REQUEST_TIMEOUT_SECONDS = 90.0
+
 
 def get_deepseek_client() -> OpenAI:
     global _client
     if _client is None:
-        _client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
+        _client = OpenAI(
+            api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com",
+            timeout=REQUEST_TIMEOUT_SECONDS,
+        )
     return _client

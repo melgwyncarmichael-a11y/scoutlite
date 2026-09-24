@@ -1,0 +1,43 @@
+{
+  "slug": "upamecano_vs_atletico",
+  "player": "Dayot Upamecano",
+  "fbref_url": "https://fbref.com/en/players/d248cd8f/Dayot-Upamecano",
+  "season": "2023-2024",
+  "squad": "Bayern Munich",
+  "competition": "1. Bundesliga",
+  "expected_position_group": "defense",
+  "actual_position_group": "defense",
+  "fame_tier": "known",
+  "note": "Bayern's possession-based CB tested against Atletico Madrid's physical, vertical low-block demands.",
+  "in_possession": "vertical",
+  "out_of_possession": "low_block",
+  "quality": {
+    "score": 3,
+    "label": "Solid Starter",
+    "position_group": "defense",
+    "components": {
+      "defensive_actions_per90": 59.64912280701754
+    },
+    "raw_components": {
+      "defensive_actions_per90": 27.19298245614035
+    },
+    "avg_percentile": 59.6,
+    "raw_avg_percentile": 27.2,
+    "raw_label": "Depth Option",
+    "explanation": "Evaluated as a defender: interceptions + tackles won per 90 minutes, ranked against Bundesliga players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality.",
+    "specialist_caveat": null
+  },
+  "fit_signal": {
+    "reference_club": "Atl\u00e9tico Madrid",
+    "position_group": "defense",
+    "target_components": {
+      "defensive_actions_per90": 59.64912280701754
+    },
+    "reference_components": {
+      "defensive_actions_per90": 50.7
+    },
+    "avg_abs_diff": 8.9,
+    "label": "Hand-in-Glove Fit"
+  },
+  "actual_label": "Hand-in-Glove Fit"
+}

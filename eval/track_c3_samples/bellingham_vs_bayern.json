@@ -1,0 +1,51 @@
+{
+  "slug": "bellingham_vs_bayern",
+  "player": "Jude Bellingham",
+  "fbref_url": "https://fbref.com/en/players/57d88cf9/Jude-Bellingham",
+  "season": "2023-2024",
+  "squad": "Real Madrid",
+  "competition": "1. La Liga",
+  "expected_position_group": "midfield",
+  "actual_position_group": "midfield",
+  "fame_tier": "known",
+  "note": "Real Madrid's box-to-box, high-tempo midfielder tested against Bayern's more patient possession/mid-block demands.",
+  "in_possession": "possession",
+  "out_of_possession": "mid_block",
+  "quality": {
+    "score": 5,
+    "label": "World Class",
+    "position_group": "midfield",
+    "components": {
+      "key_passes_per90": 85.52631578947368,
+      "xA_per90": 84.21052631578948,
+      "defensive_actions_per90": 77.58620689655173
+    },
+    "raw_components": {
+      "key_passes_per90": 85.52631578947368,
+      "xA_per90": 84.21052631578948,
+      "defensive_actions_per90": 59.770114942528735
+    },
+    "avg_percentile": 82.4,
+    "raw_avg_percentile": 76.5,
+    "raw_label": "Strong Starter",
+    "explanation": "Evaluated as a midfielder: key passes and xA per 90 (creativity) plus interceptions + tackles won per 90 (defensive work), ranked against La Liga players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality.",
+    "specialist_caveat": null
+  },
+  "fit_signal": {
+    "reference_club": "Bayern Munich",
+    "position_group": "midfield",
+    "target_components": {
+      "defensive_actions_per90": 77.58620689655173,
+      "key_passes_per90": 85.52631578947368,
+      "xA_per90": 84.21052631578948
+    },
+    "reference_components": {
+      "defensive_actions_per90": 60.4,
+      "key_passes_per90": 75.6,
+      "xA_per90": 81.1
+    },
+    "avg_abs_diff": 10.1,
+    "label": "Hand-in-Glove Fit"
+  },
+  "actual_label": "Hand-in-Glove Fit"
+}

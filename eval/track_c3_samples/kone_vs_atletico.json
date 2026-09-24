@@ -1,0 +1,43 @@
+{
+  "slug": "kone_vs_atletico",
+  "player": "Manu Kone",
+  "fbref_url": "https://fbref.com/en/players/86574238/Manu-Kone",
+  "season": "2023-2024",
+  "squad": "Gladbach",
+  "competition": "1. Bundesliga",
+  "expected_position_group": "midfield",
+  "actual_position_group": "midfield",
+  "fame_tier": "unknown",
+  "note": "Roma's box-to-box midfielder tested against Atletico Madrid's vertical/low-block philosophy.",
+  "in_possession": "vertical",
+  "out_of_possession": "low_block",
+  "quality": {
+    "score": 4,
+    "label": "Strong Starter",
+    "position_group": "midfield",
+    "components": {
+      "defensive_actions_per90": 66.45161290322581
+    },
+    "raw_components": {
+      "defensive_actions_per90": 72.25806451612904
+    },
+    "avg_percentile": 66.5,
+    "raw_avg_percentile": 72.3,
+    "raw_label": "Strong Starter",
+    "explanation": "Evaluated as a midfielder: key passes and xA per 90 (creativity) plus interceptions + tackles won per 90 (defensive work), ranked against Bundesliga players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality.",
+    "specialist_caveat": null
+  },
+  "fit_signal": {
+    "reference_club": "Atl\u00e9tico Madrid",
+    "position_group": "midfield",
+    "target_components": {
+      "defensive_actions_per90": 66.45161290322581
+    },
+    "reference_components": {
+      "defensive_actions_per90": 52.6
+    },
+    "avg_abs_diff": 13.9,
+    "label": "Hand-in-Glove Fit"
+  },
+  "actual_label": "Hand-in-Glove Fit"
+}

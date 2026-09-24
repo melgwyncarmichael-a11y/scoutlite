@@ -1,0 +1,43 @@
+{
+  "slug": "kobel_vs_brighton",
+  "player": "Gregor Kobel",
+  "fbref_url": "https://fbref.com/en/players/cd59b9df/Gregor-Kobel",
+  "season": "2023-2024",
+  "squad": "Dortmund",
+  "competition": "1. Bundesliga",
+  "expected_position_group": "goalkeeper",
+  "actual_position_group": "goalkeeper",
+  "fame_tier": "unknown",
+  "note": "Dortmund's own keeper tested against Brighton's possession/low-block philosophy -- a genuine cross-club test, not a self-reference case.",
+  "in_possession": "possession",
+  "out_of_possession": "low_block",
+  "quality": {
+    "score": 5,
+    "label": "World Class",
+    "position_group": "goalkeeper",
+    "components": {
+      "save_pct": 87.5
+    },
+    "raw_components": {
+      "save_pct": 87.5
+    },
+    "avg_percentile": 87.5,
+    "raw_avg_percentile": 87.5,
+    "raw_label": "World Class",
+    "explanation": "Evaluated as a goalkeeper: save percentage, ranked against Bundesliga players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality.",
+    "specialist_caveat": null
+  },
+  "fit_signal": {
+    "reference_club": "Brighton",
+    "position_group": "goalkeeper",
+    "target_components": {
+      "save_pct": 87.5
+    },
+    "reference_components": {
+      "save_pct": 40.6
+    },
+    "avg_abs_diff": 46.9,
+    "label": "Completely Different"
+  },
+  "actual_label": "Completely Different"
+}

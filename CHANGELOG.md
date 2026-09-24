@@ -5,6 +5,18 @@ the next time you generate a brief — not the full investigation. For the detai
 narrative behind each entry, see `NOTES.md`; for the evaluation findings that drove this round
 of fixes, see `EVAL_REPORT.md`.
 
+## 2026-09-25 — Faster, clearer failures if something goes wrong mid-run
+
+**What changed:** if DeepSeek ever genuinely hangs instead of erroring, the app used to wait up
+to 10 minutes before saying anything — now it gives up after 90 seconds with the same clear
+message it already gave for other DeepSeek problems. A DeepSeek server-side outage (as opposed
+to something wrong with your request) now says so explicitly. And if the local cache database
+ever has a problem (disk space, permissions), the app quietly falls back to fetching live
+instead of crashing the whole brief over it.
+
+**What you'll notice:** if something goes wrong, you'll find out sooner and with a clearer
+explanation, and a cache hiccup won't take down an otherwise-working request.
+
 ## 2026-09-24 — Every data table now shows readable labels
 
 **What changed:** the Background, Season stats, Goalkeeping, Defensive/discipline, and Advanced

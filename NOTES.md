@@ -1,5 +1,138 @@
 # ScoutLite — Build Notes
 
+## Track C3 result: 4/10, but every mismatch traces to one cause -- output volume vs. playing style (2026-09-25, later still)
+
+Blind labels came back (`eval/track_c3_human_labelled.csv`). First real bug: the filled-in text
+("Hand in glove fit", "Somewhat fits", "Completely different") doesn't exactly equal the tool's
+own label strings -- the same class of issue as Track A/B's early full-sentence label-matching
+bug. Added `normalize_label()` (keyword-based: "somewhat" / "completely...different" /
+"hand"+"glove") to `score_track_c3.py`, tested against the exact messy strings actually
+received, before scoring anything for real. Also split raw vs. normalized text in the output so
+a genuinely unrecognized label would be visible, not silently dropped.
+
+**Result: 4/10 matched** (worse than Track C2's already-imperfect 4/9) -- **3/5 on relatively
+unknown players, 1/5 on known ones.** Pulled the raw component breakdown behind all 6
+mismatches before writing anything up, rather than reporting the headline number alone
+(`eval/TRACK_C3_REPORT.md` has the full detail). Every single mismatch turned out to share the
+same root cause: the tool measures whether a player's *statistical output rate* matches a
+squad's average, but a blind labeler's "fit" judgment draws on *playing style and role*
+(pressing intensity, passing tempo, defensive engagement type) that no ScoutLite metric
+measures at all. Concretely:
+- Kean vs. Real Madrid (the single biggest gap, 50.5) came from one thin statistical season
+  (goals_per90 at the 6.3rd percentile that specific year) -- the tool measured the season, the
+  labeler evidently knew the player beyond it.
+- Haaland vs. Dortmund (27.6) reproduces the *exact* mechanism Track C2 already found with
+  Haaland vs. Man City: an elite scorer shows a real gap from any realistic squad average,
+  including his own former club's, because the metric can't separate "elite output volume" from
+  "fits the system's role."
+- The other four mismatches (Guirassy, Rodri, Upamecano, Van Dijk) all show the same shape:
+  counting-stat percentiles land reasonably close, but a labeler who knows the players' actual
+  tactical roles perceives a bigger real gap than raw output-rate similarity shows.
+
+**Deliberately not proposing a threshold change from this.** Unlike Track C2 (a genuine
+miscalibration, fixed by moving one number), this finding is about what the metric can see at
+all, not where the cutoff sits -- retuning 20/35 wouldn't touch the actual cause. Recommended
+next step (not yet built): a second blind labeler on the same 10 cases, to check this isn't one
+person's particular reading.
+
+## Track C3 tooling built: Fit validation against blind human judgment, not self-graded cases (2026-09-25, later still)
+
+Track C2 checked the 15/35 thresholds against 9 cases, but the "expected" label for each was
+decided by construction (self-reference should read Hand-in-Glove, mismatch should read
+Completely Different) -- reasoned out by the same person who built the tool. Discussed with the
+project owner whether that counts as real evidence; agreed it's weaker than it looked, and
+planned a successor round (Track C3) using genuinely independent, blind human labeling instead
+-- someone judges each case from their own football knowledge, before ever seeing the tool's
+output, per "don't grade your own homework."
+
+**Tooling built, following Track B's already-proven three-stage shape** (capture -> build a
+labeling sheet -> a human fills it in blind -> score) rather than inventing a new pattern:
+- `eval/track_c3_capture.py` -- same deterministic capture as `track_c2_capture.py` (no LLM),
+  but records no `expected_label` at all; the tool's own computed label is saved but never
+  printed anywhere a labeler would see it before judging.
+- `eval/build_track_c3_labeling_sheet.py` -- produces `eval/track_c3_labels.csv` with only
+  neutral context (player, real club, competition, position group, fame tier, the reference
+  club's real name, and the philosophy in plain English) -- deliberately no tool label, no
+  `avg_abs_diff`, nothing that could bias a blind judgment. Two separate fill-in columns:
+  `hand_label` (the real, blind evidence) and `your_guess` (an optional informal second opinion,
+  explicitly documented as not independent evidence on its own, since whoever's guessing already
+  knows how the tool works).
+- `eval/score_track_c3.py` -- joins captures against filled-in blind labels, reports the honest
+  match rate, and -- per the agreed plan -- flags every case whose `avg_abs_diff` sits within 3
+  points of either cutoff (20, tuned by Track C2; 35, still never validated), since a boundary
+  case is more informative than one sitting confidently mid-range regardless of match/mismatch.
+
+**10 cases, agreed with the project owner across several rounds of back-and-forth:** 3
+defenders, 3 midfielders, 3 attackers, 1 goalkeeper; 5 relatively famous / 5 relatively unknown;
+rotated across all 6 `REFERENCE_CLUBS` entries. First draft was almost entirely Premier League
+(8/10) -- flagged and rebalanced on request to 3 Premier League / 3 Bundesliga / 3 Serie A / 1
+La Liga, spanning 4 of the 5 top-5 leagues instead of concentrating on one.
+
+**Live-captured all 10, found two things only running it for real surfaced:**
+1. "Rodri" alone matches **100** unrelated, mostly retired lower-league Spanish players on
+   FBref and never surfaces the actual Manchester City Rodri within that cap -- his full legal
+   name (Rodrigo Hernández Cascante) does. Pinned his exact URL
+   (`fbref.com/en/players/6434f10d/Rodri`) rather than relying on the plain name.
+2. Two cases' real 2023-2024 clubs (this eval's standard season, for consistency with every
+   other track) predate transfers I assumed already happened: Guirassy was at Stuttgart, not
+   Dortmund yet; Koné was at Gladbach, not Roma yet. Both still Bundesliga, so the league-
+   diversity goal holds regardless -- corrected the case notes to say so rather than leave a
+   description that no longer matched what the tool actually resolved.
+
+Built `build_track_c3_labeling_sheet.py` and confirmed the resulting CSV contains zero tool
+output -- spot-checked the raw file directly. Ran `score_track_c3.py` against the still-blank
+sheet to confirm it degrades correctly (reports "10 not yet labeled," not an error) rather than
+assuming that path works. One thing already visible before any human has labeled anything:
+`score_track_c3.py`'s boundary check already flags `bastoni_vs_dortmund` (22.9) and
+`van_dijk_vs_brighton` (22.3) as sitting close to the tuned 20-cutoff -- worth the blind
+labeler's particular attention once labeling starts, though the actual match/mismatch verdict
+still depends entirely on their independent judgment, not this observation.
+
+232 tests passing (11 new: `_boundary_note`/`join_records`/`summarize` pure-logic coverage).
+
+## Three planned error-handling gaps: timeouts, server errors, cache failures (2026-09-25)
+
+Asked directly for a plan covering "if it doesn't run, server error, timeout, or others,"
+before building anything. Investigated each concretely rather than guessing at what might be
+wrong, then built all three once the plan was approved:
+
+**1. DeepSeek's default request timeout was 10 minutes.** Checked the installed `openai`
+package directly: `Timeout(connect=5.0, read=600, write=600, pool=600)` is the SDK's own
+default when no `timeout=` is passed. A genuine hang (not an error, just DeepSeek never
+responding) would leave a user staring at "Calling DeepSeek-V3..." for up to 10 minutes before
+anything surfaced -- the eventual error message was already correct
+(`friendly_error_message`'s `APITimeoutError` case), it just took far too long to fire. Set an
+explicit `REQUEST_TIMEOUT_SECONDS = 90.0` on the shared client in `llm_client.py` -- generous
+headroom over how long a real call actually takes (seconds, per this session's own live
+testing) while failing fast enough to be noticed. The SDK's default `max_retries=2` for
+transient errors (timeouts, connection errors, 5xx) already applies underneath this, unchanged.
+
+**2. DeepSeek 5xx errors weren't distinguished from other API failures.** They fell into the
+generic "the DeepSeek API request failed" bucket alongside genuinely different problems.
+`openai.InternalServerError` (confirmed via its actual class hierarchy --
+`InternalServerError -> APIStatusError -> APIError -> OpenAIError`) is now its own case in
+`friendly_error_message()`, ahead of the generic `OpenAIError` fallback: "DeepSeek's servers
+are having an issue right now -- not something wrong with your request."
+
+**3. `cache.py` had zero error handling anywhere.** Confirmed directly (grepped the file for
+`try`/`except` -- nothing). A disk-full, permissions, or corrupted-DB situation would have
+crashed the entire pipeline over what's supposed to be a pure performance optimization, never
+load-bearing for correctness. New `_fail_soft_on_db_error` decorator wraps all 8 public
+functions (4 `get_cached_*`, 4 `set_cached_*`): on any exception, warns visibly
+(`warnings.warn`, same pattern as `scoring.py`'s and `judge_llm.py`'s earlier fixes) and
+returns `None` -- which is already every `get_cached_*()`'s own "not cached" value, so callers
+need zero changes to treat a DB failure exactly like a cache miss and fetch live instead.
+Confirmed a transient failure doesn't poison later calls -- the next call after a simulated DB
+error just works normally again, since `get_conn()`'s lazy-reconnect logic isn't disturbed by
+the decorator catching the failure one level up.
+
+221 tests passing (11 new: 2 for the client timeout, 1 for the new `InternalServerError`
+category, 3 for `_fail_soft_on_db_error`'s get/set/no-poisoning behavior, plus coverage
+overlap). Live-verified the full pipeline still works end to end through all three changes at
+once (a real CLI run against Erling Haaland, cache hits, DeepSeek calls, judge loop, saved
+brief) -- confirming the new 90s timeout doesn't interfere with an actual working call, only a
+stuck one.
+
 ## Unclear-labels audit: raw dict keys in the app, a pre-existing mangling bug in the docx (2026-09-24, later still)
 
 Asked directly to check the Streamlit app for unclear labels. Read through every user-facing

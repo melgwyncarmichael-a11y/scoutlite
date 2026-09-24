@@ -1,0 +1,55 @@
+{
+  "slug": "guirassy_vs_man_city",
+  "player": "Serhou Guirassy",
+  "fbref_url": "https://fbref.com/en/players/923f4dda/Serhou-Guirassy",
+  "season": "2023-2024",
+  "squad": "Stuttgart",
+  "competition": "1. Bundesliga",
+  "expected_position_group": "attack",
+  "actual_position_group": "attack",
+  "fame_tier": "unknown",
+  "note": "Dortmund's own striker tested against Manchester City's possession/high-line philosophy -- a genuine cross-club test, not a self-reference case.",
+  "in_possession": "possession",
+  "out_of_possession": "high_line",
+  "quality": {
+    "score": 5,
+    "label": "World Class",
+    "position_group": "attack",
+    "components": {
+      "goals_per90": 98.9795918367347,
+      "assists_per90": 40.816326530612244,
+      "xG_per90": 96.93877551020408,
+      "xA_per90": 92.85714285714286
+    },
+    "raw_components": {
+      "goals_per90": 98.9795918367347,
+      "assists_per90": 40.816326530612244,
+      "xG_per90": 96.93877551020408,
+      "xA_per90": 92.85714285714286
+    },
+    "avg_percentile": 82.4,
+    "raw_avg_percentile": 82.4,
+    "raw_label": "World Class",
+    "explanation": "Evaluated as an attacker: goals, assists, xG and xA per 90 minutes, ranked against Bundesliga players in the same position group with 450+ minutes this season. Doesn't account for team style or opposition quality -- a low score can reflect a team's system as much as individual quality.",
+    "specialist_caveat": "This player's individual metrics vary widely (a 58-percentile-point spread) -- the composite score above may understate whichever specific trait they're actually best known for."
+  },
+  "fit_signal": {
+    "reference_club": "Manchester City",
+    "position_group": "attack",
+    "target_components": {
+      "xG_per90": 96.93877551020408,
+      "goals_per90": 98.9795918367347,
+      "assists_per90": 40.816326530612244,
+      "xA_per90": 92.85714285714286
+    },
+    "reference_components": {
+      "xG_per90": 76.0,
+      "goals_per90": 81.9,
+      "assists_per90": 70.1,
+      "xA_per90": 66.4
+    },
+    "avg_abs_diff": 23.4,
+    "label": "Somewhat Fits"
+  },
+  "actual_label": "Somewhat Fits"
+}

@@ -354,6 +354,11 @@ def friendly_error_message(e: Exception, context: str) -> str:
         return "DeepSeek's rate limit or quota was hit -- wait a bit and try again."
     if isinstance(e, (openai.APIConnectionError, openai.APITimeoutError)):
         return "Couldn't reach DeepSeek's API -- check your internet connection and try again."
+    if isinstance(e, openai.InternalServerError):
+        # Distinguished from the generic OpenAIError fallback below (2026-09-25): a 5xx means
+        # DeepSeek's own servers are having an issue, not anything wrong with the request --
+        # worth telling the user that explicitly rather than leaving them wondering what to fix.
+        return "DeepSeek's servers are having an issue right now -- not something wrong with your request. Try again shortly."
     if isinstance(e, openai.OpenAIError):
         return f"The DeepSeek API request failed while {context}."
     if isinstance(e, WebDriverException):
