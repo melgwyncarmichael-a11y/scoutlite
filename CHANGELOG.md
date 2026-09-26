@@ -5,6 +5,16 @@ the next time you generate a brief — not the full investigation. For the detai
 narrative behind each entry, see `NOTES.md`; for the evaluation findings that drove this round
 of fixes, see `EVAL_REPORT.md`.
 
+## 2026-09-26 — Two real bugs, found by actually using the app
+
+**What changed:** picking a player from the candidate table now behaves correctly every time,
+even right after a previous search — before, a stale selection from an earlier search could
+silently carry over into a brand-new one (in one reproduced case, confirming would have picked
+the wrong player entirely with no warning) or, in a worse case, crash the app outright.
+Separately, downloading the generated brief no longer makes the whole report disappear from the
+screen — before, clicking the download button cleared the report immediately after, and getting
+it back required generating the whole brief again from scratch.
+
 ## 2026-09-25 — Faster, clearer failures if something goes wrong mid-run
 
 **What changed:** if DeepSeek ever genuinely hangs instead of erroring, the app used to wait up

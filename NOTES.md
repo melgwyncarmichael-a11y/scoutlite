@@ -1,5 +1,46 @@
 # ScoutLite — Build Notes
 
+## Two real bugs found by live UI testing, not code review (2026-09-26)
+
+Asked directly "are there any error-handling / UI-testing gaps we've missed" -- answered by
+actually driving the running app in a browser rather than re-reading the code, and found two
+real, reproducible bugs neither prior review pass had caught:
+
+1. **Candidate-table selection wasn't reset between searches.** `st.dataframe(..., key=
+   "candidate_table")`'s selection persisted across a brand-new search because only
+   `player_data`/`search_candidates` were cleared on a new search, not the table's own widget
+   state. Reproduced live: selected row 3 of an 11-match "Bruno Fernandes" search, then searched
+   "Rodri" (100 matches) -- the app silently auto-selected row 3 of the *new* list ("Jay
+   Rodriguez") and showed "Confirm: Jay Rodriguez" with zero user action. Selecting a later row
+   in that list, then searching "Piqué" (13 matches, fewer than the stale index), crashed
+   outright with `IndexError: list index out of range` at the `st.button(f"Confirm:
+   {candidates[chosen_idx]['name']}"...)` line -- a full traceback shown to the user. Fixed by
+   giving the dataframe a fresh key each time a new ambiguous search runs
+   (`f"candidate_table_{st.session_state.search_seq}"`, bumped on every new multi-candidate
+   search), so Streamlit can't carry a stale selection into a differently-sized result set.
+   Reproduced the exact same sequence again after the fix -- no stale selection, no crash.
+2. **Downloading the brief made the whole report disappear.** The entire report -- Signals,
+   stat tables, news, synthesis, and the download button itself -- was rendered inline inside
+   `if generate:`. `st.button()` (including `st.download_button()`) only returns `True` on the
+   one script run right after it's clicked; clicking Download triggers its own rerun, on which
+   `generate` is `False` again, so the whole block (never stored anywhere) vanished from the
+   screen the instant the file downloaded. Getting the report back on screen meant clicking
+   "Generate research brief" again -- a full re-scrape + DeepSeek call at real time/token cost,
+   just to reproduce something that was already sitting in memory a moment earlier. Fixed by
+   storing the generated brief's data (bio, stats, signals, synthesis, the built `.docx` bytes)
+   in `st.session_state.generated_brief` once produced, and rendering from a new `_render_brief()`
+   helper called unconditionally whenever that session-state value is set, rather than gating
+   rendering behind the `generate` button flag. Verified live: generated a Haaland brief,
+   clicked Download, confirmed the `.docx` actually downloaded (`200 OK`) *and* the full report
+   stayed on screen afterward.
+
+Both bugs share a root cause worth naming: Streamlit reruns the whole script on every
+interaction, and any state that needs to survive past the specific button click that created it
+has to be explicitly written to `st.session_state` -- a local variable or an unkeyed/reused
+widget key silently doesn't survive the next rerun. 237 tests still pass unchanged (neither bug
+was covered by, or breakable via, the existing pytest suite -- both were UI-integration issues
+pytest's unit-level mocking doesn't exercise).
+
 ## Triangulation: a fresh, tool-blind LLM judged the same 10 cases (2026-09-25, later still)
 
 Asked for a second blind labeler to check the human's readings weren't idiosyncratic. Explained

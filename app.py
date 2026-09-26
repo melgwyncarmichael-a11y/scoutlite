@@ -72,6 +72,18 @@ if "player_data" not in st.session_state:
     st.session_state.player_data = None
 if "search_candidates" not in st.session_state:
     st.session_state.search_candidates = None
+if "search_seq" not in st.session_state:
+    # Bumped on every new ambiguous search so the candidate table below gets a fresh widget
+    # key each time (2026-09-26) -- otherwise Streamlit keeps the previous search's selected
+    # row index alive under the same key, which silently pointed "Confirm" at the wrong player
+    # in a new, different-sized result list, or crashed with IndexError when the new list was
+    # shorter than the old selected index. Confirmed live: selecting row 3 of an 11-match
+    # "Bruno Fernandes" search, then searching "Rodri" (100 matches), auto-selected row 3 of
+    # the new list ("Jay Rodriguez") with no user action; searching "Piqué" (13 matches) next
+    # crashed outright on the stale, now out-of-range index.
+    st.session_state.search_seq = 0
+if "generated_brief" not in st.session_state:
+    st.session_state.generated_brief = None
 
 
 def _show_error(e: Exception, context: str):
@@ -105,6 +117,135 @@ def _resolve_candidate(candidate: dict, player_name: str, fresh: bool):
         "seasons": list_available_seasons(html),
     }
     st.session_state.search_candidates = None
+    # Clears any previous player's report so it doesn't linger on screen under a new player's
+    # data tables (2026-09-26) -- generated_brief is otherwise only replaced by a fresh
+    # "Generate research brief" click, not by picking a new player.
+    st.session_state.generated_brief = None
+
+
+def _render_brief(brief: dict):
+    """Renders the last successfully generated brief from session_state rather than from local
+    variables scoped to the 'Generate' button's own script run (2026-09-26). st.button() --
+    including st.download_button() -- only returns True on the one script run right after it's
+    clicked; gating this whole section behind `if generate:` alone made the entire report,
+    including its own download button, disappear from the screen the instant the user clicked
+    Download, since that click's own rerun saw `generate` as False again. Confirmed live: after
+    generating a brief and clicking "Download research brief", the report vanished and getting
+    it back required a full re-scrape + DeepSeek call, at real time/token cost, to reproduce
+    something already sitting in memory a moment earlier."""
+    player_name = brief["player_name"]
+    stats = brief["stats"]
+    bio = brief["bio"]
+    keeper = brief["keeper"]
+    misc = brief["misc"]
+    xg = brief["xg"]
+    articles = brief["articles"]
+    quality = brief["quality"]
+    fit_signal = brief["fit_signal"]
+    in_possession_key = brief["in_possession_key"]
+    out_of_possession_key = brief["out_of_possession_key"]
+    synthesis = brief["synthesis"]
+    j = synthesis["judge"]
+
+    if j["confidence_warning"]:
+        st.warning(
+            f"**Confidence warning** — the two written paragraphs scored "
+            f"{j['source_accuracy']}% on automated claim-grounding after "
+            f"{j['iterations']} revision pass(es), below the {j['threshold']}% threshold. "
+            f"The data tables and signals are unaffected; verify the written sections "
+            f"against these flags:\n\n" + "\n".join(f"- {f}" for f in j["findings"])
+        )
+
+    quality_text = quality["label"] if quality else "N/A"
+    if quality and quality["raw_label"] != quality["label"]:
+        quality_text += f" (raw: {quality['raw_label']})"
+    if fit_signal:
+        fit_text = f"{fit_signal['label']} vs. {fit_signal['reference_club']}"
+    elif in_possession_key and out_of_possession_key:
+        # A philosophy was chosen but the signal still came back None -- genuinely
+        # uncovered, not the scout's own choice not to assess it. Distinguished
+        # (2026-09-24) after a real user report: a blanket "N/A" for both made "I
+        # didn't pick a philosophy" indistinguishable from "can't be assessed."
+        fit_text = "N/A (league/position not covered)"
+    else:
+        fit_text = "N/A (no club philosophy selected)"
+    st.subheader("Signals")
+    st.markdown(f"**Quality: {quality_text}** · **Fit: {fit_text}**")
+    st.caption(
+        "Signals for the scout to weigh, never a conclusion the tool reaches on the "
+        "scout's behalf. Quality is a non-AI, percentile-based baseline against real "
+        "players in the same league/season/position group -- not an LLM judgment."
+    )
+    if quality:
+        st.caption(quality["explanation"])
+        st.caption(
+            f"Exact breakdown ({quality['avg_percentile']} percentile average): " + ", ".join(
+                f"{k.replace('_', ' ')} = {v:.0f} pct" for k, v in quality["components"].items()
+            )
+        )
+        if quality["raw_avg_percentile"] != quality["avg_percentile"]:
+            st.caption(
+                f"Without the possession adjustment: {quality['raw_avg_percentile']} "
+                f"percentile average ({quality['raw_label']})."
+            )
+        if quality.get("specialist_caveat"):
+            st.caption(quality["specialist_caveat"])
+    if fit_signal:
+        st.caption(
+            f"Compared to {fit_signal['reference_club']}'s current squad: " + ", ".join(
+                f"{k.replace('_', ' ')} = this player {v:.0f} vs. "
+                f"{fit_signal['reference_components'][k]:.0f}"
+                for k, v in fit_signal["target_components"].items()
+            )
+        )
+    st.caption(
+        f"Automated judge: written sections scored {j['source_accuracy']}% on "
+        f"claim-grounding after {j['iterations']} pass(es) — "
+        + ("passed the threshold." if j["passed"] else f"below {j['threshold']}%, see warning above.")
+    )
+
+    st.subheader("Background")
+    st.table(format_dict_for_display(bio))
+
+    st.subheader(f"Season stats ({stats['season']})")
+    st.table(format_dict_for_display(stats))
+
+    if keeper:
+        st.subheader("Goalkeeping stats")
+        st.table(format_dict_for_display(keeper))
+
+    if misc:
+        st.subheader("Defensive/discipline stats")
+        st.table(format_dict_for_display(misc))
+
+    if xg:
+        st.subheader("Advanced stats (Understat)")
+        st.caption(
+            f"⚠️ Matched by name lookup (not a guaranteed-unique ID) to Understat's "
+            f"**\"{xg['understat_matched_name']}\"** — for compound surnames, nicknames, or "
+            f"abbreviations (e.g. searching \"Vinicius Jr\" won't match \"Vinícius Júnior\"), "
+            f"this can occasionally match the wrong player or miss a real one. Check the "
+            f"matched name above against who you actually mean before trusting these numbers."
+        )
+        st.table(format_dict_for_display(xg))
+
+    if articles:
+        st.subheader(f"Recent news (last {LOOKBACK_DAYS} days)")
+        for a in articles[:8]:
+            st.write(f"- {a.get('title', '')}")
+
+    st.subheader("What People Say")
+    st.write(synthesis["news_synthesis"])
+
+    st.subheader("Signals & Fit Read")
+    st.write(synthesis["fit_read"])
+
+    st.download_button(
+        "Download research brief (.docx)",
+        data=brief["docx_bytes"],
+        file_name=f"{player_name.lower().replace(' ', '_')}_{stats['season']}_brief.docx",
+        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    )
 
 
 player_name = st.text_input(
@@ -135,6 +276,7 @@ if search:
             st.success(f"Found: {st.session_state.player_data['url']}")
         else:
             st.session_state.search_candidates = (candidates, player_name, fresh_mode)
+            st.session_state.search_seq += 1
     except Exception as e:
         _show_error(e, f"searching for \"{player_name}\"")
 
@@ -161,7 +303,7 @@ if st.session_state.search_candidates:
         hide_index=True,
         on_select="rerun",
         selection_mode="single-row",
-        key="candidate_table",
+        key=f"candidate_table_{st.session_state.search_seq}",
     )
     selected_rows = selection.selection.rows
     if not selected_rows:
@@ -292,105 +434,18 @@ if data:
                 buffer.seek(0)
                 status.update(label="Done", state="complete")
 
-            j = synthesis["judge"]
-            if j["confidence_warning"]:
-                st.warning(
-                    f"**Confidence warning** — the two written paragraphs scored "
-                    f"{j['source_accuracy']}% on automated claim-grounding after "
-                    f"{j['iterations']} revision pass(es), below the {j['threshold']}% threshold. "
-                    f"The data tables and signals are unaffected; verify the written sections "
-                    f"against these flags:\n\n" + "\n".join(f"- {f}" for f in j["findings"])
-                )
-
-            quality_text = quality["label"] if quality else "N/A"
-            if quality and quality["raw_label"] != quality["label"]:
-                quality_text += f" (raw: {quality['raw_label']})"
-            if fit_signal:
-                fit_text = f"{fit_signal['label']} vs. {fit_signal['reference_club']}"
-            elif in_possession_key and out_of_possession_key:
-                # A philosophy was chosen but the signal still came back None -- genuinely
-                # uncovered, not the scout's own choice not to assess it. Distinguished
-                # (2026-09-24) after a real user report: a blanket "N/A" for both made "I
-                # didn't pick a philosophy" indistinguishable from "can't be assessed."
-                fit_text = "N/A (league/position not covered)"
-            else:
-                fit_text = "N/A (no club philosophy selected)"
-            st.subheader("Signals")
-            st.markdown(f"**Quality: {quality_text}** · **Fit: {fit_text}**")
-            st.caption(
-                "Signals for the scout to weigh, never a conclusion the tool reaches on the "
-                "scout's behalf. Quality is a non-AI, percentile-based baseline against real "
-                "players in the same league/season/position group -- not an LLM judgment."
-            )
-            if quality:
-                st.caption(quality["explanation"])
-                st.caption(
-                    f"Exact breakdown ({quality['avg_percentile']} percentile average): " + ", ".join(
-                        f"{k.replace('_', ' ')} = {v:.0f} pct" for k, v in quality["components"].items()
-                    )
-                )
-                if quality["raw_avg_percentile"] != quality["avg_percentile"]:
-                    st.caption(
-                        f"Without the possession adjustment: {quality['raw_avg_percentile']} "
-                        f"percentile average ({quality['raw_label']})."
-                    )
-                if quality.get("specialist_caveat"):
-                    st.caption(quality["specialist_caveat"])
-            if fit_signal:
-                st.caption(
-                    f"Compared to {fit_signal['reference_club']}'s current squad: " + ", ".join(
-                        f"{k.replace('_', ' ')} = this player {v:.0f} vs. "
-                        f"{fit_signal['reference_components'][k]:.0f}"
-                        for k, v in fit_signal["target_components"].items()
-                    )
-                )
-            st.caption(
-                f"Automated judge: written sections scored {j['source_accuracy']}% on "
-                f"claim-grounding after {j['iterations']} pass(es) — "
-                + ("passed the threshold." if j["passed"] else f"below {j['threshold']}%, see warning above.")
-            )
-
-            st.subheader("Background")
-            st.table(format_dict_for_display(bio))
-
-            st.subheader(f"Season stats ({stats['season']})")
-            st.table(format_dict_for_display(stats))
-
-            if keeper:
-                st.subheader("Goalkeeping stats")
-                st.table(format_dict_for_display(keeper))
-
-            if misc:
-                st.subheader("Defensive/discipline stats")
-                st.table(format_dict_for_display(misc))
-
-            if xg:
-                st.subheader("Advanced stats (Understat)")
-                st.caption(
-                    f"⚠️ Matched by name lookup (not a guaranteed-unique ID) to Understat's "
-                    f"**\"{xg['understat_matched_name']}\"** — for compound surnames, nicknames, or "
-                    f"abbreviations (e.g. searching \"Vinicius Jr\" won't match \"Vinícius Júnior\"), "
-                    f"this can occasionally match the wrong player or miss a real one. Check the "
-                    f"matched name above against who you actually mean before trusting these numbers."
-                )
-                st.table(format_dict_for_display(xg))
-
-            if articles:
-                st.subheader(f"Recent news (last {LOOKBACK_DAYS} days)")
-                for a in articles[:8]:
-                    st.write(f"- {a.get('title', '')}")
-
-            st.subheader("What People Say")
-            st.write(synthesis["news_synthesis"])
-
-            st.subheader("Signals & Fit Read")
-            st.write(synthesis["fit_read"])
-
-            st.download_button(
-                "Download research brief (.docx)",
-                data=buffer,
-                file_name=f"{player_name.lower().replace(' ', '_')}_{stats['season']}_brief.docx",
-                mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            )
+            # Stored rather than rendered directly here (2026-09-26) -- see _render_brief()'s
+            # docstring for why: rendering inline, gated on `generate`, made the report vanish
+            # the instant the user clicked its own download button.
+            st.session_state.generated_brief = {
+                "player_name": player_name, "stats": stats, "bio": bio, "keeper": keeper,
+                "misc": misc, "xg": xg, "articles": articles, "quality": quality,
+                "fit_signal": fit_signal, "in_possession_key": in_possession_key,
+                "out_of_possession_key": out_of_possession_key, "synthesis": synthesis,
+                "docx_bytes": buffer.getvalue(),
+            }
         except Exception as e:
             _show_error(e, "generating the research brief")
+
+    if st.session_state.generated_brief:
+        _render_brief(st.session_state.generated_brief)
