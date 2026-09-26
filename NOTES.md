@@ -1,5 +1,37 @@
 # ScoutLite — Build Notes
 
+## Triangulation: a fresh, tool-blind LLM judged the same 10 cases (2026-09-25, later still)
+
+Asked for a second blind labeler to check the human's readings weren't idiosyncratic. Explained
+directly why I couldn't be that labeler myself: I already know the tool's computed output for
+all 10 of these exact cases and built the scoring logic, so anything I produced would be
+contaminated, the exact "grading your own homework" problem Track C3 exists to avoid. Offered
+two real alternatives instead -- a genuinely different human, or a fresh LLM session as a
+different, clearly-labeled kind of evidence. Went with the fresh LLM.
+
+Spawned a new agent with zero access to this conversation, the tool's output, or either eval
+report -- only the same neutral labeling-sheet columns a human blind labeler saw, explicitly
+instructed not to use any tool (confirmed after the fact: zero tool calls in its run, so no web
+lookups either). It judged all 10 cases from its own trained knowledge.
+
+**Result: agreed with the human blind label on 6/10, with the tool on only 3/10.** Framed this
+precisely rather than treating all three as equivalent opinions, at the project owner's
+prompting: the tool is data-and-club-fit driven (percentile math, blind to anything not in the
+counting stats); the human blind label is subjective football expertise (one person's real
+tactical judgment, not cross-checked); the fresh LLM's read is closer to **aggregated public
+sentiment** about a player's reputation than either -- not computing anything from data, not
+first-hand tactical analysis, but reflecting the dominant narrative repeated across the football
+writing it was trained on. That framing explains the actual pattern: sentiment and expertise
+both draw on "known playing style/reputation," which is exactly why they cluster together
+against pure output-rate stats on Guirassy, Haaland, Kean, and Upamecano -- but a repeated
+narrative and one expert's real judgment are still not the same thing, which is why the human
+and the LLM still disagree with each other on 4/10 cases (Bellingham, Kobel, Rodri, Van Dijk),
+not just with the tool.
+
+Documented as supplementary triangulation, explicitly not a second blind human and not folded
+into the match-rate numbers -- full case-by-case breakdown in `eval/TRACK_C3_REPORT.md`, raw
+judgments in `eval/track_c3_llm_judgment.csv`.
+
 ## Track C3 result: 4/10, but every mismatch traces to one cause -- output volume vs. playing style (2026-09-25, later still)
 
 Blind labels came back (`eval/track_c3_human_labelled.csv`). First real bug: the filled-in text

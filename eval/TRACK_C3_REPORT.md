@@ -145,6 +145,82 @@ labeler likely has less specific stylistic knowledge to draw on and may lean mor
 general-quality reasoning that happens to correlate better with what a counting-stat metric
 also produces. This is consistent with the case-level evidence above, not separately proven.
 
+## A third, different kind of evidence: a fresh LLM's judgment on the same 10 cases
+
+Asked whether a second labeler could validate that the human's readings weren't one person's
+idiosyncratic take. A second genuinely *blind human* wasn't available in this round, so a
+different, weaker but still informative check was run instead: a completely fresh Claude
+session — no access to this conversation, the tool's output, or either report, confirmed by
+zero tool calls (so no web lookups either) — judged the same 10 cases from the same neutral
+labeling-sheet columns, using nothing but its own trained knowledge of these real players.
+Full transcript in `eval/track_c3_llm_judgment.csv`.
+
+**Result: the fresh LLM agreed with the human blind label on 6 of 10 cases, but with the tool
+on only 3 of 10.**
+
+| Case | Tool | Human (blind) | Fresh LLM | LLM=Tool | LLM=Human |
+|---|---|---|---|---|---|
+| Bastoni vs. Dortmund | Somewhat Fits | Somewhat Fits | Somewhat Fits | ✅ | ✅ |
+| Bellingham vs. Bayern | Hand-in-Glove Fit | Hand-in-Glove Fit | Somewhat Fits | ❌ | ❌ |
+| Guirassy vs. Man City | Somewhat Fits | Completely Different | Completely Different | ❌ | ✅ |
+| Haaland vs. Dortmund | Somewhat Fits | Hand-in-Glove Fit | Hand-in-Glove Fit | ❌ | ✅ |
+| Kean vs. Real Madrid | Completely Different | Somewhat Fits | Somewhat Fits | ❌ | ✅ |
+| Kobel vs. Brighton | Completely Different | Completely Different | Somewhat Fits | ❌ | ❌ |
+| Koné vs. Atlético | Hand-in-Glove Fit | Hand-in-Glove Fit | Hand-in-Glove Fit | ✅ | ✅ |
+| Rodri vs. Real Madrid | Hand-in-Glove Fit | Somewhat Fits | Completely Different | ❌ | ❌ |
+| Upamecano vs. Atlético | Hand-in-Glove Fit | Somewhat Fits | Somewhat Fits | ❌ | ✅ |
+| Van Dijk vs. Brighton | Somewhat Fits | Completely Different | Somewhat Fits | ✅ | ❌ |
+
+### What kind of evidence is each of these three, actually?
+
+Worth being precise about this rather than treating all three as interchangeable opinions,
+because they are not measuring the same thing:
+
+- **The tool is data-and-club-fit driven.** A percentile rank of the player's own per-90 output
+  against a real reference club's real current squad — reproducible, verifiable, and completely
+  blind to anything not in FBref/Understat's counting stats.
+- **The human blind label is subjective football expertise.** First-hand reasoning about a
+  specific player's tactical role, pressing habits, and passing tempo, drawn from genuinely
+  following the sport — but it is one person's read, not cross-checked against another expert,
+  and carries whatever blind spots or biases that one person's knowledge has.
+- **The fresh LLM's judgment is closer to aggregated sentiment than either.** It isn't
+  computing anything from data, and it isn't first-hand tactical analysis either — it's
+  reflecting the *dominant narrative* about a player that recurs across a huge volume of
+  football writing and discussion it was trained on. That's a real signal (a widely-repeated
+  reputation usually reflects *something* true), but it's a different thing from genuine
+  expertise: it can just as easily be repeating a famous, oversimplified storyline as capturing
+  real tactical nuance. The Haaland rationale is the clearest example — "he literally developed
+  this profile at Dortmund" is a well-known biographical fact doing the work, not a tactical
+  breakdown of his current movement patterns.
+
+**This framing explains the pattern, not just describes it.** Sentiment/narrative (the LLM) and
+subjective expertise (the human) both draw on the same broad category of information —
+*known playing style and reputation* — that pure output-rate statistics structurally cannot
+see, which is exactly why both cluster together against the tool on Guirassy, Haaland, Kean,
+and Upamecano. But "the commonly repeated story about a player" and "one expert's actual
+tactical judgment" are still not the same thing, which is exactly why the LLM and the human
+still diverge on 4 of 10 cases even though they agree with each other far more than either
+agrees with the tool:
+- **Bellingham** — the LLM leans on his "explosive box-crasher" reputation as a contrast to
+  Bayern's patient tempo; the human's "Hand-in-Glove" call plausibly reflects more specific,
+  less-repeated knowledge of his actual technical adaptability inside a possession system.
+- **Kobel** — a less globally-narrated goalkeeper than most on this list; the LLM's read reads
+  generic ("outstanding shot-stopper with reasonable distribution") in a way that suggests
+  thinner training-data coverage of his specific ball-playing limitations than the human has.
+- **Rodri** — the LLM frames "tempo control" and "vertical transitions" as fully opposed
+  archetypes, an oversimplified narrative contrast; the human's more moderate "Somewhat Fits"
+  suggests a more nuanced read of how an elite deep-lying midfielder can still function in a
+  more direct system.
+- **Van Dijk** — the LLM weighs his genuine ball-playing quality as real stylistic overlap with
+  Brighton's build-up; the human weighs the defensive-line/pressing-height mismatch as decisive
+  enough to call it "Completely Different" instead.
+
+**Bottom line: this is supplementary triangulation, not a second blind human.** It strengthens
+the case that the tool-vs-human disagreement pattern isn't one person's idiosyncratic reading —
+a completely separate reasoning process reached a similar conclusion on most of the same cases
+— but it doesn't replace the need for an actual second independent human labeler, and it
+shouldn't be averaged into the match-rate numbers above as if it were equivalent evidence.
+
 ## What this does *not* recommend
 
 Unlike Track C2, this round's finding is not "the cutoffs are miscalibrated" — retuning 20 or 35
@@ -161,4 +237,5 @@ sits. No threshold change is proposed from this data.
   left blank in this round.
 - Raw data for every case is in `eval/track_c3_samples/*.json`; the filled-in blind labels are
   in `eval/track_c3_human_labelled.csv`; `eval/score_track_c3.py` reproduces the table above
-  directly from both.
+  directly from both. The fresh-LLM triangulation (not independent evidence on its own,
+  see above) is in `eval/track_c3_llm_judgment.csv`.

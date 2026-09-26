@@ -224,6 +224,17 @@ source can verify — not an oversight this result exposes. The real fix, if pur
 actual pace/pressing/positional data, not re-litigating stats vs. judgment over the same
 incomplete inputs. Full reasoning in `eval/TRACK_C3_REPORT.md`.
 
+**Triangulation check, same day:** a fresh, tool-blind LLM session judged the same 10 cases
+from its own football knowledge (zero tool calls, so no web lookups) — not a second blind
+human, but a different, weaker kind of evidence. It agreed with the human blind label on 6/10
+cases and with the tool on only 3/10. Framed precisely: the tool is data-and-club-fit driven,
+the human blind label is subjective football expertise, and the LLM's read is closer to
+aggregated public sentiment about a player's reputation than either — which is exactly why
+sentiment and expertise cluster together against pure output-rate stats, while still disagreeing
+with each other on 4/10 cases, since "the commonly repeated story about a player" and "one
+expert's actual tactical judgment" are not the same thing. Full breakdown, including the
+specific cases where the human and the LLM diverge from each other, in `eval/TRACK_C3_REPORT.md`.
+
 ---
 
 ## Cross-cutting themes
