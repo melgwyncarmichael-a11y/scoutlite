@@ -1,5 +1,29 @@
 # ScoutLite — Build Notes
 
+## External validation for the still-unbuilt judge-calibration plan (2026-09-28)
+
+Asked whether a "Judge LLM development vs. Judge LLM usage in production" architecture diagram
+seen on LinkedIn could apply here. Mapped it against the actual build rather than treating it as
+a new idea to evaluate cold:
+
+- **Production side of the diagram (generic dataset -> target LLM -> predictions -> Judge LLM ->
+  predictions+labels -> evaluation report)** is already built, and matches closely: player input
+  -> DeepSeek synthesis -> the two written paragraphs -> `judge_rules.py` + `judge_llm.py` ->
+  source-accuracy score + findings -> the confidence-warning block already shown in the UI/docx.
+- **Development side of the diagram (representative dataset -> human annotations -> golden
+  dataset -> run the judge against it -> accuracy > threshold? -> improve if not)** is the exact
+  shape of the item already sitting in this file under "Planned, not built: calibrate the judge
+  against a human" -- sample ~15-20 real briefs across the edge cases, a human blind-labels every
+  sentence as grounded/invented/overstated/verdict-language without seeing what the automated
+  judge flagged, then score the judge's precision/recall against those labels. That's the golden
+  dataset + "accuracy > threshold" check the diagram describes, never run here.
+
+Net: the diagram isn't a new architecture to adopt, it's independent confirmation that the
+already-planned-but-never-executed calibration step is the right thing to build next, not a nice
+-to-have. Decided not to build it now, this close to submission -- it costs real human
+blind-labeling time (same shape as Track C3), and the plan was already correctly identified and
+documented before this diagram surfaced. Left as-is in "What's still open" (`STATUS.md`).
+
 ## Two real bugs found by live UI testing, not code review (2026-09-26)
 
 Asked directly "are there any error-handling / UI-testing gaps we've missed" -- answered by

@@ -168,7 +168,11 @@ contradicting it.
   `soccerdata`) nor Understat exposes a second defensive metric — a real fix needs a new
   scraper, deferred as out of scope.
 - **The judge's 80% source-accuracy threshold has never been checked against a human labeler**
-  — a full protocol exists in `NOTES.md`, never run.
+  — a full protocol exists in `NOTES.md`, never run. Independently corroborated (2026-09-28) by
+  a "Judge LLM development vs. production" architecture pattern seen elsewhere — mapped against
+  this project's actual build, it confirmed this exact calibration step (golden dataset + human
+  annotations + judge-accuracy-vs-threshold check) is the missing piece, not a nice-to-have.
+  Still not run — real human blind-labeling time, same shape as Track C3.
 - **Comparison mode is still CLI-only** — not in the Streamlit app, the documented "recommended"
   entrypoint.
 - **Quality's own external validation was discussed and deferred.** A "Quality vs. transfer
