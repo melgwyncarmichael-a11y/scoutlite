@@ -1,12 +1,11 @@
 # ScoutLite — Current Status
 
-**Snapshot date: 2026-09-25. Latest pushed commit: `7786827` on `main` (one more commit —
-Track C3's LLM-triangulation writeup — staged but not yet pushed as of this snapshot). 237
-tests passing, working tree otherwise clean.** Written as a standalone handoff — for full
-detail, the underlying docs are `README.md` (what it does, usage), `NOTES.md` (full build log),
-`CHANGELOG.md` (user-facing changes), `EVAL_REPORT.md` (eval findings, synthesis across all
-tracks), `FIT_SIGNAL_REFERENCE.md` (what each Fit label means), `TESTS.md` (test matrix +
-deferred items).
+**Snapshot date: 2026-09-28. Latest pushed commit: `008ad26` on `main`. 237 tests passing,
+working tree clean.** Written as a standalone handoff — for full detail, the underlying docs are
+`README.md` (what it does, usage), `NOTES.md` (full build log), `CHANGELOG.md` (user-facing
+changes), `EVAL_REPORT.md` (eval findings, synthesis across all tracks), `FIT_SIGNAL_REFERENCE.md`
+(what each Fit label means), `TECHNICAL_VISION.md` (fact-checked PE6201 technical companion doc,
+not itself for submission), `TESTS.md` (test matrix + deferred items).
 
 ## What ScoutLite is
 
@@ -39,7 +38,7 @@ A five-stage pipeline, shared by all three ways in:
    labels ("Full Name," "Matches Played") via a shared `format_label()` instead of raw dict keys
    or (in the docx's older formatter) mangled abbreviations ("xG" → "Xg").
 
-## What changed since the last snapshot (2026-09-23), chronological
+## What changed since the 2026-09-23 rewrite, chronological
 
 1. **Streamlit UX pass**: a one-time splash screen on first open; categorized error messages
    (`friendly_error_message()`, shared by the app and both CLIs) instead of raw exception text;
@@ -92,6 +91,69 @@ A five-stage pipeline, shared by all three ways in:
 Every fix above was verified against the live pipeline or real data, not just the test suite —
 this project's running principle has been "verify by running real cases," and essentially every
 bug found across this whole build was actually caught that way, not by inspection alone.
+
+## Since the 2026-09-25 snapshot
+
+6. **`TECHNICAL_VISION.md` added, then fact-checked against the real codebase.** A companion
+   session drafted a PE6201-facing technical writeup from an earlier version of this file.
+   Reviewed line-by-line against the actual, verified build rather than accepted at face value —
+   caught and corrected a fabricated-sounding claim ("FBref's Opta-sourced stats were deleted
+   site-wide in January 2026 after a StatsPerform contract termination") that contradicted
+   `scoring.py`'s own real, previously-documented reason (these metrics were simply never on
+   FBref's free pages to begin with); two spots that still described the dropped
+   transfer-value-based Quality validation as active, when Section 4/6 correctly say it was
+   dropped before implementation; and an overstated "resolved" claim about season-input
+   validation that doesn't actually exist in the code. Corrected wording applied directly to the
+   file rather than left as a review comment, since this doc is headed toward an academic
+   submission and an unverified claim there is a real risk, not just a style nit.
+7. **Two real bugs found by actually driving the running app, not by re-reading code.** Asked
+   directly "are there any error-handling / UI-testing gaps we've missed" — answered by testing
+   the live Streamlit app in a browser rather than auditing the source again, and found two
+   bugs neither prior review pass had caught:
+   - The candidate-disambiguation table's selection state wasn't reset between searches (same
+     `st.dataframe` widget key every time). Reproduced live: selecting a row in one ambiguous
+     search, then running a brand-new search, silently carried the old row index into the new,
+     differently-sized result list — auto-selecting the wrong player with zero user action — or,
+     when the new list was shorter than the stale index, crashed outright with `IndexError: list
+     index out of range`, a raw traceback shown to the user. Fixed by keying the table per-search
+     (`f"candidate_table_{st.session_state.search_seq}"`); re-reproduced the exact same sequence
+     afterward with no stale selection and no crash.
+   - Downloading the generated brief made the whole report — Signals, stat tables, news,
+     synthesis, and the download button itself — disappear from the screen. Root cause:
+     everything was rendered inline inside `if generate:`, but `st.button()` (including
+     `st.download_button()`) only returns `True` on the one script run right after it's clicked;
+     clicking Download triggers its own rerun, on which `generate` is `False` again, so nothing
+     (never stored anywhere) re-rendered. Getting the report back required regenerating the whole
+     brief — a full re-scrape + DeepSeek call at real time/token cost — just to see something
+     already sitting in memory a moment earlier. Fixed by storing the generated brief in
+     `st.session_state` and rendering it from a new `_render_brief()` helper, independent of the
+     `generate` button's transient state. Verified live end-to-end afterward (search → ambiguous
+     candidate → confirm → generate with a philosophy selected → download) — confidence warning,
+     signals, and every section stayed on screen after downloading, and the `.docx` itself
+     returned `200 OK`.
+   - Neither bug was reachable from the existing pytest suite (both are UI-integration issues,
+     not unit-level logic) — 237 tests passed unchanged throughout both fixes, another reminder
+     that this project's tests cover the deterministic layer well but the Streamlit surface still
+     needs live testing to catch real bugs.
+8. **Checked whether an MCP server could replace the custom FBref/Understat scraping.** A couple
+   do exist (`kupsas/football-data-mcp` unifies FBref/Understat/SofaScore/Transfermarkt; a few
+   Apify-hosted scraper wrappers also surface as "MCP servers") — more than expected, worth
+   actually checking rather than assuming. Neither is a better fit: the closest match is a
+   static, three-fixed-season dataset, not a live per-player/per-season lookup, and the
+   commercial wrappers just move the same scraping to a third party rather than removing the
+   "it's scraped data" caveat. More fundamentally, wiring one in would mean letting the LLM fetch
+   data itself via tool calls at synthesis time — exactly the "AI-as-scraper" pattern already
+   evaluated and rejected for being slower, costlier per-player, and non-deterministic.
+   Documented as a checked-off item in `TECHNICAL_VISION.md` Section 8; confirmed the existing
+   architecture rather than changing it.
+
+Also ran a broader pre-submission audit (2026-09-27): no secrets in any tracked file, `.env`
+correctly gitignored (only `.env.example` placeholders tracked), no accidentally-committed bulk
+data, `pip check` clean, both CLI entrypoints parse, `app.py` imports without error, no leftover
+TODO/FIXME markers or stray debug prints. `reddit_sentiment.py` looked like a loose end against
+the "Reddit dropped from scope" claim at first glance, but it's a genuinely unwired, standalone
+exploratory prototype (own docstring confirms it), consistent with that decision rather than
+contradicting it.
 
 ## What's still open (known, not yet done)
 
