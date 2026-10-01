@@ -1,27 +1,32 @@
 # ScoutLite Evaluation Report
 
-**PE6201 — Player Research Brief Tool.** Compiled 2026-09-16. Covers the three eval tracks
-run against ScoutLite's pipeline, mapped to the Technical Vision doc's §6 eval items
-(B1–B7 in `TESTS.md`).
+**PE6201 — Player Research Brief Tool.** Originally compiled 2026-09-16 covering Tracks A/B/C;
+extended 2026-09-18 (Track C2) and 2026-09-25 (Track C3) as the Fit signal's own evolution
+raised new, more specific questions the first three tracks couldn't answer. Mapped to the
+Technical Vision doc's §6 eval items (B1–B7 in `TESTS.md`).
 
 ## Executive summary
 
 Three things in ScoutLite can go wrong in ways no unit test catches: the deterministic Quality
 signal can be *technically correct but misleading*, the LLM-written sections can hallucinate
-or hype, and the LLM's Fit signal can be inconsistent. Each got its own eval track. All three
-surfaced real, fixable problems — **5 bugs found and fixed as a direct result of running these
-evals**, not from writing more unit tests in the abstract:
+or hype, and the Fit signal can be inconsistent or miscalibrated. Five eval tracks in total —
+each surfaced real, fixable problems, or a real, disclosed limitation where there was nothing
+to fix — **7 bugs found and fixed as a direct result of running these evals**, not from writing
+more unit tests in the abstract:
 
 | Track | Question | Headline result |
 |---|---|---|
 | **A** — Quality signal validity | Does the 1–5 number mean what it claims? | 67% → **80% exact match** on position grouping after a fix, verified against real data; 9 → 8 of 13 flagged surprising on face-validity, one resolved by a bug fix, two more (Rice, Rodri) now backed by a genuinely broader metric set |
 | **B** — Hallucination / hype | Does the LLM invent facts or oversell real ones? | **50% recall** on hype, **7% false-positive** rate — small sample, matches the design hypothesis |
-| **C** — Fit-signal consistency | Does the same input ever give a different Fit score? | Stable within every case — but **21 of 21 runs landed on the same score (3/5)**, exposing a scope limitation, not just confirming stability |
+| **C** — Fit-signal consistency | Does the same input ever give a different Fit score? | Stable within every case — but **21 of 21 runs landed on the same score (3/5)**, exposing a scope limitation, not just confirming stability — fixed architecturally in v3 (Fit became fully deterministic) |
+| **C2** — Fit label threshold calibration | Are the 15/35 percentile-point cutoffs behind the Fit labels actually right? | **2/9 → 4/9** match rate after raising the Hand-in-Glove cutoff 15→20 on real evidence; also found defense-group volatility is structural (one shared metric), not a tuning problem |
+| **C3** — Fit label validation vs. blind human judgment | Does Fit mean the same thing to an independent human as it does to the tool? | **4/10 matched** — every mismatch traced to one root cause (output-rate vs. playing style), not scattered noise. Triangulated same-day against a fresh, tool-blind LLM (agreed with the human 6/10, the tool 3/10) |
 
-The pattern across all three: the deterministic and LLM-written parts of ScoutLite are mostly
+The pattern across all five: the deterministic and LLM-written parts of ScoutLite are mostly
 behaving *honestly* — refusing to guess, disclosing uncertainty, hedging when data is thin —
-but that honesty exposed real gaps in what the underlying data can actually support, in two
-different signals independently.
+but that honesty exposed real gaps in what the underlying data can actually support, independently
+across three different checks (Quality's position grouping, Fit's original neutral ceiling, and
+Fit's later output-rate-vs-style gap).
 
 ## Method
 
@@ -30,7 +35,7 @@ Each track has its own capture/build/score tooling under `eval/` (full documenta
 into JSON, a builder turns it into a CSV with the tedious parts (sentence splitting, cross-
 referencing, context) pre-filled, a human labels the judgment columns, and a scorer computes
 the actual numbers from those labels. All scoring logic is pure and unit-tested independent of
-whether real labeling has happened yet — the suite is **113 tests** as of this report.
+whether real labeling has happened yet — the suite is **237 tests** as of this update.
 
 ---
 
@@ -259,7 +264,7 @@ than either alone:
   as a reason to keep running real cases through the pipeline, not just adding more unit tests
   in isolation.
 
-## Bugs found and fixed, across all three tracks
+## Bugs found and fixed, across the eval tracks
 
 | # | Bug | Found via | Fixed in |
 |---|---|---|---|
@@ -331,19 +336,31 @@ assumption that the fixes worked):**
    only sources? Likely a dead end, worth a quick access-check rather than an assumption. Both
    Quality's PAdj and Fit's reference-club redesign still can't see this data — it's the one
    gap no amount of restructuring the existing sources closes.
-10. **Fit's 3-tier thresholds (15 / 35 percentile-point average difference) are a first pass,
-    not eval-validated** — no labeled sample exists yet for this new mechanism, the same
-    position Fit itself was in before Track C. A natural next eval track, not urgent.
 9. **Keep the "run real cases, read real output" habit going.** Every bug in this report — and
    the position-classification fix above — was found that way, not by imagining edge cases up
    front. Cheap relative to what it catches.
+
+~~10. Fit's 3-tier thresholds (15 / 35 percentile-point average difference) are a first pass,
+not eval-validated — a natural next eval track.~~ **Partially addressed — Tracks C2 and C3 (see
+the Track C section above and `eval/TRACK_C2_REPORT.md` / `eval/TRACK_C3_REPORT.md`).** The
+lower cutoff got real calibration evidence and was raised 15→20 (Track C2, match rate 2/9→4/9);
+the upper cutoff (35) is still unvalidated. Track C3 then found a more fundamental issue no
+threshold change fixes: the metric measures statistical output rate, not playing style or
+tactical role, against an independent blind human judgment (4/10 matched). **Still open:** the
+35 cutoff itself, and a second independent blind labeler to confirm Track C3's 4/10 isn't one
+person's particular reading.
 
 ## Supporting documents
 
 - `NOTES.md` — full chronological build log, including every bug's discovery and fix in detail
 - `TESTS.md` — the original system test matrix and B1–B7 eval item tracking
-- `eval/README.md` — tooling documentation and workflow for all three tracks
+- `eval/README.md` — tooling documentation and workflow for all five tracks (A, B, C, C2, C3)
 - `eval/TRACK_C_REPORT.md` — standalone Track C report with the full 7-case results table
+- `eval/TRACK_C2_REPORT.md` — Fit label threshold calibration, full 9-case results table
+- `eval/TRACK_C3_REPORT.md` — Fit label validation vs. blind human judgment, full 10-case
+  results table plus the fresh-LLM triangulation detail
 - `eval/track_a_position_survey.csv`, `eval/track_a_quality_spotcheck.csv`,
-  `eval/track_b_labels.csv` — raw labeled data behind every number in this report
-- `tests/` — 113 automated tests covering the pure/deterministic layers referenced throughout
+  `eval/track_b_labels.csv`, `eval/track_c3_human_labelled.csv`,
+  `eval/track_c3_llm_judgment.csv` — raw labeled data behind every number in this report
+- `PRODUCT_DOCUMENTATION.md` — metrics targeted vs. reached across all five tracks, in one table
+- `tests/` — 237 automated tests covering the pure/deterministic layers referenced throughout
