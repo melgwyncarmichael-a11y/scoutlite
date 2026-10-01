@@ -163,8 +163,10 @@ percentile / per-90 math, position classification, FBref↔Understat name matchi
 logic, prompt assembly, and synthesis parsing — plus HTML-extractor regression guards run
 offline against captured FBref fixtures (`tests/fixtures/`). No network or API keys needed.
 
-See `NOTES.md` for the full build log, including bugs found and fixed, and every access decision
-with its reasoning. See **[`EVAL_REPORT.md`](EVAL_REPORT.md)** for the evaluation results —
+See **[`PRODUCT_DOCUMENTATION.md`](PRODUCT_DOCUMENTATION.md)** for the persona, input/output, a
+high-level architecture diagram, and metrics targeted vs. reached in one place. See `NOTES.md`
+for the full build log, including bugs found and fixed, and every access decision with its
+reasoning. See **[`EVAL_REPORT.md`](EVAL_REPORT.md)** for the evaluation results —
 does the Quality signal mean what it claims, does the LLM hallucinate or hype, is the Fit
 signal consistent — with the real numbers, bugs the eval process found and fixed, and what
 would actually move each result further (full detail and raw data under `eval/`). See

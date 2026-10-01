@@ -1,8 +1,11 @@
 # ScoutLite evals
 
-Two tracks, prioritized per the project owner's call (2026-09-12): **Track B matters most,
-Track A follows, Track C is parked** for whenever there's time to test it. See `NOTES.md`
-("Sources in the brief + a planned human eval of the judge loop") for how this was designed.
+Five tracks in total. Tracks A, B, and C were prioritized per the project owner's call
+(2026-09-12): **Track B matters most, Track A follows, Track C is parked** for whenever there's
+time to test it. See `NOTES.md` ("Sources in the brief + a planned human eval of the judge
+loop") for how this was designed. Tracks C2 and C3 followed later, after Track C's v3 rework
+made the Fit signal fully deterministic — they check whether that deterministic signal's
+*thresholds* are actually calibrated correctly, which C alone couldn't answer.
 
 ## Track B — does the LLM hallucinate or hype? (priority)
 
@@ -265,3 +268,93 @@ limitation, not a bug — ScoutLite has no pace/sprint/pressing data in any sour
 what philosophy fit actually depends on. Full writeup, the complete 7-case results table, the
 supporting judge-findings evidence, and the interpretation/recommendation:
 **[`TRACK_C_REPORT.md`](TRACK_C_REPORT.md)**.
+
+## Track C2 — Fit label threshold calibration (complete — see TRACK_C2_REPORT.md)
+
+Track C confirmed the Fit *label* can't flip run-to-run once it's deterministic, but never
+checked whether the cutoffs that produce that label (`scoring.FIT_LABELS`: `avg_abs_diff < 15` →
+Hand-in-Glove Fit, `< 35` → Somewhat Fits, else Completely Different) are actually set correctly.
+Track C2 does that — no LLM or NewsAPI call needed, since it checks the deterministic signal
+directly, same as Track A.
+
+**Workflow:**
+
+```bash
+.venv/bin/python eval/track_c2_capture.py
+.venv/bin/python eval/score_track_c2.py
+```
+
+`track_c2_capture.py` runs 9 hardcoded cases — 6 "self-reference" (a player compared against the
+actual club he plays for; expected label: close to Hand-in-Glove) and 3 deliberate mismatches
+(a player whose real style is the opposite of a philosophy's reference club; expected label:
+Completely Different) — straight to `track_c2_samples/*.json`. No hand-labeling step: the
+expected answer is decided by the case's own design, not a human judgment call, which is exactly
+the limitation Track C3 (below) exists to address.
+
+**Result: 2 of 9 matched on the original 15/35 threshold.** Reading *why* surfaced two real,
+distinct findings rather than "the numbers are wrong":
+
+1. **Defense is structurally more volatile than other position groups** — it has only one
+   shared metric (`defensive_actions_per90`) versus 3-4 for attack/midfield, so there's no
+   averaging to smooth out one metric's noise. A real fix needs a second defensive metric
+   (not available from either FBref or Understat); not retuned here.
+2. **An elite outlier reliably diverges from his own squad's average** — Haaland vs. Man City
+   and Kimmich vs. Bayern (both genuine standouts at their actual clubs) landed "Somewhat Fits,"
+   not "Hand-in-Glove," because Fit compares a player against his position's *squad average*,
+   which includes weaker rotation players. Being better than that average is itself a real,
+   correctly-computed gap — this is actionable: the 15-point cutoff was stricter than it should
+   be for exactly this common case.
+
+**Applied the same day:** raised the Hand-in-Glove cutoff from 15 to 20 points, directly
+supported by finding 2. Re-running all 9 cases against the new threshold: **4 of 9 now match,
+up from 2 of 9.** The defense-group threshold was deliberately *not* retuned (finding 1 needs a
+new data source, not a different number). Full case table, reasoning, and the one eval-design
+mistake found along the way (a case built from outdated reputation rather than checked against
+real data first): **[`TRACK_C2_REPORT.md`](TRACK_C2_REPORT.md)**.
+
+## Track C3 — Fit label validation against independent, blind human judgment (complete — see TRACK_C3_REPORT.md)
+
+Track C2's 9 "expected" labels were decided by construction — reasoned out by the same person
+who built the tool, so nothing stopped the case selection and the expected answer from
+unconsciously matching how the tool actually works. Track C3 fixes that with a genuinely
+independent check: a human blind-labels each case from real football knowledge, **before ever
+seeing the tool's own computed output**.
+
+**Workflow:**
+
+```bash
+.venv/bin/python eval/track_c3_capture.py          # -> track_c3_samples/*.json
+.venv/bin/python eval/build_track_c3_labeling_sheet.py   # -> track_c3_labels.csv (blank, no tool output)
+# label track_c3_labels.csv by hand -> save as track_c3_human_labelled.csv
+.venv/bin/python eval/score_track_c3.py
+```
+
+The labeling sheet deliberately shows only neutral context (player, real club, competition,
+position group, the reference club's real name and philosophy in plain English) — no
+`avg_abs_diff`, no tool output, nothing that could bias the judgment. `score_track_c3.py`
+normalizes free-typed labels ("Hand in glove fit" → "Hand-in-Glove Fit") before scoring — the
+same class of bug Track A/B's early label-matching had.
+
+**Sample:** 10 cases, agreed with the project owner across several rounds — 3 defenders, 3
+midfielders, 3 attackers, 1 goalkeeper; 5 relatively famous / 5 relatively unknown; rotated
+across all 6 `scoring.REFERENCE_CLUBS` entries; spanning 4 of the 5 top-5 leagues (an early
+all-Premier-League draft was flagged and rebalanced).
+
+**Result: 4 of 10 matched the blind label** (3/5 for unknown players, 1/5 for known players) —
+worse than Track C2's already-imperfect 4/9, but every mismatch traces to one root cause, not
+scattered reasons: the Fit metric measures a player's statistical output rate, not playing style
+or tactical role, which no ScoutLite source measures. This reproduces the same underlying
+mechanism Track C2 found with Haaland vs. Man City.
+
+**Explicitly reasoned through, not just reported:** this doesn't mean deterministic Fit was the
+wrong design choice — the pre-v3 LLM-judged version had the identical blind spot (21/21 Track C
+runs stuck at `fit_score: 3`, honestly refusing to guess at pace/pressing data it also lacked).
+
+**Triangulation, same day:** since a second genuine blind human labeler wasn't available yet, a
+completely fresh LLM session (zero access to this project or the tool's output, confirmed zero
+tool calls) independently judged the same 10 cases from its own football knowledge
+(`eval/track_c3_llm_judgment.csv`). It agreed with the human on 6/10 but the tool on only 3/10 —
+framed as three distinct kinds of evidence (data/club-fit, first-hand subjective expertise, and
+aggregated public sentiment/reputation), not as a tie-breaker. Full case table, root-cause
+breakdown, the triangulation detail, and what this does/doesn't recommend changing:
+**[`TRACK_C3_REPORT.md`](TRACK_C3_REPORT.md)**.
